@@ -43,6 +43,54 @@ const LinktreeIcon = ({ className }) => (
   </svg>
 );
 
+// Animated letter-by-letter component for hero header
+const AnimatedLetter = ({ char, delay, theme }) => {
+  return (
+    <motion.span
+      initial={{ y: 80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ 
+        duration: 0.8, 
+        delay: delay, 
+        ease: [0.16, 1, 0.3, 1] 
+      }}
+      whileHover={{ 
+        y: -10, 
+        scale: 1.15,
+        color: "#6366f1",
+        textShadow: "0 0 25px rgba(99,102,241,0.8)"
+      }}
+      className={`inline-block cursor-default font-display font-black tracking-tight select-none transition-colors duration-150 ${
+        theme === 'dark' ? 'text-white' : 'text-zinc-950'
+      }`}
+    >
+      {char === ' ' ? '\u00A0' : char}
+    </motion.span>
+  );
+};
+
+const AnimatedGradientLetter = ({ char, delay }) => {
+  return (
+    <motion.span
+      initial={{ y: 80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ 
+        duration: 0.8, 
+        delay: delay, 
+        ease: [0.16, 1, 0.3, 1] 
+      }}
+      whileHover={{ 
+        y: -10, 
+        scale: 1.15,
+        filter: "drop-shadow(0 0 15px rgba(0, 229, 255, 0.8))"
+      }}
+      className="inline-block cursor-default font-display font-black tracking-tight select-none text-gradient"
+    >
+      {char === ' ' ? '\u00A0' : char}
+    </motion.span>
+  );
+};
+
 const constellationSkills = [
   { id: "gcp", name: "Google Cloud", category: "CLOUD COMPUTING", use: "Compute Engine, Cloud Functions, Kubernetes, Cloud Run", mastery: 85, x: 20, y: 35 },
   { id: "k8s", name: "Kubernetes", category: "ORCHESTRATION", use: "Automated scaling & container deployment management", mastery: 75, x: 50, y: 20 },
@@ -190,14 +238,8 @@ export default function App() {
   };
 
   return (
-    <div className={`relative min-h-screen font-sans transition-colors duration-300 overflow-x-hidden ${theme === 'dark' ? 'bg-[#09090b] text-zinc-100' : 'bg-[#f4f4f5] text-zinc-900'
+    <div className={`relative min-h-screen font-sans transition-colors duration-300 overflow-x-hidden ${theme === 'dark' ? 'bg-black text-zinc-100' : 'bg-white text-zinc-900'
       }`}>
-
-      {/* Viewport Frame with Neon Glow */}
-      <div className={`fixed inset-0 pointer-events-none border-[8px] sm:border-[16px] z-50 transition-all duration-300 ${theme === 'dark'
-          ? 'border-[#09090b] shadow-[inset_0_0_30px_rgba(99,102,241,0.2)]'
-          : 'border-[#f4f4f5] shadow-[inset_0_0_30px_rgba(99,102,241,0.08)]'
-        }`} />
 
       {/* Background radial glows */}
       <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none" />
@@ -249,7 +291,7 @@ export default function App() {
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            className={`fixed top-0 right-0 w-80 h-full z-30 flex flex-col justify-center p-12 border-l shadow-2xl transition-colors duration-300 ${theme === 'dark' ? 'bg-[#09090b] border-white/5' : 'bg-white border-zinc-200'
+            className={`fixed top-0 right-0 w-80 h-full z-30 flex flex-col justify-center p-12 border-l shadow-2xl transition-colors duration-300 ${theme === 'dark' ? 'bg-black border-white/5' : 'bg-white border-zinc-200'
               }`}
           >
             <nav className="flex flex-col space-y-6 text-xl font-bold font-mono">
@@ -272,7 +314,7 @@ export default function App() {
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex flex-col justify-center items-center px-6 text-center relative pt-20">
-        <div className="space-y-6 max-w-4xl">
+        <div className="space-y-6 max-w-4xl relative">
           {/* Status Pill */}
           <div className="flex justify-center">
             <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium border uppercase ${theme === 'dark' ? 'bg-[#18181b]/50 border-white/5 text-indigo-400' : 'bg-white/50 border-zinc-200 text-indigo-600'
@@ -282,15 +324,30 @@ export default function App() {
             </div>
           </div>
 
+          {/* Hero Ambient Backlight Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-gradient-to-tr from-indigo-500/10 via-violet-500/5 to-cyan-500/10 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none z-0" />
+
           {/* Heading */}
-          <div className="space-y-1">
-            <h1 className={`text-6xl sm:text-9xl font-black tracking-tighter ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>
-              MEDHINI
-            </h1>
-            <h1 className="text-6xl sm:text-9xl font-black tracking-tighter text-gradient leading-none">
-              DEV
-            </h1>
+          <div className="space-y-2 select-none relative z-10">
+            <div className="flex justify-center flex-wrap gap-x-1 sm:gap-x-1.5 text-7xl sm:text-8xl md:text-[8.5rem] leading-[0.9] tracking-tighter">
+              {"MEDHINI".split("").map((char, index) => (
+                <AnimatedLetter
+                  key={`medhini-${index}`}
+                  char={char}
+                  delay={index * 0.04}
+                  theme={theme}
+                />
+              ))}
+            </div>
+            <div className="flex justify-center flex-wrap gap-x-1 sm:gap-x-1.5 text-7xl sm:text-8xl md:text-[8.5rem] leading-[0.9] tracking-tighter">
+              {"DEV".split("").map((char, index) => (
+                <AnimatedGradientLetter
+                  key={`dev-${index}`}
+                  char={char}
+                  delay={0.28 + index * 0.04}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Subtitle */}
