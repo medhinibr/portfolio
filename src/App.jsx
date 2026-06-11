@@ -938,7 +938,6 @@ export default function App() {
                           ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
                           : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
                         }`}
-                      autoFocus
                     />
                   )}
 
@@ -953,7 +952,7 @@ export default function App() {
                           ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
                           : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
                         }`}
-                      autoFocus
+                      autoFocus={contactStep > 0}
                     />
                   )}
 
@@ -968,7 +967,7 @@ export default function App() {
                           ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
                           : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
                         }`}
-                      autoFocus
+                      autoFocus={contactStep > 0}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                           e.preventDefault();
