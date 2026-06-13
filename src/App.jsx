@@ -848,18 +848,18 @@ export default function App() {
                   key={idx}
                   onClick={() => setSelectedChapter(idx)}
                   className={`flex items-center gap-4 p-4 rounded-xl border text-left transition-all duration-300 relative group ${isSelected
-                    ? 'bg-indigo-600/10 border-indigo-500 shadow-md shadow-indigo-600/5'
+                    ? item.colorTheme.bgSelected
                     : 'bg-transparent border-transparent hover:bg-zinc-800/10 hover:border-white/5'
                     }`}
                 >
                   <div className={`w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold font-mono transition-all duration-300 ${isSelected
-                    ? 'border-indigo-400 bg-indigo-500/20 text-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.5)]'
+                    ? item.colorTheme.badgeSelected
                     : 'border-zinc-700 bg-zinc-900 text-zinc-500'
                     }`}>
                     {idx === 0 ? "I" : idx === 1 ? "II" : idx === 2 ? "III" : idx === 3 ? "IV" : "V"}
                   </div>
                   <div>
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-indigo-400 uppercase">
+                    <span className={`text-[9px] font-mono font-bold tracking-wider uppercase ${isSelected ? item.colorTheme.text : 'text-zinc-500 group-hover:text-zinc-300'}`}>
                       {item.chapter}
                     </span>
                     <h3 className={`text-sm font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
@@ -871,7 +871,7 @@ export default function App() {
                   {isSelected && (
                     <motion.div
                       layoutId="arrowIndicator"
-                      className="absolute right-4 text-indigo-400"
+                      className={`absolute right-4 ${item.colorTheme.text}`}
                     >
                       <ChevronRight className="w-4 h-4" />
                     </motion.div>
