@@ -517,13 +517,13 @@ export default function App() {
           <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
             01 // THE IDENTITY
           </div>
-          <h2 className={`text-3xl sm:text-5xl font-black ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+          <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
             }`}>Engineered for impact.</h2>
         </div>
 
         <div className="grid md:grid-cols-12 gap-12 items-center">
           <div className="md:col-span-7 space-y-6 text-left">
-            <h3 className={`text-4xl sm:text-5xl font-black leading-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+            <h3 className={`text-4xl sm:text-5xl font-black font-display leading-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
               }`}>
               Systems that scale.<br />
               <span className="opacity-45">Experiences that matter.</span>
