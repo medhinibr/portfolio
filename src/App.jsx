@@ -43,48 +43,99 @@ const LinktreeIcon = ({ className }) => (
   </svg>
 );
 
-// Animated letter-by-letter component for hero header
-const AnimatedLetter = ({ char, delay, theme }) => {
+// Technology letter mappings for "MEDHINI"
+const medhiniLetters = [
+  { char: 'M', suffix: 'YSQL', prefix: '', type: 'suffix', logText: 'MYSQL // Relational database modeling, schema design, and query optimization' },
+  { char: 'E', suffix: 'XPRESS', prefix: '', type: 'suffix', logText: 'EXPRESS.JS // Minimalist web framework for Node.js REST API backends' },
+  { char: 'D', suffix: 'OCKER', prefix: '', type: 'suffix', logText: 'DOCKER // Microservices containerization, image layering, and dev environment scaling' },
+  { char: 'H', suffix: 'YBRID', prefix: '', type: 'suffix', logText: 'HYBRID SYSTEMS // Unified cross-platform app ecosystems and hybrid hosting' },
+  { char: 'I', suffix: 'NFOSYS', prefix: '', type: 'suffix', logText: 'INFOSYS SPRINGBOARD // Data Science internship and pragati path cohort execution' },
+  { char: 'N', suffix: 'ODE', prefix: '', type: 'suffix', logText: 'NODE.JS // Event-driven backend development and high-performance server runtimes' },
+  { char: 'I', suffix: '', prefix: 'A', type: 'prefix', logText: 'AI & ML // LLMs, prompt engineering, and intelligent cloud-native agents' }
+];
+
+// Interactive letter morph component for primary name "MEDHINI"
+const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, theme }) => {
+  const isHovered = hoveredIdx === index;
+  const isAnyHovered = hoveredIdx !== null;
+  const isOtherHovered = isAnyHovered && !isHovered;
+
   return (
-    <motion.span
-      initial={{ y: 80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ 
-        duration: 0.8, 
-        delay: delay, 
-        ease: [0.16, 1, 0.3, 1] 
-      }}
-      whileHover={{ 
-        y: -10, 
-        scale: 1.15,
-        color: "#6366f1",
-        textShadow: "0 0 25px rgba(99,102,241,0.8)"
-      }}
-      className={`inline-block cursor-default font-display font-black tracking-tight select-none transition-colors duration-150 ${
-        theme === 'dark' ? 'text-white' : 'text-zinc-950'
-      }`}
+    <div
+      onMouseEnter={() => setHoveredIdx(index)}
+      onMouseLeave={() => setHoveredIdx(null)}
+      className="flex items-center justify-center transition-all duration-300 h-24 sm:h-36 md:h-44"
     >
-      {char === ' ' ? '\u00A0' : char}
-    </motion.span>
+      <div className={`flex items-center select-none font-display font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter leading-none transition-all duration-300 ${isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
+        }`}>
+        {item.type === 'prefix' && (
+          <motion.span
+            initial={{ width: 0, opacity: 0 }}
+            animate={{
+              width: isHovered ? "auto" : 0,
+              opacity: isHovered ? 1 : 0
+            }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden whitespace-nowrap text-zinc-500 font-display font-medium text-4xl sm:text-6xl md:text-[7.5rem] tracking-tight uppercase mr-2"
+          >
+            {item.prefix}
+          </motion.span>
+        )}
+
+        <motion.span
+          animate={{
+            color: isHovered ? "#6366f1" : (theme === 'dark' ? "#ffffff" : "#09090b"),
+            scale: isHovered ? 1.05 : 1,
+            textShadow: isHovered ? "0 0 40px rgba(99,102,241,0.8)" : "none"
+          }}
+          transition={{ duration: 0.2 }}
+          className="cursor-default"
+        >
+          {item.char}
+        </motion.span>
+
+        {item.type === 'suffix' && (
+          <motion.span
+            initial={{ width: 0, opacity: 0 }}
+            animate={{
+              width: isHovered ? "auto" : 0,
+              opacity: isHovered ? 1 : 0
+            }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden whitespace-nowrap text-zinc-500 font-display font-medium text-4xl sm:text-6xl md:text-[7.5rem] tracking-tight uppercase ml-2"
+          >
+            {item.suffix}
+          </motion.span>
+        )}
+      </div>
+    </div>
   );
 };
 
-const AnimatedGradientLetter = ({ char, delay }) => {
+// Custom styled DEV letters
+const AnimatedGradientLetter = ({ char, delay, hoveredIdx }) => {
+  const isAnyHovered = hoveredIdx !== null;
+
   return (
     <motion.span
       initial={{ y: 80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ 
-        duration: 0.8, 
-        delay: delay, 
-        ease: [0.16, 1, 0.3, 1] 
+      animate={{
+        y: 0,
+        opacity: isAnyHovered ? 0.2 : 0.8,
+        filter: isAnyHovered ? "blur(3px)" : "blur(0px)"
       }}
-      whileHover={{ 
-        y: -10, 
-        scale: 1.15,
-        filter: "drop-shadow(0 0 15px rgba(0, 229, 255, 0.8))"
+      transition={{
+        y: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
+        opacity: { duration: 0.2 },
+        filter: { duration: 0.2 }
       }}
-      className="inline-block cursor-default font-display font-black tracking-tight select-none text-gradient"
+      whileHover={{
+        y: -10,
+        scale: 1.12,
+        opacity: 1,
+        filter: "drop-shadow(0 0 25px rgba(0, 210, 239, 0.8)) blur(0px)"
+      }}
+      className="inline-block cursor-default font-display font-black tracking-tighter select-none dev-gradient transition-all duration-150 text-6xl sm:text-8xl md:text-[10rem] leading-[0.85]"
     >
       {char === ' ' ? '\u00A0' : char}
     </motion.span>
@@ -183,6 +234,7 @@ const projectsList = [
 
 export default function App() {
   const [theme, setTheme] = useState('dark');
+  const [hoveredIdx, setHoveredIdx] = useState(null);
   const [activeMenu, setActiveMenu] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(constellationSkills[0]);
   const [selectedChapter, setSelectedChapter] = useState(0);
@@ -252,8 +304,8 @@ export default function App() {
           target="_blank"
           rel="noreferrer"
           className={`px-4 py-2 rounded-full text-xs font-mono font-medium tracking-wider uppercase border transition-all duration-300 shadow-sm ${theme === 'dark'
-              ? 'bg-[#18181b]/80 border-white/5 text-white hover:bg-zinc-800'
-              : 'bg-white/80 border-zinc-200 text-zinc-800 hover:bg-zinc-100'
+            ? 'bg-[#18181b]/80 border-white/5 text-white hover:bg-zinc-800'
+            : 'bg-white/80 border-zinc-200 text-zinc-800 hover:bg-zinc-100'
             }`}
         >
           Download Resume
@@ -263,8 +315,8 @@ export default function App() {
           <button
             onClick={toggleTheme}
             className={`p-2.5 rounded-full border transition-all duration-300 ${theme === 'dark'
-                ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white'
-                : 'bg-white/80 border-zinc-200 text-zinc-600 hover:text-zinc-900'
+              ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white'
+              : 'bg-white/80 border-zinc-200 text-zinc-600 hover:text-zinc-900'
               }`}
             aria-label="Toggle Theme"
           >
@@ -274,8 +326,8 @@ export default function App() {
           <button
             onClick={() => setActiveMenu(!activeMenu)}
             className={`p-2.5 rounded-full border transition-all duration-300 ${theme === 'dark'
-                ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white'
-                : 'bg-white/80 border-zinc-200 text-zinc-600 hover:text-zinc-900'
+              ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white'
+              : 'bg-white/80 border-zinc-200 text-zinc-600 hover:text-zinc-900'
               }`}
             aria-label="Toggle Navigation Menu"
           >
@@ -329,25 +381,57 @@ export default function App() {
 
           {/* Heading */}
           <div className="space-y-2 select-none relative z-10">
-            <div className="flex justify-center flex-wrap gap-x-1 sm:gap-x-1.5 text-7xl sm:text-8xl md:text-[8.5rem] leading-[0.9] tracking-tighter">
-              {"MEDHINI".split("").map((char, index) => (
+            <div className="flex justify-center flex-nowrap gap-x-2 text-7xl sm:text-8xl md:text-[9.5rem] leading-[0.9] tracking-tighter w-full overflow-visible">
+              {medhiniLetters.map((item, index) => (
                 <AnimatedLetter
                   key={`medhini-${index}`}
-                  char={char}
-                  delay={index * 0.04}
+                  item={item}
+                  index={index}
+                  hoveredIdx={hoveredIdx}
+                  setHoveredIdx={setHoveredIdx}
                   theme={theme}
                 />
               ))}
             </div>
-            <div className="flex justify-center flex-wrap gap-x-1 sm:gap-x-1.5 text-7xl sm:text-8xl md:text-[8.5rem] leading-[0.9] tracking-tighter">
+            <div className="flex justify-center flex-nowrap gap-x-1 sm:gap-x-1.5 leading-[0.85] tracking-tighter w-full overflow-visible">
               {"DEV".split("").map((char, index) => (
                 <AnimatedGradientLetter
                   key={`dev-${index}`}
                   char={char}
                   delay={0.28 + index * 0.04}
+                  hoveredIdx={hoveredIdx}
                 />
               ))}
             </div>
+          </div>
+
+          {/* Dynamic Hover Status Log */}
+          <div className="h-6 flex justify-center items-center mt-6 select-none relative z-10">
+            <AnimatePresence mode="wait">
+              {hoveredIdx !== null ? (
+                <motion.p
+                  key={hoveredIdx}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.15 }}
+                  className="text-xs font-mono tracking-widest text-indigo-400 uppercase font-semibold"
+                >
+                  {medhiniLetters[hoveredIdx].logText}
+                </motion.p>
+              ) : (
+                <motion.p
+                  key="default"
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 0.5, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.15 }}
+                  className="text-xs font-mono tracking-widest text-zinc-500 uppercase"
+                >
+                  Hover over letters to compile stack intelligence
+                </motion.p>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Subtitle */}
@@ -361,8 +445,8 @@ export default function App() {
             <a
               href="#contact"
               className={`px-8 py-3.5 rounded-full text-sm font-semibold shadow-md transition-all duration-300 ${theme === 'dark'
-                  ? 'bg-white text-zinc-950 hover:bg-zinc-200'
-                  : 'bg-zinc-950 text-white hover:bg-zinc-800'
+                ? 'bg-white text-zinc-950 hover:bg-zinc-200'
+                : 'bg-zinc-950 text-white hover:bg-zinc-800'
                 }`}
             >
               Book a call
@@ -471,8 +555,8 @@ export default function App() {
                   onClick={() => setSelectedSkill(skill)}
                   style={{ left: `${skill.x}%`, top: `${skill.y}%` }}
                   className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full transition-all duration-300 ${isSelected
-                      ? 'w-10 h-10 bg-indigo-500/20 border-2 border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.5)] z-20'
-                      : 'w-6 h-6 bg-zinc-900/60 border border-white/10 hover:border-white/40 z-10'
+                    ? 'w-10 h-10 bg-indigo-500/20 border-2 border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.5)] z-20'
+                    : 'w-6 h-6 bg-zinc-900/60 border border-white/10 hover:border-white/40 z-10'
                     }`}
                   aria-label={`Select skill ${skill.name}`}
                 >
@@ -601,8 +685,8 @@ export default function App() {
                   target="_blank"
                   rel="noreferrer"
                   className={`flex items-center justify-center gap-1.5 w-full py-2.5 rounded-lg text-xs font-semibold border transition-colors ${theme === 'dark'
-                      ? 'bg-zinc-900 hover:bg-zinc-800 border-white/5 text-white'
-                      : 'bg-zinc-100 hover:bg-zinc-200 border-zinc-200 text-zinc-800'
+                    ? 'bg-zinc-900 hover:bg-zinc-800 border-white/5 text-white'
+                    : 'bg-zinc-100 hover:bg-zinc-200 border-zinc-200 text-zinc-800'
                     }`}
                 >
                   <GithubIcon className="w-3.5 h-3.5" />
@@ -710,13 +794,13 @@ export default function App() {
                   key={idx}
                   onClick={() => setSelectedChapter(idx)}
                   className={`flex items-center gap-4 p-4 rounded-xl border text-left transition-all duration-300 relative group ${isSelected
-                      ? 'bg-indigo-600/10 border-indigo-500 shadow-md shadow-indigo-600/5'
-                      : 'bg-transparent border-transparent hover:bg-zinc-800/10 hover:border-white/5'
+                    ? 'bg-indigo-600/10 border-indigo-500 shadow-md shadow-indigo-600/5'
+                    : 'bg-transparent border-transparent hover:bg-zinc-800/10 hover:border-white/5'
                     }`}
                 >
                   <div className={`w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold font-mono transition-all duration-300 ${isSelected
-                      ? 'border-indigo-400 bg-indigo-500/20 text-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.5)]'
-                      : 'border-zinc-700 bg-zinc-900 text-zinc-500'
+                    ? 'border-indigo-400 bg-indigo-500/20 text-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.5)]'
+                    : 'border-zinc-700 bg-zinc-900 text-zinc-500'
                     }`}>
                     {idx === 0 ? "I" : idx === 1 ? "II" : idx === 2 ? "III" : idx === 3 ? "IV" : "V"}
                   </div>
@@ -992,8 +1076,8 @@ export default function App() {
                       onChange={handleContactInput}
                       placeholder="Your name..."
                       className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
-                          ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
-                          : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
+                        ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
+                        : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
                         }`}
                     />
                   )}
@@ -1006,8 +1090,8 @@ export default function App() {
                       onChange={handleContactInput}
                       placeholder="Your email address..."
                       className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
-                          ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
-                          : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
+                        ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
+                        : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
                         }`}
                       autoFocus={contactStep > 0}
                     />
@@ -1021,8 +1105,8 @@ export default function App() {
                       placeholder="Your message details..."
                       rows="2"
                       className={`w-full py-4 text-3xl sm:text-5xl font-black bg-transparent border-b focus:outline-none resize-none transition-colors ${theme === 'dark'
-                          ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
-                          : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
+                        ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
+                        : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
                         }`}
                       autoFocus={contactStep > 0}
                       onKeyDown={(e) => {
@@ -1075,8 +1159,8 @@ export default function App() {
             <a
               href="mailto:brmedhini@gmail.com"
               className={`p-2.5 rounded-full border transition-all duration-200 ${theme === 'dark'
-                  ? 'bg-zinc-900/50 border-white/5 text-zinc-400 hover:text-white hover:border-white/10'
-                  : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
+                ? 'bg-zinc-900/50 border-white/5 text-zinc-400 hover:text-white hover:border-white/10'
+                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
                 }`}
               aria-label="Email Address"
             >
@@ -1087,8 +1171,8 @@ export default function App() {
               target="_blank"
               rel="noreferrer"
               className={`p-2.5 rounded-full border transition-all duration-200 ${theme === 'dark'
-                  ? 'bg-zinc-900/50 border-white/5 text-zinc-400 hover:text-white hover:border-white/10'
-                  : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
+                ? 'bg-zinc-900/50 border-white/5 text-zinc-400 hover:text-white hover:border-white/10'
+                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
                 }`}
               aria-label="GitHub Profile"
             >
@@ -1099,8 +1183,8 @@ export default function App() {
               target="_blank"
               rel="noreferrer"
               className={`p-2.5 rounded-full border transition-all duration-200 ${theme === 'dark'
-                  ? 'bg-zinc-900/50 border-white/5 text-zinc-400 hover:text-white hover:border-white/10'
-                  : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
+                ? 'bg-zinc-900/50 border-white/5 text-zinc-400 hover:text-white hover:border-white/10'
+                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
                 }`}
               aria-label="LinkedIn Profile"
             >

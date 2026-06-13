@@ -22,6 +22,12 @@
   -webkit-text-fill-color: transparent;
 }
 
+@utility dev-gradient {
+  background: linear-gradient(to right, #ffffff 0%, #00d2ef 50%, #8d54ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 @utility glow-indigo {
   box-shadow: 0 0 40px -10px rgba(99, 102, 241, 0.15);
 }
