@@ -883,11 +883,11 @@ export default function App() {
 
           {/* Right Card */}
           <div className="md:col-span-7 flex flex-col justify-center">
-            <div className={`p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[300px] flex flex-col justify-between transition-all duration-300 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+            <div className={`p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[300px] flex flex-col justify-between transition-all duration-300 ${theme === 'dark' ? `bg-[#0f0f12] border-white/5 hover:border-${timelineChapters[selectedChapter].colorTheme.border.split('-')[1]}-500/20` : `bg-white border-zinc-200 hover:border-${timelineChapters[selectedChapter].colorTheme.border.split('-')[1]}-500/20`
               }`}>
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="h-0.5 w-8 bg-indigo-500"></div>
+                  <div className={`h-0.5 w-8 ${timelineChapters[selectedChapter].colorTheme.lineGlow}`}></div>
                   <span className="text-xs font-mono font-bold text-zinc-500">
                     {timelineChapters[selectedChapter].chapter}
                   </span>
@@ -897,7 +897,7 @@ export default function App() {
                   }`}>
                   {timelineChapters[selectedChapter].title}
                 </h3>
-                <h4 className="text-sm font-semibold text-indigo-400 mt-1">
+                <h4 className={`text-sm font-semibold mt-1 ${timelineChapters[selectedChapter].colorTheme.text}`}>
                   {timelineChapters[selectedChapter].role} @ {timelineChapters[selectedChapter].institution}
                 </h4>
                 <p className="text-xs text-zinc-500 mt-1 font-mono">{timelineChapters[selectedChapter].period}</p>
