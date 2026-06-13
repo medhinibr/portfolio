@@ -162,7 +162,14 @@ const timelineChapters = [
     institution: "Sri BGS PU College, Sringeri",
     period: "MAY 2021 - MAR 2023",
     description: "Engaged in early-stage scientific computation, standard logic, and basic web formatting.",
-    skills: ["HTML", "Computer Science", "Physics", "Mathematics"]
+    skills: ["HTML", "Computer Science", "Physics", "Mathematics"],
+    colorTheme: {
+      text: "text-emerald-400",
+      border: "border-emerald-500",
+      bgSelected: "bg-emerald-600/10 border-emerald-500 shadow-md shadow-emerald-600/5",
+      badgeSelected: "border-emerald-400 bg-emerald-500/20 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.5)]",
+      lineGlow: "bg-emerald-500"
+    }
   },
   {
     chapter: "CHAPTER II",
@@ -171,7 +178,14 @@ const timelineChapters = [
     institution: "Google Cloud Arcade",
     period: "JUL 2024 - JAN 2025",
     description: "Executed hands-on cloud labs focusing on container orchestration, virtual machines, and serverless workflows.",
-    skills: ["Google Cloud", "Kubernetes", "Docker", "Compute Engine"]
+    skills: ["Google Cloud", "Kubernetes", "Docker", "Compute Engine"],
+    colorTheme: {
+      text: "text-indigo-400",
+      border: "border-indigo-500",
+      bgSelected: "bg-indigo-600/10 border-indigo-500 shadow-md shadow-indigo-600/5",
+      badgeSelected: "border-indigo-400 bg-indigo-500/20 text-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.5)]",
+      lineGlow: "bg-indigo-500"
+    }
   },
   {
     chapter: "CHAPTER III",
@@ -180,7 +194,14 @@ const timelineChapters = [
     institution: "Berukodige Farm",
     period: "JAN 2025 - PRESENT",
     description: "Co-founded an agri-innovation startup integrating nurseries with custom software management models.",
-    skills: ["Entrepreneurship", "Python", "Product Lifecycle", "Leadership"]
+    skills: ["Entrepreneurship", "Python", "Product Lifecycle", "Leadership"],
+    colorTheme: {
+      text: "text-cyan-400",
+      border: "border-cyan-500",
+      bgSelected: "bg-cyan-600/10 border-cyan-500 shadow-md shadow-cyan-600/5",
+      badgeSelected: "border-cyan-400 bg-cyan-500/20 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.5)]",
+      lineGlow: "bg-cyan-500"
+    }
   },
   {
     chapter: "CHAPTER IV",
@@ -189,7 +210,14 @@ const timelineChapters = [
     institution: "Infosys Springboard",
     period: "APR 2025 - JUL 2025",
     description: "Trained on future-ready analytics models, processing telemetry data, and building Python ML models.",
-    skills: ["Python", "Machine Learning", "Data Analytics", "SQL"]
+    skills: ["Python", "Machine Learning", "Data Analytics", "SQL"],
+    colorTheme: {
+      text: "text-amber-400",
+      border: "border-amber-500",
+      bgSelected: "bg-amber-600/10 border-amber-500 shadow-md shadow-amber-600/5",
+      badgeSelected: "border-amber-400 bg-amber-500/20 text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.5)]",
+      lineGlow: "bg-amber-500"
+    }
   },
   {
     chapter: "CHAPTER V",
@@ -198,7 +226,14 @@ const timelineChapters = [
     institution: "Benevolate (Texas, USA)",
     period: "APR 2026 - PRESENT",
     description: "Building production cross-platform mobile architectures, designing custom widgets, and handling API states.",
-    skills: ["Flutter", "Dart", "REST APIs", "State Management"]
+    skills: ["Flutter", "Dart", "REST APIs", "State Management"],
+    colorTheme: {
+      text: "text-rose-400",
+      border: "border-rose-500",
+      bgSelected: "bg-rose-600/10 border-rose-500 shadow-md shadow-rose-600/5",
+      badgeSelected: "border-rose-400 bg-rose-500/20 text-rose-300 shadow-[0_0_15px_rgba(244,63,94,0.5)]",
+      lineGlow: "bg-rose-500"
+    }
   }
 ];
 
