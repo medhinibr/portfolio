@@ -358,16 +358,24 @@ export default function App() {
               }`}
           >
             <nav className="flex flex-col space-y-6 text-xl font-bold font-mono">
-              {['Home', 'Identity', 'Skills', 'Works', 'Timeline', 'Metrics', 'Contact'].map((item, idx) => (
+              {[
+                { label: 'Initialize', target: 'home' },
+                { label: 'About', target: 'identity' },
+                { label: 'Stack', target: 'skills' },
+                { label: 'Build', target: 'works' },
+                { label: 'Optimize', target: 'metrics' },
+                { label: 'Experience', target: 'timeline' },
+                { label: 'Deploy', target: 'contact' }
+              ].map((item, idx) => (
                 <a
                   key={idx}
-                  href={`#${item.toLowerCase()}`}
+                  href={`#${item.target}`}
                   onClick={() => setActiveMenu(false)}
                   className={`flex items-center group transition-colors ${theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-900'
                     }`}
                 >
                   <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity mr-2 text-indigo-500" />
-                  {item}
+                  {item.label}
                 </a>
               ))}
             </nav>
