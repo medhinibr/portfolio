@@ -577,7 +577,7 @@ export default function App() {
           <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
             02 // TECHNICAL ARSENAL
           </div>
-          <h2 className={`text-3xl sm:text-5xl font-black ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+          <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
             }`}>The Constellation.</h2>
         </div>
 
