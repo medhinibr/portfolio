@@ -273,6 +273,7 @@ export default function App() {
   const [activeMenu, setActiveMenu] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(constellationSkills[0]);
   const [selectedChapter, setSelectedChapter] = useState(0);
+  const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
 
   // Interactive contact form state
   const [contactStep, setContactStep] = useState(0);
