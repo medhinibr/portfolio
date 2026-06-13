@@ -1132,6 +1132,7 @@ export default function App() {
                       value={contactForm.name}
                       onChange={handleContactInput}
                       placeholder="Your name..."
+                      autoFocus
                       className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
                         ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
                         : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
