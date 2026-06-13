@@ -1,16 +1,56 @@
-# React + Vite
+# Medhini B R - Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance, responsive, and interactive developer portfolio website designed around a modern, developer-centric aesthetic inspired by Vercel portfolios. Built using React, Vite, Tailwind CSS, and Framer Motion.
 
-Currently, two official plugins are available:
+## Technical Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **Core Framework**: React 18
+* **Build System**: Vite
+* **Styling Engine**: Tailwind CSS
+* **Animation Library**: Framer Motion
+* **Icon Library**: Lucide React
+* **Deployment Platform**: Vercel
 
-## React Compiler
+## Key Technical Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Staggered Name Morphing Physics**: Custom letter-by-letter component system parsing the name "MEDHINI" into inline technology expansions (MYSQL, EXPRESS, DOCKER, HYBRID, INFOSYS, NODE, AI) on mouse hover. Utilizes Framer Motion's layout animations to scale, shift coordinates, and dynamically apply blur filters to non-targeted characters.
+* **Vite HMR & Optimization**: Minimized layout painting with GPU-accelerated motion layers.
+* **Dynamic System Monitor Widget**: Bottom-left fixed telemetry terminal capturing state changes from character hovers to log real-time tech stack descriptions.
+* **Glassmorphic Navigation & Theme Toggle**: Backdrop filtering, sticky navigation overlays, and native theme-toggling between black slate dark mode and pure light mode.
+* **Interactive Project Engine & Timeline**: Staggered cards and chronological experience chapters representing roles across systems engineering, cloud deployment, and academic achievements.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+Ensure you have Node.js (version 18 or above) installed on your system.
+
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/medhinibr/Portfolio.git
+cd Portfolio
+npm install
+```
+
+### Running Locally
+
+To launch the Vite development server locally:
+
+```bash
+npm run dev
+```
+
+The application will run on `http://localhost:5173/` by default.
+
+### Building for Production
+
+To compile and bundle assets for optimized production deployments:
+
+```bash
+npm run build
+```
+
+The compiled assets will be written to the `dist/` directory, ready to be hosted on Vercel or any static file hosting service.
