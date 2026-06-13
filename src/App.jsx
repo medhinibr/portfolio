@@ -761,7 +761,7 @@ export default function App() {
           <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
             03 // THE ARCHITECTURE
           </div>
-          <h2 className={`text-3xl sm:text-5xl font-black ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+          <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
             }`}>Engineered for <span className="text-gradient">Excellence.</span></h2>
           <p className={`max-w-2xl mx-auto text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
             }`}>
