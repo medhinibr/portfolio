@@ -692,7 +692,9 @@ export default function App() {
             <motion.div
               key={idx}
               whileHover={{ y: -6 }}
-              className={`rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-xl ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5 hover:border-indigo-500/25' : 'bg-white border-zinc-200 hover:border-indigo-500/25'
+              onMouseEnter={() => setHoveredProjectIdx(idx)}
+              onMouseLeave={() => setHoveredProjectIdx(null)}
+              className={`rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-500 shadow-xl ${hoveredProjectIdx !== null && hoveredProjectIdx !== idx ? 'opacity-40 scale-[0.98] blur-[0.5px]' : 'opacity-100'} ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5 hover:border-indigo-500/25' : 'bg-white border-zinc-200 hover:border-indigo-500/25'
                 }`}
             >
               <div>
