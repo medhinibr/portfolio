@@ -297,6 +297,17 @@ export default function App() {
       <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-violet-500/5 rounded-full blur-[150px] pointer-events-none" />
 
+      {/* Telemetry log box in bottom left */}
+      <div className="fixed bottom-8 left-8 z-30 hidden md:block w-72 font-mono text-[10px] text-zinc-500 bg-black/40 backdrop-blur-md border border-white/5 p-4 rounded-lg select-none">
+        <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-2">
+          <span>SYSTEM MONITOR // STATUS</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
+        </div>
+        <p className="leading-normal">
+          {hoveredIdx !== null ? medhiniLetters[hoveredIdx].logText : "IDLE // STACK TELEMETRY READY"}
+        </p>
+      </div>
+
       {/* Floating Top Nav Elements */}
       <header className="fixed top-8 left-8 right-8 z-40 flex justify-between items-center px-4 sm:px-8">
         <a
