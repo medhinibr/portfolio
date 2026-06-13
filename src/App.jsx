@@ -890,7 +890,7 @@ export default function App() {
       </section>
 
       {/* GitHub Contributions Section */}
-      <section id="metrics" className="py-24 border-t border-white/5 max-w-6xl mx-auto px-6 sm:px-16 text-center">
+      <section id="telemetry" className="py-24 border-t border-white/5 max-w-6xl mx-auto px-6 sm:px-16 text-center">
         <div className="space-y-4 mb-12">
           <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
             05 // TELEMETRY
