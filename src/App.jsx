@@ -298,8 +298,8 @@ export default function App() {
       <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-violet-500/5 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Telemetry log box in bottom left */}
-      <div className="fixed bottom-8 left-8 z-30 hidden md:block w-72 font-mono text-[10px] text-zinc-500 bg-black/40 backdrop-blur-md border border-white/5 p-4 rounded-lg select-none">
-        <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-2">
+      <div className="fixed bottom-8 left-8 z-30 hidden md:block w-72 font-mono text-[10px] p-4 rounded-lg select-none transition-all duration-300 border backdrop-blur-md dark:text-zinc-500 dark:bg-black/40 dark:border-white/5 text-zinc-600 bg-white/60 border-zinc-200 shadow-sm">
+        <div className="flex items-center justify-between border-b dark:border-white/5 border-zinc-200 pb-2 mb-2">
           <span>SYSTEM MONITOR // STATUS</span>
           <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
         </div>
