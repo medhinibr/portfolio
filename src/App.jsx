@@ -507,7 +507,7 @@ export default function App() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center relative pt-32">
+      <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center relative pt-16 sm:pt-20">
         <div className="space-y-6 w-full max-w-7xl mx-auto px-10 relative">
           {/* Status Pill */}
           <motion.div
