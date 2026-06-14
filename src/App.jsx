@@ -54,6 +54,11 @@ const medhiniLetters = [
   { char: 'I', suffix: '', prefix: 'A', type: 'prefix', logText: 'AI & ML // LLMs, prompt engineering, and intelligent cloud-native agents' }
 ];
 
+const getFullWord = (item) => {
+  if (!item) return '';
+  return item.type === 'prefix' ? (item.prefix + item.char) : (item.char + item.suffix);
+};
+
 // Interactive letter morph component for primary name "MEDHINI"
 const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, setClickedIdx, theme }) => {
   const isHovered = (hoveredIdx === index) || (clickedIdx === index);
@@ -70,8 +75,11 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
       }}
       className="flex items-center justify-center transition-all duration-300 h-24 sm:h-36 md:h-44 cursor-pointer"
     >
-      <div className={`flex items-center select-none font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter leading-none transition-all duration-300 ${isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
-        }`}>
+      <div className={`flex items-center select-none font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter leading-none transition-all duration-300 ${
+        isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
+      } ${
+        isHovered ? 'filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)]' : ''
+      }`}>
         {item.type === 'prefix' && (
           <motion.span
             initial={{ width: 0, opacity: 0 }}
@@ -80,7 +88,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-[#D8B4FE] to-white bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase mr-1"
+            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase"
           >
             {item.prefix}
           </motion.span>
@@ -93,7 +101,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
           transition={{ duration: 0.2 }}
           className={`inline-block cursor-default transition-all duration-300 ${
             isHovered 
-              ? 'bg-gradient-to-b from-[#D8B4FE] to-white bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(216,180,254,0.55)]' 
+              ? 'bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent' 
               : (theme === 'dark' ? 'text-white' : 'text-zinc-900')
           }`}
         >
@@ -108,7 +116,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-[#D8B4FE] to-white bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase ml-1"
+            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase"
           >
             {item.suffix}
           </motion.span>
@@ -119,16 +127,17 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
 };
 
 // Custom styled DEV letters
-const AnimatedGradientLetter = ({ char, delay, hoveredIdx }) => {
-  const isAnyHovered = hoveredIdx !== null;
+const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
+  const isHovered = hoveredIdx !== null;
+  const isClicked = clickedIdx !== null;
 
   return (
     <motion.span
       initial={{ y: 80, opacity: 0 }}
       animate={{
         y: 0,
-        opacity: isAnyHovered ? 0.2 : 0.8,
-        filter: isAnyHovered ? "blur(3px)" : "blur(0px)"
+        opacity: isClicked ? 1.0 : (isHovered ? 0.4 : 0.8),
+        filter: isClicked ? "blur(0px)" : (isHovered ? "blur(2px)" : "blur(0px)")
       }}
       transition={{
         y: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
@@ -288,6 +297,10 @@ export default function App() {
   const [formError, setFormError] = useState('');
   const [isTransmitting, setIsTransmitting] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Monitor custom theme toggling
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -355,7 +368,7 @@ export default function App() {
       </div>
 
       {/* Floating Top Nav Elements */}
-      <header className="fixed top-8 left-8 right-8 z-40 flex justify-between items-center px-4 sm:px-8">
+      <header className="fixed top-8 left-0 right-0 w-full z-40 flex justify-between items-center px-6 sm:px-12 md:px-16 lg:px-24">
         <a
           href="https://linktr.ee"
           target="_blank"
@@ -430,8 +443,8 @@ export default function App() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex flex-col justify-center items-center px-6 text-center relative pt-20">
-        <div className="space-y-6 w-full max-w-[90vw] md:max-w-7xl mx-auto relative">
+      <section id="home" className="min-h-screen flex flex-col justify-center items-center px-6 sm:px-12 md:px-16 lg:px-24 text-center relative pt-20">
+        <div className="space-y-6 w-full relative">
           {/* Status Pill */}
           <div className="flex justify-center">
             <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium border uppercase ${theme === 'dark' ? 'bg-[#18181b]/50 border-white/5 text-indigo-400' : 'bg-white/50 border-zinc-200 text-indigo-600'
@@ -446,19 +459,46 @@ export default function App() {
 
           {/* Heading */}
           <div className="space-y-2 select-none relative z-10">
-            <div className="flex justify-center flex-nowrap gap-x-2 text-7xl sm:text-8xl md:text-[9.5rem] leading-[0.9] tracking-tighter w-full overflow-visible">
-              {medhiniLetters.map((item, index) => (
-                <AnimatedLetter
-                  key={`medhini-${index}`}
-                  item={item}
-                  index={index}
-                  hoveredIdx={hoveredIdx}
-                  setHoveredIdx={setHoveredIdx}
-                  clickedIdx={clickedIdx}
-                  setClickedIdx={setClickedIdx}
-                  theme={theme}
-                />
-              ))}
+            <div className="flex justify-center flex-nowrap gap-x-2 text-7xl sm:text-8xl md:text-[9.5rem] leading-[0.9] tracking-tighter w-full overflow-visible h-24 sm:h-36 md:h-44 items-center justify-center">
+              <AnimatePresence mode="wait">
+                {clickedIdx !== null ? (
+                  <motion.div
+                    key={`active-word-${clickedIdx}`}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setClickedIdx(null);
+                    }}
+                    className="flex items-center justify-center cursor-pointer font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter leading-none uppercase bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)] select-none h-full"
+                  >
+                    {getFullWord(medhiniLetters[clickedIdx])}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="name-letters"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex justify-center flex-nowrap gap-x-2 w-full h-full items-center"
+                  >
+                    {medhiniLetters.map((item, index) => (
+                      <AnimatedLetter
+                        key={`medhini-${index}`}
+                        item={item}
+                        index={index}
+                        hoveredIdx={hoveredIdx}
+                        setHoveredIdx={setHoveredIdx}
+                        clickedIdx={clickedIdx}
+                        setClickedIdx={setClickedIdx}
+                        theme={theme}
+                      />
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             <div className="flex justify-center flex-nowrap gap-x-1 sm:gap-x-1.5 leading-[0.85] tracking-tighter w-full overflow-visible">
               {"DEV".split("").map((char, index) => (
@@ -466,7 +506,8 @@ export default function App() {
                   key={`dev-${index}`}
                   char={char}
                   delay={0.28 + index * 0.04}
-                  hoveredIdx={hoveredIdx !== null ? hoveredIdx : clickedIdx}
+                  hoveredIdx={hoveredIdx}
+                  clickedIdx={clickedIdx}
                 />
               ))}
             </div>
@@ -524,160 +565,164 @@ export default function App() {
       </section>
 
       {/* Identity Section */}
-      <section id="identity" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24 py-24 border-t border-white/5 w-full max-w-7xl mx-auto">
-        <div className="space-y-4 mb-16 text-left">
-          <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-            01 // THE IDENTITY
-          </div>
-          <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-            }`}>Engineered for impact.</h2>
-        </div>
-
-        <div className="grid md:grid-cols-12 gap-12 items-center">
-          <div className="md:col-span-7 space-y-6 text-left">
-            <h3 className={`text-4xl sm:text-5xl font-black font-display leading-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>
-              Systems that scale.<br />
-              <span className="opacity-45">Experiences that matter.</span>
-            </h3>
-            <p className={`text-base sm:text-lg leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-              }`}>
-              Engineering isn't just about syntax. It's about bridging the gap between rigorous cloud architecture and deeply resonant user experiences. I build products and architectures that operate seamlessly at scale, utilizing serverless patterns and robust data flows.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${theme === 'dark' ? 'bg-zinc-900 text-zinc-300' : 'bg-zinc-200 text-zinc-800'
-                }`}>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                Co-Founder @ Berukodige Farm
-              </span>
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${theme === 'dark' ? 'bg-zinc-900 text-zinc-300' : 'bg-zinc-200 text-zinc-800'
-                }`}>
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-                Flutter Intern @ Benevolate
-              </span>
+      <section id="identity" className="w-full py-24 min-h-screen flex flex-col justify-center">
+        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+          <div className="space-y-4 mb-16 text-left">
+            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+              01 // THE IDENTITY
             </div>
+            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+              }`}>Engineered for impact.</h2>
           </div>
 
-          {/* Right Column: Code Panel */}
-          <div className="md:col-span-5 w-full">
-            <div className={`p-6 rounded-2xl border text-left font-mono text-sm relative overflow-hidden shadow-xl ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
-              }`}>
-              <div className="flex gap-1.5 mb-6">
-                <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
-                <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
-                <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
-                <span className="text-xs text-zinc-500 ml-2">~/identity.ts</span>
+          <div className="grid md:grid-cols-12 gap-12 items-center">
+            <div className="md:col-span-7 space-y-6 text-left">
+              <h3 className={`text-4xl sm:text-5xl font-black font-display leading-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+                }`}>
+                Systems that scale.<br />
+                <span className="opacity-45">Experiences that matter.</span>
+              </h3>
+              <p className={`text-base sm:text-lg leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+                }`}>
+                Engineering isn't just about syntax. It's about bridging the gap between rigorous cloud architecture and deeply resonant user experiences. I build products and architectures that operate seamlessly at scale, utilizing serverless patterns and robust data flows.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${theme === 'dark' ? 'bg-zinc-900 text-zinc-300' : 'bg-zinc-200 text-zinc-800'
+                  }`}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Co-Founder @ Berukodige Farm
+                </span>
+                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${theme === 'dark' ? 'bg-zinc-900 text-zinc-300' : 'bg-zinc-200 text-zinc-800'
+                  }`}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                  Flutter Intern @ Benevolate
+                </span>
               </div>
-              <pre className="overflow-x-auto text-[13px] leading-relaxed">
-                <code>
-                  <span className="text-indigo-400">interface</span> <span className="text-yellow-300">Developer</span> &#123;{'\n'}
-                  {'  '}mindset: <span className="text-emerald-400">"Cloud Native & DevOps"</span>;{'\n'}
-                  {'  '}architecture: <span className="text-emerald-400">"Serverless & Kubernetes"</span>;{'\n'}
-                  {'  '}performance: <span className="text-emerald-400">"Highly Available & Scalable"</span>;{'\n'}
-                  &#125;{'\n\n'}
-                  <span className="text-zinc-500">// Ready to build.</span>
-                </code>
-              </pre>
+            </div>
+
+            {/* Right Column: Code Panel */}
+            <div className="md:col-span-5 w-full">
+              <div className={`p-6 rounded-2xl border text-left font-mono text-sm relative overflow-hidden shadow-xl ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+                }`}>
+                <div className="flex gap-1.5 mb-6">
+                  <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
+                  <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                  <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
+                  <span className="text-xs text-zinc-500 ml-2">~/identity.ts</span>
+                </div>
+                <pre className="overflow-x-auto text-[13px] leading-relaxed">
+                  <code>
+                    <span className="text-indigo-400">interface</span> <span className="text-yellow-300">Developer</span> &#123;{'\n'}
+                    {'  '}mindset: <span className="text-emerald-400">"Cloud Native & DevOps"</span>;{'\n'}
+                    {'  '}architecture: <span className="text-emerald-400">"Serverless & Kubernetes"</span>;{'\n'}
+                    {'  '}performance: <span className="text-emerald-400">"Highly Available & Scalable"</span>;{'\n'}
+                    &#125;{'\n\n'}
+                    <span className="text-zinc-500">// Ready to build.</span>
+                  </code>
+                </pre>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Skills Section (The Constellation) */}
-      <section id="skills" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24 py-24 border-t border-white/5 w-full max-w-7xl mx-auto">
-        <div className="space-y-4 mb-16 text-left">
-          <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-            02 // TECHNICAL ARSENAL
-          </div>
-          <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-            }`}>The Constellation.</h2>
-        </div>
-
-        <div className="grid md:grid-cols-12 gap-12 items-stretch">
-          {/* Left: Constellation Map */}
-          <div className="md:col-span-7 h-96 relative rounded-2xl overflow-hidden bg-zinc-950/20 border border-white/5 flex items-center justify-center">
-            {/* SVG Interactive Constellation Grid */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none">
-              {/* Draw connected lines */}
-              {constellationSkills.map((s, idx) => (
-                <line
-                  key={idx}
-                  x1={`${s.x}%`}
-                  y1={`${s.y}%`}
-                  x2={`${selectedSkill.x}%`}
-                  y2={`${selectedSkill.y}%`}
-                  stroke="rgba(99, 102, 241, 0.2)"
-                  strokeWidth="1"
-                  strokeDasharray="4"
-                />
-              ))}
-            </svg>
-
-            {/* Render Constellation Node Buttons */}
-            {constellationSkills.map((skill) => {
-              const isSelected = selectedSkill.id === skill.id;
-              return (
-                <button
-                  key={skill.id}
-                  onClick={() => setSelectedSkill(skill)}
-                  style={{ left: `${skill.x}%`, top: `${skill.y}%` }}
-                  className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full transition-all duration-300 ${isSelected
-                    ? 'w-10 h-10 bg-indigo-500/20 border-2 border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.5)] z-20'
-                    : 'w-6 h-6 bg-zinc-900/60 border border-white/10 hover:border-white/40 z-10'
-                    }`}
-                  aria-label={`Select skill ${skill.name}`}
-                >
-                  <span className={`w-2.5 h-2.5 rounded-full ${isSelected ? 'bg-indigo-400' : 'bg-zinc-600'
-                    }`} />
-                  <span className={`absolute top-8 text-[10px] font-mono whitespace-nowrap bg-zinc-950/80 px-2 py-0.5 rounded border border-white/5 transition-opacity ${isSelected ? 'opacity-100 text-white font-bold' : 'opacity-40 text-zinc-400 hover:opacity-100'
-                    }`}>
-                    {skill.name}
-                  </span>
-                </button>
-              );
-            })}
+      <section id="skills" className="w-full py-24 min-h-screen flex flex-col justify-center">
+        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+          <div className="space-y-4 mb-16 text-left">
+            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+              02 // TECHNICAL ARSENAL
+            </div>
+            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+              }`}>The Constellation.</h2>
           </div>
 
-          {/* Right: Detailed Card */}
-          <div className="md:col-span-5 flex flex-col justify-center">
-            <div className={`p-8 rounded-2xl border text-left space-y-6 shadow-xl transition-all duration-300 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
-              }`}>
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-400">
-                  <Cpu className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold font-mono tracking-wider text-indigo-400 uppercase">
-                    {selectedSkill.category}
-                  </p>
-                  <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                    }`}>
-                    {selectedSkill.name}
-                  </h3>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-zinc-500">PRIMARY INTEGRATION & USE</p>
-                <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'
-                  }`}>
-                  {selectedSkill.use}
-                </p>
-              </div>
-
-              <div className="space-y-2 pt-2">
-                <div className="flex justify-between text-xs font-mono">
-                  <span className="text-zinc-500">EXPERIENCE DEPTH</span>
-                  <span className="text-indigo-400">{selectedSkill.mastery}%</span>
-                </div>
-                <div className="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
-                  <motion.div
-                    key={selectedSkill.id}
-                    initial={{ width: 0 }}
-                    animate={{ width: `${selectedSkill.mastery}%` }}
-                    transition={{ duration: 0.5 }}
-                    className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full"
+          <div className="grid md:grid-cols-12 gap-12 items-stretch">
+            {/* Left: Constellation Map */}
+            <div className="md:col-span-7 h-96 relative rounded-2xl overflow-hidden bg-zinc-950/20 border border-white/5 flex items-center justify-center">
+              {/* SVG Interactive Constellation Grid */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                {/* Draw connected lines */}
+                {constellationSkills.map((s, idx) => (
+                  <line
+                    key={idx}
+                    x1={`${s.x}%`}
+                    y1={`${s.y}%`}
+                    x2={`${selectedSkill.x}%`}
+                    y2={`${selectedSkill.y}%`}
+                    stroke="rgba(99, 102, 241, 0.2)"
+                    strokeWidth="1"
+                    strokeDasharray="4"
                   />
+                ))}
+              </svg>
+
+              {/* Render Constellation Node Buttons */}
+              {constellationSkills.map((skill) => {
+                const isSelected = selectedSkill.id === skill.id;
+                return (
+                  <button
+                    key={skill.id}
+                    onClick={() => setSelectedSkill(skill)}
+                    style={{ left: `${skill.x}%`, top: `${skill.y}%` }}
+                    className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full transition-all duration-300 ${isSelected
+                      ? 'w-10 h-10 bg-indigo-500/20 border-2 border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.5)] z-20'
+                      : 'w-6 h-6 bg-zinc-900/60 border border-white/10 hover:border-white/40 z-10'
+                      }`}
+                    aria-label={`Select skill ${skill.name}`}
+                  >
+                    <span className={`w-2.5 h-2.5 rounded-full ${isSelected ? 'bg-indigo-400' : 'bg-zinc-600'
+                      }`} />
+                    <span className={`absolute top-8 text-[10px] font-mono whitespace-nowrap bg-zinc-950/80 px-2 py-0.5 rounded border border-white/5 transition-opacity ${isSelected ? 'opacity-100 text-white font-bold' : 'opacity-40 text-zinc-400 hover:opacity-100'
+                      }`}>
+                      {skill.name}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right: Detailed Card */}
+            <div className="md:col-span-5 flex flex-col justify-center">
+              <div className={`p-8 rounded-2xl border text-left space-y-6 shadow-xl transition-all duration-300 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+                }`}>
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-400">
+                    <Cpu className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold font-mono tracking-wider text-indigo-400 uppercase">
+                      {selectedSkill.category}
+                    </p>
+                    <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+                      }`}>
+                      {selectedSkill.name}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold text-zinc-500">PRIMARY INTEGRATION & USE</p>
+                  <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'
+                    }`}>
+                    {selectedSkill.use}
+                  </p>
+                </div>
+
+                <div className="space-y-2 pt-2">
+                  <div className="flex justify-between text-xs font-mono">
+                    <span className="text-zinc-500">EXPERIENCE DEPTH</span>
+                    <span className="text-indigo-400">{selectedSkill.mastery}%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+                    <motion.div
+                      key={selectedSkill.id}
+                      initial={{ width: 0 }}
+                      animate={{ width: `${selectedSkill.mastery}%` }}
+                      transition={{ duration: 0.5 }}
+                      className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -686,253 +731,259 @@ export default function App() {
       </section>
 
       {/* Selected Works Section */}
-      <section id="works" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24 py-24 border-t border-white/5 w-full max-w-7xl mx-auto">
-        <div className="space-y-4 mb-16 text-left">
-          <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-            SELECTED WORKS
+      <section id="works" className="w-full py-24 min-h-screen flex flex-col justify-center">
+        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+          <div className="space-y-4 mb-16 text-left">
+            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+              SELECTED WORKS
+            </div>
+            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+              }`}>Engineering Impact.</h2>
+            <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+              }`}>
+              A collection of projects and solutions demonstrating cloud integration, reactive frontends, and backend pipelines.
+            </p>
           </div>
-          <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-            }`}>Engineering Impact.</h2>
-          <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-            }`}>
-            A collection of projects and solutions demonstrating cloud integration, reactive frontends, and backend pipelines.
-          </p>
-        </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {projectsList.map((project, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ y: -6 }}
-              onMouseEnter={() => setHoveredProjectIdx(idx)}
-              onMouseLeave={() => setHoveredProjectIdx(null)}
-              className={`rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-500 shadow-xl ${hoveredProjectIdx !== null && hoveredProjectIdx !== idx ? 'opacity-40 scale-[0.98] blur-[0.5px]' : 'opacity-100'} ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5 hover:border-indigo-500/25' : 'bg-white border-zinc-200 hover:border-indigo-500/25'
-                }`}
-            >
-              <div>
-                <div className="relative h-48 w-full overflow-hidden bg-zinc-950/20 border-b border-white/5">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 to-transparent"></div>
-                </div>
-
-                <div className="p-6 space-y-4 text-left">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[9px] font-bold font-mono tracking-wide text-indigo-400 uppercase">
-                      {project.category}
-                    </span>
-                    <span className="text-[9px] font-bold font-mono bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-1.5 py-0.5 rounded">
-                      {project.status}
-                    </span>
+          <div className="grid md:grid-cols-3 gap-6">
+            {projectsList.map((project, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ y: -6 }}
+                onMouseEnter={() => setHoveredProjectIdx(idx)}
+                onMouseLeave={() => setHoveredProjectIdx(null)}
+                className={`rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-500 shadow-xl ${hoveredProjectIdx !== null && hoveredProjectIdx !== idx ? 'opacity-40 scale-[0.98] blur-[0.5px]' : 'opacity-100'} ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5 hover:border-indigo-500/25' : 'bg-white border-zinc-200 hover:border-indigo-500/25'
+                  }`}
+              >
+                <div>
+                  <div className="relative h-48 w-full overflow-hidden bg-zinc-950/20 border-b border-white/5">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 to-transparent"></div>
                   </div>
-                  <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                    }`}>
-                    {project.title}
-                  </h3>
-                  <p className={`text-xs sm:text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-                    }`}>
-                    {project.description}
-                  </p>
-                </div>
-              </div>
 
-              <div className="p-6 pt-0 space-y-4">
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className={`text-[10px] font-mono px-2 py-0.5 rounded border ${theme === 'dark' ? 'bg-zinc-900 border-white/5 text-zinc-400' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
+                  <div className="p-6 space-y-4 text-left">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[9px] font-bold font-mono tracking-wide text-indigo-400 uppercase">
+                        {project.category}
+                      </span>
+                      <span className="text-[9px] font-bold font-mono bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-1.5 py-0.5 rounded">
+                        {project.status}
+                      </span>
+                    </div>
+                    <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
                       }`}>
-                      {tag}
-                    </span>
-                  ))}
+                      {project.title}
+                    </h3>
+                    <p className={`text-xs sm:text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+                      }`}>
+                      {project.description}
+                    </p>
+                  </div>
                 </div>
 
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`flex items-center justify-center gap-1.5 w-full py-2.5 rounded-lg text-xs font-semibold border transition-colors ${theme === 'dark'
-                    ? 'bg-zinc-900 hover:bg-zinc-800 border-white/5 text-white'
-                    : 'bg-zinc-100 hover:bg-zinc-200 border-zinc-200 text-zinc-800'
-                    }`}
-                >
-                  <GithubIcon className="w-3.5 h-3.5" />
-                  View Repository
-                </a>
-              </div>
-            </motion.div>
-          ))}
+                <div className="p-6 pt-0 space-y-4">
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tags.map((tag, tIdx) => (
+                      <span key={tIdx} className={`text-[10px] font-mono px-2 py-0.5 rounded border ${theme === 'dark' ? 'bg-zinc-900 border-white/5 text-zinc-400' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
+                        }`}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`flex items-center justify-center gap-1.5 w-full py-2.5 rounded-lg text-xs font-semibold border transition-colors ${theme === 'dark'
+                      ? 'bg-zinc-900 hover:bg-zinc-800 border-white/5 text-white'
+                      : 'bg-zinc-100 hover:bg-zinc-200 border-zinc-200 text-zinc-800'
+                      }`}
+                  >
+                    <GithubIcon className="w-3.5 h-3.5" />
+                    View Repository
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* The Architecture (Metrics) Section */}
-      <section id="metrics" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24 py-24 border-t border-white/5 w-full max-w-7xl mx-auto">
-        <div className="space-y-4 mb-16 text-center">
-          <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-            03 // THE ARCHITECTURE
+      <section id="metrics" className="w-full py-24 min-h-screen flex flex-col justify-center">
+        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+          <div className="space-y-4 mb-16 text-center">
+            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+              03 // THE ARCHITECTURE
+            </div>
+            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+              }`}>Engineered for <span className="text-gradient">Excellence.</span></h2>
+            <p className={`max-w-2xl mx-auto text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+              }`}>
+              Beautiful design is only half the equation. Under the hood, I focus on building robust, accessible, and highly optimized applications that respect the user's time and device.
+            </p>
           </div>
-          <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-            }`}>Engineered for <span className="text-gradient">Excellence.</span></h2>
-          <p className={`max-w-2xl mx-auto text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-            }`}>
-            Beautiful design is only half the equation. Under the hood, I focus on building robust, accessible, and highly optimized applications that respect the user's time and device.
-          </p>
-        </div>
 
-        {/* Lighthouse Gauges */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 justify-center">
-          {[
-            { label: "PERFORMANCE", val: 100, color: "text-emerald-400 stroke-emerald-500" },
-            { label: "ACCESSIBILITY", val: 100, color: "text-indigo-400 stroke-indigo-500" },
-            { label: "BEST PRACTICES", val: 100, color: "text-violet-400 stroke-violet-500" },
-            { label: "SEO", val: 100, color: "text-amber-400 stroke-amber-500" }
-          ].map((item, idx) => (
-            <div key={idx} className="flex flex-col items-center space-y-3">
-              <div className="relative w-28 h-28 flex items-center justify-center">
-                <svg className="absolute w-full h-full transform -rotate-90">
-                  <circle cx="56" cy="56" r="48" stroke="rgba(255,255,255,0.05)" strokeWidth="6" fill="transparent" />
-                  <motion.circle
-                    cx="56"
-                    cy="56"
-                    r="48"
-                    className={item.color}
-                    strokeWidth="6"
-                    fill="transparent"
-                    strokeDasharray={301.6}
-                    initial={{ strokeDashoffset: 301.6 }}
-                    whileInView={{ strokeDashoffset: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: idx * 0.1 }}
-                  />
-                </svg>
-                <span className="text-2xl font-black">{item.val}</span>
+          {/* Lighthouse Gauges */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 justify-center">
+            {[
+              { label: "PERFORMANCE", val: 100, color: "text-emerald-400 stroke-emerald-500" },
+              { label: "ACCESSIBILITY", val: 100, color: "text-indigo-400 stroke-indigo-500" },
+              { label: "BEST PRACTICES", val: 100, color: "text-violet-400 stroke-violet-500" },
+              { label: "SEO", val: 100, color: "text-amber-400 stroke-amber-500" }
+            ].map((item, idx) => (
+              <div key={idx} className="flex flex-col items-center space-y-3">
+                <div className="relative w-28 h-28 flex items-center justify-center">
+                  <svg className="absolute w-full h-full transform -rotate-90">
+                    <circle cx="56" cy="56" r="48" stroke="rgba(255,255,255,0.05)" strokeWidth="6" fill="transparent" />
+                    <motion.circle
+                      cx="56"
+                      cy="56"
+                      r="48"
+                      className={item.color}
+                      strokeWidth="6"
+                      fill="transparent"
+                      strokeDasharray={301.6}
+                      initial={{ strokeDashoffset: 301.6 }}
+                      whileInView={{ strokeDashoffset: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: idx * 0.1 }}
+                    />
+                  </svg>
+                  <span className="text-2xl font-black">{item.val}</span>
+                </div>
+                <span className="text-[10px] font-bold font-mono tracking-wider text-zinc-500">{item.label}</span>
               </div>
-              <span className="text-[10px] font-bold font-mono tracking-wider text-zinc-500">{item.label}</span>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* Core Architectural Pillars */}
-        <div className="grid md:grid-cols-3 gap-6 pt-12">
-          {[
-            { title: "Serverless & Containerized", desc: "Deploying serverless endpoints and containerized services using Google Cloud Run, Cloud Functions, and Kubernetes." },
-            { title: "Automated Deployments", desc: "Using Github Actions and CI/CD pipelines to ensure rapid iteration, automatic testing, and zero-downtime rollouts." },
-            { title: "Optimized Query Schemas", desc: "Modeling and index tuning databases (MySQL, MongoDB) to execute analytical computations rapidly without performance drops." }
-          ].map((card, idx) => (
-            <div
-              key={idx}
-              className={`p-6 rounded-2xl border text-left space-y-3 shadow-lg ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
-                }`}
-            >
-              <h3 className={`text-base font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-950'
-                }`}>
-                {card.title}
-              </h3>
-              <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-                }`}>
-                {card.desc}
-              </p>
-            </div>
-          ))}
+          {/* Core Architectural Pillars */}
+          <div className="grid md:grid-cols-3 gap-6 pt-12">
+            {[
+              { title: "Serverless & Containerized", desc: "Deploying serverless endpoints and containerized services using Google Cloud Run, Cloud Functions, and Kubernetes." },
+              { title: "Automated Deployments", desc: "Using Github Actions and CI/CD pipelines to ensure rapid iteration, automatic testing, and zero-downtime rollouts." },
+              { title: "Optimized Query Schemas", desc: "Modeling and index tuning databases (MySQL, MongoDB) to execute analytical computations rapidly without performance drops." }
+            ].map((card, idx) => (
+              <div
+                key={idx}
+                className={`p-6 rounded-2xl border text-left space-y-3 shadow-lg ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+                  }`}
+              >
+                <h3 className={`text-base font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-950'
+                  }`}>
+                  {card.title}
+                </h3>
+                <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+                  }`}>
+                  {card.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Consciousness Map Timeline Section */}
-      <section id="timeline" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24 py-24 border-t border-white/5 w-full max-w-7xl mx-auto">
-        <div className="space-y-4 mb-16 text-left">
-          <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-            04 // NEURAL CARTOGRAPHY
-          </div>
-          <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-            }`}>Consciousness Map.</h2>
-          <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-            }`}>
-            Trace the neural pathways of evolution — from curiosity to mastery.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-12 gap-8 items-stretch">
-          {/* Left List */}
-          <div className="md:col-span-5 flex flex-col space-y-4 text-left justify-center">
-            {timelineChapters.map((item, idx) => {
-              const isSelected = selectedChapter === idx;
-              return (
-                <button
-                  key={idx}
-                  onClick={() => setSelectedChapter(idx)}
-                  className={`flex items-center gap-4 p-4 rounded-xl border text-left transition-all duration-300 relative group ${isSelected
-                    ? item.colorTheme.bgSelected
-                    : 'bg-transparent border-transparent hover:bg-zinc-800/10 hover:border-white/5'
-                    }`}
-                >
-                  <div className={`w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold font-mono transition-all duration-300 ${isSelected
-                    ? item.colorTheme.badgeSelected
-                    : 'border-zinc-700 bg-zinc-900 text-zinc-500'
-                    }`}>
-                    {idx === 0 ? "I" : idx === 1 ? "II" : idx === 2 ? "III" : idx === 3 ? "IV" : "V"}
-                  </div>
-                  <div>
-                    <span className={`text-[9px] font-mono font-bold tracking-wider uppercase ${isSelected ? item.colorTheme.text : 'text-zinc-500 group-hover:text-zinc-300'}`}>
-                      {item.chapter}
-                    </span>
-                    <h3 className={`text-sm font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                      }`}>
-                      {item.title}
-                    </h3>
-                  </div>
-
-                  {isSelected && (
-                    <motion.div
-                      layoutId="arrowIndicator"
-                      className={`absolute right-4 ${item.colorTheme.text}`}
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </motion.div>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Right Card */}
-          <div className="md:col-span-7 flex flex-col justify-center">
-            <div className={`p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[300px] flex flex-col justify-between transition-all duration-300 ${theme === 'dark' ? `bg-[#0f0f12] border-white/5 hover:border-${timelineChapters[selectedChapter].colorTheme.border.split('-')[1]}-500/20` : `bg-white border-zinc-200 hover:border-${timelineChapters[selectedChapter].colorTheme.border.split('-')[1]}-500/20`
+      <section id="timeline" className="w-full py-24 min-h-screen flex flex-col justify-center">
+        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+          <div className="space-y-4 mb-16 text-left">
+            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+              04 // NEURAL CARTOGRAPHY
+            </div>
+            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+              }`}>Consciousness Map.</h2>
+            <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`h-0.5 w-8 ${timelineChapters[selectedChapter].colorTheme.lineGlow}`}></div>
-                  <span className="text-xs font-mono font-bold text-zinc-500">
-                    {timelineChapters[selectedChapter].chapter}
-                  </span>
-                </div>
+              Trace the neural pathways of evolution — from curiosity to mastery.
+            </p>
+          </div>
 
-                <h3 className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                  }`}>
-                  {timelineChapters[selectedChapter].title}
-                </h3>
-                <h4 className={`text-sm font-semibold mt-1 ${timelineChapters[selectedChapter].colorTheme.text}`}>
-                  {timelineChapters[selectedChapter].role} @ {timelineChapters[selectedChapter].institution}
-                </h4>
-                <p className="text-xs text-zinc-500 mt-1 font-mono">{timelineChapters[selectedChapter].period}</p>
-
-                <p className={`text-sm leading-relaxed italic mt-4 ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'
-                  }`}>
-                  "{timelineChapters[selectedChapter].description}"
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-1.5 pt-4">
-                {timelineChapters[selectedChapter].skills.map((skill, sIdx) => (
-                  <span
-                    key={sIdx}
-                    className={`text-[9px] font-mono font-medium px-2 py-0.5 rounded-full border ${theme === 'dark' ? 'bg-zinc-900 border-white/5 text-zinc-400' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
+          <div className="grid md:grid-cols-12 gap-8 items-stretch">
+            {/* Left List */}
+            <div className="md:col-span-5 flex flex-col space-y-4 text-left justify-center">
+              {timelineChapters.map((item, idx) => {
+                const isSelected = selectedChapter === idx;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setSelectedChapter(idx)}
+                    className={`flex items-center gap-4 p-4 rounded-xl border text-left transition-all duration-300 relative group ${isSelected
+                      ? item.colorTheme.bgSelected
+                      : 'bg-transparent border-transparent hover:bg-zinc-800/10 hover:border-white/5'
                       }`}
                   >
-                    {skill}
-                  </span>
-                ))}
+                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold font-mono transition-all duration-300 ${isSelected
+                      ? item.colorTheme.badgeSelected
+                      : 'border-zinc-700 bg-zinc-900 text-zinc-500'
+                      }`}>
+                      {idx === 0 ? "I" : idx === 1 ? "II" : idx === 2 ? "III" : idx === 3 ? "IV" : "V"}
+                    </div>
+                    <div>
+                      <span className={`text-[9px] font-mono font-bold tracking-wider uppercase ${isSelected ? item.colorTheme.text : 'text-zinc-500 group-hover:text-zinc-300'}`}>
+                        {item.chapter}
+                      </span>
+                      <h3 className={`text-sm font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+                        }`}>
+                        {item.title}
+                      </h3>
+                    </div>
+
+                    {isSelected && (
+                      <motion.div
+                        layoutId="arrowIndicator"
+                        className={`absolute right-4 ${item.colorTheme.text}`}
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </motion.div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right Card */}
+            <div className="md:col-span-7 flex flex-col justify-center">
+              <div className={`p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[300px] flex flex-col justify-between transition-all duration-300 ${theme === 'dark' ? `bg-[#0f0f12] border-white/5 hover:border-${timelineChapters[selectedChapter].colorTheme.border.split('-')[1]}-500/20` : `bg-white border-zinc-200 hover:border-${timelineChapters[selectedChapter].colorTheme.border.split('-')[1]}-500/20`
+                }`}>
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={`h-0.5 w-8 ${timelineChapters[selectedChapter].colorTheme.lineGlow}`}></div>
+                    <span className="text-xs font-mono font-bold text-zinc-500">
+                      {timelineChapters[selectedChapter].chapter}
+                    </span>
+                  </div>
+
+                  <h3 className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+                    }`}>
+                    {timelineChapters[selectedChapter].title}
+                  </h3>
+                  <h4 className={`text-sm font-semibold mt-1 ${timelineChapters[selectedChapter].colorTheme.text}`}>
+                    {timelineChapters[selectedChapter].role} @ {timelineChapters[selectedChapter].institution}
+                  </h4>
+                  <p className="text-xs text-zinc-500 mt-1 font-mono">{timelineChapters[selectedChapter].period}</p>
+
+                  <p className={`text-sm leading-relaxed italic mt-4 ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'
+                    }`}>
+                    "{timelineChapters[selectedChapter].description}"
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 pt-4">
+                  {timelineChapters[selectedChapter].skills.map((skill, sIdx) => (
+                    <span
+                      key={sIdx}
+                      className={`text-[9px] font-mono font-medium px-2 py-0.5 rounded-full border ${theme === 'dark' ? 'bg-zinc-900 border-white/5 text-zinc-400' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
+                        }`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -940,8 +991,9 @@ export default function App() {
       </section>
 
       {/* GitHub Contributions Section */}
-      <section id="telemetry" className="py-24 border-t border-white/5 w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 lg:px-24 text-center">
-        <div className="space-y-4 mb-12">
+      <section id="telemetry" className="w-full py-24 text-center">
+        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+          <div className="space-y-4 mb-12">
           <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
             05 // TELEMETRY
           </div>
@@ -1088,11 +1140,13 @@ export default function App() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Interactive Contact Section */}
-      <section id="contact" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24 py-24 border-t border-white/5 w-full max-w-7xl mx-auto">
-        <div className="w-full relative min-h-[350px] flex flex-col justify-between text-left">
+      <section id="contact" className="w-full py-24 min-h-screen flex flex-col justify-center">
+        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+          <div className="w-full relative min-h-[350px] flex flex-col justify-between text-left">
 
           <AnimatePresence mode="wait">
             {contactStep === 3 ? (
@@ -1144,7 +1198,6 @@ export default function App() {
                       value={contactForm.name}
                       onChange={handleContactInput}
                       placeholder="Your name..."
-                      autoFocus
                       className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
                         ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
                         : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
@@ -1220,11 +1273,12 @@ export default function App() {
             </div>
           )}
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Footer & Social Icons */}
-      <footer className="py-16 border-t border-white/5 text-center px-6">
-        <div className="max-w-4xl mx-auto space-y-6">
+      <footer className="py-16 text-center px-6 sm:px-12 md:px-16 lg:px-24">
+        <div className="w-full space-y-6">
           <div className="flex justify-center items-center space-x-6">
             <a
               href="mailto:brmedhini@gmail.com"
