@@ -421,7 +421,7 @@ export default function App() {
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex flex-col justify-center items-center px-6 text-center relative pt-20">
-        <div className="space-y-6 max-w-4xl relative">
+        <div className="space-y-6 w-full max-w-[90vw] md:max-w-7xl mx-auto relative">
           {/* Status Pill */}
           <div className="flex justify-center">
             <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium border uppercase ${theme === 'dark' ? 'bg-[#18181b]/50 border-white/5 text-indigo-400' : 'bg-white/50 border-zinc-200 text-indigo-600'
