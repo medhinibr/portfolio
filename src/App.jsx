@@ -137,7 +137,9 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
       animate={{
         y: 0,
         opacity: isClicked ? 1.0 : (isHovered ? 0.4 : 0.8),
-        filter: isClicked ? "blur(0px)" : (isHovered ? "blur(2px)" : "blur(0px)")
+        filter: isClicked 
+          ? "drop-shadow(0 0 20px rgba(56, 189, 248, 0.4)) blur(0px)" 
+          : (isHovered ? "drop-shadow(0 0 10px rgba(56, 189, 248, 0.15)) blur(2px)" : "drop-shadow(0 0 20px rgba(56, 189, 248, 0.4)) blur(0px)")
       }}
       transition={{
         y: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
@@ -148,7 +150,7 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
         y: -10,
         scale: 1.12,
         opacity: 1,
-        filter: "drop-shadow(0 0 25px rgba(0, 210, 239, 0.8)) blur(0px)"
+        filter: "drop-shadow(0 0 25px rgba(56, 189, 248, 0.85)) blur(0px)"
       }}
       className="inline-block cursor-default font-sans font-black tracking-tighter select-none dev-gradient transition-all duration-150 text-6xl sm:text-8xl md:text-[10rem] leading-[0.85]"
     >

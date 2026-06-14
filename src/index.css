@@ -23,9 +23,21 @@
 }
 
 @utility dev-gradient {
-  background: linear-gradient(to right, #ffffff 0%, #00d2ef 50%, #8d54ff 100%);
+  background: linear-gradient(110deg, #38BDF8 20%, #e0f2fe 45%, #ffffff 50%, #e0f2fe 55%, #818CF8 80%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: devShimmer 5s linear infinite;
+  filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.4));
+}
+
+@keyframes devShimmer {
+  0% {
+    background-position: 150% 0%;
+  }
+  100% {
+    background-position: -50% 0%;
+  }
 }
 
 @utility glow-indigo {
