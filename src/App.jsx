@@ -437,10 +437,11 @@ export default function App() {
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            className={`fixed top-0 right-0 w-80 h-full z-30 flex flex-col justify-center p-12 border-l shadow-2xl transition-colors duration-300 ${theme === 'dark' ? 'bg-black border-white/5' : 'bg-white border-zinc-200'
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className={`fixed top-0 right-0 w-full sm:w-[450px] h-full z-30 flex flex-col justify-center p-16 sm:p-20 border-l shadow-2xl transition-colors duration-300 ${theme === 'dark' ? 'bg-[#08080a] border-white/5' : 'bg-white border-zinc-200'
               }`}
           >
-            <nav className="flex flex-col space-y-6 text-xl font-bold font-mono">
+            <nav className="flex flex-col space-y-7 text-4xl sm:text-5xl font-medium font-sans text-left">
               {[
                 { label: 'Initialize', target: 'home' },
                 { label: 'About', target: 'identity' },
@@ -454,10 +455,9 @@ export default function App() {
                   key={idx}
                   href={`#${item.target}`}
                   onClick={() => setActiveMenu(false)}
-                  className={`flex items-center group transition-colors ${theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-900'
+                  className={`transition-colors duration-300 ${theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-500 hover:text-zinc-900'
                     }`}
                 >
-                  <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity mr-2 text-indigo-500" />
                   {item.label}
                 </a>
               ))}
