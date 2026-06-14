@@ -66,7 +66,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, theme }) => {
       onMouseLeave={() => setHoveredIdx(null)}
       className="flex items-center justify-center transition-all duration-300 h-24 sm:h-36 md:h-44"
     >
-      <div className={`flex items-center select-none font-display font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter leading-none transition-all duration-300 ${isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
+      <div className={`flex items-center select-none font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter leading-none transition-all duration-300 ${isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
         }`}>
         {item.type === 'prefix' && (
           <motion.span
@@ -76,7 +76,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, theme }) => {
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden whitespace-nowrap text-zinc-500 font-display font-medium text-4xl sm:text-6xl md:text-[7.5rem] tracking-tight uppercase mr-2"
+            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-[#D8B4FE] to-[#818cf8] bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase mr-1"
           >
             {item.prefix}
           </motion.span>
@@ -84,12 +84,14 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, theme }) => {
 
         <motion.span
           animate={{
-            color: isHovered ? "#6366f1" : (theme === 'dark' ? "#ffffff" : "#09090b"),
             scale: isHovered ? 1.05 : 1,
-            textShadow: isHovered ? "0 0 40px rgba(99,102,241,0.8)" : "none"
           }}
           transition={{ duration: 0.2 }}
-          className="cursor-default"
+          className={`inline-block cursor-default transition-all duration-300 ${
+            isHovered 
+              ? 'bg-gradient-to-b from-[#D8B4FE] to-[#818cf8] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(216,180,254,0.5)]' 
+              : (theme === 'dark' ? 'text-white' : 'text-zinc-900')
+          }`}
         >
           {item.char}
         </motion.span>
@@ -102,7 +104,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, theme }) => {
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden whitespace-nowrap text-zinc-500 font-display font-medium text-4xl sm:text-6xl md:text-[7.5rem] tracking-tight uppercase ml-2"
+            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-[#D8B4FE] to-[#818cf8] bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase ml-1"
           >
             {item.suffix}
           </motion.span>
@@ -135,7 +137,7 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx }) => {
         opacity: 1,
         filter: "drop-shadow(0 0 25px rgba(0, 210, 239, 0.8)) blur(0px)"
       }}
-      className="inline-block cursor-default font-display font-black tracking-tighter select-none dev-gradient transition-all duration-150 text-6xl sm:text-8xl md:text-[10rem] leading-[0.85]"
+      className="inline-block cursor-default font-sans font-black tracking-tighter select-none dev-gradient transition-all duration-150 text-6xl sm:text-8xl md:text-[10rem] leading-[0.85]"
     >
       {char === ' ' ? '\u00A0' : char}
     </motion.span>
