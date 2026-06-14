@@ -365,30 +365,9 @@ export default function App() {
       <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-violet-500/5 rounded-full blur-[150px] pointer-events-none" />
 
-      {/* Telemetry log box in bottom left */}
-      <div className="fixed bottom-8 left-8 z-30 hidden md:block w-72 font-mono text-[10px] p-4 rounded-lg select-none transition-all duration-300 border backdrop-blur-md dark:text-zinc-500 dark:bg-black/40 dark:border-white/5 text-zinc-600 bg-white/60 border-zinc-200 shadow-sm">
-        <div className="flex items-center justify-between border-b dark:border-white/5 border-zinc-200 pb-2 mb-2">
-          <span>SYSTEM MONITOR // STATUS</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
-        </div>
-        <p className="leading-normal">
-          {(hoveredIdx !== null || clickedIdx !== null) ? medhiniLetters[hoveredIdx !== null ? hoveredIdx : clickedIdx].logText : "IDLE // STACK TELEMETRY READY"}
-        </p>
-      </div>
 
-      {/* Floating Top Nav Elements */}
-      <header className="fixed top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl z-40 flex justify-between items-center px-10">
-        <a
-          href="https://linktr.ee"
-          target="_blank"
-          rel="noreferrer"
-          className={`px-4 py-2 rounded-full text-xs font-mono font-bold tracking-wider uppercase border transition-all duration-300 shadow-sm ${theme === 'dark'
-            ? 'bg-[#18181b]/80 border-white/5 text-white hover:bg-zinc-800'
-            : 'bg-white/80 border-zinc-200 text-zinc-800 hover:bg-zinc-100'
-            }`}
-        >
-          DOWNLOAD RESUME
-        </a>
+
+      <header className="fixed top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl z-40 flex justify-end items-center px-10">
 
         <div className="flex items-center gap-4">
           <button
@@ -537,34 +516,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Dynamic Hover Status Log */}
-          <div className="h-6 flex justify-center items-center mt-6 select-none relative z-10">
-            <AnimatePresence mode="wait">
-              {(hoveredIdx !== null || clickedIdx !== null) ? (
-                <motion.p
-                  key={hoveredIdx !== null ? hoveredIdx : clickedIdx}
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -5 }}
-                  transition={{ duration: 0.15 }}
-                  className="text-xs font-mono tracking-widest text-indigo-400 uppercase font-semibold"
-                >
-                  {medhiniLetters[hoveredIdx !== null ? hoveredIdx : clickedIdx].logText}
-                </motion.p>
-              ) : (
-                <motion.p
-                  key="default"
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 0.5, y: 0 }}
-                  exit={{ opacity: 0, y: -5 }}
-                  transition={{ duration: 0.15 }}
-                  className="text-xs font-mono tracking-widest text-zinc-500 uppercase"
-                >
-                  Hover over letters to compile stack intelligence
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </div>
+
 
           {/* Subtitle */}
           <p className="max-w-[650px] mx-auto text-lg md:text-xl leading-relaxed text-[#94A3B8] font-normal">
