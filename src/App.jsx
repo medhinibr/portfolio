@@ -82,7 +82,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
       }}
       className="flex items-center justify-center transition-all duration-300 h-24 sm:h-36 md:h-44 cursor-pointer"
     >
-      <div className={`flex items-center select-none font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter leading-none transition-all duration-300 ${
+      <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 ${
         isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
       } ${
         isHovered ? 'filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)]' : ''
@@ -95,7 +95,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase"
+            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase"
           >
             {item.prefix}
           </motion.span>
@@ -123,7 +123,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase"
+            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase"
           >
             {item.suffix}
           </motion.span>
@@ -159,7 +159,7 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
         opacity: 1,
         filter: "drop-shadow(0 0 25px rgba(34, 211, 238, 0.85)) blur(0px)"
       }}
-      className="inline-block cursor-default font-sans font-black tracking-tighter select-none dev-gradient transition-all duration-150 text-6xl sm:text-8xl md:text-[10rem] leading-[0.85]"
+      className="inline-block cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-5xl sm:text-7xl md:text-[8rem] lg:text-[9rem] leading-[0.85]"
     >
       {char === ' ' ? '\u00A0' : char}
     </motion.span>
@@ -458,11 +458,11 @@ export default function App() {
           </div>
 
           {/* Hero Ambient Backlight Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-gradient-to-tr from-indigo-500/10 via-violet-500/5 to-cyan-500/10 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none z-0" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[900px] h-[500px] sm:h-[900px] bg-gradient-to-tr from-[#22D3EE]/20 via-[#818CF8]/15 to-transparent rounded-full blur-[120px] sm:blur-[180px] pointer-events-none z-0 opacity-80" />
 
           {/* Heading */}
           <div className="space-y-2 select-none relative z-10">
-            <div className="flex justify-center flex-nowrap gap-x-2 text-7xl sm:text-8xl md:text-[9.5rem] lg:text-[10.5rem] leading-[0.9] tracking-tighter w-full overflow-visible h-24 sm:h-36 md:h-44 items-center justify-center">
+            <div className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.05em] w-full overflow-visible h-24 sm:h-36 md:h-44 items-center justify-center">
               <AnimatePresence mode="wait">
                 {clickedIdx !== null ? (
                   <motion.div
@@ -475,7 +475,7 @@ export default function App() {
                       e.stopPropagation();
                       setClickedIdx(null);
                     }}
-                    className="flex items-center justify-center cursor-pointer font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] lg:text-[10.5rem] tracking-tighter leading-none uppercase bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)] select-none h-full"
+                    className="flex items-center justify-center cursor-pointer font-sans font-black text-6xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none uppercase bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)] select-none h-full"
                   >
                     {getFullWord(medhiniLetters[clickedIdx])}
                   </motion.div>
@@ -485,7 +485,7 @@ export default function App() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex justify-center flex-nowrap gap-x-2 w-full h-full items-center"
+                    className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 w-full h-full items-center"
                   >
                     {medhiniLetters.map((item, index) => (
                       <AnimatedLetter
@@ -503,7 +503,7 @@ export default function App() {
                 )}
               </AnimatePresence>
             </div>
-            <div className="flex justify-center flex-nowrap gap-x-1 sm:gap-x-1.5 leading-[0.85] tracking-tighter w-full overflow-visible">
+            <div className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible">
               {"DEV".split("").map((char, index) => (
                 <AnimatedGradientLetter
                   key={`dev-${index}`}
