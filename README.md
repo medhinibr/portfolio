@@ -1,15 +1,31 @@
 # Medhini B R - Developer Portfolio
 
-A high-performance, responsive, and interactive developer portfolio website designed around a modern, developer-centric aesthetic inspired by Vercel portfolios. Built using React, Vite, Tailwind CSS, and Framer Motion.
+A high-performance, responsive, and interactive developer portfolio website designed around a modern, developer-centric aesthetic. Built using React, Vite, Tailwind CSS, and Framer Motion.
 
-## Technical Stack
+## Full Technology Stack
 
-* **Core Framework**: React 18
-* **Build System**: Vite
-* **Styling Engine**: Tailwind CSS
-* **Animation Library**: Framer Motion
-* **Icon Library**: Lucide React
-* **Deployment Platform**: Vercel
+### Frontend & Styling
+* **Core Framework**: React 19 (React-DOM)
+* **Build System**: Vite 8
+* **Styling Engine**: Tailwind CSS v4
+* **Animation Engine**: Framer Motion 12
+* **Icon Suite**: Lucide React
+* **Typeface Assets**: Google Fonts (Inter, Sora, JetBrains Mono)
+
+### Mobile Development
+* **Framework**: Flutter
+* **Programming Language**: Dart
+* **Architecture**: State Management, Widget Trees, REST API Integrations
+
+### Backend & Cloud Infrastructure
+* **Backend Engines**: Node.js, Express, Flask
+* **Programming Languages**: JavaScript (ES6+), Python
+* **Relational Datastores**: MySQL
+* **Document Datastores**: MongoDB
+* **Cloud Operations**: Google Cloud Platform (GCP), Google Cloud Run, Cloud Functions, Compute Engine
+* **Containerization**: Kubernetes, Docker
+* **Automation**: CI/CD Pipelines, GitHub Actions
+* **AI & Machine Learning**: ML Model Operations, Hugging Face Integrations
 
 ## Key Technical Features
 
