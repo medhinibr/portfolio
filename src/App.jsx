@@ -674,7 +674,7 @@ export default function App() {
       </section>
 
       {/* Selected Works Section */}
-      <section id="works" className="min-h-screen flex flex-col justify-center px-6 sm:px-16 py-24 border-t border-white/5 max-w-6xl mx-auto">
+      <section id="works" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24 py-24 border-t border-white/5 w-full max-w-7xl mx-auto">
         <div className="space-y-4 mb-16 text-left">
           <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
             SELECTED WORKS
