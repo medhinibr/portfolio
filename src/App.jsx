@@ -146,8 +146,8 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
         y: 0,
         opacity: isClicked ? 1.0 : (isHovered ? 0.4 : 0.8),
         filter: isClicked 
-          ? "drop-shadow(0 0 20px rgba(34, 211, 238, 0.4)) blur(0px)" 
-          : (isHovered ? "drop-shadow(0 0 10px rgba(34, 211, 238, 0.15)) blur(2px)" : "drop-shadow(0 0 20px rgba(34, 211, 238, 0.4)) blur(0px)")
+          ? "blur(0px)" 
+          : (isHovered ? "blur(2px)" : "blur(0px)")
       }}
       transition={{
         y: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
@@ -158,9 +158,9 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
         y: -10,
         scale: 1.12,
         opacity: 1,
-        filter: "drop-shadow(0 0 25px rgba(34, 211, 238, 0.85)) blur(0px)"
+        filter: "none"
       }}
-      className="inline-block cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-5xl sm:text-7xl md:text-[8rem] lg:text-[9rem] leading-[0.85]"
+      className="inline-block cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-4xl sm:text-6xl md:text-[7.5rem] lg:text-[8.5rem] leading-[0.85]"
     >
       {char === ' ' ? '\u00A0' : char}
     </motion.span>
@@ -525,7 +525,7 @@ export default function App() {
           </motion.div>
 
           {/* Hero Ambient Backlight Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[900px] h-[500px] sm:h-[900px] bg-gradient-to-tr from-[#22D3EE]/20 via-[#818CF8]/15 to-transparent rounded-full blur-[120px] sm:blur-[180px] pointer-events-none z-0 opacity-80" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[950px] h-[600px] sm:h-[950px] bg-gradient-to-tr from-[#22D3EE]/18 via-[#818CF8]/14 to-transparent rounded-full blur-[140px] sm:blur-[220px] pointer-events-none z-0" />
 
           {/* Heading */}
           <div className="space-y-2 select-none relative z-10">
@@ -533,7 +533,7 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.05em] w-full overflow-visible h-24 sm:h-36 md:h-44 items-center justify-center"
+              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.07em] w-full overflow-visible h-24 sm:h-36 md:h-44 items-center justify-center"
             >
               <AnimatePresence mode="wait">
                 {clickedIdx !== null ? (
@@ -547,7 +547,7 @@ export default function App() {
                       e.stopPropagation();
                       setClickedIdx(null);
                     }}
-                    className="flex items-center justify-center cursor-pointer font-sans font-black text-6xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none uppercase bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)] select-none h-full"
+                    className="flex items-center justify-center cursor-pointer font-sans font-black text-6xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.07em] leading-none uppercase bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)] select-none h-full"
                   >
                     {getFullWord(medhiniLetters[clickedIdx])}
                   </motion.div>
@@ -579,7 +579,7 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible"
+              className="flex justify-center flex-nowrap mt-5 sm:mt-7 gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible"
             >
               {"DEV".split("").map((char, index) => (
                 <AnimatedGradientLetter
@@ -598,7 +598,7 @@ export default function App() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-[650px] mx-auto text-lg md:text-xl leading-relaxed text-[#94A3B8] font-normal"
+            className="max-w-[580px] mx-auto text-lg md:text-xl leading-relaxed text-[#94A3B8] font-normal mt-10 sm:mt-14"
           >
             I build high-performance cloud architectures, cross-platform mobile experiences, and scalable software pipelines that live at the intersection of infrastructure and design.
           </motion.p>
@@ -608,11 +608,11 @@ export default function App() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="pt-8 flex flex-row justify-center items-center gap-4"
+            className="pt-8 flex flex-row justify-center items-center gap-5 sm:gap-6"
           >
             <a
               href="#contact"
-              className={`w-[190px] h-[54px] flex items-center justify-center rounded-full text-sm font-bold shadow-md transition-all duration-300 ${theme === 'dark'
+              className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] font-bold shadow-md transition-all duration-300 ${theme === 'dark'
                 ? 'bg-white text-zinc-950 hover:bg-zinc-200'
                 : 'bg-zinc-950 text-white hover:bg-zinc-800'
                 }`}
@@ -623,7 +623,7 @@ export default function App() {
               href="https://linktr.ee"
               target="_blank"
               rel="noreferrer"
-              className={`w-[190px] h-[54px] flex items-center justify-center rounded-full text-sm font-bold border transition-all duration-300 ${theme === 'dark'
+              className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] font-bold border transition-all duration-300 ${theme === 'dark'
                 ? 'bg-transparent border-zinc-800 text-white hover:bg-white/5'
                 : 'bg-transparent border-zinc-200 text-zinc-800 hover:bg-zinc-50'
                 }`}
