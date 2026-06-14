@@ -303,8 +303,14 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
   const [isExecuting, setIsExecuting] = useState(false);
   const terminalEndRef = useRef(null);
 
+  const isFirstRender = useRef(true);
+
   // Auto scroll to bottom of console logs
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [history]);
 
