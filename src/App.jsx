@@ -55,16 +55,20 @@ const medhiniLetters = [
 ];
 
 // Interactive letter morph component for primary name "MEDHINI"
-const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, theme }) => {
-  const isHovered = hoveredIdx === index;
-  const isAnyHovered = hoveredIdx !== null;
+const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, setClickedIdx, theme }) => {
+  const isHovered = (hoveredIdx === index) || (clickedIdx === index);
+  const isAnyHovered = (hoveredIdx !== null) || (clickedIdx !== null);
   const isOtherHovered = isAnyHovered && !isHovered;
 
   return (
     <div
       onMouseEnter={() => setHoveredIdx(index)}
       onMouseLeave={() => setHoveredIdx(null)}
-      className="flex items-center justify-center transition-all duration-300 h-24 sm:h-36 md:h-44"
+      onClick={(e) => {
+        e.stopPropagation();
+        setClickedIdx(clickedIdx === index ? null : index);
+      }}
+      className="flex items-center justify-center transition-all duration-300 h-24 sm:h-36 md:h-44 cursor-pointer"
     >
       <div className={`flex items-center select-none font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter leading-none transition-all duration-300 ${isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
         }`}>
@@ -76,7 +80,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, theme }) => {
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-[#D8B4FE] to-[#818cf8] bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase mr-1"
+            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-[#D8B4FE] to-white bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase mr-1"
           >
             {item.prefix}
           </motion.span>
@@ -89,7 +93,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, theme }) => {
           transition={{ duration: 0.2 }}
           className={`inline-block cursor-default transition-all duration-300 ${
             isHovered 
-              ? 'bg-gradient-to-b from-[#D8B4FE] to-[#818cf8] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(216,180,254,0.5)]' 
+              ? 'bg-gradient-to-b from-[#D8B4FE] to-white bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(216,180,254,0.55)]' 
               : (theme === 'dark' ? 'text-white' : 'text-zinc-900')
           }`}
         >
@@ -104,7 +108,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, theme }) => {
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-[#D8B4FE] to-[#818cf8] bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase ml-1"
+            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-[#D8B4FE] to-white bg-clip-text text-transparent font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter uppercase ml-1"
           >
             {item.suffix}
           </motion.span>
@@ -272,6 +276,7 @@ const projectsList = [
 export default function App() {
   const [theme, setTheme] = useState('dark');
   const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [clickedIdx, setClickedIdx] = useState(null);
   const [activeMenu, setActiveMenu] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(constellationSkills[0]);
   const [selectedChapter, setSelectedChapter] = useState(0);
@@ -328,8 +333,11 @@ export default function App() {
   };
 
   return (
-    <div className={`relative min-h-screen font-sans transition-colors duration-300 overflow-x-hidden ${theme === 'dark' ? 'bg-black text-zinc-100' : 'bg-white text-zinc-900'
-      }`}>
+    <div 
+      onClick={() => setClickedIdx(null)}
+      className={`relative min-h-screen font-sans transition-colors duration-300 overflow-x-hidden ${theme === 'dark' ? 'bg-black text-zinc-100' : 'bg-white text-zinc-900'
+      }`}
+    >
 
       {/* Background radial glows */}
       <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none" />
@@ -342,7 +350,7 @@ export default function App() {
           <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
         </div>
         <p className="leading-normal">
-          {hoveredIdx !== null ? medhiniLetters[hoveredIdx].logText : "IDLE // STACK TELEMETRY READY"}
+          {(hoveredIdx !== null || clickedIdx !== null) ? medhiniLetters[hoveredIdx !== null ? hoveredIdx : clickedIdx].logText : "IDLE // STACK TELEMETRY READY"}
         </p>
       </div>
 
@@ -446,6 +454,8 @@ export default function App() {
                   index={index}
                   hoveredIdx={hoveredIdx}
                   setHoveredIdx={setHoveredIdx}
+                  clickedIdx={clickedIdx}
+                  setClickedIdx={setClickedIdx}
                   theme={theme}
                 />
               ))}
@@ -456,7 +466,7 @@ export default function App() {
                   key={`dev-${index}`}
                   char={char}
                   delay={0.28 + index * 0.04}
-                  hoveredIdx={hoveredIdx}
+                  hoveredIdx={hoveredIdx !== null ? hoveredIdx : clickedIdx}
                 />
               ))}
             </div>
@@ -465,16 +475,16 @@ export default function App() {
           {/* Dynamic Hover Status Log */}
           <div className="h-6 flex justify-center items-center mt-6 select-none relative z-10">
             <AnimatePresence mode="wait">
-              {hoveredIdx !== null ? (
+              {(hoveredIdx !== null || clickedIdx !== null) ? (
                 <motion.p
-                  key={hoveredIdx}
+                  key={hoveredIdx !== null ? hoveredIdx : clickedIdx}
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -5 }}
                   transition={{ duration: 0.15 }}
                   className="text-xs font-mono tracking-widest text-indigo-400 uppercase font-semibold"
                 >
-                  {medhiniLetters[hoveredIdx].logText}
+                  {medhiniLetters[hoveredIdx !== null ? hoveredIdx : clickedIdx].logText}
                 </motion.p>
               ) : (
                 <motion.p
