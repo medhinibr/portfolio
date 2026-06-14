@@ -160,7 +160,7 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
         opacity: 1,
         filter: "none"
       }}
-      className="inline-block cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-4xl sm:text-6xl md:text-[7.5rem] lg:text-[8.5rem] leading-[0.85]"
+      className="inline-block cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-5.5xl sm:text-7.5xl md:text-[9.5rem] lg:text-[10.5rem] leading-[0.85]"
     >
       {char === ' ' ? '\u00A0' : char}
     </motion.span>
@@ -508,7 +508,7 @@ export default function App() {
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center relative pt-16 sm:pt-20">
-        <div className="space-y-6 w-full max-w-7xl mx-auto px-10 relative">
+        <div className="-mt-14 sm:-mt-20 space-y-6 w-full max-w-7xl mx-auto px-10 relative">
           {/* Status Pill */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
