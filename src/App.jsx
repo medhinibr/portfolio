@@ -558,11 +558,6 @@ export default function App() {
     if (window.location.hash) {
       window.history.replaceState("", document.title, window.location.pathname + window.location.search);
     }
-    
-    // Force scroll to top on mount
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 50);
 
     // Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
@@ -576,6 +571,11 @@ export default function App() {
       infinite: false,
     });
     lenisRef.current = lenis;
+
+    // Reset view position to absolute top via Lenis
+    setTimeout(() => {
+      lenis.scrollTo(0, { immediate: true });
+    }, 50);
 
     function raf(time) {
       lenis.raf(time);
