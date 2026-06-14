@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Lenis from 'lenis';
 import {
   Sun,
   Moon,
@@ -300,6 +301,10 @@ export default function App() {
   const [selectedChapter, setSelectedChapter] = useState(0);
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
 
+  // Custom cursor state variables
+  const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
+  const [isHoveringClickable, setIsHoveringClickable] = useState(false);
+
   // Interactive contact form state
   const [contactStep, setContactStep] = useState(0);
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
@@ -308,6 +313,44 @@ export default function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Initialize Lenis Smooth Scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Custom Interactive Cursor Event Handlers
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseOver = (e) => {
+      const target = e.target;
+      const isClickable = target.closest('a, button, [role="button"], input, select, textarea, .cursor-pointer');
+      setIsHoveringClickable(!!isClickable);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseover', handleMouseOver);
+
+    return () => {
+      lenis.destroy();
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseover', handleMouseOver);
+    };
   }, []);
 
   // Monitor custom theme toggling
@@ -360,6 +403,25 @@ export default function App() {
       className={`relative min-h-screen font-sans transition-colors duration-300 overflow-x-hidden ${theme === 'dark' ? 'bg-black text-zinc-100' : 'bg-white text-zinc-900'
       }`}
     >
+      {/* Custom Interactive Cursor */}
+      <motion.div
+        className="fixed top-0 left-0 w-4 h-4 rounded-full bg-white mix-blend-difference pointer-events-none z-50 hidden md:block"
+        animate={{
+          x: mousePos.x - (isHoveringClickable ? 24 : 8),
+          y: mousePos.y - (isHoveringClickable ? 24 : 8),
+          scale: isHoveringClickable ? 3.0 : 1.0,
+        }}
+        transition={{ type: 'spring', damping: 30, stiffness: 450, mass: 0.15 }}
+      />
+
+      {/* Cinematic Noise Texture */}
+      <div className="fixed inset-0 bg-noise opacity-[0.04] pointer-events-none z-40" />
+
+      {/* Deep cinematic background blur blobs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-[10%] left-[20%] w-[500px] h-[500px] rounded-full bg-[#22D3EE]/6 blur-[130px]" />
+        <div className="absolute bottom-[20%] right-[15%] w-[600px] h-[600px] rounded-full bg-[#818CF8]/6 blur-[150px]" />
+      </div>
 
       {/* Background radial glows */}
       <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none" />
@@ -449,20 +511,30 @@ export default function App() {
       <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center relative pt-32">
         <div className="space-y-6 w-full max-w-7xl mx-auto px-10 relative">
           {/* Status Pill */}
-          <div className="flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="flex justify-center"
+          >
             <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold border uppercase ${theme === 'dark' ? 'bg-[#18181b]/50 border-white/5 text-indigo-400' : 'bg-white/50 border-zinc-200 text-indigo-600'
               }`}>
               <span className="w-2 h-2 rounded-full bg-[#22D3EE] animate-pulse"></span>
               MEDHINI B R // CLOUD & DEVOPS PRACTITIONER
             </div>
-          </div>
+          </motion.div>
 
           {/* Hero Ambient Backlight Glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[900px] h-[500px] sm:h-[900px] bg-gradient-to-tr from-[#22D3EE]/20 via-[#818CF8]/15 to-transparent rounded-full blur-[120px] sm:blur-[180px] pointer-events-none z-0 opacity-80" />
 
           {/* Heading */}
           <div className="space-y-2 select-none relative z-10">
-            <div className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.05em] w-full overflow-visible h-24 sm:h-36 md:h-44 items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.05em] w-full overflow-visible h-24 sm:h-36 md:h-44 items-center justify-center"
+            >
               <AnimatePresence mode="wait">
                 {clickedIdx !== null ? (
                   <motion.div
@@ -502,8 +574,13 @@ export default function App() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
-            <div className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible"
+            >
               {"DEV".split("").map((char, index) => (
                 <AnimatedGradientLetter
                   key={`dev-${index}`}
@@ -513,18 +590,26 @@ export default function App() {
                   clickedIdx={clickedIdx}
                 />
               ))}
-            </div>
+            </motion.div>
           </div>
 
-
-
           {/* Subtitle */}
-          <p className="max-w-[650px] mx-auto text-lg md:text-xl leading-relaxed text-[#94A3B8] font-normal">
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-[650px] mx-auto text-lg md:text-xl leading-relaxed text-[#94A3B8] font-normal"
+          >
             I build high-performance cloud architectures, cross-platform mobile experiences, and scalable software pipelines that live at the intersection of infrastructure and design.
-          </p>
+          </motion.p>
 
           {/* Center Call Buttons */}
-          <div className="pt-8 flex flex-row justify-center items-center gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="pt-8 flex flex-row justify-center items-center gap-4"
+          >
             <a
               href="#contact"
               className={`w-[190px] h-[54px] flex items-center justify-center rounded-full text-sm font-bold shadow-md transition-all duration-300 ${theme === 'dark'
@@ -545,7 +630,7 @@ export default function App() {
             >
               Download Resume
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
 
