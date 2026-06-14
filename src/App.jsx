@@ -404,10 +404,13 @@ export default function App() {
 
           <button
             onClick={() => setActiveMenu(!activeMenu)}
-            className={`p-2.5 rounded-full border transition-all duration-300 ${theme === 'dark'
-              ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white'
-              : 'bg-white/80 border-zinc-200 text-zinc-600 hover:text-zinc-900'
-              }`}
+            className={`p-2.5 rounded-full border transition-all duration-300 ${
+              activeMenu
+                ? 'bg-white border-transparent text-black'
+                : (theme === 'dark'
+                  ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white'
+                  : 'bg-white/80 border-zinc-200 text-zinc-600 hover:text-zinc-900')
+            }`}
             aria-label="Toggle Navigation Menu"
           >
             {activeMenu ? <X className="w-5 h-5" /> : <TwoLineMenuIcon className="w-5 h-5" />}
@@ -416,6 +419,18 @@ export default function App() {
       </header>
 
       {/* Slide drawer menu overlay */}
+      <AnimatePresence>
+        {activeMenu && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveMenu(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-md z-30"
+          />
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {activeMenu && (
           <motion.div
