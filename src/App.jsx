@@ -305,6 +305,8 @@ export default function App() {
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
   const [isHoveringClickable, setIsHoveringClickable] = useState(false);
 
+  const lenisRef = useRef(null);
+
   // Interactive contact form state
   const [contactStep, setContactStep] = useState(0);
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
@@ -325,6 +327,7 @@ export default function App() {
       touchMultiplier: 2,
       infinite: false,
     });
+    lenisRef.current = lenis;
 
     function raf(time) {
       lenis.raf(time);
@@ -348,6 +351,7 @@ export default function App() {
 
     return () => {
       lenis.destroy();
+      lenisRef.current = null;
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
     };
@@ -518,7 +522,19 @@ export default function App() {
                 >
                   <a
                     href={`#${item.target}`}
-                    onClick={() => setActiveMenu(false)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveMenu(false);
+                      if (lenisRef.current) {
+                        lenisRef.current.scrollTo(`#${item.target}`, {
+                          duration: 1.2,
+                          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                        });
+                      } else {
+                        const el = document.getElementById(item.target);
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                     className={`transition-colors duration-300 block ${theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-500 hover:text-zinc-900'
                       }`}
                   >
