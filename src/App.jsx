@@ -81,7 +81,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
         e.stopPropagation();
         setClickedIdx(clickedIdx === index ? null : index);
       }}
-      className="flex items-center justify-center transition-all duration-300 h-24 sm:h-36 md:h-44 cursor-pointer"
+      className="flex items-center justify-center transition-all duration-300 h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] cursor-pointer"
     >
       <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 ${
         isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
@@ -557,7 +557,7 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.07em] w-full overflow-hidden h-24 sm:h-36 md:h-44 items-center justify-center"
+              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.07em] w-full overflow-hidden h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] items-center justify-center"
             >
               <AnimatePresence mode="wait">
                 {clickedIdx !== null ? (
