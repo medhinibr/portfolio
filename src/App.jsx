@@ -390,7 +390,7 @@ export default function App() {
               }`}
             aria-label="Toggle Theme"
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            {theme === 'dark' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>
 
           <button
@@ -450,7 +450,7 @@ export default function App() {
             <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium border uppercase ${theme === 'dark' ? 'bg-[#18181b]/50 border-white/5 text-indigo-400' : 'bg-white/50 border-zinc-200 text-indigo-600'
               }`}>
               <span className="w-2 h-2 rounded-full bg-[#64ffda] animate-pulse"></span>
-              Medhini B R // Cloud & DevOps Practitioner
+              MEDHINI B R // CLOUD & DEVOPS PRACTITIONER
             </div>
           </div>
 
@@ -548,8 +548,8 @@ export default function App() {
             I build high-performance cloud architectures, cross-platform mobile experiences, and scalable software pipelines that live at the intersection of infrastructure and design.
           </p>
 
-          {/* Center Call Button */}
-          <div className="pt-8 flex flex-col items-center gap-4">
+          {/* Center Call Buttons */}
+          <div className="pt-8 flex flex-row justify-center items-center gap-4">
             <a
               href="#contact"
               className={`px-8 py-3.5 rounded-full text-sm font-semibold shadow-md transition-all duration-300 ${theme === 'dark'
@@ -559,7 +559,17 @@ export default function App() {
             >
               Book a call
             </a>
-            <div className="w-1.5 h-1.5 rounded-full bg-zinc-500 animate-ping mt-4"></div>
+            <a
+              href="https://linktr.ee"
+              target="_blank"
+              rel="noreferrer"
+              className={`px-8 py-3.5 rounded-full text-sm font-semibold border transition-all duration-300 ${theme === 'dark'
+                ? 'bg-zinc-900/50 border-white/5 text-white hover:bg-zinc-800'
+                : 'bg-zinc-100 border-zinc-200 text-zinc-800 hover:bg-zinc-200'
+                }`}
+            >
+              Download Resume
+            </a>
           </div>
         </div>
       </section>
