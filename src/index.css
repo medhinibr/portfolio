@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bgPrimary: #000000;
+  --color-bgPrimary: #030303;
   --color-bgSecondary: #0a0a0a;
   --color-borderPrimary: rgba(255, 255, 255, 0.05);
   --font-sans: 'Inter', sans-serif;
@@ -41,7 +41,7 @@ html {
 }
 
 body {
-  background-color: #000000;
+  background-color: #030303;
   color: #f4f4f5;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
