@@ -95,7 +95,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               width: isHovered ? "auto" : 0,
               opacity: isHovered ? 1 : 0
             }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: isHovered ? 0.35 : 0.01, ease: [0.16, 1, 0.3, 1] }}
             className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase"
           >
             {item.prefix}
@@ -123,7 +123,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               width: isHovered ? "auto" : 0,
               opacity: isHovered ? 1 : 0
             }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: isHovered ? 0.35 : 0.01, ease: [0.16, 1, 0.3, 1] }}
             className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase"
           >
             {item.suffix}
@@ -557,7 +557,7 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.07em] w-full overflow-visible h-24 sm:h-36 md:h-44 items-center justify-center"
+              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.07em] w-full overflow-hidden h-24 sm:h-36 md:h-44 items-center justify-center"
             >
               <AnimatePresence mode="wait">
                 {clickedIdx !== null ? (
