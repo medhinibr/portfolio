@@ -603,7 +603,7 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="flex justify-center flex-nowrap mt-5 sm:mt-7 gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible"
+              className="flex justify-center flex-nowrap -mt-2 sm:-mt-4 gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible"
             >
               {"DEV".split("").map((char, index) => (
                 <AnimatedGradientLetter
