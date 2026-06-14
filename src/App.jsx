@@ -481,7 +481,21 @@ export default function App() {
             className={`fixed top-0 right-0 w-full sm:w-[450px] h-full z-30 flex flex-col justify-center p-16 sm:p-20 border-l shadow-2xl transition-colors duration-300 ${theme === 'dark' ? 'bg-[#08080a] border-white/5' : 'bg-white border-zinc-200'
               }`}
           >
-            <nav className="flex flex-col space-y-7 text-4xl sm:text-5xl font-medium font-sans text-left">
+            <motion.nav 
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.06,
+                    delayChildren: 0.1
+                  }
+                }
+              }}
+              className="flex flex-col space-y-7 text-4xl sm:text-5xl font-medium font-sans text-left"
+            >
               {[
                 { label: 'Initialize', target: 'home' },
                 { label: 'About', target: 'identity' },
@@ -491,17 +505,28 @@ export default function App() {
                 { label: 'Experience', target: 'timeline' },
                 { label: 'Deploy', target: 'contact' }
               ].map((item, idx) => (
-                <a
+                <motion.div 
                   key={idx}
-                  href={`#${item.target}`}
-                  onClick={() => setActiveMenu(false)}
-                  className={`transition-colors duration-300 ${theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-500 hover:text-zinc-900'
-                    }`}
+                  variants={{
+                    hidden: { opacity: 0, x: 45 },
+                    show: { 
+                      opacity: 1, 
+                      x: 0,
+                      transition: { type: 'spring', damping: 22, stiffness: 200 }
+                    }
+                  }}
                 >
-                  {item.label}
-                </a>
+                  <a
+                    href={`#${item.target}`}
+                    onClick={() => setActiveMenu(false)}
+                    className={`transition-colors duration-300 block ${theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-500 hover:text-zinc-900'
+                      }`}
+                  >
+                    {item.label}
+                  </a>
+                </motion.div>
               ))}
-            </nav>
+            </motion.nav>
           </motion.div>
         )}
       </AnimatePresence>
