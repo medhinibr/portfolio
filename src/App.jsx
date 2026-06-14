@@ -296,7 +296,6 @@ export default function App() {
   const [theme, setTheme] = useState('dark');
   const [hoveredIdx, setHoveredIdx] = useState(null);
   const [clickedIdx, setClickedIdx] = useState(null);
-  const [activeMenu, setActiveMenu] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(constellationSkills[0]);
   const [selectedChapter, setSelectedChapter] = useState(0);
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
@@ -445,107 +444,8 @@ export default function App() {
           >
             {theme === 'dark' ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
           </button>
-
-          <button
-            onClick={() => setActiveMenu(!activeMenu)}
-            className={`w-12 h-12 flex items-center justify-center rounded-full border transition-all duration-300 ${
-              activeMenu
-                ? 'bg-white border-transparent text-black'
-                : (theme === 'dark'
-                  ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white'
-                  : 'bg-white/80 border-zinc-200 text-zinc-600 hover:text-zinc-900')
-            }`}
-            aria-label="Toggle Navigation Menu"
-          >
-            {activeMenu ? <X className="w-6 h-6" /> : <TwoLineMenuIcon className="w-6 h-6" />}
-          </button>
         </div>
       </header>
-
-      {/* Slide drawer menu overlay */}
-      <AnimatePresence>
-        {activeMenu && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setActiveMenu(false)}
-            className="fixed inset-0 bg-black/60 backdrop-blur-md z-30"
-          />
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {activeMenu && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className={`fixed top-0 right-0 w-full sm:w-[450px] h-full z-30 flex flex-col justify-center p-16 sm:p-20 border-l shadow-2xl transition-colors duration-300 ${theme === 'dark' ? 'bg-[#08080a] border-white/5' : 'bg-white border-zinc-200'
-              }`}
-          >
-            <motion.nav 
-              initial="hidden"
-              animate="show"
-              variants={{
-                hidden: { opacity: 0 },
-                show: {
-                  opacity: 1,
-                  transition: {
-                    staggerChildren: 0.06,
-                    delayChildren: 0.1
-                  }
-                }
-              }}
-              className="flex flex-col space-y-8 text-4xl sm:text-5xl font-medium tracking-tight font-sans text-left"
-            >
-              {[
-                { label: 'Initialize', target: 'home' },
-                { label: 'About', target: 'identity' },
-                { label: 'Stack', target: 'skills' },
-                { label: 'Build', target: 'works' },
-                { label: 'Optimize', target: 'metrics' },
-                { label: 'Experience', target: 'timeline' },
-                { label: 'Deploy', target: 'contact' }
-              ].map((item, idx) => (
-                <motion.div 
-                  key={idx}
-                  variants={{
-                    hidden: { opacity: 0, x: 45 },
-                    show: { 
-                      opacity: 1, 
-                      x: 0,
-                      transition: { type: 'spring', damping: 22, stiffness: 200 }
-                    }
-                  }}
-                >
-                  <a
-                    href={`#${item.target}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveMenu(false);
-                      if (lenisRef.current) {
-                        lenisRef.current.scrollTo(`#${item.target}`, {
-                          duration: 1.2,
-                          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-                        });
-                      } else {
-                        const el = document.getElementById(item.target);
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                    className={`transition-colors duration-300 block ${theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-500 hover:text-zinc-900'
-                      }`}
-                  >
-                    {item.label}
-                  </a>
-                </motion.div>
-              ))}
-            </motion.nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center relative pt-16 sm:pt-20">
