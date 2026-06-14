@@ -429,9 +429,8 @@ export default function App() {
 
 
 
-      <header className="fixed top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl z-40 flex justify-end items-center px-10">
-
-        <div className="flex items-center gap-4">
+      <header className="fixed top-8 left-0 w-full z-40 flex justify-end items-center px-6 sm:px-12 pointer-events-none">
+        <div className="flex items-center gap-4 pointer-events-auto">
           <button
             onClick={toggleTheme}
             className={`p-2.5 rounded-full border transition-all duration-300 ${theme === 'dark'
