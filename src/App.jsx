@@ -478,7 +478,7 @@ export default function App() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className={`fixed top-0 right-0 w-full sm:w-[450px] h-full z-30 flex flex-col justify-center p-16 sm:p-20 border-l shadow-2xl transition-colors duration-300 ${theme === 'dark' ? 'bg-[#08080a] border-white/5' : 'bg-white border-zinc-200'
+            className={`fixed top-0 right-0 w-full sm:w-[450px] h-full z-30 flex flex-col justify-start pt-28 sm:pt-36 p-16 sm:p-20 border-l shadow-2xl transition-colors duration-300 ${theme === 'dark' ? 'bg-[#08080a] border-white/5' : 'bg-white border-zinc-200'
               }`}
           >
             <motion.nav 
@@ -494,7 +494,7 @@ export default function App() {
                   }
                 }
               }}
-              className="flex flex-col space-y-10 text-5xl sm:text-6xl font-bold tracking-tight font-sans text-left"
+              className="flex flex-col space-y-11 sm:space-y-13 text-5.5xl sm:text-7xl font-black tracking-tighter leading-none font-sans text-left"
             >
               {[
                 { label: 'Initialize', target: 'home' },
