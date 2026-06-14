@@ -43,6 +43,13 @@ const LinktreeIcon = ({ className }) => (
   </svg>
 );
 
+const TwoLineMenuIcon = ({ className }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <line x1="4" y1="8" x2="20" y2="8" />
+    <line x1="4" y1="16" x2="20" y2="16" />
+  </svg>
+);
+
 // Technology letter mappings for "MEDHINI"
 const medhiniLetters = [
   { char: 'M', suffix: 'YSQL', prefix: '', type: 'suffix', logText: 'MYSQL // Relational database modeling, schema design, and query optimization' },
@@ -138,8 +145,8 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
         y: 0,
         opacity: isClicked ? 1.0 : (isHovered ? 0.4 : 0.8),
         filter: isClicked 
-          ? "drop-shadow(0 0 20px rgba(56, 189, 248, 0.4)) blur(0px)" 
-          : (isHovered ? "drop-shadow(0 0 10px rgba(56, 189, 248, 0.15)) blur(2px)" : "drop-shadow(0 0 20px rgba(56, 189, 248, 0.4)) blur(0px)")
+          ? "drop-shadow(0 0 20px rgba(34, 211, 238, 0.4)) blur(0px)" 
+          : (isHovered ? "drop-shadow(0 0 10px rgba(34, 211, 238, 0.15)) blur(2px)" : "drop-shadow(0 0 20px rgba(34, 211, 238, 0.4)) blur(0px)")
       }}
       transition={{
         y: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
@@ -150,7 +157,7 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
         y: -10,
         scale: 1.12,
         opacity: 1,
-        filter: "drop-shadow(0 0 25px rgba(56, 189, 248, 0.85)) blur(0px)"
+        filter: "drop-shadow(0 0 25px rgba(34, 211, 238, 0.85)) blur(0px)"
       }}
       className="inline-block cursor-default font-sans font-black tracking-tighter select-none dev-gradient transition-all duration-150 text-6xl sm:text-8xl md:text-[10rem] leading-[0.85]"
     >
@@ -370,17 +377,17 @@ export default function App() {
       </div>
 
       {/* Floating Top Nav Elements */}
-      <header className="fixed top-8 left-0 right-0 w-full z-40 flex justify-between items-center px-6 sm:px-12 md:px-16 lg:px-24">
+      <header className="fixed top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl z-40 flex justify-between items-center px-10">
         <a
           href="https://linktr.ee"
           target="_blank"
           rel="noreferrer"
-          className={`px-4 py-2 rounded-full text-xs font-mono font-medium tracking-wider uppercase border transition-all duration-300 shadow-sm ${theme === 'dark'
+          className={`px-4 py-2 rounded-full text-xs font-mono font-bold tracking-wider uppercase border transition-all duration-300 shadow-sm ${theme === 'dark'
             ? 'bg-[#18181b]/80 border-white/5 text-white hover:bg-zinc-800'
             : 'bg-white/80 border-zinc-200 text-zinc-800 hover:bg-zinc-100'
             }`}
         >
-          Download Resume
+          DOWNLOAD RESUME
         </a>
 
         <div className="flex items-center gap-4">
@@ -392,7 +399,7 @@ export default function App() {
               }`}
             aria-label="Toggle Theme"
           >
-            {theme === 'dark' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+            {theme === 'dark' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
           </button>
 
           <button
@@ -403,7 +410,7 @@ export default function App() {
               }`}
             aria-label="Toggle Navigation Menu"
           >
-            {activeMenu ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            {activeMenu ? <X className="w-5 h-5" /> : <TwoLineMenuIcon className="w-5 h-5" />}
           </button>
         </div>
       </header>
@@ -445,13 +452,13 @@ export default function App() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex flex-col justify-center items-center px-6 sm:px-12 md:px-16 lg:px-24 text-center relative pt-20">
-        <div className="space-y-6 w-full relative">
+      <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center relative pt-32">
+        <div className="space-y-6 w-full max-w-7xl mx-auto px-10 relative">
           {/* Status Pill */}
           <div className="flex justify-center">
-            <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium border uppercase ${theme === 'dark' ? 'bg-[#18181b]/50 border-white/5 text-indigo-400' : 'bg-white/50 border-zinc-200 text-indigo-600'
+            <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold border uppercase ${theme === 'dark' ? 'bg-[#18181b]/50 border-white/5 text-indigo-400' : 'bg-white/50 border-zinc-200 text-indigo-600'
               }`}>
-              <span className="w-2 h-2 rounded-full bg-[#64ffda] animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-[#22D3EE] animate-pulse"></span>
               MEDHINI B R // CLOUD & DEVOPS PRACTITIONER
             </div>
           </div>
@@ -461,7 +468,7 @@ export default function App() {
 
           {/* Heading */}
           <div className="space-y-2 select-none relative z-10">
-            <div className="flex justify-center flex-nowrap gap-x-2 text-7xl sm:text-8xl md:text-[9.5rem] leading-[0.9] tracking-tighter w-full overflow-visible h-24 sm:h-36 md:h-44 items-center justify-center">
+            <div className="flex justify-center flex-nowrap gap-x-2 text-7xl sm:text-8xl md:text-[9.5rem] lg:text-[10.5rem] leading-[0.9] tracking-tighter w-full overflow-visible h-24 sm:h-36 md:h-44 items-center justify-center">
               <AnimatePresence mode="wait">
                 {clickedIdx !== null ? (
                   <motion.div
@@ -474,7 +481,7 @@ export default function App() {
                       e.stopPropagation();
                       setClickedIdx(null);
                     }}
-                    className="flex items-center justify-center cursor-pointer font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] tracking-tighter leading-none uppercase bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)] select-none h-full"
+                    className="flex items-center justify-center cursor-pointer font-sans font-black text-6xl sm:text-8xl md:text-[9.5rem] lg:text-[10.5rem] tracking-tighter leading-none uppercase bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)] select-none h-full"
                   >
                     {getFullWord(medhiniLetters[clickedIdx])}
                   </motion.div>
@@ -545,8 +552,7 @@ export default function App() {
           </div>
 
           {/* Subtitle */}
-          <p className={`max-w-2xl mx-auto text-base sm:text-lg leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-            }`}>
+          <p className="max-w-[650px] mx-auto text-lg md:text-xl leading-relaxed text-[#94A3B8] font-normal">
             I build high-performance cloud architectures, cross-platform mobile experiences, and scalable software pipelines that live at the intersection of infrastructure and design.
           </p>
 
@@ -554,7 +560,7 @@ export default function App() {
           <div className="pt-8 flex flex-row justify-center items-center gap-4">
             <a
               href="#contact"
-              className={`px-8 py-3.5 rounded-full text-sm font-semibold shadow-md transition-all duration-300 ${theme === 'dark'
+              className={`w-[190px] h-[54px] flex items-center justify-center rounded-full text-sm font-bold shadow-md transition-all duration-300 ${theme === 'dark'
                 ? 'bg-white text-zinc-950 hover:bg-zinc-200'
                 : 'bg-zinc-950 text-white hover:bg-zinc-800'
                 }`}
@@ -565,9 +571,9 @@ export default function App() {
               href="https://linktr.ee"
               target="_blank"
               rel="noreferrer"
-              className={`px-8 py-3.5 rounded-full text-sm font-semibold border transition-all duration-300 ${theme === 'dark'
-                ? 'bg-zinc-900/50 border-white/5 text-white hover:bg-zinc-800'
-                : 'bg-zinc-100 border-zinc-200 text-zinc-800 hover:bg-zinc-200'
+              className={`w-[190px] h-[54px] flex items-center justify-center rounded-full text-sm font-bold border transition-all duration-300 ${theme === 'dark'
+                ? 'bg-transparent border-zinc-800 text-white hover:bg-white/5'
+                : 'bg-transparent border-zinc-200 text-zinc-800 hover:bg-zinc-50'
                 }`}
             >
               Download Resume
@@ -578,7 +584,7 @@ export default function App() {
 
       {/* Identity Section */}
       <section id="identity" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto px-10 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               01 // THE IDENTITY
@@ -640,7 +646,7 @@ export default function App() {
 
       {/* Skills Section (The Constellation) */}
       <section id="skills" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto px-10 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               02 // TECHNICAL ARSENAL
@@ -744,7 +750,7 @@ export default function App() {
 
       {/* Selected Works Section */}
       <section id="works" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto px-10 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               SELECTED WORKS
@@ -828,7 +834,7 @@ export default function App() {
 
       {/* The Architecture (Metrics) Section */}
       <section id="metrics" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto px-10 w-full">
           <div className="space-y-4 mb-16 text-center">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               03 // THE ARCHITECTURE
@@ -902,7 +908,7 @@ export default function App() {
 
       {/* Consciousness Map Timeline Section */}
       <section id="timeline" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto px-10 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               04 // NEURAL CARTOGRAPHY
@@ -1004,7 +1010,7 @@ export default function App() {
 
       {/* GitHub Contributions Section */}
       <section id="telemetry" className="w-full py-24 text-center">
-        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto px-10 w-full">
           <div className="space-y-4 mb-12">
           <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
             05 // TELEMETRY
@@ -1157,7 +1163,7 @@ export default function App() {
 
       {/* Interactive Contact Section */}
       <section id="contact" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto px-10 w-full">
           <div className="w-full relative min-h-[350px] flex flex-col justify-between text-left">
 
           <AnimatePresence mode="wait">
@@ -1289,8 +1295,8 @@ export default function App() {
     </section>
 
       {/* Footer & Social Icons */}
-      <footer className="py-16 text-center px-6 sm:px-12 md:px-16 lg:px-24">
-        <div className="w-full space-y-6">
+      <footer className="py-16 text-center">
+        <div className="max-w-7xl mx-auto px-10 w-full space-y-6">
           <div className="flex justify-center items-center space-x-6">
             <a
               href="mailto:brmedhini@gmail.com"
