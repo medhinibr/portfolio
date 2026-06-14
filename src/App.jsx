@@ -433,18 +433,18 @@ export default function App() {
         <div className="flex items-center gap-4 pointer-events-auto">
           <button
             onClick={toggleTheme}
-            className={`p-2.5 rounded-full border transition-all duration-300 ${theme === 'dark'
+            className={`w-12 h-12 flex items-center justify-center rounded-full border transition-all duration-300 ${theme === 'dark'
               ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white'
               : 'bg-white/80 border-zinc-200 text-zinc-600 hover:text-zinc-900'
               }`}
             aria-label="Toggle Theme"
           >
-            {theme === 'dark' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+            {theme === 'dark' ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
           </button>
 
           <button
             onClick={() => setActiveMenu(!activeMenu)}
-            className={`p-2.5 rounded-full border transition-all duration-300 ${
+            className={`w-12 h-12 flex items-center justify-center rounded-full border transition-all duration-300 ${
               activeMenu
                 ? 'bg-white border-transparent text-black'
                 : (theme === 'dark'
@@ -453,7 +453,7 @@ export default function App() {
             }`}
             aria-label="Toggle Navigation Menu"
           >
-            {activeMenu ? <X className="w-5 h-5" /> : <TwoLineMenuIcon className="w-5 h-5" />}
+            {activeMenu ? <X className="w-6 h-6" /> : <TwoLineMenuIcon className="w-6 h-6" />}
           </button>
         </div>
       </header>
