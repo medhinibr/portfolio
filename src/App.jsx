@@ -498,7 +498,6 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
                 className="flex-1 bg-transparent border-none outline-none focus:ring-0 p-0 text-zinc-100 caret-indigo-400 font-mono text-xs"
                 placeholder=""
                 autoComplete="off"
-                autoFocus
               />
             </div>
           )}
@@ -555,7 +554,15 @@ export default function App() {
   const [isTransmitting, setIsTransmitting] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Clear URL hash to prevent native browser scroll-to-anchor jumping
+    if (window.location.hash) {
+      window.history.replaceState("", document.title, window.location.pathname + window.location.search);
+    }
+    
+    // Force scroll to top on mount
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
 
     // Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
