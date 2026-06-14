@@ -292,6 +292,248 @@ const projectsList = [
   }
 ];
 
+// Interactive DevOps SSH terminal shell component
+const DevOpsTerminal = ({ theme, lenisRef }) => {
+  const [history, setHistory] = useState([
+    'Welcome to DevOps Node-01 terminal.',
+    'Type "help" to see available commands or click the shortcuts below.',
+    ''
+  ]);
+  const [inputValue, setInputValue] = useState('');
+  const [isExecuting, setIsExecuting] = useState(false);
+  const terminalEndRef = useRef(null);
+
+  // Auto scroll to bottom of console logs
+  useEffect(() => {
+    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [history]);
+
+  const executeCommand = async (cmdText) => {
+    const trimmed = cmdText.trim().toLowerCase();
+    if (!trimmed) return;
+
+    // Add command to history
+    setHistory(prev => [...prev, `medhini@devops-node-01:~$ ${cmdText}`]);
+
+    if (trimmed === 'clear') {
+      setHistory([]);
+      return;
+    }
+
+    if (trimmed === 'help') {
+      setHistory(prev => [
+        ...prev,
+        'Available commands:',
+        '  about     - Display personal overview & focus',
+        '  skills    - Navigate to Technical Arsenal section',
+        '  projects  - Navigate to Selected Works section',
+        '  contact   - Navigate to Get In Touch section',
+        '  pipeline  - Run Docker container build & Firebase hosting deploy',
+        '  clear     - Reset the terminal screen'
+      ]);
+      return;
+    }
+
+    if (trimmed === 'about') {
+      setHistory(prev => [
+        ...prev,
+        'Identity: Medhini B R',
+        'Role: Cloud & DevOps Architect',
+        'Stack: CI/CD Pipelines, Docker Containers, Firebase, Google Cloud',
+        'Uptime Focus: High Availability & Automated Self-Healing workflows.'
+      ]);
+      return;
+    }
+
+    if (trimmed === 'skills') {
+      setHistory(prev => [...prev, 'Navigating to Technical Arsenal...']);
+      if (lenisRef?.current) {
+        lenisRef.current.scrollTo('#skills', { duration: 1.2 });
+      } else {
+        document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
+
+    if (trimmed === 'projects') {
+      setHistory(prev => [...prev, 'Navigating to Selected Works...']);
+      if (lenisRef?.current) {
+        lenisRef.current.scrollTo('#works', { duration: 1.2 });
+      } else {
+        document.getElementById('works')?.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
+
+    if (trimmed === 'contact') {
+      setHistory(prev => [...prev, 'Navigating to Contact Section...']);
+      if (lenisRef?.current) {
+        lenisRef.current.scrollTo('#contact', { duration: 1.2 });
+      } else {
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
+
+    if (trimmed === 'pipeline') {
+      if (isExecuting) return;
+      setIsExecuting(true);
+      setHistory(prev => [
+        ...prev,
+        'Initializing Docker containerization run...',
+        'Sending build context to Docker daemon...'
+      ]);
+
+      // Stage 1: Docker Build
+      await new Promise(r => setTimeout(r, 800));
+      setHistory(prev => [
+        ...prev,
+        'Step 1/3 : FROM node:18-alpine',
+        ' ---> Pulling node:18-alpine from registry...',
+        ' ---> Docker build cache matched local image sha256.',
+        'Step 2/3 : COPY . .',
+        'Step 3/3 : RUN npm run build'
+      ]);
+
+      // Stage 2: Compile & Build
+      await new Promise(r => setTimeout(r, 1000));
+      setHistory(prev => [
+        ...prev,
+        ' ---> Vite building production assets...',
+        ' ✓ dist/assets/index.js (382kB) | dist/assets/index.css (87kB)',
+        'Successfully tagged medhini-portfolio:latest'
+      ]);
+
+      // Stage 3: Firebase Deployment
+      await new Promise(r => setTimeout(r, 900));
+      setHistory(prev => [
+        ...prev,
+        '',
+        '$ firebase deploy --only hosting --project medhini-portfolio',
+        '=== Hosting Deploy ===',
+        'Host URL: https://medhini-portfolio.web.app',
+        'Uploading project release bundle...'
+      ]);
+
+      await new Promise(r => setTimeout(r, 1000));
+      setHistory(prev => [
+        ...prev,
+        '✓ Successfully uploaded 14 files to Firebase Hosting!',
+        '✓ Deployment complete. Live URL: https://medhini-portfolio.web.app',
+        'Status: Success (Uptime target 100% stable)'
+      ]);
+      setIsExecuting(false);
+      return;
+    }
+
+    // Default error command
+    setHistory(prev => [
+      ...prev,
+      `bash: ${cmdText}: command not found. Type "help" to see available commands.`
+    ]);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      executeCommand(inputValue);
+      setInputValue('');
+    }
+  };
+
+  return (
+    <div className="w-full flex flex-col gap-3">
+      {/* Shell Container */}
+      <div 
+        className={`w-full rounded-2xl border text-left font-mono shadow-xl relative overflow-hidden flex flex-col h-[380px] ${
+          theme === 'dark' ? 'bg-[#0b0b0d] border-white/5 text-zinc-300' : 'bg-zinc-950 border-zinc-800 text-zinc-300'
+        }`}
+        onClick={() => document.getElementById('ssh-input')?.focus()}
+      >
+        {/* Terminal Header */}
+        <div className={`flex items-center justify-between px-5 py-3.5 border-b ${
+          theme === 'dark' ? 'border-white/5 bg-[#121216]' : 'border-zinc-800 bg-zinc-900'
+        }`}>
+          <div className="flex gap-2 items-center">
+            <span className="w-3.5 h-3.5 rounded-full bg-red-500/80"></span>
+            <span className="w-3.5 h-3.5 rounded-full bg-yellow-500/80"></span>
+            <span className="w-3.5 h-3.5 rounded-full bg-green-500/80"></span>
+            <span className="text-xs text-zinc-500 ml-2 font-mono">ssh medhini@devops-node-01</span>
+          </div>
+          <span className="text-[10px] text-zinc-600 font-mono">PORT: 22</span>
+        </div>
+
+        {/* Console logs output */}
+        <div className="flex-1 p-5 overflow-y-auto font-mono text-xs leading-relaxed space-y-1.5 scrollbar-thin">
+          {history.map((line, idx) => {
+            let colorClass = 'text-zinc-300';
+            if (line.startsWith('medhini@devops-node-01:~$')) {
+              colorClass = 'text-indigo-400 font-bold';
+            } else if (line.startsWith('✓') || line.includes('Success')) {
+              colorClass = 'text-emerald-400';
+            } else if (line.startsWith('bash:') || line.includes('WARNING:')) {
+              colorClass = 'text-red-400';
+            } else if (line.startsWith('  ') || line.startsWith('Available')) {
+              colorClass = 'text-zinc-400';
+            } else if (line.startsWith('$')) {
+              colorClass = 'text-cyan-400';
+            }
+
+            return (
+              <div key={idx} className={`${colorClass} whitespace-pre-wrap`}>
+                {line}
+              </div>
+            );
+          })}
+          
+          {/* Active Input Line */}
+          {!isExecuting && (
+            <div className="flex items-center gap-1.5 text-zinc-300">
+              <span className="text-indigo-400 font-bold">medhini@devops-node-01:~$</span>
+              <input
+                id="ssh-input"
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="flex-1 bg-transparent border-none outline-none focus:ring-0 p-0 text-zinc-100 caret-indigo-400 font-mono text-xs"
+                placeholder=""
+                autoComplete="off"
+                autoFocus
+              />
+            </div>
+          )}
+
+          {isExecuting && (
+            <div className="flex items-center gap-2 text-indigo-400 font-bold animate-pulse text-xs">
+              <span>[RUNNING BUILD PIPELINE...]</span>
+            </div>
+          )}
+          <div ref={terminalEndRef} />
+        </div>
+      </div>
+
+      {/* Shortcut Command Pills */}
+      <div className="flex flex-wrap gap-2 items-center">
+        <span className="text-[11px] font-mono font-bold text-zinc-500 uppercase tracking-wider mr-1">Shortcuts:</span>
+        {['help', 'pipeline', 'skills', 'projects', 'contact', 'clear'].map((cmd) => (
+          <button
+            key={cmd}
+            onClick={() => executeCommand(cmd)}
+            disabled={isExecuting}
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold border transition-all ${
+              theme === 'dark'
+                ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white hover:border-indigo-500/40 hover:bg-indigo-500/5'
+                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-indigo-500/40 hover:bg-indigo-500/5'
+            }`}
+          >
+            {cmd}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const [theme, setTheme] = useState('dark');
   const [hoveredIdx, setHoveredIdx] = useState(null);
@@ -579,58 +821,45 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-10 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              01 // THE IDENTITY
+              01 // DEVOPS ENGINEER
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>Engineered for impact.</h2>
+              }`}>Automating pipeline execution.</h2>
           </div>
 
           <div className="grid md:grid-cols-12 gap-12 items-center">
-            <div className="md:col-span-7 space-y-6 text-left">
+            <div className="md:col-span-6 space-y-6 text-left">
               <h3 className={`text-4xl sm:text-5xl font-black font-display leading-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
                 }`}>
-                Systems that scale.<br />
-                <span className="opacity-45">Experiences that matter.</span>
+                Interactive Shell.<br />
+                <span className="opacity-45">Automated pipelines.</span>
               </h3>
               <p className={`text-base sm:text-lg leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
                 }`}>
-                Engineering isn't just about syntax. It's about bridging the gap between rigorous cloud architecture and deeply resonant user experiences. I build products and architectures that operate seamlessly at scale, utilizing serverless patterns and robust data flows.
+                I build robust CI/CD automation pipelines, package application code with Docker containers, and deploy scalable hosting zones on Google Cloud and Firebase. Use the interactive SSH shell console to trigger dockerized compilation logs, deploy updates, or navigate through the pages.
               </p>
               <div className="flex flex-wrap gap-3">
-                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${theme === 'dark' ? 'bg-zinc-900 text-zinc-300' : 'bg-zinc-200 text-zinc-800'
+                {[
+                  { name: 'CI/CD Pipelines', color: 'bg-indigo-500' },
+                  { name: 'Docker Containers', color: 'bg-blue-500' },
+                  { name: 'Firebase Hosting', color: 'bg-amber-500' },
+                  { name: 'Google Cloud (GCP)', color: 'bg-sky-500' },
+                  { name: 'Shell Scripting (Bash)', color: 'bg-emerald-500' },
+                  { name: 'GitHub Actions', color: 'bg-purple-500' }
+                ].map((tag, i) => (
+                  <span key={i} className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${
+                    theme === 'dark' ? 'bg-zinc-900 text-zinc-300' : 'bg-zinc-100 text-zinc-800'
                   }`}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  Co-Founder @ Berukodige Farm
-                </span>
-                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${theme === 'dark' ? 'bg-zinc-900 text-zinc-300' : 'bg-zinc-200 text-zinc-800'
-                  }`}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-                  Flutter Intern @ Benevolate
-                </span>
+                    <span className={`w-1.5 h-1.5 rounded-full ${tag.color}`}></span>
+                    {tag.name}
+                  </span>
+                ))}
               </div>
             </div>
 
-            {/* Right Column: Code Panel */}
-            <div className="md:col-span-5 w-full">
-              <div className={`p-6 rounded-2xl border text-left font-mono text-sm relative overflow-hidden shadow-xl ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
-                }`}>
-                <div className="flex gap-1.5 mb-6">
-                  <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
-                  <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
-                  <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
-                  <span className="text-xs text-zinc-500 ml-2">~/identity.ts</span>
-                </div>
-                <pre className="overflow-x-auto text-[13px] leading-relaxed">
-                  <code>
-                    <span className="text-indigo-400">interface</span> <span className="text-yellow-300">Developer</span> &#123;{'\n'}
-                    {'  '}mindset: <span className="text-emerald-400">"Cloud Native & DevOps"</span>;{'\n'}
-                    {'  '}architecture: <span className="text-emerald-400">"Serverless & Kubernetes"</span>;{'\n'}
-                    {'  '}performance: <span className="text-emerald-400">"Highly Available & Scalable"</span>;{'\n'}
-                    &#125;{'\n\n'}
-                    <span className="text-zinc-500">// Ready to build.</span>
-                  </code>
-                </pre>
-              </div>
+            {/* Right Column: DevOps SSH Terminal */}
+            <div className="md:col-span-6 w-full">
+              <DevOpsTerminal theme={theme} lenisRef={lenisRef} />
             </div>
           </div>
         </div>
