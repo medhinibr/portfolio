@@ -494,7 +494,7 @@ export default function App() {
                   }
                 }
               }}
-              className="flex flex-col space-y-7 text-4xl sm:text-5xl font-medium font-sans text-left"
+              className="flex flex-col space-y-10 text-4xl sm:text-5xl font-medium font-sans text-left"
             >
               {[
                 { label: 'Initialize', target: 'home' },
