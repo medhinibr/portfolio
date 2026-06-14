@@ -1079,7 +1079,7 @@ export default function App() {
       </section>
 
       {/* Interactive Contact Section */}
-      <section id="contact" className="min-h-screen flex flex-col justify-center px-6 sm:px-16 py-24 border-t border-white/5 max-w-4xl mx-auto">
+      <section id="contact" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24 py-24 border-t border-white/5 w-full max-w-7xl mx-auto">
         <div className="w-full relative min-h-[350px] flex flex-col justify-between text-left">
 
           <AnimatePresence mode="wait">
