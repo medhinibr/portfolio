@@ -2589,7 +2589,9 @@ export default function App() {
           {/* Direct Mail & Social Connections */}
           <div className="flex flex-col items-center gap-2">
             <a 
-              href="mailto:brmedhini@gmail.com" 
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=brmedhini@gmail.com" 
+              target="_blank"
+              rel="noreferrer"
               className="text-xs font-mono font-bold text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-2 tracking-wider group"
             >
               <Mail className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
