@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import { GitHubCalendar } from 'react-github-calendar';
 import 'react-github-calendar/tooltips.css';
-import CloudConsole from './CloudConsole';
+import EnvironmentSwitcher from './EnvironmentSwitcher';
 import {
   Sun,
   Moon,
@@ -978,8 +978,73 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
 
 export default function App() {
   const theme = 'dark';
+  const [envMode, setEnvMode] = useState('prod'); // 'prod' | 'dev'
+  const [showSkillsRaw, setShowSkillsRaw] = useState(false);
+  const [showProjectsRaw, setShowProjectsRaw] = useState(false);
+  const [showTimelineRaw, setShowTimelineRaw] = useState(false);
+  const [debugLogs, setDebugLogs] = useState([
+    { id: 1, time: new Date().toLocaleTimeString(), text: 'KERNEL // Initialized Medhini portfolio workspace.' },
+    { id: 2, time: new Date().toLocaleTimeString(), text: 'NET // GCP global target loaded: http://localhost:5173' },
+    { id: 3, time: new Date().toLocaleTimeString(), text: 'ENV_MODE set to PRODUCTION (Stable)' }
+  ]);
+
+  const addDebugLog = (text) => {
+    setDebugLogs(prev => [
+      ...prev,
+      { id: Date.now() + Math.random(), time: new Date().toLocaleTimeString(), text }
+    ].slice(-100));
+  };
+  
+  const [chaosState, setChaosState] = useState('stable'); // 'stable' | 'crashed' | 'healing'
+  const [chaosTarget, setChaosTarget] = useState(null); // 'skills' | 'works'
+
+  const triggerChaosMonkey = () => {
+    if (chaosState !== 'stable') return;
+    
+    const targets = ['skills', 'works'];
+    const chosenTarget = targets[Math.floor(Math.random() * targets.length)];
+    
+    setChaosState('crashed');
+    setChaosTarget(chosenTarget);
+    
+    addDebugLog(`CHAOS MONKEY // Initiating network disturbance...`);
+    addDebugLog(`CHAOS MONKEY // Target component selected: ${chosenTarget.toUpperCase()}`);
+    addDebugLog(`CHAOS MONKEY // Injecting SIGKILL into ${chosenTarget}-pod-deployment...`);
+    
+    setTimeout(() => {
+      setChaosState('healing');
+      addDebugLog(`KUBELET // Pod failure detected for namespace: default`);
+      addDebugLog(`REPLICASE // Rescheduling replacement pod for ${chosenTarget}...`);
+      addDebugLog(`NET // Resuming routing tables...`);
+      
+      setTimeout(() => {
+        setChaosState('stable');
+        setChaosTarget(null);
+        addDebugLog(`SYSTEM // Pod restored. Liveness probe: 200 OK.`);
+        addDebugLog(`SYSTEM // Chaos engineering self-healing complete!`);
+      }, 1800);
+    }, 2000);
+  };
+  
+  const envModeRef = useRef(envMode);
+  useEffect(() => {
+    envModeRef.current = envMode;
+  }, [envMode]);
+
   const [hoveredIdx, setHoveredIdx] = useState(null);
   const [clickedIdx, setClickedIdx] = useState(null);
+  useEffect(() => {
+    if (hoveredIdx !== null && envMode === 'dev') {
+      const item = medhiniLetters[hoveredIdx];
+      addDebugLog(`UI_INTERACTION // Hovered letter: ${item.char} (${item.prefix || item.suffix})`);
+    }
+  }, [hoveredIdx, envMode]);
+
+  useEffect(() => {
+    if (clickedIdx !== null && envMode === 'dev') {
+      addDebugLog(`UI_INTERACTION // Locked letter details: ${medhiniLetters[clickedIdx].char}`);
+    }
+  }, [clickedIdx, envMode]);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(pipelineStages[0]);
   const [k8sTab, setK8sTab] = useState('logs');
@@ -1020,6 +1085,30 @@ export default function App() {
       });
   }, [githubYear]);
 
+  useEffect(() => {
+    if (envMode === 'dev') {
+      addDebugLog(`TELEMETRY // Switched active resource: ${selectedSkill.name} (Namespace: ${selectedSkill.namespace})`);
+    }
+  }, [selectedSkill, envMode]);
+
+  useEffect(() => {
+    if (envMode === 'dev') {
+      addDebugLog(`ARCHIVE // Loaded Chapter ${selectedChapter + 1} (${timelineChapters[selectedChapter].title})`);
+    }
+  }, [selectedChapter, envMode]);
+
+  useEffect(() => {
+    if (envMode === 'dev') {
+      addDebugLog(`NET // API call to GitHub Contributions API for year: ${githubYear}`);
+    }
+  }, [githubYear, envMode]);
+
+  useEffect(() => {
+    if (envMode === 'dev') {
+      addDebugLog(`TELEMETRY // Rerouted console buffer stream to tab: ${k8sTab}`);
+    }
+  }, [k8sTab, envMode]);
+
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
   const [pingingIdx, setPingingIdx] = useState(null);
   const [pingResults, setPingResults] = useState({});
@@ -1028,16 +1117,23 @@ export default function App() {
   const handleTestConnection = (idx) => {
     if (pingingIdx !== null) return;
     setPingingIdx(idx);
+    if (envMode === 'dev') {
+      addDebugLog(`NET // Pinging remote pod endpoint: ${projectsList[idx].title}`);
+    }
     setTimeout(() => {
+      const res = {
+        status: "200 OK",
+        latency: `${Math.floor(Math.random() * 80) + 45}ms`,
+        server: idx === 3 ? "edge-cdn" : "gcp-cloud-run",
+        ip: `34.120.${Math.floor(Math.random() * 190) + 10}.${Math.floor(Math.random() * 254)}`
+      };
       setPingResults(prev => ({
         ...prev,
-        [idx]: {
-          status: "200 OK",
-          latency: `${Math.floor(Math.random() * 80) + 45}ms`,
-          server: idx === 3 ? "edge-cdn" : "gcp-cloud-run",
-          ip: `34.120.${Math.floor(Math.random() * 190) + 10}.${Math.floor(Math.random() * 254)}`
-        }
+        [idx]: res
       }));
+      if (envMode === 'dev') {
+        addDebugLog(`NET // Response from ${projectsList[idx].title}: ${res.status} (RTT ${res.latency}, Server ${res.server}, IP ${res.ip})`);
+      }
       setPingingIdx(null);
     }, 1100);
   };
@@ -1095,11 +1191,17 @@ export default function App() {
       setIsHoveringClickable(!!isClickable);
     };
 
+    let lastLoggedScrollY = 0;
     const handleScroll = () => {
-      if (window.scrollY > 200) {
+      const scrollY = window.scrollY;
+      if (scrollY > 200) {
         setScrolledPastHero(true);
       } else {
         setScrolledPastHero(false);
+      }
+      if (envModeRef.current === 'dev' && Math.abs(scrollY - lastLoggedScrollY) > 250) {
+        addDebugLog(`SCROLL // Viewport scroll offset: ${Math.round(scrollY)}px`);
+        lastLoggedScrollY = scrollY;
       }
     };
 
@@ -1225,6 +1327,12 @@ export default function App() {
       className={`relative min-h-screen font-sans transition-colors duration-300 overflow-x-hidden ${theme === 'dark' ? 'bg-black text-zinc-100' : 'bg-white text-zinc-900'
         }`}
     >
+      {/* Dev Mode Grid Overlay */}
+      {envMode === 'dev' && (
+        <div className="pointer-events-none fixed inset-0 z-[999] opacity-10">
+          <div className="h-full w-full bg-[linear-gradient(to_right,rgba(99,102,241,0.25)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.25)_1px,transparent_1px)] bg-[size:40px_40px]" />
+        </div>
+      )}
       {/* Custom Interactive Cursor */}
       <motion.div
         className="fixed top-0 left-0 w-4 h-4 rounded-full bg-white mix-blend-difference pointer-events-none z-50 hidden md:block"
@@ -1477,11 +1585,29 @@ export default function App() {
       </section>
 
       {/* Skills Section (Interactive Cloud Architecture / Topology Map) */}
-      <section id="skills" className="w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="skills" className={`w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28 relative ${envMode === 'dev' ? 'border border-dashed border-indigo-500/20' : ''}`}>
+        {envMode === 'dev' && (
+          <div className="absolute top-2 left-6 z-30 font-mono text-[8px] bg-indigo-950/90 text-indigo-400 border border-indigo-500/30 px-1.5 py-0.5 rounded uppercase tracking-widest pointer-events-none select-none">
+            &lt;SkillsSection /&gt;
+          </div>
+        )}
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-12 text-left">
-            <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              02 // TECHNICAL ARSENAL
+            <div className="flex items-center gap-3">
+              <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
+                02 // TECHNICAL ARSENAL
+              </div>
+              {envMode === 'dev' && (
+                <button
+                  onClick={() => {
+                    setShowSkillsRaw(!showSkillsRaw);
+                    addDebugLog(`UI_INTERACTION // Toggled Technical Arsenal RAW PAYLOAD: ${!showSkillsRaw}`);
+                  }}
+                  className="px-2 py-0.5 rounded border border-amber-500/30 bg-amber-500/10 text-amber-400 font-mono text-[9px] font-bold uppercase hover:bg-amber-500/20 transition-all cursor-pointer"
+                >
+                  {showSkillsRaw ? '[Hide Payload]' : '[Show Payload]'}
+                </button>
+              )}
             </div>
             <h2 className={`text-3xl sm:text-5xl md:text-6xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
               }`}>Infrastructure Topology.</h2>
@@ -1491,7 +1617,54 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          <AnimatePresence>
+            {showSkillsRaw && envMode === 'dev' && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mb-8 overflow-hidden font-mono text-[9px] md:text-[10px]"
+              >
+                <pre className="p-4 rounded-xl border border-amber-500/20 bg-black/95 text-amber-400/90 overflow-x-auto max-h-72 select-text scrollbar-thin scrollbar-thumb-amber-500/20">
+                  {JSON.stringify(pipelineStages, null, 2)}
+                </pre>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {chaosTarget === 'skills' ? (
+            <div className={`w-full min-h-[400px] border rounded-2xl flex flex-col items-center justify-center p-8 text-center font-mono select-none transition-all duration-300 ${
+              chaosState === 'crashed' ? 'border-rose-500/40 bg-rose-950/10 text-rose-400' : 'border-amber-500/40 bg-amber-950/10 text-amber-400'
+            }`}>
+              {chaosState === 'crashed' ? (
+                <>
+                  <span className="text-rose-500 text-4xl sm:text-5xl font-black mb-3 animate-pulse">⚠️ ERROR_POD_CRASHED</span>
+                  <div className="text-xs uppercase tracking-widest text-zinc-500 font-bold mb-4">DEPLOYMENT: default/skills-replicaset-7f8a</div>
+                  <p className="max-w-md text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
+                    A severe network disturbance simulation has terminated the pod group container. Health probes returned status <code className="text-rose-400">503 Service Unavailable</code>.
+                  </p>
+                  <div className="bg-black/60 border border-rose-500/20 p-3 rounded text-[9px] sm:text-[10px] text-zinc-500 max-w-sm w-full text-left space-y-1">
+                    <div>[ERROR] Connection reset by peer: port 8080</div>
+                    <div>[ERROR] Process terminated with SIGKILL (Exit Code 137 - OOM)</div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="w-10 h-10 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-4" />
+                  <span className="text-amber-500 font-black text-lg uppercase tracking-wider mb-2">ReplicaSet Recovering Container...</span>
+                  <p className="max-w-md text-xs text-zinc-400 leading-relaxed mb-4">
+                    Rescheduling pods onto node pool. Downloading image layers and validating liveness checks.
+                  </p>
+                  <div className="bg-black/60 border border-amber-500/20 p-3 rounded text-[9px] sm:text-[10px] text-zinc-500 max-w-sm w-full text-left space-y-1">
+                    <div>[INFO] Rescheduling deployment replica... OK</div>
+                    <div>[INFO] Pulling container layers... OK</div>
+                    <div>[INFO] Initializing HTTP health check probes...</div>
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
 
             {/* Left Column: Interactive SVG Network Map */}
             <div className="lg:col-span-7 relative w-full aspect-[2/1] min-h-[250px] sm:min-h-[400px] rounded-2xl bg-[#09090b]/90 border border-white/5 overflow-hidden shadow-2xl flex items-center justify-center">
@@ -1746,21 +1919,37 @@ export default function App() {
                 </div>
 
               </div>
-
             </div>
-
           </div>
-
+          )}
         </div>
       </section>
 
-      {/* Selected Works Section (DevOps Deployments Registry) */}
-      <section id="works" className="w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
+{/* Selected Works Section (DevOps Deployments Registry) */}
+      <section id="works" className={`w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28 relative ${envMode === 'dev' ? 'border border-dashed border-indigo-500/20' : ''}`}>
+        {envMode === 'dev' && (
+          <div className="absolute top-2 left-6 z-30 font-mono text-[8px] bg-indigo-950/90 text-indigo-400 border border-indigo-500/30 px-1.5 py-0.5 rounded uppercase tracking-widest pointer-events-none select-none">
+            &lt;DeploymentsRegistry /&gt;
+          </div>
+        )}
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
 
           <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-16 text-left">
-            <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              03 // DEPLOYMENTS REGISTRY
+            <div className="flex items-center gap-3">
+              <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
+                03 // DEPLOYMENTS REGISTRY
+              </div>
+              {envMode === 'dev' && (
+                <button
+                  onClick={() => {
+                    setShowProjectsRaw(!showProjectsRaw);
+                    addDebugLog(`UI_INTERACTION // Toggled Deployments Registry RAW PAYLOAD: ${!showProjectsRaw}`);
+                  }}
+                  className="px-2 py-0.5 rounded border border-amber-500/30 bg-amber-500/10 text-amber-400 font-mono text-[9px] font-bold uppercase hover:bg-amber-500/20 transition-all cursor-pointer"
+                >
+                  {showProjectsRaw ? '[Hide Payload]' : '[Show Payload]'}
+                </button>
+              )}
             </div>
             <h2 className={`text-3xl sm:text-5xl md:text-6xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
               }`}>Service Catalog.</h2>
@@ -1770,7 +1959,54 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+          <AnimatePresence>
+            {showProjectsRaw && envMode === 'dev' && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mb-8 overflow-hidden font-mono text-[9px] md:text-[10px]"
+              >
+                <pre className="p-4 rounded-xl border border-amber-500/20 bg-black/95 text-amber-400/90 overflow-x-auto max-h-72 select-text scrollbar-thin scrollbar-thumb-amber-500/20">
+                  {JSON.stringify(projectsList, null, 2)}
+                </pre>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {chaosTarget === 'works' ? (
+            <div className={`w-full min-h-[400px] border rounded-2xl flex flex-col items-center justify-center p-8 text-center font-mono select-none transition-all duration-300 ${
+              chaosState === 'crashed' ? 'border-rose-500/40 bg-rose-950/10 text-rose-400' : 'border-amber-500/40 bg-amber-950/10 text-amber-400'
+            }`}>
+              {chaosState === 'crashed' ? (
+                <>
+                  <span className="text-rose-500 text-4xl sm:text-5xl font-black mb-3 animate-pulse">⚠️ ERROR_POD_CRASHED</span>
+                  <div className="text-xs uppercase tracking-widest text-zinc-500 font-bold mb-4">DEPLOYMENT: default/works-registry-8c2b</div>
+                  <p className="max-w-md text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
+                    A simulate-chaos pipeline event has killed the service deployment group. Virtual container endpoints are currently unreachable.
+                  </p>
+                  <div className="bg-black/60 border border-rose-500/20 p-3 rounded text-[9px] sm:text-[10px] text-zinc-500 max-w-sm w-full text-left space-y-1">
+                    <div>[ERROR] Microservice target host down: works-registry-svc</div>
+                    <div>[ERROR] Process exit code: 1 (SIGKILL)</div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="w-10 h-10 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-4" />
+                  <span className="text-amber-500 font-black text-lg uppercase tracking-wider mb-2">ReplicaSet Recovering Container...</span>
+                  <p className="max-w-md text-xs text-zinc-400 leading-relaxed mb-4">
+                    Rescheduling pods onto node pool. Downloading image layers and validating liveness checks.
+                  </p>
+                  <div className="bg-black/60 border border-amber-500/20 p-3 rounded text-[9px] sm:text-[10px] text-zinc-500 max-w-sm w-full text-left space-y-1">
+                    <div>[INFO] Rescheduling deployment replica... OK</div>
+                    <div>[INFO] Pulling container layers... OK</div>
+                    <div>[INFO] Initializing HTTP health check probes...</div>
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             {projectsList.map((project, idx) => (
               <motion.div
                 key={idx}
@@ -1927,6 +2163,7 @@ export default function App() {
               </motion.div>
             ))}
           </div>
+          )}
         </div>
       </section>
 
@@ -2097,11 +2334,29 @@ export default function App() {
       </section>
 
       {/* Horizontal Deployment Tracker Timeline Section */}
-      <section id="timeline" className="w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="timeline" className={`w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28 relative ${envMode === 'dev' ? 'border border-dashed border-indigo-500/20' : ''}`}>
+        {envMode === 'dev' && (
+          <div className="absolute top-2 left-6 z-30 font-mono text-[8px] bg-indigo-950/90 text-indigo-400 border border-indigo-500/30 px-1.5 py-0.5 rounded uppercase tracking-widest pointer-events-none select-none">
+            &lt;DeploymentTrackerTimeline /&gt;
+          </div>
+        )}
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-12 text-left">
-            <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              04 // PIPELINE METRICS
+            <div className="flex items-center gap-3">
+              <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
+                04 // PIPELINE METRICS
+              </div>
+              {envMode === 'dev' && (
+                <button
+                  onClick={() => {
+                    setShowTimelineRaw(!showTimelineRaw);
+                    addDebugLog(`UI_INTERACTION // Toggled Career Timeline RAW PAYLOAD: ${!showTimelineRaw}`);
+                  }}
+                  className="px-2 py-0.5 rounded border border-amber-500/30 bg-amber-500/10 text-amber-400 font-mono text-[9px] font-bold uppercase hover:bg-amber-500/20 transition-all cursor-pointer"
+                >
+                  {showTimelineRaw ? '[Hide Payload]' : '[Show Payload]'}
+                </button>
+              )}
             </div>
             <h2 className={`text-3xl sm:text-5xl md:text-6xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
               }`}>Deployment Tracker.</h2>
@@ -2110,6 +2365,21 @@ export default function App() {
               Tracing my educational milestones, internships, and startup operations as a horizontal CI/CD pipeline.
             </p>
           </div>
+
+          <AnimatePresence>
+            {showTimelineRaw && envMode === 'dev' && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mb-8 overflow-hidden font-mono text-[9px] md:text-[10px]"
+              >
+                <pre className="p-4 rounded-xl border border-amber-500/20 bg-black/95 text-amber-400/90 overflow-x-auto max-h-72 select-text scrollbar-thin scrollbar-thumb-amber-500/20">
+                  {JSON.stringify(timelineChapters, null, 2)}
+                </pre>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Horizontal progress bar container with horizontal scroll for mobile */}
           <div className="w-full overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
@@ -2616,8 +2886,15 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Cloud Console Simulator */}
-      <CloudConsole theme={theme} />
+      {/* Environment Switcher & Debug logs */}
+      <EnvironmentSwitcher 
+        envMode={envMode} 
+        setEnvMode={setEnvMode} 
+        debugLogs={debugLogs} 
+        addDebugLog={addDebugLog}
+        chaosState={chaosState}
+        triggerChaosMonkey={triggerChaosMonkey}
+      />
     </div>
   );
 }
