@@ -919,7 +919,7 @@ export default function App() {
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
   const [pingingIdx, setPingingIdx] = useState(null);
   const [pingResults, setPingResults] = useState({});
-  const [selectedAuditTab, setSelectedAuditTab] = useState("performance");
+  const [selectedDevOpsStage, setSelectedDevOpsStage] = useState(1);
 
   const handleTestConnection = (idx) => {
     if (pingingIdx !== null) return;
@@ -1776,198 +1776,165 @@ export default function App() {
         </div>
       </section>
 
-      {/* Chrome Lighthouse Audits Console Section */}
+      {/* DevOps Lifecycle Section */}
       <section id="metrics" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           
           <div className="space-y-4 mb-16 text-center">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              04 // CHROME LIGHTHOUSE AUDITS
+              04 // ENGINEERING LIFECYCLE
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>Chrome Lighthouse Audits.</h2>
+              }`}>DevOps Lifecycle.</h2>
             <p className={`max-w-2xl mx-auto text-sm ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              Chrome Lighthouse is an open-source, automated tool by Google for improving the quality of web pages. Every application built here undergoes audits to achieve a perfect 100/100 score.
+              A structured roadmap of how I build, containerize, provision, and deploy cloud applications automatically.
             </p>
           </div>
 
-          {/* DevTools Lighthouse UI Window */}
-          <div className="bg-[#09090b]/90 border border-white/5 rounded-2xl overflow-hidden shadow-2xl w-full flex flex-col max-w-4xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-8 max-w-5xl mx-auto items-stretch">
             
-            {/* DevTools Chrome Mock Header */}
-            <div className="bg-zinc-950 px-6 py-3 border-b border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500 select-none">
-              <div className="flex items-center gap-4">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-                </span>
-                <span className="text-zinc-600 border-r border-white/5 pr-4">Chrome DevTools</span>
-                <span className="text-zinc-400 font-bold border-b-2 border-indigo-500 pb-1 -mb-1">Lighthouse Report</span>
-                <span className="hover:text-zinc-300 cursor-pointer">Console</span>
-                <span className="hover:text-zinc-300 cursor-pointer">Network</span>
-              </div>
-              <div>
-                <span>DEVICE: DESKTOP (MOTO G4 SIMULATED)</span>
-              </div>
+            {/* Left: Step Indicators */}
+            <div className="lg:col-span-4 flex flex-col gap-4 justify-between">
+              {[
+                { step: 1, label: "01 // INTEGRATION", title: "CI Pipeline" },
+                { step: 2, label: "02 // CONTAINERIZE", title: "Docker Build" },
+                { step: 3, label: "03 // PROVISION", title: "IaC Terraform" },
+                { step: 4, label: "04 // DEPLOYMENT", title: "CD Release" }
+              ].map((stage) => {
+                const isActive = selectedDevOpsStage === stage.step;
+                return (
+                  <button
+                    key={stage.step}
+                    onClick={() => setSelectedDevOpsStage(stage.step)}
+                    className={`p-5 rounded-xl border text-left transition-all duration-300 relative overflow-hidden select-none outline-none ${
+                      isActive 
+                        ? 'bg-indigo-600/10 border-indigo-500/50 shadow-md shadow-indigo-600/5' 
+                        : theme === 'dark' 
+                          ? 'bg-zinc-900/40 border-white/5 hover:bg-zinc-900/60 hover:border-white/10' 
+                          : 'bg-zinc-50 border-zinc-200 hover:bg-zinc-100 hover:border-zinc-300'
+                    }`}
+                  >
+                    {isActive && (
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-indigo-500" />
+                    )}
+                    <div className={`text-[9px] font-mono font-bold ${isActive ? 'text-indigo-400' : 'text-zinc-500'}`}>
+                      {stage.label}
+                    </div>
+                    <div className={`text-base font-bold mt-1 ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+                      {stage.title}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Audit Gauges Row */}
-            <div className="p-8 border-b border-white/5 bg-zinc-950/20">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-center">
-                {[
-                  { id: "performance", label: "PERFORMANCE", val: 100, color: "text-emerald-400 stroke-emerald-500" },
-                  { id: "accessibility", label: "ACCESSIBILITY", val: 100, color: "text-indigo-400 stroke-indigo-500" },
-                  { id: "best-practices", label: "BEST PRACTICES", val: 100, color: "text-violet-400 stroke-violet-500" },
-                  { id: "seo", label: "SEO", val: 100, color: "text-amber-400 stroke-amber-500" }
-                ].map((item, idx) => {
-                  const isSelected = selectedAuditTab === item.id;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => setSelectedAuditTab(item.id)}
-                      className={`flex flex-col items-center space-y-3 p-4 rounded-xl border transition-all duration-300 outline-none ${
-                        isSelected 
-                          ? 'bg-white/[0.03] border-white/10 shadow-lg scale-105' 
-                          : 'bg-transparent border-transparent hover:bg-white/[0.01]'
-                      }`}
-                    >
-                      <div className="relative w-24 h-24 flex items-center justify-center">
-                        <svg className="absolute w-full h-full transform -rotate-90">
-                          <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.03)" strokeWidth="5" fill="transparent" />
-                          <motion.circle
-                            cx="48"
-                            cy="48"
-                            r="40"
-                            className={item.color}
-                            strokeWidth="5"
-                            fill="transparent"
-                            strokeDasharray={251.2}
-                            initial={{ strokeDashoffset: 251.2 }}
-                            whileInView={{ strokeDashoffset: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.2, delay: idx * 0.15 }}
-                          />
-                        </svg>
-                        <span className="text-xl font-black font-mono tracking-tighter text-zinc-100 flex items-center gap-0.5">
-                          {item.val}
-                          <span className="text-[10px] text-emerald-400 font-bold">★</span>
-                        </span>
-                      </div>
-                      <span className={`text-[9px] font-bold font-mono tracking-wider transition-colors duration-300 ${isSelected ? 'text-indigo-400' : 'text-zinc-500'}`}>
-                        {item.label}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Diagnostic Details Area */}
-            <div className="p-8 text-left bg-zinc-950/40">
+            {/* Right: Stage Console & Details */}
+            <div className="lg:col-span-8 flex flex-col justify-between rounded-2xl border border-white/5 bg-[#09090b]/90 p-6 sm:p-8 shadow-2xl relative overflow-hidden text-left min-h-[400px]">
               
-              {/* Performance Diagnostics */}
-              {selectedAuditTab === "performance" && (
-                <div className="space-y-4 font-mono text-xs">
-                  <div className="flex items-center gap-2 border-b border-white/5 pb-2 text-[10px] text-zinc-500 uppercase tracking-widest font-bold">
-                    <span>Performance Diagnostics</span>
-                    <span className="text-emerald-400 font-bold">(5 audits passed)</span>
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      { name: "First Contentful Paint (FCP)", value: "0.2s", desc: "First Contentful Paint marks the time at which the first text or image is painted." },
-                      { name: "Speed Index (SI)", value: "0.4s", desc: "Speed Index shows how quickly the contents of a page are visibly populated." },
-                      { name: "Largest Contentful Paint (LCP)", value: "0.5s", desc: "Largest Contentful Paint marks the time at which the main content of a page has likely loaded." },
-                      { name: "Total Blocking Time (TBT)", value: "0ms", desc: "Sum of all time periods between FCP and Time to Interactive where task duration exceeded 50ms." },
-                      { name: "Cumulative Layout Shift (CLS)", value: "0", desc: "Cumulative Layout Shift measures the movement of visible elements within the viewport." }
-                    ].map((m, idx) => (
-                      <div key={idx} className="flex flex-col gap-1 p-3 rounded bg-zinc-950 border border-white/5 hover:border-emerald-500/20 transition-colors">
-                        <div className="flex justify-between items-center">
-                          <span className="text-zinc-300 font-bold">▲ {m.name}</span>
-                          <span className="text-emerald-400 font-bold">{m.value}</span>
-                        </div>
-                        <span className="text-[10px] text-zinc-500 leading-normal">{m.desc}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+              {/* Decorative terminal dot highlights */}
+              <div className="absolute top-4 right-6 flex gap-1.5 select-none opacity-50">
+                <span className="w-2 h-2 rounded-full bg-zinc-700"></span>
+                <span className="w-2 h-2 rounded-full bg-zinc-700"></span>
+                <span className="w-2 h-2 rounded-full bg-zinc-700"></span>
+              </div>
 
-              {/* Accessibility Diagnostics */}
-              {selectedAuditTab === "accessibility" && (
-                <div className="space-y-4 font-mono text-xs">
-                  <div className="flex items-center gap-2 border-b border-white/5 pb-2 text-[10px] text-zinc-500 uppercase tracking-widest font-bold">
-                    <span>Accessibility Audits</span>
-                    <span className="text-indigo-400 font-bold">(passed compliance)</span>
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      { name: "ARIA Attributes Validity", value: "100%", desc: "Ensures all screen reader-accessible elements declare correct ARIA roles and labels." },
-                      { name: "Color Contrast Ratios", value: "Passing", desc: "Background and foreground colors have a sufficient contrast ratio, meeting WCAG 2.1 AA parameters." },
-                      { name: "Keyboard Navigational Focus", value: "Passing", desc: "All interactive controls (links, inputs, buttons) are sequentially focusable via Tab navigation." }
-                    ].map((m, idx) => (
-                      <div key={idx} className="flex flex-col gap-1 p-3 rounded bg-zinc-950 border border-white/5 hover:border-indigo-500/20 transition-colors">
-                        <div className="flex justify-between items-center">
-                          <span className="text-zinc-300 font-bold">▲ {m.name}</span>
-                          <span className="text-indigo-400 font-bold">{m.value}</span>
-                        </div>
-                        <span className="text-[10px] text-zinc-500 leading-normal">{m.desc}</span>
-                      </div>
-                    ))}
-                  </div>
+              {/* Stage description & detail metrics */}
+              <div className="space-y-4">
+                
+                {/* Active Stage Label */}
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded border border-indigo-500/20">
+                    STAGE 0{selectedDevOpsStage} ACTIVE
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 </div>
-              )}
 
-              {/* Best Practices Diagnostics */}
-              {selectedAuditTab === "best-practices" && (
-                <div className="space-y-4 font-mono text-xs">
-                  <div className="flex items-center gap-2 border-b border-white/5 pb-2 text-[10px] text-zinc-500 uppercase tracking-widest font-bold">
-                    <span>Best Practices Diagnostics</span>
-                    <span className="text-violet-400 font-bold">(compliant runtime)</span>
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      { name: "Secure Origin Connections (HTTPS)", value: "Enabled", desc: "Configured TLS certificate handshakes, forcing encryption on all incoming endpoints." },
-                      { name: "Modern Framework API Usages", value: "Valid", desc: "Uses clean, deprecation-free React hooks, avoiding outdated document APIs." },
-                      { name: "Content Security Policy (CSP)", value: "Configured", desc: "Declares strict resource-loading origins to prevent cross-site scripting (XSS) vectors." }
-                    ].map((m, idx) => (
-                      <div key={idx} className="flex flex-col gap-1 p-3 rounded bg-zinc-950 border border-white/5 hover:border-violet-500/20 transition-colors">
-                        <div className="flex justify-between items-center">
-                          <span className="text-zinc-300 font-bold">▲ {m.name}</span>
-                          <span className="text-violet-400 font-bold">{m.value}</span>
-                        </div>
-                        <span className="text-[10px] text-zinc-500 leading-normal">{m.desc}</span>
-                      </div>
-                    ))}
-                  </div>
+                {/* Info block */}
+                <div className="space-y-2">
+                  <h3 className={`text-xl sm:text-2xl font-bold font-mono ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+                    {selectedDevOpsStage === 1 && "Continuous Integration"}
+                    {selectedDevOpsStage === 2 && "Docker Containerization"}
+                    {selectedDevOpsStage === 3 && "Infrastructure as Code"}
+                    {selectedDevOpsStage === 4 && "Continuous Delivery"}
+                  </h3>
+                  <p className={`text-xs leading-relaxed max-w-xl ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                    {selectedDevOpsStage === 1 && "Automating lint checking, static code analysis, and test suites execution on code pushes to keep the main branch stable."}
+                    {selectedDevOpsStage === 2 && "Creating lightweight, reproducible container images using Docker. Bundles the app files and runs securely in isolated host environments."}
+                    {selectedDevOpsStage === 3 && "Declaring and maintaining cloud network resources, databases, permissions, and server instances safely using Terraform code templates."}
+                    {selectedDevOpsStage === 4 && "Automatically deploying container images to serverless endpoints (Google Cloud Run) and routing production user traffic with zero-downtime."}
+                  </p>
                 </div>
-              )}
 
-              {/* SEO Diagnostics */}
-              {selectedAuditTab === "seo" && (
-                <div className="space-y-4 font-mono text-xs">
-                  <div className="flex items-center gap-2 border-b border-white/5 pb-2 text-[10px] text-zinc-500 uppercase tracking-widest font-bold">
-                    <span>Search Engine Optimization</span>
-                    <span className="text-amber-400 font-bold">(100% crawlable)</span>
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      { name: "Crawlability & Indexing Signals", value: "Passing", desc: "Correct robots.txt declarations, sitemaps index, and canonical href parameters." },
-                      { name: "Semantic Heading Hierarchy Structure", value: "Valid", desc: "Single h1 structure with logical parent-child heading elements (h2, h3) sequence." },
-                      { name: "Schema.org Rich Snippets JSON-LD", value: "Configured", desc: "Valid corporate contacts, profile, and developer organization metadata schemas mapped." }
-                    ].map((m, idx) => (
-                      <div key={idx} className="flex flex-col gap-1 p-3 rounded bg-zinc-950 border border-white/5 hover:border-amber-500/20 transition-colors">
-                        <div className="flex justify-between items-center">
-                          <span className="text-zinc-300 font-bold">▲ {m.name}</span>
-                          <span className="text-amber-400 font-bold">{m.value}</span>
-                        </div>
-                        <span className="text-[10px] text-zinc-500 leading-normal">{m.desc}</span>
-                      </div>
+                {/* Core Tooling Badge Row */}
+                <div className="space-y-1.5 pt-2">
+                  <span className="text-[9px] font-bold font-mono text-zinc-500 uppercase tracking-widest block">INTEGRATED TOOLCHAIN</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {(selectedDevOpsStage === 1 ? ["GitHub Actions", "Git", "Pytest", "ESLint"] :
+                      selectedDevOpsStage === 2 ? ["Docker", "Multi-stage Builds", "Google Artifact Registry"] :
+                      selectedDevOpsStage === 3 ? ["Terraform", "Google Cloud Provider", "IAM Policies"] :
+                      ["Google Cloud Run", "Cloud CDN", "Load Balancing", "GKE"]
+                    ).map((tool, idx) => (
+                      <span key={idx} className="text-[9px] font-mono bg-zinc-950 border border-white/5 text-zinc-400 px-2.5 py-1 rounded">
+                        {tool}
+                      </span>
                     ))}
                   </div>
                 </div>
-              )}
+
+              </div>
+
+              {/* Mock Terminal Shell Console */}
+              <div className="mt-8 pt-4 border-t border-white/5 space-y-3 font-mono text-[11px] leading-relaxed">
+                
+                {/* Mock Command line */}
+                <div className="flex items-center gap-1.5 text-zinc-500">
+                  <span className="text-indigo-400">$</span>
+                  <span>
+                    {selectedDevOpsStage === 1 && "git push origin main"}
+                    {selectedDevOpsStage === 2 && "docker build -t gcr.io/medhini/app:v1.2 ."}
+                    {selectedDevOpsStage === 3 && "terraform apply -auto-approve"}
+                    {selectedDevOpsStage === 4 && "gcloud run deploy --image=gcr.io/medhini/app:v1.2"}
+                  </span>
+                </div>
+
+                {/* Simulated console lines */}
+                <div className="bg-black/60 p-4 rounded-lg border border-white/5 space-y-1.5 select-all text-left">
+                  {selectedDevOpsStage === 1 && (
+                    <>
+                      <div className="text-zinc-500">✓ trigger: github-actions workflow initiated</div>
+                      <div className="text-zinc-500">✓ run linting: flake8 styles check... <span className="text-emerald-400 font-bold">passed</span></div>
+                      <div className="text-zinc-500">✓ run tests: pytest suites execution... <span className="text-emerald-400 font-bold">14 tests passed</span></div>
+                      <div className="text-emerald-300 font-bold">✓ status: code quality checks successful</div>
+                    </>
+                  )}
+                  {selectedDevOpsStage === 2 && (
+                    <>
+                      <div className="text-zinc-500">✓ Step 1/4: FROM python:3.10-alpine</div>
+                      <div className="text-zinc-500">✓ Step 2/4: COPY requirements.txt .</div>
+                      <div className="text-zinc-500">✓ Step 3/4: RUN pip install -r requirements.txt</div>
+                      <div className="text-emerald-300 font-bold">✓ registry: uploaded build image to Google Artifact Registry</div>
+                    </>
+                  )}
+                  {selectedDevOpsStage === 3 && (
+                    <>
+                      <div className="text-zinc-500">✓ module.vpc: creating network topology... done</div>
+                      <div className="text-zinc-500">✓ module.cloudrun: configuring serverless container resources... done</div>
+                      <div className="text-zinc-500">✓ output: load_balancer_ip = 34.120.45.10</div>
+                      <div className="text-emerald-300 font-bold">✓ plan: 3 resources added, 0 changed, 0 destroyed</div>
+                    </>
+                  )}
+                  {selectedDevOpsStage === 4 && (
+                    <>
+                      <div className="text-zinc-500">✓ service: microservice deployed to us-central1</div>
+                      <div className="text-zinc-500">✓ traffic: 100% routed to latest revision build</div>
+                      <div className="text-zinc-500">✓ healthcheck: probes check... <span className="text-emerald-400 font-bold">200 OK</span></div>
+                      <div className="text-emerald-300 font-bold">✓ active endpoint: https://api.medhini.dev</div>
+                    </>
+                  )}
+                </div>
+
+              </div>
 
             </div>
 
