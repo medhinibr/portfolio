@@ -211,7 +211,7 @@ const TelemetryHeaderWidget = ({ lenisRef }) => {
     <div className="relative flex flex-col items-end">
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/5 bg-zinc-950/80 backdrop-blur-md cursor-pointer select-none text-[10px] font-mono font-bold text-zinc-400 hover:border-indigo-500/40 hover:text-indigo-400 transition-all duration-300 shadow-lg"
+        className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/5 bg-zinc-950/80 backdrop-blur-md cursor-pointer select-none text-[10px] md:text-xs font-mono font-bold text-zinc-400 hover:border-indigo-500/40 hover:text-indigo-400 transition-all duration-300 shadow-lg"
       >
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
         <span>SYS STATUS: OPTIMAL</span>
@@ -224,7 +224,7 @@ const TelemetryHeaderWidget = ({ lenisRef }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-10 right-0 w-56 p-4 rounded-xl border border-white/5 bg-zinc-950/95 backdrop-blur-xl shadow-2xl flex flex-col gap-3 z-50 text-[10px] font-mono text-zinc-400"
+            className="absolute top-10 right-0 w-56 p-4 rounded-xl border border-white/5 bg-zinc-950/95 backdrop-blur-xl shadow-2xl flex flex-col gap-3 z-50 text-[10px] md:text-xs font-mono text-zinc-400"
           >
             <div className="flex justify-between items-center pb-2 border-b border-white/5">
               <span className="text-zinc-500 uppercase tracking-wider font-bold">Node Telemetry</span>
@@ -900,13 +900,13 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
             <span className="w-3.5 h-3.5 rounded-full bg-red-500/80"></span>
             <span className="w-3.5 h-3.5 rounded-full bg-yellow-500/80"></span>
             <span className="w-3.5 h-3.5 rounded-full bg-green-500/80"></span>
-            <span className="text-xs text-zinc-500 ml-2 font-mono">ssh medhini@devops-node-01</span>
+            <span className="text-xs md:text-sm text-zinc-500 ml-2 font-mono">ssh medhini@devops-node-01</span>
           </div>
-          <span className="text-[10px] text-zinc-600 font-mono">PORT: 22</span>
+          <span className="text-[10px] md:text-xs text-zinc-600 font-mono">PORT: 22</span>
         </div>
 
         {/* Console logs output */}
-        <div className="flex-1 p-5 overflow-y-auto font-mono text-xs leading-relaxed space-y-1.5 scrollbar-thin">
+        <div className="flex-1 p-5 overflow-y-auto font-mono text-xs md:text-sm leading-relaxed space-y-1.5 scrollbar-thin">
           {history.map((line, idx) => {
             let colorClass = 'text-zinc-300';
             if (line.startsWith('medhini@devops-node-01:~$')) {
@@ -931,14 +931,14 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
           {/* Active Input Line */}
           {!isExecuting && (
             <div className="flex items-center gap-1.5 text-zinc-300">
-              <span className="text-indigo-400 font-bold">medhini@devops-node-01:~$</span>
+              <span className="text-indigo-400 font-bold text-xs md:text-sm">medhini@devops-node-01:~$</span>
               <input
                 id="ssh-input"
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent border-none outline-none focus:ring-0 p-0 text-zinc-100 caret-indigo-400 font-mono text-xs"
+                className="flex-1 bg-transparent border-none outline-none focus:ring-0 p-0 text-zinc-100 caret-indigo-400 font-mono text-xs md:text-sm"
                 placeholder=""
                 autoComplete="off"
               />
@@ -946,7 +946,7 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
           )}
 
           {isExecuting && (
-            <div className="flex items-center gap-2 text-indigo-400 font-bold animate-pulse text-xs">
+            <div className="flex items-center gap-2 text-indigo-400 font-bold animate-pulse text-xs md:text-sm">
               <span>[RUNNING BUILD PIPELINE...]</span>
             </div>
           )}
@@ -956,13 +956,13 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
 
       {/* Shortcut Command Pills */}
       <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-[11px] font-mono font-bold text-zinc-500 uppercase tracking-wider mr-1">Shortcuts:</span>
+        <span className="text-[11px] md:text-xs font-mono font-bold text-zinc-500 uppercase tracking-wider mr-1">Shortcuts:</span>
         {['help', 'pipeline', 'skills', 'projects', 'contact', 'clear'].map((cmd) => (
           <button
             key={cmd}
             onClick={() => executeCommand(cmd)}
             disabled={isExecuting}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold border transition-all ${theme === 'dark'
+            className={`px-3 py-1.5 rounded-lg text-xs md:text-sm font-mono font-bold border transition-all ${theme === 'dark'
               ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white hover:border-indigo-500/40 hover:bg-indigo-500/5'
               : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-indigo-500/40 hover:bg-indigo-500/5'
               }`}
@@ -1245,7 +1245,7 @@ export default function App() {
           : 'h-20 bg-transparent'
       }`}>
         {/* Left Side: Minimalist Name Logo (visible when scrolled past hero) */}
-        <div className="flex items-center gap-2 font-mono text-[11px] tracking-widest font-bold">
+        <div className="flex items-center gap-2 font-mono text-[11px] md:text-sm tracking-widest font-bold">
           <motion.span
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: scrolledPastHero ? 1 : 0, x: scrolledPastHero ? 0 : -10 }}
@@ -1264,7 +1264,7 @@ export default function App() {
                 layoutId="download-resume-btn"
                 href="/Resume%20-%20B%20R%20Medhini.pdf"
                 download="Resume - B R Medhini.pdf"
-                className={`px-4 h-[34px] flex items-center justify-center rounded-full text-[11px] sm:text-[12px] font-bold border shadow-md transition-all duration-300 ${theme === 'dark'
+                className={`px-4 h-[34px] flex items-center justify-center rounded-full text-[11px] sm:text-[12px] md:text-sm font-bold border shadow-md transition-all duration-300 ${theme === 'dark'
                   ? 'bg-zinc-900 border-white/10 text-white hover:bg-white/5'
                   : 'bg-white border-zinc-200 text-zinc-800 hover:bg-zinc-50'
                   }`}
@@ -1342,7 +1342,7 @@ export default function App() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-[580px] mx-auto text-lg md:text-xl leading-relaxed text-[#94A3B8] font-normal mt-6 sm:mt-14"
+            className="max-w-[620px] mx-auto text-lg md:text-xl md:text-[22px] leading-relaxed text-[#94A3B8] font-normal mt-6 sm:mt-14"
           >
             I build high-performance cloud architectures, cross-platform mobile experiences, and scalable software pipelines that live at the intersection of infrastructure and design.
           </motion.p>
@@ -1356,7 +1356,7 @@ export default function App() {
           >
             <a
               href="#contact"
-              className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] font-bold shadow-md transition-all duration-300 ${theme === 'dark'
+              className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] md:text-sm font-bold shadow-md transition-all duration-300 ${theme === 'dark'
                 ? 'bg-white text-zinc-950 hover:bg-zinc-200'
                 : 'bg-zinc-950 text-white hover:bg-zinc-800'
                 }`}
@@ -1370,7 +1370,7 @@ export default function App() {
                   href="/Resume%20-%20B%20R%20Medhini.pdf"
                   download="Resume - B R Medhini.pdf"
                   exit={{ opacity: 0 }}
-                  className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] font-bold border transition-all duration-300 ${theme === 'dark'
+                  className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] md:text-sm font-bold border transition-all duration-300 ${theme === 'dark'
                     ? 'bg-transparent border-zinc-800 text-white hover:bg-white/5'
                     : 'bg-transparent border-zinc-200 text-zinc-800 hover:bg-zinc-50'
                     }`}
@@ -1387,10 +1387,10 @@ export default function App() {
       <section id="identity" className="w-full pt-20 pb-16 sm:pt-32 sm:pb-20 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-3 mb-6 sm:mb-10 text-left">
-            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+            <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
               01 // DEVOPS ENGINEER
             </div>
-            <h2 className={`text-3xl sm:text-5xl font-black font-display leading-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+            <h2 className={`text-3xl sm:text-5xl md:text-6xl font-black font-display leading-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
               }`}>
               Interactive Shell.<br />
               <span className="opacity-45">Automated pipelines.</span>
@@ -1399,7 +1399,7 @@ export default function App() {
 
           <div className="grid md:grid-cols-12 gap-6 md:gap-12 items-center">
             <div className="md:col-span-6 space-y-6 text-left">
-              <p className={`text-base sm:text-lg leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+              <p className={`text-base sm:text-lg md:text-xl leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
                 }`}>
                 I build responsive web architectures, containerize applications for serverless cloud hosting, and integrate intelligent data pipelines. Use the interactive SSH shell console to explore my engineering domains, trigger virtual pipeline builds, or navigate the sections.
               </p>
@@ -1408,11 +1408,11 @@ export default function App() {
                 {/* Programming & Logic Card */}
                 <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-indigo-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
                   <div>
-                    <div className="text-indigo-400 font-mono text-xs uppercase mb-1 font-bold">Programming & Logic</div>
-                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Python, SQL, Java, and C Programming for building reliable logic and database structures.</p>
+                    <div className="text-indigo-400 font-mono text-xs md:text-sm uppercase mb-1 font-bold">Programming & Logic</div>
+                    <p className={`text-xs md:text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Python, SQL, Java, and C Programming for building reliable logic and database structures.</p>
                   </div>
                   {/* Mini visual */}
-                  <div className="mt-3 font-mono text-[9px] text-zinc-500 bg-black/40 p-2 rounded border border-white/5 flex flex-col gap-0.5 select-none">
+                  <div className="mt-3 font-mono text-[9px] md:text-[11px] text-zinc-500 bg-black/40 p-2 rounded border border-white/5 flex flex-col gap-0.5 select-none">
                     <div className="flex justify-between">
                       <span className="text-indigo-400 font-semibold"># python main.py</span>
                       <span className="text-zinc-600">v3.11</span>
@@ -1424,13 +1424,13 @@ export default function App() {
                 {/* Web Systems Card */}
                 <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-blue-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
                   <div>
-                    <div className="text-blue-400 font-mono text-xs uppercase mb-1 font-bold">Web Systems</div>
-                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>HTML, CSS, JS, Flask, REST APIs, and Firebase for modern, interactive applications.</p>
+                    <div className="text-blue-400 font-mono text-xs md:text-sm uppercase mb-1 font-bold">Web Systems</div>
+                    <p className={`text-xs md:text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>HTML, CSS, JS, Flask, REST APIs, and Firebase for modern, interactive applications.</p>
                   </div>
                   {/* Mini visual */}
                   <div className="mt-3 flex items-center justify-between bg-black/40 p-2 rounded border border-white/5 select-none">
-                    <span className="font-mono text-[9px] text-zinc-500">API: GET /api/v1/health</span>
-                    <span className="font-mono text-[9px] text-emerald-400 font-bold flex items-center gap-1">
+                    <span className="font-mono text-[9px] md:text-[11px] text-zinc-500">API: GET /api/v1/health</span>
+                    <span className="font-mono text-[9px] md:text-[11px] text-emerald-400 font-bold flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 200 OK
                     </span>
                   </div>
@@ -1439,13 +1439,13 @@ export default function App() {
                 {/* Cloud & Deployment Card */}
                 <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-emerald-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
                   <div>
-                    <div className="text-emerald-400 font-mono text-xs uppercase mb-1 font-bold">Cloud & Deployment</div>
-                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Google Cloud Platform, Docker container workflows, Cloud Run serverless, and IAM policies.</p>
+                    <div className="text-emerald-400 font-mono text-xs md:text-sm uppercase mb-1 font-bold">Cloud & Deployment</div>
+                    <p className={`text-xs md:text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Google Cloud Platform, Docker container workflows, Cloud Run serverless, and IAM policies.</p>
                   </div>
                   {/* Mini visual */}
                   <div className="mt-3 flex items-center justify-between bg-black/40 p-2 rounded border border-white/5 select-none">
-                    <span className="font-mono text-[9px] text-zinc-500">CLOUD RUN RUNTIME</span>
-                    <span className="font-mono text-[9px] text-emerald-400 font-bold flex items-center gap-1">
+                    <span className="font-mono text-[9px] md:text-[11px] text-zinc-500">CLOUD RUN RUNTIME</span>
+                    <span className="font-mono text-[9px] md:text-[11px] text-emerald-400 font-bold flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ONLINE
                     </span>
                   </div>
@@ -1454,13 +1454,13 @@ export default function App() {
                 {/* AI & Intelligent Tools Card */}
                 <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-purple-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
                   <div>
-                    <div className="text-purple-400 font-mono text-xs uppercase mb-1 font-bold">AI & Intelligent Tools</div>
-                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Generative AI, Pandas, NumPy, Hugging Face models, Git, and Antigravity tooling.</p>
+                    <div className="text-purple-400 font-mono text-xs md:text-sm uppercase mb-1 font-bold">AI & Intelligent Tools</div>
+                    <p className={`text-xs md:text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Generative AI, Pandas, NumPy, Hugging Face models, Git, and Antigravity tooling.</p>
                   </div>
                   {/* Mini visual */}
                   <div className="mt-3 flex items-center justify-between bg-black/40 p-2 rounded border border-white/5 select-none">
-                    <span className="font-mono text-[9px] text-zinc-500">LLM MODEL PIPELINE</span>
-                    <span className="font-mono text-[9px] text-purple-400 font-bold flex items-center gap-1">
+                    <span className="font-mono text-[9px] md:text-[11px] text-zinc-500">LLM MODEL PIPELINE</span>
+                    <span className="font-mono text-[9px] md:text-[11px] text-purple-400 font-bold flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> READY
                     </span>
                   </div>
@@ -1480,12 +1480,12 @@ export default function App() {
       <section id="skills" className="w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-12 text-left">
-            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+            <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
               02 // TECHNICAL ARSENAL
             </div>
-            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+            <h2 className={`text-3xl sm:text-5xl md:text-6xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
               }`}>Infrastructure Topology.</h2>
-            <p className={`max-w-2xl text-sm ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+            <p className={`max-w-2xl text-sm md:text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
               Interactive system architecture map with live data packet flows. Click on any system component to view infrastructure provisioning logs, specs, and integrated skills.
             </p>
@@ -1686,7 +1686,7 @@ export default function App() {
                 {/* Main Console Box */}
                 <div className="flex-grow flex flex-col justify-start">
                   {k8sTab === 'logs' ? (
-                    <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[10px] text-zinc-400 min-h-[250px] max-h-[300px] overflow-y-auto relative flex-grow flex flex-col justify-start gap-1">
+                    <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[10px] md:text-xs text-zinc-400 min-h-[250px] max-h-[300px] overflow-y-auto relative flex-grow flex flex-col justify-start gap-1">
                       {printedLogs.map((line, idx) => (
                         <motion.div
                           key={`${selectedSkill.id}-log-${idx}`}
@@ -1699,14 +1699,14 @@ export default function App() {
                         </motion.div>
                       ))}
                       {printedLogs.length < selectedSkill.logs.length && (
-                        <div className="text-[10px] text-zinc-600 animate-pulse">Provisioning resources...</div>
+                        <div className="text-[10px] md:text-xs text-zinc-600 animate-pulse">Provisioning resources...</div>
                       )}
                       <div className="absolute bottom-2 right-2 text-[8px] text-zinc-600 uppercase font-mono tracking-widest select-none">
                         TERRAFORM RUN
                       </div>
                     </div>
                   ) : (
-                    <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[10px] text-zinc-400 min-h-[250px] max-h-[300px] overflow-y-auto relative flex-grow flex flex-col justify-start whitespace-pre-wrap select-all">
+                    <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[10px] md:text-xs text-zinc-400 min-h-[250px] max-h-[300px] overflow-y-auto relative flex-grow flex flex-col justify-start whitespace-pre-wrap select-all">
                       {selectedSkill.yaml.split('\n').map((line, idx) => {
                         if (line.trim().startsWith('- name:') || line.trim().startsWith('- containerPort:') || line.trim().startsWith('- value:') || line.trim().startsWith('metadata:') || line.trim().startsWith('spec:') || line.trim().startsWith('containers:')) {
                           return <div key={idx} className="text-cyan-400">{line}</div>;
@@ -1734,15 +1734,15 @@ export default function App() {
                 {/* Info Text & Skills Grid */}
                 <div className="space-y-4">
                   <div>
-                    <div className="text-[10px] font-mono tracking-wider text-zinc-500 uppercase font-bold mb-1">Functional Description</div>
-                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>{selectedSkill.use}</p>
+                    <div className="text-[10px] md:text-xs font-mono tracking-wider text-zinc-500 uppercase font-bold mb-1">Functional Description</div>
+                    <p className={`text-xs md:text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>{selectedSkill.use}</p>
                   </div>
 
                   <div>
-                    <div className="text-[10px] font-mono tracking-wider text-zinc-500 uppercase font-bold mb-2">Integrated Core Skills</div>
+                    <div className="text-[10px] md:text-xs font-mono tracking-wider text-zinc-500 uppercase font-bold mb-2">Integrated Core Skills</div>
                     <div className="grid grid-cols-2 gap-2">
                       {selectedSkill.skills.map((skill, idx) => (
-                        <div key={idx} className="p-2.5 rounded bg-zinc-950 border border-white/5 flex items-center justify-between text-[10px] sm:text-xs font-mono">
+                        <div key={idx} className="p-2.5 rounded bg-zinc-950 border border-white/5 flex items-center justify-between text-[10px] sm:text-xs md:text-sm font-mono">
                           <span className="text-zinc-400">{skill.name}</span>
                           <span className={selectedSkill.colorTheme.text}>{skill.level}%</span>
                         </div>
@@ -1765,12 +1765,12 @@ export default function App() {
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           
           <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-16 text-left">
-            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+            <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
               03 // DEPLOYMENTS REGISTRY
             </div>
-            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+            <h2 className={`text-3xl sm:text-5xl md:text-6xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
               }`}>Service Catalog.</h2>
-            <p className={`max-w-2xl text-sm ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+            <p className={`max-w-2xl text-sm md:text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
               Active microservices catalog and containerized system endpoints built by B R Medhini. Inspect telemetry, configurations, and running runtimes.
             </p>
@@ -1802,8 +1802,8 @@ export default function App() {
                 <div className="space-y-4 text-left">
                   
                   {/* Status telemetry row */}
-                  <div className="flex items-center justify-between text-[9px] font-mono text-zinc-500 border-b border-white/5 pb-3">
-                    <span className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">
+                  <div className="flex items-center justify-between text-[9px] md:text-xs font-mono text-zinc-500 border-b border-white/5 pb-3">
+                    <span className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded text-[9px] md:text-xs">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                       {project.status.toUpperCase()}
                     </span>
@@ -1812,19 +1812,19 @@ export default function App() {
 
                   {/* Service type & Title */}
                   <div className="space-y-1">
-                    <div className="text-[10px] font-mono font-bold text-indigo-400 uppercase tracking-wider">
+                    <div className="text-[10px] md:text-xs font-mono font-bold text-indigo-400 uppercase tracking-wider">
                       {project.category}
                     </div>
-                    <h3 className={`text-xl font-bold font-mono tracking-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+                    <h3 className={`text-xl md:text-2xl font-bold font-mono tracking-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
                       {project.title}
                     </h3>
-                    <div className="text-[9px] font-mono text-zinc-500 truncate" title={project.registry}>
+                    <div className="text-[9px] md:text-xs font-mono text-zinc-500 truncate" title={project.registry}>
                       IMAGE: <span className="text-zinc-400">{project.registry}</span>
                     </div>
                   </div>
 
                   {/* Resource Consumption Indicators */}
-                  <div className="bg-black/40 p-3 rounded-lg border border-white/5 space-y-2 select-none font-mono text-[9px]">
+                  <div className="bg-black/40 p-3 rounded-lg border border-white/5 space-y-2 select-none font-mono text-[9px] md:text-[11px]">
                     <div className="flex items-center justify-between text-zinc-500">
                       <span>POD CPU UTILIZATION</span>
                       <span className="text-indigo-300">{project.metrics.cpu}</span>
@@ -1839,7 +1839,7 @@ export default function App() {
                   </div>
 
                   {/* Connection / Ping Telemetry */}
-                  <div className="flex flex-col gap-1 text-[9px] font-mono border-t border-b border-white/5 py-2">
+                  <div className="flex flex-col gap-1 text-[9px] md:text-[11px] font-mono border-t border-b border-white/5 py-2">
                     <div className="flex items-center justify-between">
                       <span className="text-zinc-500">ENDPOINT URL</span>
                       <button
@@ -1848,7 +1848,7 @@ export default function App() {
                           handleTestConnection(idx);
                         }}
                         disabled={pingingIdx !== null}
-                        className={`text-[8px] px-1.5 py-0.5 rounded font-bold transition-all border ${
+                        className={`text-[8px] md:text-[10px] px-1.5 py-0.5 rounded font-bold transition-all border ${
                           pingingIdx === idx 
                             ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400 animate-pulse'
                             : 'bg-indigo-500/10 border-indigo-500/20 text-indigo-300 hover:bg-indigo-500/25'
@@ -1861,7 +1861,7 @@ export default function App() {
                       href={project.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-zinc-400 hover:text-white truncate underline cursor-pointer"
+                      className="text-zinc-400 hover:text-white truncate underline cursor-pointer text-xs md:text-sm"
                     >
                       {project.endpoint}
                     </a>
@@ -1871,7 +1871,7 @@ export default function App() {
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
-                        className="mt-1 bg-zinc-950 p-2 rounded border border-white/5 space-y-1 text-zinc-500 text-[8px] leading-tight"
+                        className="mt-1 bg-zinc-950 p-2 rounded border border-white/5 space-y-1 text-zinc-500 text-[8px] md:text-[10px] leading-tight"
                       >
                         <div className="flex justify-between">
                           <span>HTTP STATUS:</span>
@@ -1894,7 +1894,7 @@ export default function App() {
                   </div>
 
                   {/* Description */}
-                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                  <p className={`text-xs md:text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>
                     {project.description}
                   </p>
 
@@ -1908,7 +1908,7 @@ export default function App() {
                     {project.tags.map((tag, tIdx) => (
                       <span
                         key={tIdx}
-                        className={`text-[9px] font-mono px-2 py-0.5 rounded border ${
+                        className={`text-[9px] md:text-[11px] font-mono px-2 py-0.5 rounded border ${
                           theme === 'dark' ? 'bg-zinc-950 border-white/5 text-zinc-500' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
                         }`}
                       >
@@ -1922,7 +1922,7 @@ export default function App() {
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    className={`flex items-center justify-between w-full p-2.5 rounded-lg text-[10px] font-mono border transition-all duration-300 ${
+                    className={`flex items-center justify-between w-full p-2.5 rounded-lg text-[10px] md:text-xs font-mono border transition-all duration-300 ${
                       theme === 'dark'
                         ? 'bg-zinc-950 hover:bg-zinc-900 border-white/5 hover:border-indigo-500/30 text-zinc-400 hover:text-white'
                         : 'bg-zinc-50 hover:bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900'
@@ -1931,7 +1931,7 @@ export default function App() {
                     <span className="truncate flex items-center gap-1.5">
                       <span className="text-indigo-400">$</span> git clone repo
                     </span>
-                    <GithubIcon className="w-3.5 h-3.5 flex-shrink-0" />
+                    <GithubIcon className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0" />
                   </a>
 
                 </div>
@@ -2113,12 +2113,12 @@ export default function App() {
       <section id="timeline" className="w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-12 text-left">
-            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+            <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
               04 // PIPELINE METRICS
             </div>
-            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+            <h2 className={`text-3xl sm:text-5xl md:text-6xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
               }`}>Deployment Tracker.</h2>
-            <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+            <p className={`max-w-2xl text-base md:text-lg ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
               Tracing my educational milestones, internships, and startup operations as a horizontal CI/CD pipeline.
             </p>
@@ -2152,7 +2152,7 @@ export default function App() {
                       className="flex flex-col items-center group focus:outline-none w-20 text-center"
                     >
                       {/* Chapter identifier tag */}
-                      <span className={`text-[8px] font-mono font-bold tracking-wider mb-2.5 uppercase transition-colors duration-200 ${isSelected ? 'text-indigo-400' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
+                      <span className={`text-[8px] md:text-[10px] font-mono font-bold tracking-wider mb-2.5 uppercase transition-colors duration-200 ${isSelected ? 'text-indigo-400' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
                         {item.chapter.split(' ').pop()}
                       </span>
 
@@ -2173,7 +2173,7 @@ export default function App() {
                       </div>
 
                       {/* Period year tag */}
-                      <span className={`text-[9px] font-mono mt-2.5 ${isSelected ? 'text-zinc-200 font-semibold' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
+                      <span className={`text-[9px] md:text-[11px] font-mono mt-2.5 ${isSelected ? 'text-zinc-200 font-semibold' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
                         {item.period.split(' ').pop()}
                       </span>
                     </button>
@@ -2192,27 +2192,27 @@ export default function App() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
                 <div className="flex items-center gap-2.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span className="font-mono text-xs text-zinc-400">PIPELINE STATUS: <span className="text-emerald-400 font-bold">SUCCESSFUL</span></span>
+                  <span className="font-mono text-xs md:text-sm text-zinc-400">PIPELINE STATUS: <span className="text-emerald-400 font-bold">SUCCESSFUL</span></span>
                 </div>
-                <div className="font-mono text-xs text-zinc-500">
+                <div className="font-mono text-xs md:text-sm text-zinc-500">
                   STAGE: <span className="text-indigo-400 font-bold">{timelineChapters[selectedChapter].chapter}</span> // {timelineChapters[selectedChapter].period}
                 </div>
               </div>
 
               <div className="grid md:grid-cols-12 gap-6 items-start">
                 <div className="md:col-span-8 space-y-3">
-                  <h3 className={`text-2xl font-black font-display tracking-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+                  <h3 className={`text-2xl md:text-3xl font-black font-display tracking-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
                     {timelineChapters[selectedChapter].title}
                   </h3>
-                  <p className="text-sm text-indigo-400 font-mono font-medium">
+                  <p className="text-sm md:text-base text-indigo-400 font-mono font-medium">
                     {timelineChapters[selectedChapter].role} @ {timelineChapters[selectedChapter].institution}
                   </p>
-                  <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-600'}`}>
+                  <p className={`text-sm md:text-base leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-600'}`}>
                     {timelineChapters[selectedChapter].description}
                   </p>
                 </div>
 
-                <div className="md:col-span-4 bg-zinc-950/40 border border-white/5 rounded-xl p-4 space-y-2.5 font-mono text-[11px] text-zinc-400">
+                <div className="md:col-span-4 bg-zinc-950/40 border border-white/5 rounded-xl p-4 space-y-2.5 font-mono text-[11px] md:text-xs text-zinc-400">
                   <div>
                     <span className="text-zinc-500">ENVIRONMENT:</span>{" "}
                     <span className="text-zinc-300">{timelineChapters[selectedChapter].institution}</span>
@@ -2232,7 +2232,7 @@ export default function App() {
                 {timelineChapters[selectedChapter].skills.map((skill, sIdx) => (
                   <span
                     key={sIdx}
-                    className={`text-[9px] font-mono font-medium px-2 py-0.5 rounded-full border ${theme === 'dark' ? 'bg-zinc-900 border-white/5 text-zinc-400' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
+                    className={`text-[9px] md:text-xs font-mono font-medium px-2 py-0.5 rounded-full border ${theme === 'dark' ? 'bg-zinc-900 border-white/5 text-zinc-400' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
                       }`}
                   >
                     {skill}
@@ -2248,12 +2248,12 @@ export default function App() {
       <section id="telemetry" className="w-full py-16 sm:py-24 text-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-12">
-            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+            <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
               05 // TELEMETRY
             </div>
-            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+            <h2 className={`text-3xl sm:text-5xl md:text-6xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
               }`}>Git Contributions.</h2>
-            <p className={`max-w-2xl mx-auto text-sm sm:text-base leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+            <p className={`max-w-2xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
               A real-time command center visualizing my engineering velocity, technical focus, and open-source contributions.
             </p>
@@ -2265,12 +2265,12 @@ export default function App() {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></span>
-                <h3 className="font-bold text-sm">Contributions Graph</h3>
+                <h3 className="font-bold text-sm md:text-base">Contributions Graph</h3>
               </div>
               
               {/* Year Select Tabs & Username */}
-              <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
-                <div className="flex bg-zinc-950/60 p-0.5 rounded-lg border border-white/5 text-[10px] font-mono">
+              <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm font-mono">
+                <div className="flex bg-zinc-950/60 p-0.5 rounded-lg border border-white/5 text-[10px] md:text-xs font-mono">
                   {[2026, 2025, 2024].map((yr) => (
                     <button
                       key={yr}
@@ -2330,10 +2330,10 @@ export default function App() {
                     }`}
                 >
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-mono font-bold text-zinc-500">{insight.title}</span>
+                    <span className="text-[10px] md:text-xs font-mono font-bold text-zinc-500">{insight.title}</span>
                     {insight.icon}
                   </div>
-                  <span className={`text-sm font-bold mt-4 ${theme === 'dark' ? 'text-white' : 'text-zinc-950'
+                  <span className={`text-sm md:text-base font-bold mt-4 ${theme === 'dark' ? 'text-white' : 'text-zinc-950'
                     }`}>
                     {insight.val}
                   </span>
@@ -2346,12 +2346,12 @@ export default function App() {
               }`}>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-sm">Activity Graph</h3>
+                  <h3 className="font-bold text-sm md:text-base">Activity Graph</h3>
                   {contributionsLoading && (
-                    <span className="text-[8px] font-mono bg-indigo-500/10 text-indigo-400 px-1.5 py-0.5 rounded animate-pulse">SYNCING</span>
+                    <span className="text-[8px] md:text-[10px] font-mono bg-indigo-500/10 text-indigo-400 px-1.5 py-0.5 rounded animate-pulse">SYNCING</span>
                   )}
                 </div>
-                <span className="text-[10px] font-mono text-zinc-500">Real-Time Velocity // {githubYear}</span>
+                <span className="text-[10px] md:text-xs font-mono text-zinc-500">Real-Time Velocity // {githubYear}</span>
               </div>
 
               {/* Custom SVG Line Chart */}
@@ -2465,7 +2465,7 @@ export default function App() {
                   className="space-y-6 w-full flex-grow flex flex-col justify-center"
                 >
                   <div>
-                    <h3 className={`text-2xl italic font-normal font-serif ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'
+                    <h3 className={`text-2xl md:text-3xl italic font-normal font-serif ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'
                       }`}>
                       {contactStep === 0 ? "Identify yourself." : contactStep === 1 ? "Where should I reply?" : "What are we building?"}
                     </h3>
@@ -2542,14 +2542,14 @@ export default function App() {
             {/* Form Actions Footer & Social */}
             {contactStep < 3 && (
               <div className="flex justify-between items-center pt-8 border-t border-white/5 mt-12">
-                <span className="text-xs font-mono text-zinc-500">
+                <span className="text-xs md:text-sm font-mono text-zinc-500">
                   PHASE 0{contactStep + 1} // 03
                 </span>
 
                 <button
                   onClick={handleNextStep}
                   disabled={isTransmitting}
-                  className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-indigo-400 hover:text-indigo-300 transition-colors uppercase"
+                  className="inline-flex items-center gap-1.5 text-xs md:text-sm font-mono font-bold text-indigo-400 hover:text-indigo-300 transition-colors uppercase"
                 >
                   {isTransmitting ? (
                     <span>TRANSMITTING...</span>
@@ -2571,7 +2571,7 @@ export default function App() {
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full flex flex-col md:flex-row justify-between items-center gap-6">
           
           {/* Status Indicators */}
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-[10px] font-mono text-zinc-500">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-[10px] md:text-xs font-mono text-zinc-500">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className={theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}>SYSTEM: ONLINE</span>
@@ -2592,20 +2592,20 @@ export default function App() {
               href="https://mail.google.com/mail/?view=cm&fs=1&to=brmedhini@gmail.com" 
               target="_blank"
               rel="noreferrer"
-              className="text-xs font-mono font-bold text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-2 tracking-wider group"
+              className="text-xs md:text-sm font-mono font-bold text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-2 tracking-wider group"
             >
-              <Mail className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+              <Mail className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:scale-110 transition-transform" />
               <span>DIRECT MAIL // brmedhini@gmail.com</span>
             </a>
             
-            <div className="flex items-center gap-6 text-xs font-mono text-zinc-400 mt-1">
+            <div className="flex items-center gap-6 text-xs md:text-sm font-mono text-zinc-400 mt-1">
               <a 
                 href="https://github.com/medhinibr" 
                 target="_blank" 
                 rel="noreferrer" 
                 className="hover:text-indigo-400 transition-all flex items-center gap-1.5 uppercase hover:scale-105"
               >
-                <GithubIcon className="w-3.5 h-3.5" />
+                <GithubIcon className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 <span>GitHub</span>
               </a>
               <span className="text-zinc-800">•</span>
@@ -2615,16 +2615,16 @@ export default function App() {
                 rel="noreferrer" 
                 className="hover:text-indigo-400 transition-all flex items-center gap-1.5 uppercase hover:scale-105"
               >
-                <LinkedinIcon className="w-3.5 h-3.5" />
+                <LinkedinIcon className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 <span>LinkedIn</span>
               </a>
             </div>
           </div>
 
           {/* Copyleft & Frameworks */}
-          <div className="text-center md:text-right text-[10px] font-mono text-zinc-500">
+          <div className="text-center md:text-right text-[10px] md:text-xs font-mono text-zinc-500">
             <p>© {new Date().getFullYear()} // B R MEDHINI // ALL SIGNALS ROUTED</p>
-            <p className="text-[9px] text-zinc-600 mt-1">Vite + React + Tailwind v4 + Framer Motion</p>
+            <p className="text-[9px] md:text-[11px] text-zinc-600 mt-1">Vite + React + Tailwind v4 + Framer Motion</p>
           </div>
 
         </div>
