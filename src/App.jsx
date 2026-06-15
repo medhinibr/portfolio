@@ -2439,53 +2439,62 @@ export default function App() {
 
                   <form onSubmit={handleNextStep} className="w-full">
                     {contactStep === 0 && (
-                      <input
-                        type="text"
-                        name="name"
-                        value={contactForm.name}
-                        onChange={handleContactInput}
-                        placeholder="Your name..."
-                        className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
-                          ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
-                          : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
-                          }`}
-                      />
+                      <div className="relative w-full group">
+                        <input
+                          type="text"
+                          name="name"
+                          value={contactForm.name}
+                          onChange={handleContactInput}
+                          placeholder="Your name..."
+                          className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
+                            ? 'border-white/10 text-white placeholder-zinc-800'
+                            : 'border-zinc-200 text-zinc-900 placeholder-zinc-300'
+                            }`}
+                        />
+                        <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-center scale-x-0 transition-transform duration-500 ease-out pointer-events-none group-focus-within:scale-x-100 shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
+                      </div>
                     )}
 
                     {contactStep === 1 && (
-                      <input
-                        type="email"
-                        name="email"
-                        value={contactForm.email}
-                        onChange={handleContactInput}
-                        placeholder="Your email address..."
-                        className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
-                          ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
-                          : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
-                          }`}
-                        autoFocus={contactStep > 0}
-                      />
+                      <div className="relative w-full group">
+                        <input
+                          type="email"
+                          name="email"
+                          value={contactForm.email}
+                          onChange={handleContactInput}
+                          placeholder="Your email address..."
+                          className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
+                            ? 'border-white/10 text-white placeholder-zinc-800'
+                            : 'border-zinc-200 text-zinc-900 placeholder-zinc-300'
+                            }`}
+                          autoFocus={contactStep > 0}
+                        />
+                        <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-center scale-x-0 transition-transform duration-500 ease-out pointer-events-none group-focus-within:scale-x-100 shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
+                      </div>
                     )}
 
                     {contactStep === 2 && (
-                      <textarea
-                        name="message"
-                        value={contactForm.message}
-                        onChange={handleContactInput}
-                        placeholder="Your message details..."
-                        rows="2"
-                        className={`w-full py-4 text-3xl sm:text-5xl font-black bg-transparent border-b focus:outline-none resize-none transition-colors ${theme === 'dark'
-                          ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
-                          : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
-                          }`}
-                        autoFocus={contactStep > 0}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' && !e.shiftKey) {
-                            e.preventDefault();
-                            handleNextStep();
-                          }
-                        }}
-                      />
+                      <div className="relative w-full group">
+                        <textarea
+                          name="message"
+                          value={contactForm.message}
+                          onChange={handleContactInput}
+                          placeholder="Your message details..."
+                          rows="2"
+                          className={`w-full py-4 text-3xl sm:text-5xl font-black bg-transparent border-b focus:outline-none resize-none transition-colors ${theme === 'dark'
+                            ? 'border-white/10 text-white placeholder-zinc-800'
+                            : 'border-zinc-200 text-zinc-900 placeholder-zinc-300'
+                            }`}
+                          autoFocus={contactStep > 0}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                              e.preventDefault();
+                              handleNextStep();
+                            }
+                          }}
+                        />
+                        <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-center scale-x-0 transition-transform duration-500 ease-out pointer-events-none group-focus-within:scale-x-100 shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
+                      </div>
                     )}
 
                     {formError && (
