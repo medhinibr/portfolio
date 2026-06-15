@@ -83,7 +83,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
       }}
       className="flex items-center justify-center transition-all duration-300 h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] cursor-pointer"
     >
-      <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${isOtherHovered ? 'opacity-0 pointer-events-none select-none' : 'opacity-100 scale-100'
+      <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${isOtherHovered ? 'blur-[3px] opacity-25 scale-95 pointer-events-none select-none' : 'opacity-100 scale-100'
         } ${isHovered ? 'filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)]' : ''
         }`}>
         {item.type === 'prefix' && (
@@ -94,7 +94,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: isHovered ? 0.35 : 0.01, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text px-1"
+            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text pl-4 sm:pl-6 pr-1"
           >
             {item.prefix}
           </motion.span>
@@ -121,7 +121,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: isHovered ? 0.35 : 0.01, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text px-1"
+            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text pl-1 pr-4 sm:pr-6"
           >
             {item.suffix}
           </motion.span>
@@ -797,49 +797,20 @@ export default function App() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.07em] w-full overflow-visible h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] items-center justify-center"
             >
-              <AnimatePresence mode="wait">
-                {clickedIdx !== null ? (
-                  <motion.div
-                    key={`active-word-${clickedIdx}`}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setClickedIdx(null);
-                    }}
-                    className="flex items-center justify-center cursor-pointer font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.07em] leading-none uppercase bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)] select-none h-full smooth-text"
-                  >
-                    {getFullWord(medhiniLetters[clickedIdx])}
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="name-letters"
-                    initial={{ opacity: 0, scale: 1 }}
-                    animate={{ 
-                      opacity: 1,
-                      scale: 1
-                    }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    exit={{ opacity: 0 }}
-                    className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 w-full h-full items-center origin-center"
-                  >
-                    {medhiniLetters.map((item, index) => (
-                      <AnimatedLetter
-                        key={`medhini-${index}`}
-                        item={item}
-                        index={index}
-                        hoveredIdx={hoveredIdx}
-                        setHoveredIdx={setHoveredIdx}
-                        clickedIdx={clickedIdx}
-                        setClickedIdx={setClickedIdx}
-                        theme={theme}
-                      />
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 w-full h-full items-center origin-center">
+                {medhiniLetters.map((item, index) => (
+                  <AnimatedLetter
+                    key={`medhini-${index}`}
+                    item={item}
+                    index={index}
+                    hoveredIdx={hoveredIdx}
+                    setHoveredIdx={setHoveredIdx}
+                    clickedIdx={clickedIdx}
+                    setClickedIdx={setClickedIdx}
+                    theme={theme}
+                  />
+                ))}
+              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
