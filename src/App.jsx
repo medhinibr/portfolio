@@ -266,17 +266,144 @@ const TelemetryHeaderWidget = ({ lenisRef }) => {
 
 
 
-const constellationSkills = [
-  { id: "gcp", name: "Google Cloud", category: "CLOUD & DEVOPS", use: "Serverless container execution (Cloud Run), IAM policies, and cloud infrastructure management.", mastery: 90, x: 50, y: 50 },
-  { id: "docker", name: "Docker", category: "CLOUD & DEVOPS", use: "Microservices containerization, multi-stage builds, and dev environment scaling.", mastery: 85, x: 25, y: 30 },
-  { id: "cloudrun", name: "Cloud Run", category: "CLOUD & DEVOPS", use: "Deploying production-ready containers on serverless, scalable architecture.", mastery: 85, x: 75, y: 30 },
-  { id: "linux", name: "Linux & Shell", category: "CLOUD & DEVOPS", use: "Command-line administration, bash scripting, and task automation pipelines.", mastery: 85, x: 15, y: 15 },
-  { id: "python", name: "Python", category: "LANGUAGES", use: "Data analytics, server scripting, Flask API development, and ML integration.", mastery: 95, x: 15, y: 65 },
-  { id: "sql", name: "SQL", category: "LANGUAGES", use: "Relational database schema design, indexing, and optimized query pipelines.", mastery: 80, x: 80, y: 65 },
-  { id: "flask", name: "Flask", category: "WEB DEV", use: "Building RESTful microservices, request routing, and web service logic.", mastery: 90, x: 45, y: 80 },
-  { id: "firebase", name: "Firebase", category: "WEB DEV", use: "NoSQL Firestore collections, real-time sync, and client-side user authentication.", mastery: 80, x: 75, y: 80 },
-  { id: "genai", name: "Generative AI", category: "AI & TOOLS", use: "Prompt engineering, generative model integrations, and smart tool utilization.", mastery: 85, x: 55, y: 20 },
-  { id: "huggingface", name: "Hugging Face", category: "AI & TOOLS", use: "Importing state-of-the-art transformer models and tokenizer pipeline setups.", mastery: 75, x: 80, y: 15 }
+const pipelineStages = [
+  {
+    id: "source",
+    number: "01",
+    name: "Source & Versioning",
+    category: "STAGE 01 // SOURCE",
+    status: "STABLE",
+    colorTheme: {
+      text: "text-indigo-400",
+      border: "border-indigo-500/20",
+      glow: "shadow-[0_0_15px_rgba(99,102,241,0.25)]",
+      badge: "bg-indigo-500/10 border-indigo-500/20 text-indigo-300",
+      bgSelected: "bg-indigo-500/5 border-indigo-500/40",
+      accent: "#6366f1"
+    },
+    skills: [
+      { name: "VS Code", level: 90 },
+      { name: "Git", level: 85 },
+      { name: "GitHub", level: 85 },
+      { name: "Antigravity", level: 80 }
+    ],
+    use: "Writing modular architectures, managing code checkouts, branching, commits, and AI-assisted development tools.",
+    logs: [
+      "[runner-01]: Initializing workspace context...",
+      "[runner-01]: Checking local integrity... OK",
+      "[runner-01]: git commit -m 'feat: base platform' -> OK",
+      "[runner-01]: git push origin main -> 200 SUCCESS"
+    ]
+  },
+  {
+    id: "logic",
+    number: "02",
+    name: "Logic & APIs",
+    category: "STAGE 02 // LOGIC",
+    status: "STABLE",
+    colorTheme: {
+      text: "text-blue-400",
+      border: "border-blue-500/20",
+      glow: "shadow-[0_0_15px_rgba(59,130,246,0.25)]",
+      badge: "bg-blue-500/10 border-blue-500/20 text-blue-300",
+      bgSelected: "bg-blue-500/5 border-blue-500/40",
+      accent: "#3b82f6"
+    },
+    skills: [
+      { name: "Python", level: 95 },
+      { name: "Flask & REST APIs", level: 90 },
+      { name: "SQL", level: 80 },
+      { name: "Java & C", level: 75 }
+    ],
+    use: "Developing routing modules, structuring clean RESTful API services, and indexing database schema systems.",
+    logs: [
+      "[runner-02]: Starting Flask server framework...",
+      "[runner-02]: Bound dynamic routing -> /api/v1/health",
+      "[runner-02]: Initialized connection pool to relational datastore",
+      "[runner-02]: API health check verified: 18ms latency... OK"
+    ]
+  },
+  {
+    id: "container",
+    number: "03",
+    name: "Containerization",
+    category: "STAGE 03 // CONTAINER",
+    status: "STABLE",
+    colorTheme: {
+      text: "text-cyan-400",
+      border: "border-cyan-500/20",
+      glow: "shadow-[0_0_15px_rgba(6,182,212,0.25)]",
+      badge: "bg-cyan-500/10 border-cyan-500/20 text-cyan-300",
+      bgSelected: "bg-cyan-500/5 border-cyan-500/40",
+      accent: "#06b6d4"
+    },
+    skills: [
+      { name: "Docker", level: 85 },
+      { name: "Linux & Shell", level: 85 }
+    ],
+    use: "Creating multi-stage Dockerfiles, building container layers, running shell scripts, and system dependency patching.",
+    logs: [
+      "[runner-03]: Parsing build context for Dockerfile...",
+      "[runner-03]: Step 1/3: FROM python:3.11-alpine (Cache matched)",
+      "[runner-03]: Step 2/3: COPY requirements.txt . (Installed payload)",
+      "[runner-03]: Step 3/3: RUN npm run build -> SUCCESS"
+    ]
+  },
+  {
+    id: "deploy",
+    number: "04",
+    name: "Cloud Deployment",
+    category: "STAGE 04 // CLOUD DEPLOY",
+    status: "STABLE",
+    colorTheme: {
+      text: "text-emerald-400",
+      border: "border-emerald-500/20",
+      glow: "shadow-[0_0_15px_rgba(16,185,129,0.25)]",
+      badge: "bg-emerald-500/10 border-emerald-500/20 text-emerald-300",
+      bgSelected: "bg-emerald-500/5 border-emerald-500/40",
+      accent: "#10b981"
+    },
+    skills: [
+      { name: "Google Cloud (GCP)", level: 90 },
+      { name: "Cloud Run", level: 85 },
+      { name: "Firebase", level: 80 },
+      { name: "IAM Security", level: 85 }
+    ],
+    use: "Deploying serverless runtimes, configuring Google IAM security policies, and managing web service hosting instances.",
+    logs: [
+      "[runner-04]: Targeting project: medhini-cloud-prod",
+      "[runner-04]: Pushing container image to Artifact Registry...",
+      "[runner-04]: Deploying to Cloud Run serverless cluster...",
+      "[runner-04]: Deployment verified: 100% traffic active. SUCCESS."
+    ]
+  },
+  {
+    id: "ai",
+    number: "05",
+    name: "AI & Tools Integration",
+    category: "STAGE 05 // AI PIPELINE",
+    status: "STABLE",
+    colorTheme: {
+      text: "text-violet-400",
+      border: "border-violet-500/20",
+      glow: "shadow-[0_0_15px_rgba(139,92,246,0.25)]",
+      badge: "bg-violet-500/10 border-violet-500/20 text-violet-300",
+      bgSelected: "bg-violet-500/5 border-violet-500/40",
+      accent: "#8b5cf6"
+    },
+    skills: [
+      { name: "Generative AI", level: 85 },
+      { name: "Hugging Face", level: 75 },
+      { name: "Pandas & NumPy", level: 80 }
+    ],
+    use: "Integrating intelligent prompt models, transformer tokenizers, dataset parsing, and smart scripting tools.",
+    logs: [
+      "[runner-05]: Loading tokenizer models from Hugging Face...",
+      "[runner-05]: Executing dataset analytics with Pandas & NumPy...",
+      "[runner-05]: Validating smart assistant pipeline hooks...",
+      "[runner-05]: Telemetry status: AI Assistant active. READY."
+    ]
+  }
 ];
 
 
@@ -701,7 +828,7 @@ export default function App() {
   const [hoveredIdx, setHoveredIdx] = useState(null);
   const [clickedIdx, setClickedIdx] = useState(null);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
-  const [selectedSkill, setSelectedSkill] = useState(constellationSkills[0]);
+  const [selectedSkill, setSelectedSkill] = useState(pipelineStages[0]);
   const [selectedChapter, setSelectedChapter] = useState(0);
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
   // Custom cursor state variables
@@ -839,25 +966,40 @@ export default function App() {
 
 
 
-      <header className="fixed top-8 left-0 w-full z-40 flex justify-between items-center px-6 sm:px-12 pointer-events-none">
-        <div className="flex items-center gap-4 pointer-events-auto">
+      <header className={`fixed top-0 left-0 w-full z-40 flex justify-between items-center px-6 sm:px-16 transition-all duration-300 pointer-events-auto ${
+        scrolledPastHero 
+          ? (theme === 'dark' ? 'h-16 bg-black/75 backdrop-blur-md border-b border-white/5 shadow-lg shadow-black/10' : 'h-16 bg-white/75 backdrop-blur-md border-b border-zinc-200/50 shadow-md')
+          : 'h-20 bg-transparent'
+      }`}>
+        {/* Left Side: Minimalist Name Logo (visible when scrolled past hero) */}
+        <div className="flex items-center gap-2 font-mono text-[11px] tracking-widest font-bold">
+          <motion.span
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: scrolledPastHero ? 1 : 0, x: scrolledPastHero ? 0 : -10 }}
+            transition={{ duration: 0.3 }}
+            className="text-zinc-200"
+          >
+            MEDHINI B R <span className="text-[#22D3EE] animate-pulse">●</span>
+          </motion.span>
+        </div>
+
+        {/* Right Side: Resume Button & Telemetry widget side-by-side */}
+        <div className="flex items-center gap-3">
           <AnimatePresence>
             {scrolledPastHero && (
               <motion.a
                 layoutId="download-resume-btn"
                 href="/Resume%20-%20B%20R%20Medhini.pdf"
                 download="Resume - B R Medhini.pdf"
-                className={`w-[150px] sm:w-[180px] h-[40px] sm:h-[48px] flex items-center justify-center rounded-full text-[11px] sm:text-[13px] font-bold border shadow-md transition-all duration-300 ${theme === 'dark'
-                  ? 'bg-black/80 border-white/10 text-white hover:bg-white/5'
-                  : 'bg-white/80 border-zinc-200 text-zinc-800 hover:bg-zinc-50'
+                className={`px-4 h-[34px] flex items-center justify-center rounded-full text-[11px] sm:text-[12px] font-bold border shadow-md transition-all duration-300 ${theme === 'dark'
+                  ? 'bg-zinc-900 border-white/10 text-white hover:bg-white/5'
+                  : 'bg-white border-zinc-200 text-zinc-800 hover:bg-zinc-50'
                   }`}
               >
                 Download Resume
               </motion.a>
             )}
           </AnimatePresence>
-        </div>
-        <div className="flex items-center gap-4 pointer-events-auto">
           <TelemetryHeaderWidget lenisRef={lenisRef} />
         </div>
       </header>
@@ -1061,7 +1203,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Skills Section (The Constellation) */}
+      {/* Skills Section (CI/CD Pipeline Simulator) */}
       <section id="skills" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
@@ -1069,129 +1211,150 @@ export default function App() {
               02 // TECHNICAL ARSENAL
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>The Constellation.</h2>
+              }`}>Deployment Pipeline.</h2>
+            <p className={`max-w-2xl text-sm ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+              }`}>
+              Interactive build and delivery pipeline showcasing tools, programming languages, and automation workflows.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-12 gap-12 items-stretch">
-            {/* Left: Constellation Map */}
-            <div className="md:col-span-7 h-96 relative rounded-2xl overflow-hidden bg-zinc-950/20 border border-white/5 flex items-center justify-center">
-              {/* Concentric Radar Grid Background */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                <circle cx="50%" cy="50%" r="18%" fill="none" stroke="rgba(99, 102, 241, 0.05)" strokeWidth="1" strokeDasharray="3, 6" />
-                <circle cx="50%" cy="50%" r="32%" fill="none" stroke="rgba(99, 102, 241, 0.035)" strokeWidth="1" strokeDasharray="4, 8" />
-                <circle cx="50%" cy="50%" r="45%" fill="none" stroke="rgba(99, 102, 241, 0.02)" strokeWidth="1" />
-                
-                {/* Rotating Radar Sweep Line */}
-                <motion.line
-                  x1="50%"
-                  y1="50%"
-                  x2="50%"
-                  y2="5%"
-                  stroke="rgba(34, 211, 238, 0.04)"
-                  strokeWidth="1.5"
-                  style={{ originX: "50%", originY: "50%" }}
-                  animate={{ rotate: 360 }}
-                  transition={{ ease: "linear", duration: 10, repeat: Infinity }}
+            {/* Left: CI/CD Pipeline Simulator */}
+            <div className="md:col-span-7 flex flex-col gap-4 relative">
+              {/* Connecting Pipe Line (Vertical indicator line) */}
+              <div className="absolute left-10 sm:left-12 top-6 bottom-6 w-0.5 bg-zinc-800/40 pointer-events-none z-0">
+                <motion.div
+                  className="w-full bg-gradient-to-b from-indigo-500 via-cyan-400 to-emerald-500"
+                  style={{ height: '100%', originY: 0 }}
+                  animate={{ scaleY: [0.3, 1.0, 0.3] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 />
-              </svg>
+              </div>
 
-              {/* SVG Interactive Constellation Grid */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                {/* Draw connected lines with animated data packet flow */}
-                {constellationSkills.map((s, idx) => {
-                  const isCurrent = selectedSkill.id === s.id;
-                  return (
-                    <motion.line
-                      key={idx}
-                      x1={`${s.x}%`}
-                      y1={`${s.y}%`}
-                      x2={`${selectedSkill.x}%`}
-                      y2={`${selectedSkill.y}%`}
-                      stroke={isCurrent ? "rgba(34, 211, 238, 0.45)" : "rgba(99, 102, 241, 0.15)"}
-                      strokeWidth={isCurrent ? "1.5" : "0.75"}
-                      strokeDasharray={isCurrent ? "6, 6" : "4, 8"}
-                      animate={{ strokeDashoffset: [0, -24] }}
-                      transition={{ 
-                        ease: "linear", 
-                        duration: isCurrent ? 1.0 : 2.0, 
-                        repeat: Infinity 
-                      }}
-                    />
-                  );
-                })}
-              </svg>
-
-              {/* Render Constellation Node Buttons */}
-              {constellationSkills.map((skill) => {
-                const isSelected = selectedSkill.id === skill.id;
+              {pipelineStages.map((stage) => {
+                const isSelected = selectedSkill.id === stage.id;
                 return (
-                  <button
-                    key={skill.id}
-                    onClick={() => setSelectedSkill(skill)}
-                    style={{ left: `${skill.x}%`, top: `${skill.y}%` }}
-                    className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full transition-all duration-300 ${isSelected
-                      ? 'w-11 h-11 bg-cyan-500/10 border border-cyan-400 shadow-[0_0_25px_rgba(34,211,238,0.4)] z-20'
-                      : 'w-7 h-7 bg-zinc-950/80 border border-white/10 hover:border-indigo-500/40 z-10'
-                      }`}
-                    aria-label={`Select skill ${skill.name}`}
+                  <motion.div
+                    key={stage.id}
+                    onClick={() => setSelectedSkill(stage)}
+                    whileHover={{ x: 4 }}
+                    className={`relative z-10 p-4 rounded-xl border flex items-center justify-between gap-4 cursor-pointer transition-all duration-300 ${isSelected 
+                      ? `${stage.colorTheme.bgSelected} ${stage.colorTheme.border} ${stage.colorTheme.glow}` 
+                      : 'bg-zinc-950/20 border-white/5 hover:border-white/10 hover:bg-zinc-950/40'
+                    }`}
                   >
-                    {isSelected ? (
-                      <span className="relative flex h-3 w-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
-                      </span>
-                    ) : (
-                      <span className="w-2 h-2 rounded-full bg-zinc-600 transition-colors duration-300 hover:bg-indigo-400" />
-                    )}
-                    <span className={`absolute top-9 text-[9px] font-mono tracking-wider whitespace-nowrap bg-zinc-950/90 px-2 py-0.5 rounded border transition-all duration-300 ${isSelected ? 'opacity-100 border-cyan-500/30 text-cyan-300 font-bold scale-105' : 'opacity-50 border-white/5 text-zinc-400 hover:opacity-100'
+                    <div className="flex items-center gap-4 text-left">
+                      {/* Stage Circle Indicator */}
+                      <div className={`w-12 h-12 rounded-full border flex items-center justify-center font-mono font-bold text-sm transition-all duration-300 ${isSelected 
+                        ? `border-current bg-zinc-950 ${stage.colorTheme.text}` 
+                        : 'border-zinc-800 bg-zinc-900 text-zinc-500'
                       }`}>
-                      {skill.name}
-                    </span>
-                  </button>
+                        {stage.number}
+                      </div>
+
+                      {/* Stage Info */}
+                      <div>
+                        <span className="text-[9px] font-mono tracking-wider font-bold text-zinc-500 block uppercase">
+                          {stage.id.toUpperCase()} STAGE
+                        </span>
+                        <h4 className={`text-base font-bold transition-colors duration-300 ${isSelected ? 'text-white' : 'text-zinc-400'}`}>
+                          {stage.name}
+                        </h4>
+                      </div>
+                    </div>
+
+                    {/* Skill Badges for this stage */}
+                    <div className="hidden sm:flex flex-wrap gap-1.5 justify-end max-w-[50%]">
+                      {stage.skills.map((s, idx) => (
+                        <span key={idx} className={`text-[9px] font-mono px-2 py-0.5 rounded border transition-all duration-300 ${isSelected ? stage.colorTheme.badge : 'bg-zinc-900/40 border-white/5 text-zinc-500'}`}>
+                          {s.name}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
                 );
               })}
             </div>
 
-            {/* Right: Detailed Card */}
-            <div className="md:col-span-5 flex flex-col justify-center">
-              <div className={`p-8 rounded-2xl border text-left space-y-6 shadow-xl transition-all duration-300 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+            {/* Right: Detailed Card & Console Runner logs */}
+            <div className="md:col-span-5 flex flex-col justify-between gap-4">
+              <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-6 shadow-xl transition-all duration-300 flex-grow flex flex-col justify-between ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
                 }`}>
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-400">
-                    <Cpu className="w-5 h-5" />
+                <div className="space-y-6">
+                  {/* Header */}
+                  <div className="flex items-center gap-3">
+                    <div className={`p-2.5 rounded-lg bg-zinc-900 text-zinc-400 border border-white/5 ${selectedSkill.colorTheme.text}`}>
+                      <Terminal className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className={`text-[10px] font-bold font-mono tracking-wider uppercase ${selectedSkill.colorTheme.text}`}>
+                        {selectedSkill.category}
+                      </p>
+                      <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+                        }`}>
+                        {selectedSkill.name}
+                      </h3>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[10px] font-bold font-mono tracking-wider text-indigo-400 uppercase">
-                      {selectedSkill.category}
-                    </p>
-                    <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+
+                  {/* Description */}
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">STAGE CAPABILITY</p>
+                    <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'
                       }`}>
-                      {selectedSkill.name}
-                    </h3>
+                      {selectedSkill.use}
+                    </p>
+                  </div>
+
+                  {/* Skills Mastery Progress Grid */}
+                  <div className="space-y-3 pt-2">
+                    <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">SKILLS INTEGRATION</p>
+                    {selectedSkill.skills.map((skill, idx) => (
+                      <div key={idx} className="space-y-1">
+                        <div className="flex justify-between text-xs font-mono">
+                          <span className={`${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>{skill.name}</span>
+                          <span className={selectedSkill.colorTheme.text}>{skill.level}%</span>
+                        </div>
+                        <div className="h-1.5 w-full bg-zinc-850 rounded-full overflow-hidden border border-white/5">
+                          <motion.div
+                            key={`${selectedSkill.id}-${skill.name}`}
+                            initial={{ width: 0 }}
+                            animate={{ width: `${skill.level}%` }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            className="h-full rounded-full"
+                            style={{ backgroundColor: selectedSkill.colorTheme.accent }}
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold text-zinc-500">PRIMARY INTEGRATION & USE</p>
-                  <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'
-                    }`}>
-                    {selectedSkill.use}
-                  </p>
-                </div>
-
-                <div className="space-y-2 pt-2">
-                  <div className="flex justify-between text-xs font-mono">
-                    <span className="text-zinc-500">EXPERIENCE DEPTH</span>
-                    <span className="text-indigo-400">{selectedSkill.mastery}%</span>
+                {/* Console Log Runner Display */}
+                <div className="pt-4 border-t border-white/5 mt-4 space-y-2">
+                  <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500">
+                    <span>RUNNER CONSOLE: STAGE_{selectedSkill.id.toUpperCase()}</span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      ACTIVE
+                    </span>
                   </div>
-                  <div className="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
-                    <motion.div
-                      key={selectedSkill.id}
-                      initial={{ width: 0 }}
-                      animate={{ width: `${selectedSkill.mastery}%` }}
-                      transition={{ duration: 0.5 }}
-                      className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full"
-                    />
+
+                  <div className="bg-zinc-950 p-4 rounded-xl border border-white/5 font-mono text-[11px] text-zinc-400 space-y-1 min-h-[110px] overflow-hidden relative">
+                    {selectedSkill.logs.map((log, idx) => (
+                      <motion.div
+                        key={`${selectedSkill.id}-log-${idx}`}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.15, duration: 0.3 }}
+                        className={idx === selectedSkill.logs.length - 1 ? selectedSkill.colorTheme.text : 'text-zinc-400'}
+                      >
+                        {log}
+                      </motion.div>
+                    ))}
+                    <div className="absolute bottom-2 right-2 text-[9px] text-zinc-600 uppercase font-mono">
+                      Telemetry Node-01
+                    </div>
                   </div>
                 </div>
               </div>
