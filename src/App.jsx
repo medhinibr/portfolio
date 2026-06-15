@@ -83,7 +83,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
       }}
       className="flex items-center justify-center transition-all duration-300 h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] cursor-pointer"
     >
-      <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
+      <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${isOtherHovered ? 'opacity-0 pointer-events-none select-none' : 'opacity-100 scale-100'
         } ${isHovered ? 'filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)]' : ''
         }`}>
         {item.type === 'prefix' && (
@@ -819,7 +819,7 @@ export default function App() {
                     initial={{ opacity: 0, scale: 1 }}
                     animate={{ 
                       opacity: 1,
-                      scale: hoveredIdx !== null ? 0.72 : 1
+                      scale: 1
                     }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     exit={{ opacity: 0 }}
