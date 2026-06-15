@@ -2023,114 +2023,135 @@ export default function App() {
         </div>
       </section>
 
-      {/* Interactive Connection Pipe Timeline Section */}
+      {/* Horizontal Deployment Tracker Timeline Section */}
       <section id="timeline" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
-          <div className="space-y-4 mb-16 text-left">
+          <div className="space-y-4 mb-12 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              04 // INTERACTIVE TIMELINE
+              04 // PIPELINE METRICS
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>Career Stepper.</h2>
+              }`}>Deployment Tracker.</h2>
             <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              Chronological track of my academic milestones, developer internships, and startup operations connected via interactive fiber-optic nodes.
+              Tracing my educational milestones, internships, and startup operations as a horizontal CI/CD pipeline.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-12 gap-10 items-stretch">
-            {/* Left Column - Stepper track list */}
-            <div className="md:col-span-5 relative flex flex-col space-y-2 text-left justify-center py-4 pl-4">
-              {/* Vertical fiber-optic line track */}
-              <div className="absolute left-[19px] top-6 bottom-6 w-0.5 bg-zinc-800/80" />
+          {/* Horizontal progress bar container with horizontal scroll for mobile */}
+          <div className="w-full overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+            <div className="min-w-[900px] relative py-8 px-6">
+              {/* Progress track background */}
+              <div className="absolute left-[36px] right-[36px] h-0.5 bg-zinc-800 top-1/2 -translate-y-1/2" />
 
-              {timelineChapters.map((item, idx) => {
-                const isSelected = selectedChapter === idx;
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => setSelectedChapter(idx)}
-                    className="relative flex items-center w-full text-left group focus:outline-none py-3 pl-12"
-                  >
-                    {/* The Node circle */}
-                    <div className="absolute left-[10px] top-1/2 -translate-y-1/2 z-10 flex items-center justify-center">
-                      {isSelected ? (
-                        <div className="w-5 h-5 rounded-full bg-zinc-950 border-2 border-indigo-500 flex items-center justify-center relative shadow-[0_0_15px_rgba(99,102,241,0.5)]">
-                          {/* Glowing inner dot */}
-                          <motion.div
-                            layoutId="stepperPacket"
-                            className="w-1.5 h-1.5 rounded-full bg-indigo-400"
-                            transition={{ type: "spring", stiffness: 150, damping: 18 }}
-                          />
-                          {/* Outer pulse */}
-                          <span className="absolute -inset-1 rounded-full border border-indigo-500/30 animate-ping" />
-                        </div>
-                      ) : (
-                        <div className="w-4 h-4 rounded-full bg-zinc-950 border-2 border-zinc-700 group-hover:border-zinc-400 transition-all duration-200" />
-                      )}
-                    </div>
+              {/* Progress track active fill */}
+              <div
+                className="absolute h-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 top-1/2 -translate-y-1/2 transition-all duration-500 ease-out"
+                style={{
+                  left: "36px",
+                  right: `calc(${100 - (selectedChapter / (timelineChapters.length - 1)) * 100}% + 36px)`
+                }}
+              />
 
-                    {/* Label details */}
-                    <div className="flex flex-col transition-all duration-300 group-hover:translate-x-0.5">
-                      <span className={`text-[9px] font-mono font-bold tracking-widest uppercase ${isSelected ? 'text-indigo-400' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
-                        {item.chapter} // {item.period.split(' ').pop()}
-                      </span>
-                      <h3 className={`text-sm font-bold transition-colors duration-200 ${isSelected ? (theme === 'dark' ? 'text-white' : 'text-zinc-900') : 'text-zinc-500 group-hover:text-zinc-300'}`}>
-                        {item.title}
-                      </h3>
-                      <span className={`text-[10px] font-mono ${isSelected ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                        {item.role}
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
+              {/* Step buttons */}
+              <div className="flex justify-between items-center relative z-10">
+                {timelineChapters.map((item, idx) => {
+                  const isSelected = selectedChapter === idx;
+                  const isCompleted = idx < selectedChapter;
 
-            {/* Right Column - Sleek details card with glowing border */}
-            <div className="md:col-span-7 flex flex-col justify-center">
-              <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[400px] flex flex-col justify-between transition-all duration-500 ${theme === 'dark'
-                ? 'bg-[#0f0f12] border-indigo-500/20 shadow-[0_0_50px_rgba(99,102,241,0.03)]'
-                : 'bg-white border-zinc-200 shadow-[0_0_50px_rgba(0,0,0,0.02)]'
-                }`}>
-                <div>
-                  {/* Header containing Chapter ID & dates */}
-                  <div className="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
-                    <div className="flex items-center gap-2 font-mono text-[10px] text-zinc-500">
-                      <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                      <span>{timelineChapters[selectedChapter].chapter} // RUNNING</span>
-                    </div>
-                    <span className="font-mono text-[10px] text-indigo-400 font-bold">{timelineChapters[selectedChapter].period}</span>
-                  </div>
-
-                  {/* Core content */}
-                  <div className="space-y-4">
-                    <div>
-                      <h3 className={`text-2xl font-black font-display tracking-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
-                        {timelineChapters[selectedChapter].title}
-                      </h3>
-                      <p className="text-sm text-indigo-400 font-mono font-medium mt-1">
-                        {timelineChapters[selectedChapter].role} @ {timelineChapters[selectedChapter].institution}
-                      </p>
-                    </div>
-
-                    <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-600'}`}>
-                      {timelineChapters[selectedChapter].description}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-800">
-                  {timelineChapters[selectedChapter].skills.map((skill, sIdx) => (
-                    <span
-                      key={sIdx}
-                      className={`text-[9px] font-mono font-medium px-2 py-0.5 rounded-full border ${theme === 'dark' ? 'bg-zinc-900 border-white/5 text-zinc-400' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
-                        }`}
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedChapter(idx)}
+                      className="flex flex-col items-center group focus:outline-none w-20 text-center"
                     >
-                      {skill}
-                    </span>
-                  ))}
+                      {/* Chapter identifier tag */}
+                      <span className={`text-[8px] font-mono font-bold tracking-wider mb-2.5 uppercase transition-colors duration-200 ${isSelected ? 'text-indigo-400' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
+                        {item.chapter.split(' ').pop()}
+                      </span>
+
+                      {/* Connection node circle */}
+                      <div className="h-6 w-6 flex items-center justify-center relative">
+                        {isSelected ? (
+                          <div className="w-5 h-5 rounded-full bg-zinc-950 border-2 border-indigo-400 flex items-center justify-center relative shadow-[0_0_15px_rgba(99,102,241,0.5)]">
+                            <div className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                            <span className="absolute -inset-1 rounded-full border border-indigo-500/30 animate-ping" />
+                          </div>
+                        ) : isCompleted ? (
+                          <div className="w-4 h-4 rounded-full bg-indigo-500 flex items-center justify-center text-[8px] text-white font-mono font-bold">
+                            ✓
+                          </div>
+                        ) : (
+                          <div className="w-3.5 h-3.5 rounded-full bg-zinc-950 border-2 border-zinc-700 group-hover:border-zinc-500 transition-colors duration-200" />
+                        )}
+                      </div>
+
+                      {/* Period year tag */}
+                      <span className={`text-[9px] font-mono mt-2.5 ${isSelected ? 'text-zinc-200 font-semibold' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
+                        {item.period.split(' ').pop()}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Detailed information card */}
+          <div className="max-w-4xl mx-auto mt-6">
+            <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-6 shadow-xl relative transition-all duration-500 ${theme === 'dark'
+              ? 'bg-[#0f0f12] border-indigo-500/20 shadow-[0_0_50px_rgba(99,102,241,0.03)]'
+              : 'bg-white border-zinc-200 shadow-[0_0_50px_rgba(0,0,0,0.02)]'
+              }`}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span className="font-mono text-xs text-zinc-400">PIPELINE STATUS: <span className="text-emerald-400 font-bold">SUCCESSFUL</span></span>
                 </div>
+                <div className="font-mono text-xs text-zinc-500">
+                  STAGE: <span className="text-indigo-400 font-bold">{timelineChapters[selectedChapter].chapter}</span> // {timelineChapters[selectedChapter].period}
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-12 gap-6 items-start">
+                <div className="md:col-span-8 space-y-3">
+                  <h3 className={`text-2xl font-black font-display tracking-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+                    {timelineChapters[selectedChapter].title}
+                  </h3>
+                  <p className="text-sm text-indigo-400 font-mono font-medium">
+                    {timelineChapters[selectedChapter].role} @ {timelineChapters[selectedChapter].institution}
+                  </p>
+                  <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-600'}`}>
+                    {timelineChapters[selectedChapter].description}
+                  </p>
+                </div>
+
+                <div className="md:col-span-4 bg-zinc-950/40 border border-white/5 rounded-xl p-4 space-y-2.5 font-mono text-[11px] text-zinc-400">
+                  <div>
+                    <span className="text-zinc-500">ENVIRONMENT:</span>{" "}
+                    <span className="text-zinc-300">{timelineChapters[selectedChapter].institution}</span>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500">ROLE_TARGET:</span>{" "}
+                    <span className="text-zinc-300 font-bold">{timelineChapters[selectedChapter].role}</span>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500">BUILD_TIME :</span>{" "}
+                    <span className="text-zinc-300">{timelineChapters[selectedChapter].period}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-800">
+                {timelineChapters[selectedChapter].skills.map((skill, sIdx) => (
+                  <span
+                    key={sIdx}
+                    className={`text-[9px] font-mono font-medium px-2 py-0.5 rounded-full border ${theme === 'dark' ? 'bg-zinc-900 border-white/5 text-zinc-400' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
+                      }`}
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
