@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import { GitHubCalendar } from 'react-github-calendar';
 import 'react-github-calendar/tooltips.css';
+import Chatbot from './Chatbot';
 import {
   Sun,
   Moon,
@@ -1144,7 +1145,7 @@ export default function App() {
       setIsTransmitting(true);
       fetch("https://formsubmit.co/ajax/brmedhini@gmail.com", {
         method: "POST",
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
@@ -1155,16 +1156,16 @@ export default function App() {
           _subject: `New Portfolio Message from ${contactForm.name}`
         })
       })
-      .then(res => res.json())
-      .then(() => {
-        setIsTransmitting(false);
-        setContactStep(3);
-      })
-      .catch(err => {
-        console.error(err);
-        setFormError("Transmission failed. Please check connection and try again.");
-        setIsTransmitting(false);
-      });
+        .then(res => res.json())
+        .then(() => {
+          setIsTransmitting(false);
+          setContactStep(3);
+        })
+        .catch(err => {
+          console.error(err);
+          setFormError("Transmission failed. Please check connection and try again.");
+          setIsTransmitting(false);
+        });
     }
   };
 
@@ -1181,7 +1182,7 @@ export default function App() {
       // Fallback mock counts to avoid an empty graph before data loads
       return [12, 25, 18, 30, 42, 35, 50, 48, 62, 70, 45, 20];
     }
-    
+
     contributionData.forEach(day => {
       if (day.date) {
         const dateParts = day.date.split('-');
@@ -1239,11 +1240,10 @@ export default function App() {
 
 
 
-      <header className={`fixed top-0 left-0 w-full z-40 flex justify-between items-center px-6 sm:px-16 transition-all duration-300 pointer-events-auto ${
-        scrolledPastHero 
+      <header className={`fixed top-0 left-0 w-full z-40 flex justify-between items-center px-6 sm:px-16 transition-all duration-300 pointer-events-auto ${scrolledPastHero
           ? (theme === 'dark' ? 'h-16 bg-black/75 backdrop-blur-md border-b border-white/5 shadow-lg shadow-black/10' : 'h-16 bg-white/75 backdrop-blur-md border-b border-zinc-200/50 shadow-md')
           : 'h-20 bg-transparent'
-      }`}>
+        }`}>
         {/* Left Side: Minimalist Name Logo (visible when scrolled past hero) */}
         <div className="flex items-center gap-2 font-mono text-[11px] md:text-sm tracking-widest font-bold">
           <motion.span
@@ -1403,7 +1403,7 @@ export default function App() {
                 }`}>
                 I build responsive web architectures, containerize applications for serverless cloud hosting, and integrate intelligent data pipelines. Use the interactive SSH shell console to explore my engineering domains, trigger virtual pipeline builds, or navigate the sections.
               </p>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 {/* Programming & Logic Card */}
                 <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-indigo-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
@@ -1492,13 +1492,13 @@ export default function App() {
           </div>
 
           <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-            
+
             {/* Left Column: Interactive SVG Network Map */}
             <div className="lg:col-span-7 relative w-full aspect-[2/1] min-h-[250px] sm:min-h-[400px] rounded-2xl bg-[#09090b]/90 border border-white/5 overflow-hidden shadow-2xl flex items-center justify-center">
-              
+
               {/* Grid Background */}
               <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
-              
+
               <div className="absolute top-6 left-6 text-[10px] font-mono tracking-widest text-zinc-500 uppercase flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 ACTIVE MONITOR // TELEMETRY LINKED
@@ -1545,7 +1545,7 @@ export default function App() {
 
               {/* Interactive Node Buttons Overlay */}
               <div className="absolute inset-0 w-full h-full">
-                
+
                 {/* Node 1: CI/CD Pipeline */}
                 {(() => {
                   const stage = pipelineStages.find(s => s.id === "cicd");
@@ -1554,9 +1554,8 @@ export default function App() {
                     <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1 sm:gap-2 animate-pulse-slow" style={{ left: "15%", top: "50%" }}>
                       <button
                         onClick={() => setSelectedSkill(stage)}
-                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
-                          isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
-                        }`}
+                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
+                          }`}
                       >
                         {isSelected && (
                           <motion.div
@@ -1581,9 +1580,8 @@ export default function App() {
                     <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1 sm:gap-2" style={{ left: "50%", top: "25%" }}>
                       <button
                         onClick={() => setSelectedSkill(stage)}
-                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
-                          isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
-                        }`}
+                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
+                          }`}
                       >
                         {isSelected && (
                           <motion.div
@@ -1608,9 +1606,8 @@ export default function App() {
                     <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1 sm:gap-2" style={{ left: "50%", top: "75%" }}>
                       <button
                         onClick={() => setSelectedSkill(stage)}
-                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
-                          isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
-                        }`}
+                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
+                          }`}
                       >
                         {isSelected && (
                           <motion.div
@@ -1635,9 +1632,8 @@ export default function App() {
                     <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1 sm:gap-2" style={{ left: "85%", top: "50%" }}>
                       <button
                         onClick={() => setSelectedSkill(stage)}
-                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
-                          isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
-                        }`}
+                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
+                          }`}
                       >
                         {isSelected && (
                           <motion.div
@@ -1660,24 +1656,22 @@ export default function App() {
 
             {/* Right Column: Node Inspector & Provisioning logs */}
             <div className="lg:col-span-5 p-6 rounded-2xl bg-[#09090b]/90 border border-white/5 text-left flex flex-col justify-between shadow-2xl">
-              
+
               <div className="flex flex-col h-full justify-between gap-4">
-                
+
                 {/* Tab Header Selector */}
                 <div className="flex border-b border-white/5 text-xs font-mono select-none">
                   <button
                     onClick={() => setK8sTab('logs')}
-                    className={`pb-2 px-4 border-b-2 font-bold transition-all ${
-                      k8sTab === 'logs' ? `border-b-2 border-current ${selectedSkill.colorTheme.text}` : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                    }`}
+                    className={`pb-2 px-4 border-b-2 font-bold transition-all ${k8sTab === 'logs' ? `border-b-2 border-current ${selectedSkill.colorTheme.text}` : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                      }`}
                   >
                     IaC Provisioning
                   </button>
                   <button
                     onClick={() => setK8sTab('yaml')}
-                    className={`pb-2 px-4 border-b-2 font-bold transition-all ${
-                      k8sTab === 'yaml' ? `border-b-2 border-current ${selectedSkill.colorTheme.text}` : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                    }`}
+                    className={`pb-2 px-4 border-b-2 font-bold transition-all ${k8sTab === 'yaml' ? `border-b-2 border-current ${selectedSkill.colorTheme.text}` : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                      }`}
                   >
                     YAML Specification
                   </button>
@@ -1763,7 +1757,7 @@ export default function App() {
       {/* Selected Works Section (DevOps Deployments Registry) */}
       <section id="works" className="w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
-          
+
           <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-16 text-left">
             <div className="inline-block text-xs md:text-sm font-bold font-mono tracking-widest text-indigo-400 uppercase">
               03 // DEPLOYMENTS REGISTRY
@@ -1783,24 +1777,21 @@ export default function App() {
                 whileHover={{ y: -6 }}
                 onMouseEnter={() => setHoveredProjectIdx(idx)}
                 onMouseLeave={() => setHoveredProjectIdx(null)}
-                className={`rounded-2xl border p-6 flex flex-col justify-between transition-all duration-500 shadow-2xl relative overflow-hidden min-h-[460px] ${
-                  hoveredProjectIdx !== null && hoveredProjectIdx !== idx ? 'opacity-40 scale-[0.98] blur-[0.5px]' : 'opacity-100'
-                } ${
-                  theme === 'dark' ? 'bg-[#09090b]/90 border-white/5 hover:border-indigo-500/25' : 'bg-white border-zinc-200 hover:border-indigo-500/25'
-                }`}
+                className={`rounded-2xl border p-6 flex flex-col justify-between transition-all duration-500 shadow-2xl relative overflow-hidden min-h-[460px] ${hoveredProjectIdx !== null && hoveredProjectIdx !== idx ? 'opacity-40 scale-[0.98] blur-[0.5px]' : 'opacity-100'
+                  } ${theme === 'dark' ? 'bg-[#09090b]/90 border-white/5 hover:border-indigo-500/25' : 'bg-white border-zinc-200 hover:border-indigo-500/25'
+                  }`}
               >
-                
+
                 {/* Visual Top Highlight bar */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${
-                  idx === 0 ? 'from-cyan-500 to-blue-500' :
-                  idx === 1 ? 'from-indigo-500 to-purple-500' :
-                  idx === 2 ? 'from-emerald-500 to-teal-500' :
-                  'from-purple-500 to-pink-500'
-                }`} />
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${idx === 0 ? 'from-cyan-500 to-blue-500' :
+                    idx === 1 ? 'from-indigo-500 to-purple-500' :
+                      idx === 2 ? 'from-emerald-500 to-teal-500' :
+                        'from-purple-500 to-pink-500'
+                  }`} />
 
                 {/* Dashboard Console Header */}
                 <div className="space-y-4 text-left">
-                  
+
                   {/* Status telemetry row */}
                   <div className="flex items-center justify-between text-[9px] md:text-xs font-mono text-zinc-500 border-b border-white/5 pb-3">
                     <span className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded text-[9px] md:text-xs">
@@ -1848,11 +1839,10 @@ export default function App() {
                           handleTestConnection(idx);
                         }}
                         disabled={pingingIdx !== null}
-                        className={`text-[8px] md:text-[10px] px-1.5 py-0.5 rounded font-bold transition-all border ${
-                          pingingIdx === idx 
+                        className={`text-[8px] md:text-[10px] px-1.5 py-0.5 rounded font-bold transition-all border ${pingingIdx === idx
                             ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400 animate-pulse'
                             : 'bg-indigo-500/10 border-indigo-500/20 text-indigo-300 hover:bg-indigo-500/25'
-                        }`}
+                          }`}
                       >
                         {pingingIdx === idx ? 'PINGING...' : 'TEST CONN'}
                       </button>
@@ -1865,7 +1855,7 @@ export default function App() {
                     >
                       {project.endpoint}
                     </a>
-                    
+
                     {/* Live Ping Response */}
                     {pingResults[idx] && (
                       <motion.div
@@ -1902,15 +1892,14 @@ export default function App() {
 
                 {/* Footer layers & CTA */}
                 <div className="space-y-4 pt-4 mt-4 border-t border-white/5 text-left">
-                  
+
                   {/* Container Layer tags */}
                   <div className="flex flex-wrap gap-1.5">
                     {project.tags.map((tag, tIdx) => (
                       <span
                         key={tIdx}
-                        className={`text-[9px] md:text-[11px] font-mono px-2 py-0.5 rounded border ${
-                          theme === 'dark' ? 'bg-zinc-950 border-white/5 text-zinc-500' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
-                        }`}
+                        className={`text-[9px] md:text-[11px] font-mono px-2 py-0.5 rounded border ${theme === 'dark' ? 'bg-zinc-950 border-white/5 text-zinc-500' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
+                          }`}
                       >
                         {tIdx === 0 ? 'FROM' : tIdx === 1 ? 'RUN' : 'ENV'} {tag.toLowerCase()}
                       </span>
@@ -1922,11 +1911,10 @@ export default function App() {
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    className={`flex items-center justify-between w-full p-2.5 rounded-lg text-[10px] md:text-xs font-mono border transition-all duration-300 ${
-                      theme === 'dark'
+                    className={`flex items-center justify-between w-full p-2.5 rounded-lg text-[10px] md:text-xs font-mono border transition-all duration-300 ${theme === 'dark'
                         ? 'bg-zinc-950 hover:bg-zinc-900 border-white/5 hover:border-indigo-500/30 text-zinc-400 hover:text-white'
                         : 'bg-zinc-50 hover:bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900'
-                    }`}
+                      }`}
                   >
                     <span className="truncate flex items-center gap-1.5">
                       <span className="text-indigo-400">$</span> git clone repo
@@ -1945,7 +1933,7 @@ export default function App() {
       {/* DevOps Lifecycle Section */}
       <section id="metrics" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
-          
+
           <div className="space-y-4 mb-16 text-center">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               04 // ENGINEERING LIFECYCLE
@@ -1959,7 +1947,7 @@ export default function App() {
           </div>
 
           <div className="grid lg:grid-cols-12 gap-8 max-w-5xl mx-auto items-stretch">
-            
+
             {/* Left: Step Indicators */}
             <div className="lg:col-span-4 flex flex-col gap-4 justify-between">
               {[
@@ -1973,13 +1961,12 @@ export default function App() {
                   <button
                     key={stage.step}
                     onClick={() => setSelectedDevOpsStage(stage.step)}
-                    className={`p-5 rounded-xl border text-left transition-all duration-300 relative overflow-hidden select-none outline-none ${
-                      isActive 
-                        ? 'bg-indigo-600/10 border-indigo-500/50 shadow-md shadow-indigo-600/5' 
-                        : theme === 'dark' 
-                          ? 'bg-zinc-900/40 border-white/5 hover:bg-zinc-900/60 hover:border-white/10' 
+                    className={`p-5 rounded-xl border text-left transition-all duration-300 relative overflow-hidden select-none outline-none ${isActive
+                        ? 'bg-indigo-600/10 border-indigo-500/50 shadow-md shadow-indigo-600/5'
+                        : theme === 'dark'
+                          ? 'bg-zinc-900/40 border-white/5 hover:bg-zinc-900/60 hover:border-white/10'
                           : 'bg-zinc-50 border-zinc-200 hover:bg-zinc-100 hover:border-zinc-300'
-                    }`}
+                      }`}
                   >
                     {isActive && (
                       <div className="absolute left-0 top-0 bottom-0 w-1 bg-indigo-500" />
@@ -1997,7 +1984,7 @@ export default function App() {
 
             {/* Right: Stage Console & Details */}
             <div className="lg:col-span-8 flex flex-col justify-between rounded-2xl border border-white/5 bg-[#09090b]/90 p-6 sm:p-8 shadow-2xl relative overflow-hidden text-left min-h-[400px]">
-              
+
               {/* Decorative terminal dot highlights */}
               <div className="absolute top-4 right-6 flex gap-1.5 select-none opacity-50">
                 <span className="w-2 h-2 rounded-full bg-zinc-700"></span>
@@ -2007,7 +1994,7 @@ export default function App() {
 
               {/* Stage description & detail metrics */}
               <div className="space-y-4">
-                
+
                 {/* Active Stage Label */}
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-mono bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded border border-indigo-500/20">
@@ -2038,8 +2025,8 @@ export default function App() {
                   <div className="flex flex-wrap gap-1.5">
                     {(selectedDevOpsStage === 1 ? ["GitHub Actions", "Git", "Pytest", "ESLint"] :
                       selectedDevOpsStage === 2 ? ["Docker", "Multi-stage Builds", "Google Artifact Registry"] :
-                      selectedDevOpsStage === 3 ? ["Terraform", "Google Cloud Provider", "IAM Policies"] :
-                      ["Google Cloud Run", "Cloud CDN", "Load Balancing", "GKE"]
+                        selectedDevOpsStage === 3 ? ["Terraform", "Google Cloud Provider", "IAM Policies"] :
+                          ["Google Cloud Run", "Cloud CDN", "Load Balancing", "GKE"]
                     ).map((tool, idx) => (
                       <span key={idx} className="text-[9px] font-mono bg-zinc-950 border border-white/5 text-zinc-400 px-2.5 py-1 rounded">
                         {tool}
@@ -2052,7 +2039,7 @@ export default function App() {
 
               {/* Mock Terminal Shell Console */}
               <div className="mt-8 pt-4 border-t border-white/5 space-y-3 font-mono text-[11px] leading-relaxed">
-                
+
                 {/* Mock Command line */}
                 <div className="flex items-center gap-1.5 text-zinc-500">
                   <span className="text-indigo-400">$</span>
@@ -2267,7 +2254,7 @@ export default function App() {
                 <span className="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></span>
                 <h3 className="font-bold text-sm md:text-base">Contributions Graph</h3>
               </div>
-              
+
               {/* Year Select Tabs & Username */}
               <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm font-mono">
                 <div className="flex bg-zinc-950/60 p-0.5 rounded-lg border border-white/5 text-[10px] md:text-xs font-mono">
@@ -2275,11 +2262,10 @@ export default function App() {
                     <button
                       key={yr}
                       onClick={() => setGithubYear(yr)}
-                      className={`px-2.5 py-1 rounded-md transition-all ${
-                        githubYear === yr 
-                          ? 'bg-indigo-600 text-white font-bold shadow' 
+                      className={`px-2.5 py-1 rounded-md transition-all ${githubYear === yr
+                          ? 'bg-indigo-600 text-white font-bold shadow'
                           : 'text-zinc-500 hover:text-zinc-300'
-                      }`}
+                        }`}
                     >
                       {yr}
                     </button>
@@ -2569,7 +2555,7 @@ export default function App() {
       {/* Footer & Social Icons */}
       <footer className={`py-12 border-t w-full ${theme === 'dark' ? 'bg-[#0b0b0d] border-white/5' : 'bg-zinc-50 border-zinc-200'}`}>
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full flex flex-col md:flex-row justify-between items-center gap-6">
-          
+
           {/* Status Indicators */}
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-[10px] md:text-xs font-mono text-zinc-500">
             <div className="flex items-center gap-2">
@@ -2588,8 +2574,8 @@ export default function App() {
 
           {/* Direct Mail & Social Connections */}
           <div className="flex flex-col items-center gap-2">
-            <a 
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=brmedhini@gmail.com" 
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=brmedhini@gmail.com"
               target="_blank"
               rel="noreferrer"
               className="text-xs md:text-sm font-mono font-bold text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-2 tracking-wider group"
@@ -2597,22 +2583,22 @@ export default function App() {
               <Mail className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:scale-110 transition-transform" />
               <span>DIRECT MAIL // brmedhini@gmail.com</span>
             </a>
-            
+
             <div className="flex items-center gap-6 text-xs md:text-sm font-mono text-zinc-400 mt-1">
-              <a 
-                href="https://github.com/medhinibr" 
-                target="_blank" 
-                rel="noreferrer" 
+              <a
+                href="https://github.com/medhinibr"
+                target="_blank"
+                rel="noreferrer"
                 className="hover:text-indigo-400 transition-all flex items-center gap-1.5 uppercase hover:scale-105"
               >
                 <GithubIcon className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 <span>GitHub</span>
               </a>
               <span className="text-zinc-800">•</span>
-              <a 
-                href="https://www.linkedin.com/in/br-medhini/" 
-                target="_blank" 
-                rel="noreferrer" 
+              <a
+                href="https://www.linkedin.com/in/br-medhini/"
+                target="_blank"
+                rel="noreferrer"
                 className="hover:text-indigo-400 transition-all flex items-center gap-1.5 uppercase hover:scale-105"
               >
                 <LinkedinIcon className="w-3.5 h-3.5 md:w-4 md:h-4" />
@@ -2630,6 +2616,8 @@ export default function App() {
         </div>
       </footer>
 
+      {/* Cloud-Orchestrator AI Chatbot */}
+      <Chatbot theme={theme} />
     </div>
   );
 }
