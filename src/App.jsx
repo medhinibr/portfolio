@@ -998,7 +998,26 @@ export default function App() {
   }, [selectedSkill]);
 
   const [selectedChapter, setSelectedChapter] = useState(0);
-  const [githubYear, setGithubYear] = useState('last');
+  const [githubYear, setGithubYear] = useState(2026);
+  const [contributionData, setContributionData] = useState([]);
+  const [contributionsLoading, setContributionsLoading] = useState(false);
+
+  useEffect(() => {
+    setContributionsLoading(true);
+    fetch(`https://github-contributions-api.jogruber.de/v4/medhinibr?y=${githubYear}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.contributions) {
+          setContributionData(data.contributions);
+        }
+        setContributionsLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setContributionsLoading(false);
+      });
+  }, [githubYear]);
+
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
   const [pingingIdx, setPingingIdx] = useState(null);
   const [pingResults, setPingResults] = useState({});
@@ -1134,6 +1153,50 @@ export default function App() {
     setContactStep(0);
     setFormError('');
   };
+
+  // Group daily contributions by month (Jan-Dec) for the line graph
+  const getMonthlyContributions = () => {
+    const monthlyCounts = Array(12).fill(0);
+    if (!contributionData || contributionData.length === 0) {
+      // Fallback mock counts to avoid an empty graph before data loads
+      return [12, 25, 18, 30, 42, 35, 50, 48, 62, 70, 45, 20];
+    }
+    
+    contributionData.forEach(day => {
+      if (day.date) {
+        const dateParts = day.date.split('-');
+        if (dateParts.length === 3) {
+          const monthIndex = parseInt(dateParts[1], 10) - 1; // 0-indexed
+          if (monthIndex >= 0 && monthIndex < 12) {
+            monthlyCounts[monthIndex] += day.count || 0;
+          }
+        }
+      }
+    });
+
+    return monthlyCounts;
+  };
+
+  const monthlyCounts = getMonthlyContributions();
+  const maxVal = Math.max(...monthlyCounts, 1);
+  const graphPoints = monthlyCounts.map((count, index) => {
+    const x = (index / 11) * 100;
+    const y = 28 - (count / maxVal) * 23;
+    return { x, y };
+  });
+
+  let linePath = `M ${graphPoints[0].x} ${graphPoints[0].y}`;
+  for (let i = 1; i < graphPoints.length; i++) {
+    const prev = graphPoints[i - 1];
+    const curr = graphPoints[i];
+    const cpX1 = prev.x + (curr.x - prev.x) / 2;
+    const cpY1 = prev.y;
+    const cpX2 = prev.x + (curr.x - prev.x) / 2;
+    const cpY2 = curr.y;
+    linePath += ` C ${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${curr.x} ${curr.y}`;
+  }
+
+  const areaPath = `${linePath} L 100 30 L 0 30 Z`;
 
   return (
     <div
@@ -2188,7 +2251,7 @@ export default function App() {
               {/* Year Select Tabs & Username */}
               <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
                 <div className="flex bg-zinc-950/60 p-0.5 rounded-lg border border-white/5 text-[10px] font-mono">
-                  {['last', 2026, 2025, 2024].map((yr) => (
+                  {[2026, 2025, 2024].map((yr) => (
                     <button
                       key={yr}
                       onClick={() => setGithubYear(yr)}
@@ -2198,7 +2261,7 @@ export default function App() {
                           : 'text-zinc-500 hover:text-zinc-300'
                       }`}
                     >
-                      {yr === 'last' ? 'Last 12 Months' : yr}
+                      {yr}
                     </button>
                   ))}
                 </div>
@@ -2262,8 +2325,13 @@ export default function App() {
             <div className={`md:col-span-7 p-6 rounded-2xl border text-left shadow-xl flex flex-col justify-between ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
               }`}>
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-sm">Activity Graph</h3>
-                <span className="text-[10px] font-mono text-zinc-500">Medhini's Contribution Velocity</span>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-bold text-sm">Activity Graph</h3>
+                  {contributionsLoading && (
+                    <span className="text-[8px] font-mono bg-indigo-500/10 text-indigo-400 px-1.5 py-0.5 rounded animate-pulse">SYNCING</span>
+                  )}
+                </div>
+                <span className="text-[10px] font-mono text-zinc-500">Real-Time Velocity // {githubYear}</span>
               </div>
 
               {/* Custom SVG Line Chart */}
@@ -2281,22 +2349,25 @@ export default function App() {
                       <stop offset="100%" stopColor="#6366f1" stopOpacity="0.0" />
                     </linearGradient>
                   </defs>
+
+                  {/* Real-time Area Path */}
                   <path
-                    d="M0,30 L0,22 Q15,8 30,18 T60,5 T90,20 L100,28 L100,30 Z"
+                    d={areaPath}
                     fill="url(#chartGlow)"
+                    className="transition-all duration-500 ease-in-out"
                   />
 
-                  {/* Line Path */}
+                  {/* Real-time Line Path */}
                   <motion.path
-                    d="M0,22 Q15,8 30,18 T60,5 T90,20 L100,28"
+                    key={githubYear}
+                    d={linePath}
                     fill="none"
                     stroke="url(#lineGradient)"
                     strokeWidth="2"
                     strokeLinecap="round"
                     initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1.2, ease: "easeInOut" }}
                   />
                   <defs>
                     <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
@@ -2308,10 +2379,11 @@ export default function App() {
                 </svg>
               </div>
               <div className="flex justify-between items-center text-[9px] font-mono text-zinc-500 pt-2 border-t border-white/5 mt-2">
-                <span>JUN 2025</span>
-                <span>OCT 2025</span>
-                <span>FEB 2026</span>
-                <span>JUN 2026</span>
+                <span>JAN {githubYear}</span>
+                <span>APR {githubYear}</span>
+                <span>JUL {githubYear}</span>
+                <span>OCT {githubYear}</span>
+                <span>DEC {githubYear}</span>
               </div>
             </div>
           </div>
