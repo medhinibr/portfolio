@@ -1203,7 +1203,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Skills Section (CI/CD Pipeline Simulator) */}
+      {/* Skills Section (Horizontal CI/CD Pipeline Simulator) */}
       <section id="skills" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
@@ -1214,101 +1214,98 @@ export default function App() {
               }`}>Deployment Pipeline.</h2>
             <p className={`max-w-2xl text-sm ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              Interactive build and delivery pipeline showcasing tools, programming languages, and automation workflows.
+              Interactive horizontal build and delivery pipeline showcasing tools, programming languages, and automation workflows. Click any stage to inspect.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-12 gap-12 items-stretch">
-            {/* Left: CI/CD Pipeline Simulator */}
-            <div className="md:col-span-7 flex flex-col gap-4 relative">
-              {/* Connecting Pipe Line (Vertical indicator line) */}
-              <div className="absolute left-10 sm:left-12 top-6 bottom-6 w-0.5 bg-zinc-800/40 pointer-events-none z-0">
-                <motion.div
-                  className="w-full bg-gradient-to-b from-indigo-500 via-cyan-400 to-emerald-500"
-                  style={{ height: '100%', originY: 0 }}
-                  animate={{ scaleY: [0.3, 1.0, 0.3] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </div>
+          {/* Horizontal/Vertical Pipeline Track */}
+          <div className="relative p-6 sm:p-10 rounded-2xl bg-[#09090b]/80 border border-white/5 overflow-hidden w-full mb-10">
+            {/* Background Desktop Connecting SVG Line */}
+            <div className="hidden sm:block absolute left-[12%] right-[12%] top-[60px] h-0.5 bg-zinc-800/40 pointer-events-none z-0">
+              <motion.div
+                className="h-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-500"
+                style={{ width: '100%', originX: 0 }}
+                animate={{ scaleX: [0.3, 1.0, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
 
+            {/* Background Mobile Connecting SVG Line */}
+            <div className="block sm:hidden absolute left-12 top-[60px] bottom-[60px] w-0.5 bg-zinc-800/40 pointer-events-none z-0">
+              <motion.div
+                className="w-full bg-gradient-to-b from-indigo-500 via-cyan-400 to-emerald-500"
+                style={{ height: '100%', originY: 0 }}
+                animate={{ scaleY: [0.3, 1.0, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
+
+            {/* Stages Grid Container */}
+            <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-start gap-8 sm:gap-4 z-10 w-full relative">
               {pipelineStages.map((stage) => {
                 const isSelected = selectedSkill.id === stage.id;
                 return (
                   <motion.div
                     key={stage.id}
                     onClick={() => setSelectedSkill(stage)}
-                    whileHover={{ x: 4 }}
-                    className={`relative z-10 p-4 rounded-xl border flex items-center justify-between gap-4 cursor-pointer transition-all duration-300 ${isSelected 
-                      ? `${stage.colorTheme.bgSelected} ${stage.colorTheme.border} ${stage.colorTheme.glow}` 
-                      : 'bg-zinc-950/20 border-white/5 hover:border-white/10 hover:bg-zinc-950/40'
-                    }`}
+                    whileHover={{ scale: 1.03 }}
+                    className="flex flex-row sm:flex-col items-center gap-4 sm:gap-3 cursor-pointer z-10 w-full sm:w-1/5 text-left sm:text-center"
                   >
-                    <div className="flex items-center gap-4 text-left">
-                      {/* Stage Circle Indicator */}
-                      <div className={`w-12 h-12 rounded-full border flex items-center justify-center font-mono font-bold text-sm transition-all duration-300 ${isSelected 
-                        ? `border-current bg-zinc-950 ${stage.colorTheme.text}` 
-                        : 'border-zinc-800 bg-zinc-900 text-zinc-500'
-                      }`}>
-                        {stage.number}
-                      </div>
-
-                      {/* Stage Info */}
-                      <div>
-                        <span className="text-[9px] font-mono tracking-wider font-bold text-zinc-500 block uppercase">
-                          {stage.id.toUpperCase()} STAGE
-                        </span>
-                        <h4 className={`text-base font-bold transition-colors duration-300 ${isSelected ? 'text-white' : 'text-zinc-400'}`}>
-                          {stage.name}
-                        </h4>
-                      </div>
+                    {/* Node circle */}
+                    <div className={`w-14 h-14 rounded-full border-2 flex items-center justify-center font-mono font-black text-sm transition-all duration-300 flex-shrink-0 ${isSelected
+                      ? `border-current bg-zinc-950 ${stage.colorTheme.text} ${stage.colorTheme.glow}`
+                      : 'border-zinc-850 bg-zinc-900 text-zinc-500 hover:border-zinc-700'
+                    }`}>
+                      {stage.number}
                     </div>
-
-                    {/* Skill Badges for this stage */}
-                    <div className="hidden sm:flex flex-wrap gap-1.5 justify-end max-w-[50%]">
-                      {stage.skills.map((s, idx) => (
-                        <span key={idx} className={`text-[9px] font-mono px-2 py-0.5 rounded border transition-all duration-300 ${isSelected ? stage.colorTheme.badge : 'bg-zinc-900/40 border-white/5 text-zinc-500'}`}>
-                          {s.name}
-                        </span>
-                      ))}
+                    
+                    {/* Label */}
+                    <div className="flex flex-col items-start sm:items-center">
+                      <span className={`text-[8px] font-mono tracking-wider font-bold uppercase ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>
+                        {stage.id} STAGE
+                      </span>
+                      <span className={`text-xs font-bold transition-colors duration-300 ${isSelected ? 'text-white' : 'text-zinc-400'}`}>
+                        {stage.name}
+                      </span>
                     </div>
                   </motion.div>
                 );
               })}
             </div>
+          </div>
 
-            {/* Right: Detailed Card & Console Runner logs */}
-            <div className="md:col-span-5 flex flex-col justify-between gap-4">
-              <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-6 shadow-xl transition-all duration-300 flex-grow flex flex-col justify-between ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+          {/* Details & Terminal Output panel */}
+          <div className="grid md:grid-cols-12 gap-8 items-stretch mt-8">
+            {/* Left: Capability and Skills */}
+            <div className="md:col-span-6">
+              <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-6 shadow-xl transition-all duration-300 h-full ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
                 }`}>
-                <div className="space-y-6">
-                  {/* Header */}
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2.5 rounded-lg bg-zinc-900 text-zinc-400 border border-white/5 ${selectedSkill.colorTheme.text}`}>
-                      <Terminal className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className={`text-[10px] font-bold font-mono tracking-wider uppercase ${selectedSkill.colorTheme.text}`}>
-                        {selectedSkill.category}
-                      </p>
-                      <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                        }`}>
-                        {selectedSkill.name}
-                      </h3>
-                    </div>
+                <div className="flex items-center gap-3">
+                  <div className={`p-2.5 rounded-lg bg-zinc-900 text-zinc-400 border border-white/5 ${selectedSkill.colorTheme.text}`}>
+                    <Terminal className="w-5 h-5" />
                   </div>
-
-                  {/* Description */}
-                  <div className="space-y-2">
-                    <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">STAGE CAPABILITY</p>
-                    <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'
-                      }`}>
-                      {selectedSkill.use}
+                  <div>
+                    <p className={`text-[10px] font-bold font-mono tracking-wider uppercase ${selectedSkill.colorTheme.text}`}>
+                      {selectedSkill.category}
                     </p>
+                    <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+                      }`}>
+                      {selectedSkill.name}
+                    </h3>
                   </div>
+                </div>
 
-                  {/* Skills Mastery Progress Grid */}
-                  <div className="space-y-3 pt-2">
-                    <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">SKILLS INTEGRATION</p>
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">STAGE CAPABILITY</p>
+                  <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'
+                    }`}>
+                    {selectedSkill.use}
+                  </p>
+                </div>
+
+                <div className="space-y-3 pt-2">
+                  <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">SKILLS INTEGRATION</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {selectedSkill.skills.map((skill, idx) => (
                       <div key={idx} className="space-y-1">
                         <div className="flex justify-between text-xs font-mono">
@@ -1329,9 +1326,14 @@ export default function App() {
                     ))}
                   </div>
                 </div>
+              </div>
+            </div>
 
-                {/* Console Log Runner Display */}
-                <div className="pt-4 border-t border-white/5 mt-4 space-y-2">
+            {/* Right: Console Logs */}
+            <div className="md:col-span-6">
+              <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-4 shadow-xl transition-all duration-300 h-full flex flex-col justify-between ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+                }`}>
+                <div className="space-y-2 flex-grow flex flex-col justify-between">
                   <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500">
                     <span>RUNNER CONSOLE: STAGE_{selectedSkill.id.toUpperCase()}</span>
                     <span className="flex items-center gap-1.5">
@@ -1340,7 +1342,7 @@ export default function App() {
                     </span>
                   </div>
 
-                  <div className="bg-zinc-950 p-4 rounded-xl border border-white/5 font-mono text-[11px] text-zinc-400 space-y-1 min-h-[110px] overflow-hidden relative">
+                  <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[11px] text-zinc-400 space-y-1.5 min-h-[160px] overflow-hidden relative flex-grow flex flex-col justify-start">
                     {selectedSkill.logs.map((log, idx) => (
                       <motion.div
                         key={`${selectedSkill.id}-log-${idx}`}
