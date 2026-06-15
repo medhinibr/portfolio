@@ -88,7 +88,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
       <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${isOtherHovered ? 'blur-[3px] opacity-25 scale-95 select-none' : 'opacity-100 scale-100'
         } ${isHovered ? 'filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)]' : ''
         }`}>
-        
+
         {item.type === 'prefix' && (
           <motion.span
             initial={{ width: 0, opacity: 0 }}
@@ -109,8 +109,8 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
           }}
           transition={{ duration: 0.2 }}
           className={`inline-flex flex-shrink-0 cursor-default transition-all duration-300 smooth-text px-1 ${isHovered
-              ? 'bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent'
-              : (theme === 'dark' ? 'text-white' : 'text-zinc-900')
+            ? 'bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent'
+            : (theme === 'dark' ? 'text-white' : 'text-zinc-900')
             }`}
         >
           {item.char}
@@ -204,7 +204,7 @@ const TelemetryHeaderWidget = ({ lenisRef }) => {
 
   return (
     <div className="relative flex flex-col items-end">
-      <div 
+      <div
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/5 bg-zinc-950/80 backdrop-blur-md cursor-pointer select-none text-[10px] font-mono font-bold text-zinc-400 hover:border-indigo-500/40 hover:text-indigo-400 transition-all duration-300 shadow-lg"
       >
@@ -231,8 +231,8 @@ const TelemetryHeaderWidget = ({ lenisRef }) => {
               <span className="text-zinc-200 font-bold">{cpu}%</span>
             </div>
             <div className="w-full bg-zinc-900/50 h-1.5 rounded-full overflow-hidden">
-              <motion.div 
-                animate={{ width: `${cpu * 8}%` }} 
+              <motion.div
+                animate={{ width: `${cpu * 8}%` }}
                 transition={{ duration: 0.5 }}
                 className="bg-indigo-500 h-full rounded-full"
               />
@@ -248,7 +248,7 @@ const TelemetryHeaderWidget = ({ lenisRef }) => {
               <span className="text-zinc-200 font-bold">{formatUptime(uptime)}</span>
             </div>
 
-            <button 
+            <button
               onClick={() => {
                 setIsOpen(false);
                 handleStatusClick();
@@ -623,8 +623,8 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
             onClick={() => executeCommand(cmd)}
             disabled={isExecuting}
             className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold border transition-all ${theme === 'dark'
-                ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white hover:border-indigo-500/40 hover:bg-indigo-500/5'
-                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-indigo-500/40 hover:bg-indigo-500/5'
+              ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white hover:border-indigo-500/40 hover:bg-indigo-500/5'
+              : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-indigo-500/40 hover:bg-indigo-500/5'
               }`}
           >
             {cmd}
@@ -785,7 +785,7 @@ export default function App() {
               <motion.a
                 layoutId="download-resume-btn"
                 href="/resume.pdf"
-                download="Medhini_Resume.pdf"
+                download="B R Medhini - Resume.pdf"
                 className={`w-[150px] sm:w-[180px] h-[40px] sm:h-[48px] flex items-center justify-center rounded-full text-[11px] sm:text-[13px] font-bold border shadow-md transition-all duration-300 ${theme === 'dark'
                   ? 'bg-black/80 border-white/10 text-white hover:bg-white/5'
                   : 'bg-white/80 border-zinc-200 text-zinc-800 hover:bg-zinc-50'
@@ -892,7 +892,7 @@ export default function App() {
                 <motion.a
                   layoutId="download-resume-btn"
                   href="/resume.pdf"
-                  download="Medhini_Resume.pdf"
+                  download="B R Medhini - Resume.pdf"
                   exit={{ opacity: 0 }}
                   className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] font-bold border transition-all duration-300 ${theme === 'dark'
                     ? 'bg-transparent border-zinc-800 text-white hover:bg-white/5'
