@@ -69,7 +69,9 @@ const getFullWord = (item) => {
 
 // Interactive letter morph component for primary name "MEDHINI"
 const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, setClickedIdx, theme }) => {
-  const isHovered = (hoveredIdx === index) || (clickedIdx === index);
+  const isHovered = (hoveredIdx !== null)
+    ? (hoveredIdx === index)
+    : (clickedIdx === index);
   const isAnyHovered = (hoveredIdx !== null) || (clickedIdx !== null);
   const isOtherHovered = isAnyHovered && !isHovered;
 
@@ -83,9 +85,10 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
       }}
       className="flex items-center justify-center transition-all duration-300 h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] cursor-pointer"
     >
-      <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${isOtherHovered ? 'blur-[3px] opacity-25 scale-95 pointer-events-none select-none' : 'opacity-100 scale-100'
+      <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${isOtherHovered ? 'blur-[3px] opacity-25 scale-95 select-none' : 'opacity-100 scale-100'
         } ${isHovered ? 'filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)]' : ''
         }`}>
+        
         {item.type === 'prefix' && (
           <motion.span
             initial={{ width: 0, opacity: 0 }}
@@ -93,8 +96,8 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               width: isHovered ? "auto" : 0,
               opacity: isHovered ? 1 : 0
             }}
-            transition={{ duration: isHovered ? 0.35 : 0.01, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text pl-4 sm:pl-6 pr-1"
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-5xl sm:text-6xl md:text-[6.5rem] lg:text-[7.5rem] tracking-[-0.05em] uppercase smooth-text pl-4 sm:pl-6 pr-1"
           >
             {item.prefix}
           </motion.span>
@@ -120,8 +123,8 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               width: isHovered ? "auto" : 0,
               opacity: isHovered ? 1 : 0
             }}
-            transition={{ duration: isHovered ? 0.35 : 0.01, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text pl-1 pr-4 sm:pr-6"
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-5xl sm:text-6xl md:text-[6.5rem] lg:text-[7.5rem] tracking-[-0.05em] uppercase smooth-text pl-1 pr-4 sm:pr-6"
           >
             {item.suffix}
           </motion.span>
