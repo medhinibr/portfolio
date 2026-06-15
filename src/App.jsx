@@ -2596,13 +2596,25 @@ export default function App() {
               <span>DIRECT MAIL // brmedhini@gmail.com</span>
             </a>
             
-            <div className="flex items-center gap-4 text-[10px] font-mono text-zinc-500">
-              <a href="https://github.com/medhinibr" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors uppercase">
-                GitHub
+            <div className="flex items-center gap-6 text-xs font-mono text-zinc-400 mt-1">
+              <a 
+                href="https://github.com/medhinibr" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="hover:text-indigo-400 transition-all flex items-center gap-1.5 uppercase hover:scale-105"
+              >
+                <GithubIcon className="w-3.5 h-3.5" />
+                <span>GitHub</span>
               </a>
-              <span>•</span>
-              <a href="https://www.linkedin.com/in/br-medhini/" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors uppercase">
-                LinkedIn
+              <span className="text-zinc-800">•</span>
+              <a 
+                href="https://www.linkedin.com/in/br-medhini/" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="hover:text-indigo-400 transition-all flex items-center gap-1.5 uppercase hover:scale-105"
+              >
+                <LinkedinIcon className="w-3.5 h-3.5" />
+                <span>LinkedIn</span>
               </a>
             </div>
           </div>
