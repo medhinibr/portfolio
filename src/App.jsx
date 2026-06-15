@@ -1278,8 +1278,8 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center relative pt-16 sm:pt-20">
-        <div className="-mt-14 sm:-mt-20 space-y-6 w-full max-w-full mx-auto px-6 sm:px-16 relative">
+      <section id="home" className="min-h-screen flex flex-col justify-start sm:justify-center items-center text-center relative pt-28 sm:pt-20">
+        <div className="mt-0 sm:-mt-20 space-y-4 sm:space-y-6 w-full max-w-full mx-auto px-6 sm:px-16 relative">
           {/* Status Pill */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1342,7 +1342,7 @@ export default function App() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-[580px] mx-auto text-lg md:text-xl leading-relaxed text-[#94A3B8] font-normal mt-10 sm:mt-14"
+            className="max-w-[580px] mx-auto text-lg md:text-xl leading-relaxed text-[#94A3B8] font-normal mt-6 sm:mt-14"
           >
             I build high-performance cloud architectures, cross-platform mobile experiences, and scalable software pipelines that live at the intersection of infrastructure and design.
           </motion.p>
@@ -1352,7 +1352,7 @@ export default function App() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="pt-8 flex flex-row justify-center items-center gap-5 sm:gap-6"
+            className="pt-4 sm:pt-8 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6"
           >
             <a
               href="#contact"
@@ -1384,9 +1384,9 @@ export default function App() {
       </section>
 
       {/* Identity Section */}
-      <section id="identity" className="w-full pt-32 pb-20 min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="identity" className="w-full pt-20 pb-16 sm:pt-32 sm:pb-20 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
-          <div className="space-y-3 mb-10 text-left">
+          <div className="space-y-3 mb-6 sm:mb-10 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               01 // DEVOPS ENGINEER
             </div>
@@ -1397,7 +1397,7 @@ export default function App() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-12 gap-12 items-center">
+          <div className="grid md:grid-cols-12 gap-6 md:gap-12 items-center">
             <div className="md:col-span-6 space-y-6 text-left">
               <p className={`text-base sm:text-lg leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
                 }`}>
@@ -1477,9 +1477,9 @@ export default function App() {
       </section>
 
       {/* Skills Section (Interactive Cloud Architecture / Topology Map) */}
-      <section id="skills" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="skills" className="w-full py-16 sm:py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
-          <div className="space-y-4 mb-12 text-left">
+          <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-12 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               02 // TECHNICAL ARSENAL
             </div>
@@ -1491,7 +1491,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
             
             {/* Left Column: Interactive SVG Network Map */}
             <div className="lg:col-span-7 relative w-full aspect-[2/1] min-h-[250px] sm:min-h-[400px] rounded-2xl bg-[#09090b]/90 border border-white/5 overflow-hidden shadow-2xl flex items-center justify-center">
@@ -1761,10 +1761,10 @@ export default function App() {
       </section>
 
       {/* Selected Works Section (DevOps Deployments Registry) */}
-      <section id="works" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="works" className="w-full py-16 sm:py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           
-          <div className="space-y-4 mb-16 text-left">
+          <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               03 // DEPLOYMENTS REGISTRY
             </div>
@@ -2110,9 +2110,9 @@ export default function App() {
       </section>
 
       {/* Horizontal Deployment Tracker Timeline Section */}
-      <section id="timeline" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="timeline" className="w-full py-16 sm:py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
-          <div className="space-y-4 mb-12 text-left">
+          <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-12 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               04 // PIPELINE METRICS
             </div>
@@ -2245,9 +2245,9 @@ export default function App() {
       </section>
 
       {/* GitHub Contributions Section */}
-      <section id="telemetry" className="w-full py-24 text-center scroll-mt-28">
+      <section id="telemetry" className="w-full py-16 sm:py-24 text-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
-          <div className="space-y-4 mb-12">
+          <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-12">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               05 // TELEMETRY
             </div>
@@ -2260,7 +2260,7 @@ export default function App() {
           </div>
 
           {/* Calendar Grid Card */}
-          <div className={`p-6 sm:p-8 rounded-2xl border shadow-xl relative overflow-hidden text-left mb-8 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+          <div className={`p-6 sm:p-8 rounded-2xl border shadow-xl relative overflow-hidden text-left mb-4 sm:mb-8 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
             }`}>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
               <div className="flex items-center gap-2">
@@ -2411,7 +2411,7 @@ export default function App() {
       </section>
 
       {/* Interactive Contact Section */}
-      <section id="contact" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="contact" className="w-full py-16 sm:py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="w-full relative min-h-[350px] flex flex-col justify-between text-left">
 
