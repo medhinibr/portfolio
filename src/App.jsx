@@ -157,7 +157,7 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
         opacity: 1,
         filter: "none"
       }}
-      className="inline-flex cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-5.5xl sm:text-7.5xl md:text-[9.5rem] lg:text-[10.5rem] leading-[0.85] smooth-text px-3 sm:px-4 flex-shrink-0"
+      className="inline-flex cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-5.5xl sm:text-7.5xl md:text-[9.5rem] lg:text-[10.5rem] leading-[0.85] smooth-text px-0.5 sm:px-1 flex-shrink-0"
     >
       {char === ' ' ? '\u00A0' : char}
     </motion.span>
@@ -845,7 +845,7 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="flex justify-center flex-nowrap -mt-6 sm:-mt-10 md:-mt-14 lg:-mt-16 gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible"
+              className="flex justify-center flex-nowrap -mt-2 sm:-mt-4 gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible"
             >
               {"DEV".split("").map((char, index) => (
                 <AnimatedGradientLetter
