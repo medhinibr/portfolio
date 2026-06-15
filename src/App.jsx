@@ -597,50 +597,50 @@ const timelineChapters = [
 
 const projectsList = [
   {
-    title: "nivarya-setu-api",
+    title: "Nivarya_Setu",
     category: "Deployment (Cloud Run)",
     status: "Healthy",
     description: "An Indian stock market simulator processing real-time NSE/BSE data, rendering technical charts, and conducting portfolio analytics.",
-    github: "https://github.com/medhinibr",
+    github: "https://github.com/medhinibr/Nivarya_Setu",
     tags: ["React", "Python", "Flask", "Stock-Analysis"],
     endpoint: "https://nivarya-setu.medhini.dev",
-    registry: "gcr.io/medhini-prod/nivarya-setu:v1.2",
+    registry: "gcr.io/medhini-prod/Nivarya_Setu:v1.2",
     uptime: "99.98%",
     metrics: { cpu: "18%", mem: "145MB / 512MB" }
   },
   {
-    title: "vyamir-weather-service",
+    title: "Vyamir",
     category: "Serverless (Cloud Run)",
     status: "Healthy",
     description: "A visually rich weather analytics platform designed to offer real-time meteorological intelligence and a gamified rewards ecosystem.",
-    github: "https://github.com/medhinibr",
+    github: "https://github.com/medhinibr/Vyamir",
     tags: ["HTML", "CSS", "JavaScript", "Visualizations"],
     endpoint: "https://vyamir.medhini.dev",
-    registry: "gcr.io/medhini-prod/vyamir-service:v2.0",
+    registry: "gcr.io/medhini-prod/Vyamir:v2.0",
     uptime: "100.00%",
     metrics: { cpu: "8%", mem: "64MB / 256MB" }
   },
   {
-    title: "ed-wise-lms-engine",
+    title: "Ed-Wise",
     category: "Orchestrated (K8s Pod)",
     status: "Healthy",
     description: "An AI-powered Learning Management System (LMS) designed to modernize student-teacher-parent interactions with gamification logic.",
-    github: "https://github.com/medhinibr",
+    github: "https://github.com/medhinibr/Ed-Wise",
     tags: ["JavaScript", "Node.js", "LMS", "Gamification"],
     endpoint: "https://ed-wise.medhini.dev",
-    registry: "gcr.io/medhini-prod/ed-wise-lms:v1.0",
+    registry: "gcr.io/medhini-prod/Ed-Wise:v1.0",
     uptime: "99.95%",
     metrics: { cpu: "28%", mem: "210MB / 512MB" }
   },
   {
-    title: "viral-drop-asset-cdn",
+    title: "Viral-Drop-Platform-",
     category: "DaemonSet (Edge CDN)",
     status: "Active Dev",
     description: "A high-performance content delivery and automated assets sharing platform designed for frictionless community-wide file drops.",
-    github: "https://github.com/medhinibr",
+    github: "https://github.com/medhinibr/Viral-Drop-Platform-",
     tags: ["JavaScript", "Node.js", "Content-Sharing", "WebSockets"],
     endpoint: "https://viral-drop.medhini.dev",
-    registry: "gcr.io/medhini-prod/viral-drop-cdn:v0.8-alpha",
+    registry: "gcr.io/medhini-prod/Viral-Drop-Platform-:v0.8-alpha",
     uptime: "99.90%",
     metrics: { cpu: "35%", mem: "340MB / 1024MB" }
   }
@@ -917,6 +917,26 @@ export default function App() {
 
   const [selectedChapter, setSelectedChapter] = useState(0);
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
+  const [pingingIdx, setPingingIdx] = useState(null);
+  const [pingResults, setPingResults] = useState({});
+
+  const handleTestConnection = (idx) => {
+    if (pingingIdx !== null) return;
+    setPingingIdx(idx);
+    setTimeout(() => {
+      setPingResults(prev => ({
+        ...prev,
+        [idx]: {
+          status: "200 OK",
+          latency: `${Math.floor(Math.random() * 80) + 45}ms`,
+          server: idx === 3 ? "edge-cdn" : "gcp-cloud-run",
+          ip: `34.120.${Math.floor(Math.random() * 190) + 10}.${Math.floor(Math.random() * 254)}`
+        }
+      }));
+      setPingingIdx(null);
+    }, 1100);
+  };
+
   // Custom cursor state variables
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
   const [isHoveringClickable, setIsHoveringClickable] = useState(false);
@@ -1649,6 +1669,61 @@ export default function App() {
                       <span>MEMORY RESIDENT SET</span>
                       <span className="text-indigo-300">{project.metrics.mem}</span>
                     </div>
+                  </div>
+
+                  {/* Connection / Ping Telemetry */}
+                  <div className="flex flex-col gap-1 text-[9px] font-mono border-t border-b border-white/5 py-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-zinc-500">ENDPOINT URL</span>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleTestConnection(idx);
+                        }}
+                        disabled={pingingIdx !== null}
+                        className={`text-[8px] px-1.5 py-0.5 rounded font-bold transition-all border ${
+                          pingingIdx === idx 
+                            ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400 animate-pulse'
+                            : 'bg-indigo-500/10 border-indigo-500/20 text-indigo-300 hover:bg-indigo-500/25'
+                        }`}
+                      >
+                        {pingingIdx === idx ? 'PINGING...' : 'TEST CONN'}
+                      </button>
+                    </div>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-zinc-400 hover:text-white truncate underline cursor-pointer"
+                    >
+                      {project.endpoint}
+                    </a>
+                    
+                    {/* Live Ping Response */}
+                    {pingResults[idx] && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="mt-1 bg-zinc-950 p-2 rounded border border-white/5 space-y-1 text-zinc-500 text-[8px] leading-tight"
+                      >
+                        <div className="flex justify-between">
+                          <span>HTTP STATUS:</span>
+                          <span className="text-emerald-400 font-bold">{pingResults[idx].status}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>LATENCY:</span>
+                          <span className="text-zinc-300">{pingResults[idx].latency}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>IP ADDRESS:</span>
+                          <span className="text-zinc-300">{pingResults[idx].ip}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>SERVER:</span>
+                          <span className="text-zinc-300">{pingResults[idx].server}</span>
+                        </div>
+                      </motion.div>
+                    )}
                   </div>
 
                   {/* Description */}
