@@ -2023,107 +2023,104 @@ export default function App() {
         </div>
       </section>
 
-      {/* Linux System Boot Sequence Timeline Section */}
+      {/* Interactive Connection Pipe Timeline Section */}
       <section id="timeline" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              04 // KERNEL BOOT SEQUENCE
+              04 // INTERACTIVE TIMELINE
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>System Boot Logs.</h2>
+              }`}>Career Stepper.</h2>
             <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              Initializing educational subsystems, remote internship endpoints, and student leadership processes as chronological operating system boot sequences.
+              Chronological track of my academic milestones, developer internships, and startup operations connected via interactive fiber-optic nodes.
             </p>
           </div>
 
           <div className="grid md:grid-cols-12 gap-10 items-stretch">
-            {/* Left Column - Systemd Services list */}
-            <div className="md:col-span-5 flex flex-col space-y-2.5 text-left justify-center">
+            {/* Left Column - Stepper track list */}
+            <div className="md:col-span-5 relative flex flex-col space-y-2 text-left justify-center py-4 pl-4">
+              {/* Vertical fiber-optic line track */}
+              <div className="absolute left-[19px] top-6 bottom-6 w-0.5 bg-zinc-800/80" />
+
               {timelineChapters.map((item, idx) => {
                 const isSelected = selectedChapter === idx;
                 return (
                   <button
                     key={idx}
                     onClick={() => setSelectedChapter(idx)}
-                    className={`flex items-center justify-between p-3.5 rounded-xl border text-left font-mono transition-all duration-300 relative group ${isSelected
-                      ? 'bg-zinc-900 border-indigo-500/30 text-white shadow-lg shadow-indigo-500/5'
-                      : 'bg-transparent border-transparent hover:bg-zinc-800/10 hover:border-white/5 text-zinc-400 hover:text-zinc-200'
-                      }`}
+                    className="relative flex items-center w-full text-left group focus:outline-none py-3 pl-12"
                   >
-                    <div className="flex items-center gap-3">
-                      <span className={`text-[10px] font-bold ${isSelected ? 'text-emerald-400' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
-                        [  OK  ]
-                      </span>
-                      <div className="flex flex-col">
-                        <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">
-                          init-stage-0{idx + 1}.service
-                        </span>
-                        <span className="text-xs font-bold font-sans">
-                          {item.title}
-                        </span>
-                      </div>
+                    {/* The Node circle */}
+                    <div className="absolute left-[10px] top-1/2 -translate-y-1/2 z-10 flex items-center justify-center">
+                      {isSelected ? (
+                        <div className="w-5 h-5 rounded-full bg-zinc-950 border-2 border-indigo-500 flex items-center justify-center relative shadow-[0_0_15px_rgba(99,102,241,0.5)]">
+                          {/* Glowing inner dot */}
+                          <motion.div
+                            layoutId="stepperPacket"
+                            className="w-1.5 h-1.5 rounded-full bg-indigo-400"
+                            transition={{ type: "spring", stiffness: 150, damping: 18 }}
+                          />
+                          {/* Outer pulse */}
+                          <span className="absolute -inset-1 rounded-full border border-indigo-500/30 animate-ping" />
+                        </div>
+                      ) : (
+                        <div className="w-4 h-4 rounded-full bg-zinc-950 border-2 border-zinc-700 group-hover:border-zinc-400 transition-all duration-200" />
+                      )}
                     </div>
-                    {isSelected && (
-                      <span className="text-[10px] text-indigo-400 font-bold tracking-wider animate-pulse">
-                        [ACTIVE]
+
+                    {/* Label details */}
+                    <div className="flex flex-col transition-all duration-300 group-hover:translate-x-0.5">
+                      <span className={`text-[9px] font-mono font-bold tracking-widest uppercase ${isSelected ? 'text-indigo-400' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
+                        {item.chapter} // {item.period.split(' ').pop()}
                       </span>
-                    )}
+                      <h3 className={`text-sm font-bold transition-colors duration-200 ${isSelected ? (theme === 'dark' ? 'text-white' : 'text-zinc-900') : 'text-zinc-500 group-hover:text-zinc-300'}`}>
+                        {item.title}
+                      </h3>
+                      <span className={`text-[10px] font-mono ${isSelected ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                        {item.role}
+                      </span>
+                    </div>
                   </button>
                 );
               })}
             </div>
 
-            {/* Right Column - Journald Log Inspector */}
+            {/* Right Column - Sleek details card with glowing border */}
             <div className="md:col-span-7 flex flex-col justify-center">
-              <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[440px] flex flex-col justify-between transition-all duration-300 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+              <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[400px] flex flex-col justify-between transition-all duration-500 ${theme === 'dark'
+                ? 'bg-[#0f0f12] border-indigo-500/20 shadow-[0_0_50px_rgba(99,102,241,0.03)]'
+                : 'bg-white border-zinc-200 shadow-[0_0_50px_rgba(0,0,0,0.02)]'
                 }`}>
                 <div>
-                  {/* Journalctl Header */}
-                  <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
+                  {/* Header containing Chapter ID & dates */}
+                  <div className="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
                     <div className="flex items-center gap-2 font-mono text-[10px] text-zinc-500">
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                      <span>systemd-journald@medhini-core</span>
+                      <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                      <span>{timelineChapters[selectedChapter].chapter} // RUNNING</span>
                     </div>
-                    <span className="font-mono text-[9px] text-zinc-500">journalctl -u init-stage-0{selectedChapter + 1} -n 20</span>
+                    <span className="font-mono text-[10px] text-indigo-400 font-bold">{timelineChapters[selectedChapter].period}</span>
                   </div>
 
-                  {/* Terminal Log Console */}
-                  <div className="font-mono text-xs space-y-4 leading-relaxed text-zinc-400">
+                  {/* Core content */}
+                  <div className="space-y-4">
                     <div>
-                      <span className="text-indigo-400 font-bold">$ journalctl -xe --no-pager</span>
+                      <h3 className={`text-2xl font-black font-display tracking-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+                        {timelineChapters[selectedChapter].title}
+                      </h3>
+                      <p className="text-sm text-indigo-400 font-mono font-medium mt-1">
+                        {timelineChapters[selectedChapter].role} @ {timelineChapters[selectedChapter].institution}
+                      </p>
                     </div>
 
-                    <div className={`border rounded-lg p-4 space-y-2.5 overflow-x-auto ${theme === 'dark' ? 'bg-zinc-950/60 border-white/5' : 'bg-zinc-50 border-zinc-200'}`}>
-                      {timelineChapters[selectedChapter].bootLogs.map((log, lIdx) => {
-                        const isOk = log.startsWith("[  OK  ]");
-                        const isInfo = log.startsWith("[ INFO ]");
-                        return (
-                          <div key={lIdx} className="flex gap-2 whitespace-nowrap">
-                            <span className="text-zinc-600 select-none">Jun 15 18:35:1{lIdx}</span>
-                            <span className="text-zinc-500">medhini-kernel:</span>
-                            <span className={isOk ? "text-emerald-400 font-bold" : isInfo ? "text-cyan-400" : "text-zinc-300"}>
-                              {log}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    <div className="pt-2 space-y-2">
-                      <span className="text-indigo-400 font-bold">SYSTEM METADATA:</span>
-                      <div className="grid grid-cols-2 gap-y-1 text-[11px]">
-                        <div><span className="text-zinc-500">INSTITUTION :</span> <span className="text-zinc-300">{timelineChapters[selectedChapter].institution}</span></div>
-                        <div><span className="text-zinc-500">ROLE        :</span> <span className="text-zinc-300 font-bold">{timelineChapters[selectedChapter].role}</span></div>
-                        <div><span className="text-zinc-500">PERIOD      :</span> <span className="text-zinc-300">{timelineChapters[selectedChapter].period}</span></div>
-                        <div><span className="text-zinc-500">STATUS      :</span> <span className="text-emerald-400 font-bold">● Active (running)</span></div>
-                      </div>
-                    </div>
+                    <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-600'}`}>
+                      {timelineChapters[selectedChapter].description}
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/5">
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-800">
                   {timelineChapters[selectedChapter].skills.map((skill, sIdx) => (
                     <span
                       key={sIdx}
