@@ -479,7 +479,14 @@ const timelineChapters = [
       bgSelected: "bg-emerald-600/10 border-emerald-500 shadow-md shadow-emerald-600/5",
       badgeSelected: "border-emerald-400 bg-emerald-500/20 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.5)]",
       lineGlow: "bg-emerald-500"
-    }
+    },
+    bootLogs: [
+      "[  OK  ] Started Chapter I: First Light.",
+      "[ INFO ] Mounting Sri BGS PU College resources...",
+      "[ INFO ] Loading module: standard_logic.bin (Success)",
+      "[ INFO ] Loading module: basic_web_formatting.bin (Success)",
+      "[  OK  ] Completed Chapter I in 22 months."
+    ]
   },
   {
     chapter: "CHAPTER II",
@@ -495,7 +502,15 @@ const timelineChapters = [
       bgSelected: "bg-teal-600/10 border-teal-500 shadow-md shadow-teal-600/5",
       badgeSelected: "border-teal-400 bg-teal-500/20 text-teal-300 shadow-[0_0_15px_rgba(20,184,166,0.5)]",
       lineGlow: "bg-teal-500"
-    }
+    },
+    bootLogs: [
+      "[  OK  ] Reached target higher-academia.target.",
+      "[ INFO ] Mounting SDM Institute of Technology (SDMIT) assets...",
+      "[ INFO ] Loading module: cs_fundamentals.bin (Success)",
+      "[ INFO ] Loading module: database_management.bin (Success)",
+      "[ INFO ] Loading module: python_scripting.bin (Success)",
+      "[  OK  ] Active Enrollment: Expected completion in May 2027."
+    ]
   },
   {
     chapter: "CHAPTER III",
@@ -511,7 +526,15 @@ const timelineChapters = [
       bgSelected: "bg-blue-600/10 border-blue-500 shadow-md shadow-blue-600/5",
       badgeSelected: "border-blue-400 bg-blue-500/20 text-blue-300 shadow-[0_0_15px_rgba(59,130,246,0.5)]",
       lineGlow: "bg-blue-500"
-    }
+    },
+    bootLogs: [
+      "[  OK  ] Reached target cloud-native.target.",
+      "[ INFO ] Initializing Google Cloud Arcade sandbox...",
+      "[ INFO ] Spawning microservice container: docker.io/library/alpine:latest",
+      "[ INFO ] Mounting persistent volume: /var/lib/k8s",
+      "[ INFO ] Loading module: kubernetes_orchestrator.bin (Success)",
+      "[  OK  ] Completed facilitation labs in 7 months."
+    ]
   },
   {
     chapter: "CHAPTER IV",
@@ -527,7 +550,14 @@ const timelineChapters = [
       bgSelected: "bg-purple-600/10 border-purple-500 shadow-md shadow-purple-600/5",
       badgeSelected: "border-purple-400 bg-purple-500/20 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.5)]",
       lineGlow: "bg-purple-500"
-    }
+    },
+    bootLogs: [
+      "[  OK  ] Reached target tech-communities.target.",
+      "[ INFO ] Connecting to global innovators community...",
+      "[ INFO ] Subscribing to deep-dives: compute_engine, cloud_functions",
+      "[ INFO ] Joining Women Techmakers networking portal...",
+      "[  OK  ] Active Membership established."
+    ]
   },
   {
     chapter: "CHAPTER V",
@@ -543,7 +573,14 @@ const timelineChapters = [
       bgSelected: "bg-cyan-600/10 border-cyan-500 shadow-md shadow-cyan-600/5",
       badgeSelected: "border-cyan-400 bg-cyan-500/20 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.5)]",
       lineGlow: "bg-cyan-500"
-    }
+    },
+    bootLogs: [
+      "[  OK  ] Reached target startup-foundation.target.",
+      "[ INFO ] Initializing Berukodige Farm Agri-Innovation codebase...",
+      "[ INFO ] Provisioning server: plant-nursery-management-v1",
+      "[ INFO ] Deploying backend logic: python_flask_api.bin",
+      "[  OK  ] Active Co-Founder & CSO role online."
+    ]
   },
   {
     chapter: "CHAPTER VI",
@@ -559,7 +596,14 @@ const timelineChapters = [
       bgSelected: "bg-amber-600/10 border-amber-500 shadow-md shadow-amber-600/5",
       badgeSelected: "border-amber-400 bg-amber-500/20 text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.5)]",
       lineGlow: "bg-amber-500"
-    }
+    },
+    bootLogs: [
+      "[  OK  ] Reached target pragati-path.target.",
+      "[ INFO ] Initializing Infosys Springboard data science track...",
+      "[ INFO ] Loading module: machine_learning_model.bin (Success)",
+      "[ INFO ] Loading module: data_analytics_pipelines.bin (Success)",
+      "[  OK  ] Completed Cohort 5 internship in 4 months."
+    ]
   },
   {
     chapter: "CHAPTER VII",
@@ -575,7 +619,14 @@ const timelineChapters = [
       bgSelected: "bg-orange-600/10 border-orange-500 shadow-md shadow-orange-600/5",
       badgeSelected: "border-orange-400 bg-orange-500/20 text-orange-300 shadow-[0_0_15px_rgba(249,115,22,0.5)]",
       lineGlow: "bg-orange-500"
-    }
+    },
+    bootLogs: [
+      "[  OK  ] Reached target community-expert.target.",
+      "[ INFO ] Authenticating with Google Forum Moderator API...",
+      "[ INFO ] Indexing SEO help inquiries...",
+      "[ INFO ] Analyzing snippet ranking & safe search behaviors...",
+      "[  OK  ] Active Product Expert status live."
+    ]
   },
   {
     chapter: "CHAPTER VIII",
@@ -591,7 +642,13 @@ const timelineChapters = [
       bgSelected: "bg-sky-600/10 border-sky-500 shadow-md shadow-sky-600/5",
       badgeSelected: "border-sky-400 bg-sky-500/20 text-sky-300 shadow-[0_0_15px_rgba(14,165,233,0.5)]",
       lineGlow: "bg-sky-500"
-    }
+    },
+    bootLogs: [
+      "[  OK  ] Reached target startup-coordinator.target.",
+      "[ INFO ] Mapping campus innovation ecosystem...",
+      "[ INFO ] Organizing entrepreneurship hackathons & product workshops...",
+      "[  OK  ] Coordination system active."
+    ]
   },
   {
     chapter: "CHAPTER IX",
@@ -607,7 +664,14 @@ const timelineChapters = [
       bgSelected: "bg-rose-600/10 border-rose-500 shadow-md shadow-rose-600/5",
       badgeSelected: "border-rose-400 bg-rose-500/20 text-rose-300 shadow-[0_0_15px_rgba(244,63,94,0.5)]",
       lineGlow: "bg-rose-500"
-    }
+    },
+    bootLogs: [
+      "[  OK  ] Reached target mobile-architecture.target.",
+      "[ INFO ] Mounting US-Remote development workspace (Texas)...",
+      "[ INFO ] Spawning mobile container: flutter_dart_runtime.bin",
+      "[ INFO ] Loading module: api_state_management.bin (Success)",
+      "[  OK  ] Active Flutter Developer Intern session initialized."
+    ]
   }
 ];
 
@@ -1959,182 +2023,102 @@ export default function App() {
         </div>
       </section>
 
-      {/* Git Branches History Tree Timeline Section */}
+      {/* Linux System Boot Sequence Timeline Section */}
       <section id="timeline" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              04 // SYSTEMS VERSION CONTROL
+              04 // KERNEL BOOT SEQUENCE
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>Git History Tree.</h2>
+              }`}>System Boot Logs.</h2>
             <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              Visualizing my educational track and parallel engineering/startup branches as interactive Git workflow commits.
+              Initializing educational subsystems, remote internship endpoints, and student leadership processes as chronological operating system boot sequences.
             </p>
-
-            {/* Tree Branch Legend */}
-            <div className="flex flex-wrap gap-4 text-[10px] font-mono pt-2">
-              <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                <span className="text-zinc-500">main (Education)</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-cyan-500"></span>
-                <span className="text-zinc-500">cloud-devops (Engineering)</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-purple-500"></span>
-                <span className="text-zinc-500">startup-community (Leadership)</span>
-              </div>
-            </div>
           </div>
 
           <div className="grid md:grid-cols-12 gap-10 items-stretch">
-            {/* Left Column - Git tree selector */}
-            <div className="md:col-span-5 flex flex-col space-y-0 text-left justify-center">
+            {/* Left Column - Systemd Services list */}
+            <div className="md:col-span-5 flex flex-col space-y-2.5 text-left justify-center">
               {timelineChapters.map((item, idx) => {
                 const isSelected = selectedChapter === idx;
-
-                // Define coordinates for columns
-                const colX = [22, 46, 70];
-
-                // Define branch colors
-                const branchColors = [
-                  "#10b981", // main (emerald)
-                  "#06b6d4", // cloud-devops (cyan)
-                  "#a855f7"  // startup-community (purple)
-                ];
-
-                // Row branch mapping
-                const rowBranch = [0, 0, 1, 2, 2, 1, 2, 2, 1];
-                const activeBranch = rowBranch[idx];
-                const nodeX = colX[activeBranch];
-
-                // Check active highlighting per branch
-                const isMainActive = selectedChapter === 0 || selectedChapter === 1;
-                const isCloudActive = selectedChapter === 2 || selectedChapter === 5 || selectedChapter === 8;
-                const isStartupActive = selectedChapter === 3 || selectedChapter === 4 || selectedChapter === 6 || selectedChapter === 7;
-
                 return (
                   <button
                     key={idx}
                     onClick={() => setSelectedChapter(idx)}
-                    className={`flex items-stretch w-full text-left group focus:outline-none transition-colors duration-200 ${isSelected ? 'bg-white/[0.02] border-y border-white/5' : 'border-y border-transparent'}`}
+                    className={`flex items-center justify-between p-3.5 rounded-xl border text-left font-mono transition-all duration-300 relative group ${isSelected
+                      ? 'bg-zinc-900 border-indigo-500/30 text-white shadow-lg shadow-indigo-500/5'
+                      : 'bg-transparent border-transparent hover:bg-zinc-800/10 hover:border-white/5 text-zinc-400 hover:text-zinc-200'
+                      }`}
                   >
-                    {/* Git Tree SVG cell */}
-                    <div className="w-[90px] relative flex-shrink-0">
-                      <svg className="w-full h-full min-h-[70px]" viewBox="0 0 90 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        {/* Column 1 (main) - always present */}
-                        <line x1="22" y1="0" x2="22" y2="70" stroke={isMainActive ? "#10b981" : "#27272a"} strokeWidth={isSelected && activeBranch === 0 ? "3" : "1.5"} />
-
-                        {/* Column 2 (cloud-devops) - active from Chapter III (idx >= 2) */}
-                        {idx >= 2 && (
-                          <line x1="46" y1="0" x2="46" y2="70" stroke={isCloudActive ? "#06b6d4" : "#27272a"} strokeWidth={isSelected && activeBranch === 1 ? "3" : "1.5"} />
-                        )}
-
-                        {/* Column 3 (startup-community) - active from Chapter IV (idx >= 3) */}
-                        {idx >= 3 && (
-                          <line x1="70" y1="0" x2="70" y2="70" stroke={isStartupActive ? "#a855f7" : "#27272a"} strokeWidth={isSelected && activeBranch === 2 ? "3" : "1.5"} />
-                        )}
-
-                        {/* Branch curves for splits */}
-                        {idx === 2 && (
-                          <path d="M 22 0 Q 32 15 46 35" stroke={isCloudActive ? "#06b6d4" : "#27272a"} strokeWidth="1.5" />
-                        )}
-                        {idx === 3 && (
-                          <path d="M 22 0 Q 46 15 70 35" stroke={isStartupActive ? "#a855f7" : "#27272a"} strokeWidth="1.5" />
-                        )}
-
-                        {/* Commit Node Circle */}
-                        {isSelected ? (
-                          <g>
-                            <circle cx={nodeX} cy="35" r="7.5" fill="#09090b" stroke={branchColors[activeBranch]} strokeWidth="3" />
-                            <circle cx={nodeX} cy="35" r="3" fill={branchColors[activeBranch]} />
-                          </g>
-                        ) : (
-                          <circle cx={nodeX} cy="35" r="4.5" fill="#09090b" stroke="#52525b" strokeWidth="2.5" className="group-hover:stroke-zinc-300 group-hover:scale-125 transition-all duration-200" />
-                        )}
-                      </svg>
-                    </div>
-
-                    {/* Chapter details label */}
-                    <div className={`flex-1 pl-2 pr-4 flex flex-col justify-center py-2 transition-all duration-300 ${isSelected ? 'translate-x-1' : 'group-hover:translate-x-0.5'}`}>
-                      <span className={`text-[8px] font-mono font-bold tracking-wider uppercase ${isSelected ? item.colorTheme.text : 'text-zinc-500 group-hover:text-zinc-300'}`}>
-                        {idx === 0 || idx === 1 ? 'main' : idx === 2 || idx === 5 || idx === 8 ? 'cloud-devops' : 'startup-community'} // {item.period.split(' ').pop()}
+                    <div className="flex items-center gap-3">
+                      <span className={`text-[10px] font-bold ${isSelected ? 'text-emerald-400' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
+                        [  OK  ]
                       </span>
-                      <h3 className={`text-xs sm:text-sm font-bold transition-colors duration-200 ${isSelected ? (theme === 'dark' ? 'text-white' : 'text-zinc-900') : 'text-zinc-500 group-hover:text-zinc-300'}`}>
-                        {item.title}
-                      </h3>
-                      <span className={`text-[9px] font-mono ${isSelected ? 'text-zinc-400' : 'text-zinc-500'}`}>{item.role}</span>
+                      <div className="flex flex-col">
+                        <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">
+                          init-stage-0{idx + 1}.service
+                        </span>
+                        <span className="text-xs font-bold font-sans">
+                          {item.title}
+                        </span>
+                      </div>
                     </div>
+                    {isSelected && (
+                      <span className="text-[10px] text-indigo-400 font-bold tracking-wider animate-pulse">
+                        [ACTIVE]
+                      </span>
+                    )}
                   </button>
                 );
               })}
             </div>
 
-            {/* Right Column - Git Show Commit Inspector */}
+            {/* Right Column - Journald Log Inspector */}
             <div className="md:col-span-7 flex flex-col justify-center">
               <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[440px] flex flex-col justify-between transition-all duration-300 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
                 }`}>
                 <div>
-                  {/* Git show header */}
+                  {/* Journalctl Header */}
                   <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
                     <div className="flex items-center gap-2 font-mono text-[10px] text-zinc-500">
-                      <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                      <span>git show {selectedChapter === 0 || selectedChapter === 1 ? 'main' : selectedChapter === 2 || selectedChapter === 5 || selectedChapter === 8 ? 'cloud-devops' : 'startup-community'}:0{selectedChapter + 1}</span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span>systemd-journald@medhini-core</span>
                     </div>
-                    <span className="font-mono text-[9px] text-zinc-500">COMMIT_SHA: f2a8{selectedChapter}de</span>
+                    <span className="font-mono text-[9px] text-zinc-500">journalctl -u init-stage-0{selectedChapter + 1} -n 20</span>
                   </div>
 
-                  {/* Network Log Output Block */}
+                  {/* Terminal Log Console */}
                   <div className="font-mono text-xs space-y-4 leading-relaxed text-zinc-400">
                     <div>
-                      <span className="text-indigo-400 font-bold">$ git show --stat</span>
+                      <span className="text-indigo-400 font-bold">$ journalctl -xe --no-pager</span>
                     </div>
 
-                    <div className={`border rounded-lg p-4 space-y-2.5 ${theme === 'dark' ? 'bg-zinc-950/40 border-white/5' : 'bg-zinc-50 border-zinc-200'}`}>
-                      <div>
-                        <span className="text-zinc-500 inline-block w-24">COMMIT       :</span>{" "}
-                        <span className={`font-bold ${timelineChapters[selectedChapter].colorTheme.text}`}>
-                          f2a8{selectedChapter}de817c6000000000000{selectedChapter + 1}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-500 inline-block w-24">BRANCH       :</span>{" "}
-                        <span className="text-zinc-300 font-semibold">
-                          {selectedChapter === 0 || selectedChapter === 1 ? 'main' : selectedChapter === 2 || selectedChapter === 5 || selectedChapter === 8 ? 'cloud-devops' : 'startup-community'}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-500 inline-block w-24">AUTHOR       :</span>{" "}
-                        <span className="text-zinc-300">
-                          B R Medhini &lt;brmedhini@gmail.com&gt;
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-500 inline-block w-24">DATE         :</span>{" "}
-                        <span className="text-zinc-300">{timelineChapters[selectedChapter].period}</span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-500 inline-block w-24">SUBJECT      :</span>{" "}
-                        <span className={`${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-800'} font-bold`}>{timelineChapters[selectedChapter].title} - {timelineChapters[selectedChapter].role}</span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-500 inline-block w-24">LOCATION     :</span>{" "}
-                        <span className="text-zinc-300">{timelineChapters[selectedChapter].institution}</span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-500 inline-block w-24">INTEGRITY    :</span>{" "}
-                        <span className="text-emerald-400 font-bold">✓ GPG Signature Verified</span>
-                      </div>
+                    <div className={`border rounded-lg p-4 space-y-2.5 overflow-x-auto ${theme === 'dark' ? 'bg-zinc-950/60 border-white/5' : 'bg-zinc-50 border-zinc-200'}`}>
+                      {timelineChapters[selectedChapter].bootLogs.map((log, lIdx) => {
+                        const isOk = log.startsWith("[  OK  ]");
+                        const isInfo = log.startsWith("[ INFO ]");
+                        return (
+                          <div key={lIdx} className="flex gap-2 whitespace-nowrap">
+                            <span className="text-zinc-600 select-none">Jun 15 18:35:1{lIdx}</span>
+                            <span className="text-zinc-500">medhini-kernel:</span>
+                            <span className={isOk ? "text-emerald-400 font-bold" : isInfo ? "text-cyan-400" : "text-zinc-300"}>
+                              {log}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
 
-                    <div className="pt-2">
-                      <span className="text-indigo-400 font-bold">CHANGELOG:</span>
-                      <p className={`mt-1.5 leading-relaxed italic ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'}`}>
-                        "{timelineChapters[selectedChapter].description}"
-                      </p>
+                    <div className="pt-2 space-y-2">
+                      <span className="text-indigo-400 font-bold">SYSTEM METADATA:</span>
+                      <div className="grid grid-cols-2 gap-y-1 text-[11px]">
+                        <div><span className="text-zinc-500">INSTITUTION :</span> <span className="text-zinc-300">{timelineChapters[selectedChapter].institution}</span></div>
+                        <div><span className="text-zinc-500">ROLE        :</span> <span className="text-zinc-300 font-bold">{timelineChapters[selectedChapter].role}</span></div>
+                        <div><span className="text-zinc-500">PERIOD      :</span> <span className="text-zinc-300">{timelineChapters[selectedChapter].period}</span></div>
+                        <div><span className="text-zinc-500">STATUS      :</span> <span className="text-emerald-400 font-bold">● Active (running)</span></div>
+                      </div>
                     </div>
                   </div>
                 </div>
