@@ -2198,7 +2198,7 @@ export default function App() {
                           : 'text-zinc-500 hover:text-zinc-300'
                       }`}
                     >
-                      {yr === 'last' ? 'Last Year' : yr}
+                      {yr === 'last' ? 'Last 12 Months' : yr}
                     </button>
                   ))}
                 </div>
@@ -2208,7 +2208,7 @@ export default function App() {
 
             {/* Real GitHub Calendar */}
             <div className="overflow-x-auto py-2">
-              <div className="min-w-[850px] flex justify-center text-zinc-300">
+              <div className="min-w-[1100px] flex justify-center text-zinc-300">
                 <GitHubCalendar
                   username="medhinibr"
                   year={githubYear}
@@ -2217,9 +2217,9 @@ export default function App() {
                     light: ['#ebedf0', '#c7d2fe', '#818cf8', '#4f46e5', '#312e81'],
                     dark: ['#161b22', '#221545', '#4f39a3', '#7d58f3', '#b199ff']
                   }}
-                  fontSize={11}
-                  blockSize={13.5}
-                  blockMargin={3.5}
+                  fontSize={12}
+                  blockSize={16}
+                  blockMargin={4}
                   showWeekdayLabels
                   tooltips={{
                     activity: {
