@@ -2567,49 +2567,52 @@ export default function App() {
       </section>
 
       {/* Footer & Social Icons */}
-      <footer className="py-16 text-center">
-        <div className="max-w-full mx-auto px-6 sm:px-16 w-full space-y-6">
-          <div className="flex justify-center items-center space-x-6">
-            <a
-              href="mailto:brmedhini@gmail.com"
-              className={`p-2.5 rounded-full border transition-all duration-200 ${theme === 'dark'
-                ? 'bg-zinc-900/50 border-white/5 text-zinc-400 hover:text-white hover:border-white/10'
-                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
-                }`}
-              aria-label="Email Address"
-            >
-              <Mail className="w-4 h-4" />
-            </a>
-            <a
-              href="https://github.com/medhinibr"
-              target="_blank"
-              rel="noreferrer"
-              className={`p-2.5 rounded-full border transition-all duration-200 ${theme === 'dark'
-                ? 'bg-zinc-900/50 border-white/5 text-zinc-400 hover:text-white hover:border-white/10'
-                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
-                }`}
-              aria-label="GitHub Profile"
-            >
-              <GithubIcon className="w-4 h-4" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/br-medhini/"
-              target="_blank"
-              rel="noreferrer"
-              className={`p-2.5 rounded-full border transition-all duration-200 ${theme === 'dark'
-                ? 'bg-zinc-900/50 border-white/5 text-zinc-400 hover:text-white hover:border-white/10'
-                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
-                }`}
-              aria-label="LinkedIn Profile"
-            >
-              <LinkedinIcon className="w-4 h-4" />
-            </a>
+      <footer className={`py-12 border-t w-full ${theme === 'dark' ? 'bg-[#0b0b0d] border-white/5' : 'bg-zinc-50 border-zinc-200'}`}>
+        <div className="max-w-full mx-auto px-6 sm:px-16 w-full flex flex-col md:flex-row justify-between items-center gap-6">
+          
+          {/* Status Indicators */}
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-[10px] font-mono text-zinc-500">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className={theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}>SYSTEM: ONLINE</span>
+            </div>
+            <span className="text-zinc-800">|</span>
+            <div>
+              <span>LATENCY: 14MS</span>
+            </div>
+            <span className="text-zinc-800">|</span>
+            <div>
+              <span>PORT: 443</span>
+            </div>
           </div>
 
-          <div className="text-[10px] font-mono text-zinc-500 space-y-1">
-            <p>© {new Date().getFullYear()} // B R MEDHINI // SYSTEM ONLINE</p>
-            <p className="text-[9px] text-zinc-600">Built with React, Tailwind CSS v4, and Framer Motion.</p>
+          {/* Direct Mail & Social Connections */}
+          <div className="flex flex-col items-center gap-2">
+            <a 
+              href="mailto:brmedhini@gmail.com" 
+              className="text-xs font-mono font-bold text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-2 tracking-wider group"
+            >
+              <Mail className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+              <span>DIRECT MAIL // brmedhini@gmail.com</span>
+            </a>
+            
+            <div className="flex items-center gap-4 text-[10px] font-mono text-zinc-500">
+              <a href="https://github.com/medhinibr" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors uppercase">
+                GitHub
+              </a>
+              <span>•</span>
+              <a href="https://www.linkedin.com/in/br-medhini/" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors uppercase">
+                LinkedIn
+              </a>
+            </div>
           </div>
+
+          {/* Copyleft & Frameworks */}
+          <div className="text-center md:text-right text-[10px] font-mono text-zinc-500">
+            <p>© {new Date().getFullYear()} // B R MEDHINI // ALL SIGNALS ROUTED</p>
+            <p className="text-[9px] text-zinc-600 mt-1">Vite + React + Tailwind v4 + Framer Motion</p>
+          </div>
+
         </div>
       </footer>
 
