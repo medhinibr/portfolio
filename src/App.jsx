@@ -784,9 +784,8 @@ export default function App() {
             {scrolledPastHero && (
               <motion.a
                 layoutId="download-resume-btn"
-                href="https://linktr.ee"
-                target="_blank"
-                rel="noreferrer"
+                href="/resume.pdf"
+                download="Medhini_Resume.pdf"
                 className={`w-[150px] sm:w-[180px] h-[40px] sm:h-[48px] flex items-center justify-center rounded-full text-[11px] sm:text-[13px] font-bold border shadow-md transition-all duration-300 ${theme === 'dark'
                   ? 'bg-black/80 border-white/10 text-white hover:bg-white/5'
                   : 'bg-white/80 border-zinc-200 text-zinc-800 hover:bg-zinc-50'
@@ -892,9 +891,8 @@ export default function App() {
               {!scrolledPastHero && (
                 <motion.a
                   layoutId="download-resume-btn"
-                  href="https://linktr.ee"
-                  target="_blank"
-                  rel="noreferrer"
+                  href="/resume.pdf"
+                  download="Medhini_Resume.pdf"
                   exit={{ opacity: 0 }}
                   className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] font-bold border transition-all duration-300 ${theme === 'dark'
                     ? 'bg-transparent border-zinc-800 text-white hover:bg-white/5'
