@@ -990,21 +990,67 @@ export default function App() {
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-indigo-500/30 ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
-                  <div className="text-indigo-400 font-mono text-xs uppercase mb-1 font-bold">IaC & Automation</div>
-                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Terraform scripting for repeatable, self-healing cloud infrastructures.</p>
+                {/* IaC & Automation Card */}
+                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-indigo-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
+                  <div>
+                    <div className="text-indigo-400 font-mono text-xs uppercase mb-1 font-bold">IaC & Automation</div>
+                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Terraform scripting for repeatable, self-healing cloud infrastructures.</p>
+                  </div>
+                  {/* Mini visual */}
+                  <div className="mt-3 font-mono text-[9px] text-zinc-500 bg-black/40 p-2 rounded border border-white/5 flex flex-col gap-0.5 select-none">
+                    <div className="flex justify-between">
+                      <span className="text-indigo-400 font-semibold"># terraform apply</span>
+                      <span className="text-zinc-600">v1.5.0</span>
+                    </div>
+                    <div className="text-emerald-400/80 animate-pulse">Apply complete! Resources: 12 added.</div>
+                  </div>
                 </div>
-                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-blue-500/30 ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
-                  <div className="text-blue-400 font-mono text-xs uppercase mb-1 font-bold">Orchestration</div>
-                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Kubernetes & Docker container deployment and cluster management.</p>
+
+                {/* Orchestration Card */}
+                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-blue-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
+                  <div>
+                    <div className="text-blue-400 font-mono text-xs uppercase mb-1 font-bold">Orchestration</div>
+                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Kubernetes & Docker container deployment and cluster management.</p>
+                  </div>
+                  {/* Mini visual */}
+                  <div className="mt-3 flex items-center justify-between bg-black/40 p-2 rounded border border-white/5 select-none">
+                    <span className="font-mono text-[9px] text-zinc-500">REPLICAS (3/3)</span>
+                    <div className="flex gap-1.5 items-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    </div>
+                  </div>
                 </div>
-                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-emerald-500/30 ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
-                  <div className="text-emerald-400 font-mono text-xs uppercase mb-1 font-bold">Telemetry</div>
-                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Real-time metrics, logs, and alert system integration via Prometheus.</p>
+
+                {/* Telemetry Card */}
+                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-emerald-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
+                  <div>
+                    <div className="text-emerald-400 font-mono text-xs uppercase mb-1 font-bold">Telemetry</div>
+                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Real-time metrics, logs, and alert system integration via Prometheus.</p>
+                  </div>
+                  {/* Mini visual */}
+                  <div className="mt-3 flex items-center justify-between bg-black/40 p-2 rounded border border-white/5 h-[28px] overflow-hidden select-none">
+                    <span className="font-mono text-[9px] text-zinc-500">SLA: 99.98%</span>
+                    <svg className="w-16 h-5 stroke-emerald-500 fill-none" viewBox="0 0 100 30">
+                      <path d="M0 20 Q15 5 30 18 T60 10 T90 22 T100 15" strokeWidth="2" />
+                    </svg>
+                  </div>
                 </div>
-                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-purple-500/30 ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
-                  <div className="text-purple-400 font-mono text-xs uppercase mb-1 font-bold">DevSecOps</div>
-                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Automated vulnerability scanning, secrets rotation, and audit logs.</p>
+
+                {/* DevSecOps Card */}
+                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-purple-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
+                  <div>
+                    <div className="text-purple-400 font-mono text-xs uppercase mb-1 font-bold">DevSecOps</div>
+                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Automated vulnerability scanning, secrets rotation, and audit logs.</p>
+                  </div>
+                  {/* Mini visual */}
+                  <div className="mt-3 flex items-center justify-between bg-black/40 p-2 rounded border border-white/5 select-none">
+                    <span className="font-mono text-[9px] text-zinc-500">SCAN: VULN_CHECK</span>
+                    <span className="font-mono text-[9px] text-purple-400 font-bold flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping"></span> SECURE
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
