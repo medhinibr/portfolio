@@ -986,69 +986,67 @@ export default function App() {
               </h3>
               <p className={`text-base sm:text-lg leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
                 }`}>
-                I architect highly resilient cloud infrastructures, automate scalable deployment pipelines, and configure secure orchestration engines. Use the interactive SSH shell console to trigger dockerized compilation logs, deploy updates, or navigate through the pages.
+                I build responsive web architectures, containerize applications for serverless cloud hosting, and integrate intelligent data pipelines. Use the interactive SSH shell console to explore my engineering domains, trigger virtual pipeline builds, or navigate the sections.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                {/* IaC & Automation Card */}
+                {/* Programming & Logic Card */}
                 <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-indigo-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
                   <div>
-                    <div className="text-indigo-400 font-mono text-xs uppercase mb-1 font-bold">IaC & Automation</div>
-                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Terraform scripting for repeatable, self-healing cloud infrastructures.</p>
+                    <div className="text-indigo-400 font-mono text-xs uppercase mb-1 font-bold">Programming & Logic</div>
+                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Python, SQL, Java, and C Programming for building reliable logic and database structures.</p>
                   </div>
                   {/* Mini visual */}
                   <div className="mt-3 font-mono text-[9px] text-zinc-500 bg-black/40 p-2 rounded border border-white/5 flex flex-col gap-0.5 select-none">
                     <div className="flex justify-between">
-                      <span className="text-indigo-400 font-semibold"># terraform apply</span>
-                      <span className="text-zinc-600">v1.5.0</span>
+                      <span className="text-indigo-400 font-semibold"># python main.py</span>
+                      <span className="text-zinc-600">v3.11</span>
                     </div>
-                    <div className="text-emerald-400/80 animate-pulse">Apply complete! Resources: 12 added.</div>
+                    <div className="text-emerald-400/80">Query successful: 200 records loaded.</div>
                   </div>
                 </div>
 
-                {/* Orchestration Card */}
+                {/* Web Systems Card */}
                 <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-blue-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
                   <div>
-                    <div className="text-blue-400 font-mono text-xs uppercase mb-1 font-bold">Orchestration</div>
-                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Kubernetes & Docker container deployment and cluster management.</p>
+                    <div className="text-blue-400 font-mono text-xs uppercase mb-1 font-bold">Web Systems</div>
+                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>HTML, CSS, JS, Flask, REST APIs, and Firebase for modern, interactive applications.</p>
                   </div>
                   {/* Mini visual */}
                   <div className="mt-3 flex items-center justify-between bg-black/40 p-2 rounded border border-white/5 select-none">
-                    <span className="font-mono text-[9px] text-zinc-500">REPLICAS (3/3)</span>
-                    <div className="flex gap-1.5 items-center">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    </div>
+                    <span className="font-mono text-[9px] text-zinc-500">API: GET /api/v1/health</span>
+                    <span className="font-mono text-[9px] text-emerald-400 font-bold flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 200 OK
+                    </span>
                   </div>
                 </div>
 
-                {/* Telemetry Card */}
+                {/* Cloud & Deployment Card */}
                 <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-emerald-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
                   <div>
-                    <div className="text-emerald-400 font-mono text-xs uppercase mb-1 font-bold">Telemetry</div>
-                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Real-time metrics, logs, and alert system integration via Prometheus.</p>
-                  </div>
-                  {/* Mini visual */}
-                  <div className="mt-3 flex items-center justify-between bg-black/40 p-2 rounded border border-white/5 h-[28px] overflow-hidden select-none">
-                    <span className="font-mono text-[9px] text-zinc-500">SLA: 99.98%</span>
-                    <svg className="w-16 h-5 stroke-emerald-500 fill-none" viewBox="0 0 100 30">
-                      <path d="M0 20 Q15 5 30 18 T60 10 T90 22 T100 15" strokeWidth="2" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* DevSecOps Card */}
-                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-purple-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
-                  <div>
-                    <div className="text-purple-400 font-mono text-xs uppercase mb-1 font-bold">DevSecOps</div>
-                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Automated vulnerability scanning, secrets rotation, and audit logs.</p>
+                    <div className="text-emerald-400 font-mono text-xs uppercase mb-1 font-bold">Cloud & Deployment</div>
+                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Google Cloud Platform, Docker container workflows, Cloud Run serverless, and IAM policies.</p>
                   </div>
                   {/* Mini visual */}
                   <div className="mt-3 flex items-center justify-between bg-black/40 p-2 rounded border border-white/5 select-none">
-                    <span className="font-mono text-[9px] text-zinc-500">SCAN: VULN_CHECK</span>
+                    <span className="font-mono text-[9px] text-zinc-500">CLOUD RUN RUNTIME</span>
+                    <span className="font-mono text-[9px] text-emerald-400 font-bold flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ONLINE
+                    </span>
+                  </div>
+                </div>
+
+                {/* AI & Intelligent Tools Card */}
+                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-purple-500/30 group/card relative overflow-hidden flex flex-col justify-between ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
+                  <div>
+                    <div className="text-purple-400 font-mono text-xs uppercase mb-1 font-bold">AI & Intelligent Tools</div>
+                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Generative AI, Pandas, NumPy, Hugging Face models, Git, and Antigravity tooling.</p>
+                  </div>
+                  {/* Mini visual */}
+                  <div className="mt-3 flex items-center justify-between bg-black/40 p-2 rounded border border-white/5 select-none">
+                    <span className="font-mono text-[9px] text-zinc-500">LLM MODEL PIPELINE</span>
                     <span className="font-mono text-[9px] text-purple-400 font-bold flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping"></span> SECURE
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> READY
                     </span>
                   </div>
                 </div>
