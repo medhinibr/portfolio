@@ -270,161 +270,282 @@ const TelemetryHeaderWidget = ({ lenisRef }) => {
 
 const pipelineStages = [
   {
-    id: "security",
+    id: "gcp",
     number: "01",
-    name: "IAM Shield & VPC Security",
-    iconName: "Shield",
-    role: "Ingress Security",
-    x: 18,
-    y: 28,
-    category: "INGRESS // SECURITY",
-    status: "STABLE",
+    name: "pod/gcp-cloud-engine",
+    namespace: "cloud-ops",
+    status: "Running",
+    restarts: 0,
+    cpu: 90,
+    memory: 85,
+    category: "CLOUD-OPS // GOOGLE-CLOUD",
     colorTheme: {
       text: "text-indigo-400",
       border: "border-indigo-500/20",
       glow: "shadow-[0_0_15px_rgba(99,102,241,0.25)]",
       badge: "bg-indigo-500/10 border-indigo-500/20 text-indigo-300",
       bgSelected: "bg-indigo-500/5 border-indigo-500/40",
-      accent: "#6366f1",
-      glowingSvg: "rgba(99, 102, 241, 0.4)"
+      accent: "#6366f1"
     },
     skills: [
-      { name: "IAM Security", level: 85 },
-      { name: "Git & SSH", level: 85 },
-      { name: "Linux Administration", level: 85 }
+      { name: "Google Cloud (GCP)", level: 90 },
+      { name: "Cloud Run", level: 85 },
+      { name: "Firebase", level: 80 },
+      { name: "IAM Security", level: 85 }
     ],
-    use: "Securing container ingress, managing role-based access controls (RBAC), SSH keys, and provisioning secure cloud environments.",
+    use: "Deploying serverless isolates, configuring Google IAM credentials, routing network boundaries, and provisioning Cloud Run clusters.",
+    yaml: `apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gcp-cloud-engine
+  namespace: cloud-ops
+  labels:
+    app: portfolio-hosting
+    provider: google-cloud
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gcp-cloud-engine
+  template:
+    metadata:
+      labels:
+        app: gcp-cloud-engine
+    spec:
+      containers:
+      - name: cloud-run-service
+        image: gcr.io/medhini-cloud/serverless:v1.0
+        resources:
+          limits:
+            cpu: "90%" # GCP / Cloud Run Mastery
+            memory: "85%" # Firebase & IAM Integration
+        env:
+        - name: TARGET_PLATFORM
+          value: Google Cloud Run
+        - name: ACCESS_CONTROL
+          value: GCP IAM Security
+        - name: SERVICES
+          value: GCP, Cloud Run, Firebase, IAM`,
     logs: [
-      "[security]: Client request received on port 443",
-      "[security]: TLS handshake completed successfully.",
-      "[security]: Authenticating client credentials via Google IAM...",
-      "[security]: Access GRANTED (Role: Cloud Practitioner)"
+      "[gcp-cloud-engine]: Initializing container runtimes...",
+      "[gcp-cloud-engine]: Authenticating IAM Service Account: portfolio-sa@medhini-cloud.iam.gserviceaccount.com",
+      "[gcp-cloud-engine]: Routing HTTP traffic to serverless endpoint Cloud Run",
+      "[gcp-cloud-engine]: Database sync with Firebase established. State: STABLE"
     ]
   },
   {
-    id: "routing",
+    id: "python",
     number: "02",
-    name: "HTTPS Load Balancer",
-    iconName: "Globe",
-    role: "Traffic Management",
-    x: 50,
-    y: 28,
-    category: "TRAFFIC // DISTRIBUTION",
-    status: "STABLE",
+    name: "pod/python-backend-api",
+    namespace: "programming",
+    status: "Running",
+    restarts: 0,
+    cpu: 95,
+    memory: 90,
+    category: "PROGRAMMING // BACKEND",
     colorTheme: {
       text: "text-blue-400",
       border: "border-blue-500/20",
       glow: "shadow-[0_0_15px_rgba(59,130,246,0.25)]",
       badge: "bg-blue-500/10 border-blue-500/20 text-blue-300",
       bgSelected: "bg-blue-500/5 border-blue-500/40",
-      accent: "#3b82f6",
-      glowingSvg: "rgba(59, 130, 246, 0.4)"
+      accent: "#3b82f6"
     },
     skills: [
+      { name: "Python", level: 95 },
       { name: "Flask & REST APIs", level: 90 },
-      { name: "Java & C", level: 75 }
+      { name: "Java", level: 75 },
+      { name: "C Programming", level: 75 }
     ],
-    use: "Routing incoming HTTP requests, balancing microservices network load, and managing REST API routing layers.",
+    use: "Architecting backend systems, setting routing parameters, orchestrating microservice APIs, and designing algorithmic procedures.",
+    yaml: `apiVersion: v1
+kind: Pod
+metadata:
+  name: python-backend-api
+  namespace: programming
+  labels:
+    tier: backend
+    framework: flask
+spec:
+  containers:
+  - name: flask-rest-api
+    image: python:3.11-alpine
+    resources:
+      limits:
+        cpu: "95%" # Python Proficiency
+        memory: "90%" # Flask & REST APIs
+    ports:
+    - containerPort: 5000
+    env:
+    - name: CORE_LANGUAGES
+      value: Python, Java, C Programming
+    - name: DATABASE_DRIVERS
+      value: SQL-Connector, Firebase-Admin`,
     logs: [
-      "[balancer]: Intercepted load balanced traffic...",
-      "[balancer]: Match target path -> /api/v1/compute",
-      "[balancer]: Forwarding request to active server pool...",
-      "[balancer]: Proxy request complete. Response 200"
+      "[python-backend-api]: Starting Python REST API framework...",
+      "[python-backend-api]: Dynamic routing initialized: /api/v1/skills",
+      "[python-backend-api]: Loading SQL driver connection pool...",
+      "[python-backend-api]: Healthcheck probe check: 200 OK (12ms latency)"
     ]
   },
   {
-    id: "compute",
+    id: "docker",
     number: "03",
-    name: "Cloud Run Compute Engine",
-    iconName: "Cpu",
-    role: "Serverless Compute",
-    x: 50,
-    y: 72,
-    category: "COMPUTE // SERVERLESS",
-    status: "STABLE",
+    name: "pod/docker-isolate-runtime",
+    namespace: "infrastructure",
+    status: "Running",
+    restarts: 0,
+    cpu: 85,
+    memory: 85,
+    category: "INFRA // VIRTUALIZATION",
     colorTheme: {
       text: "text-cyan-400",
       border: "border-cyan-500/20",
       glow: "shadow-[0_0_15px_rgba(6,182,212,0.25)]",
       badge: "bg-cyan-500/10 border-cyan-500/20 text-cyan-300",
       bgSelected: "bg-cyan-500/5 border-cyan-500/40",
-      accent: "#06b6d4",
-      glowingSvg: "rgba(6, 182, 212, 0.4)"
+      accent: "#06b6d4"
     },
     skills: [
       { name: "Docker", level: 85 },
-      { name: "Cloud Run", level: 85 },
-      { name: "Python", level: 95 }
+      { name: "Linux & Shell", level: 85 },
+      { name: "Git", level: 85 },
+      { name: "GitHub", level: 85 }
     ],
-    use: "Spanning lightweight, containerized microservices to execute serverless application business logic on-demand.",
+    use: "Writing clean Dockerfiles, orchestrating multi-stage system layering, writing shell scripts, and executing version controls.",
+    yaml: `apiVersion: v1
+kind: Pod
+metadata:
+  name: docker-isolate-runtime
+  namespace: infrastructure
+  labels:
+    runtime: containerd
+    environment: linux-alpine
+spec:
+  containers:
+  - name: docker-engine
+    image: docker:dind
+    securityContext:
+      privileged: true
+    resources:
+      limits:
+        cpu: "85%" # Docker Containers
+        memory: "85%" # Linux & Shell Environment
+    env:
+    - name: CONTAINER_TECH
+      value: Docker, Linux, Shell scripting
+    - name: REPO_CONTROL
+      value: Git, GitHub version checks`,
     logs: [
-      "[compute]: Ingress event triggered container spin-up",
-      "[compute]: Docker entrypoint executed: python app.py",
-      "[compute]: Allocating 1 vCPU and 512MB RAM dynamically...",
-      "[compute]: Server execution complete. De-provisioning container."
+      "[docker-isolate-runtime]: Dockerd daemon active in privileged container",
+      "[docker-isolate-runtime]: Running multi-stage Docker build...",
+      "[docker-isolate-runtime]: Exported alpine base filesystem layer",
+      "[docker-isolate-runtime]: Container layer caching completed successfully"
     ]
   },
   {
-    id: "datastore",
+    id: "database",
     number: "04",
-    name: "Cloud Databases",
-    iconName: "Database",
-    role: "Persistence Layer",
-    x: 18,
-    y: 72,
-    category: "PERSISTENCE // DATABASE",
-    status: "STABLE",
+    name: "pod/db-relational-sql",
+    namespace: "data-layer",
+    status: "Running",
+    restarts: 0,
+    cpu: 80,
+    memory: 80,
+    category: "DATA-LAYER // PERSISTENCE",
     colorTheme: {
       text: "text-emerald-400",
       border: "border-emerald-500/20",
       glow: "shadow-[0_0_15px_rgba(16,185,129,0.25)]",
       badge: "bg-emerald-500/10 border-emerald-500/20 text-emerald-300",
       bgSelected: "bg-emerald-500/5 border-emerald-500/40",
-      accent: "#10b981",
-      glowingSvg: "rgba(16, 185, 129, 0.4)"
+      accent: "#10b981"
     },
     skills: [
       { name: "SQL", level: 80 },
       { name: "Firebase (Firestore)", level: 80 }
     ],
-    use: "Storing indexed application datasets in SQL structures and real-time NoSQL Firebase collections.",
+    use: "Writing database schemas, optimization queries, building indexed tables, and establishing document databases.",
+    yaml: `apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-relational-sql
+  namespace: data-layer
+spec:
+  serviceName: postgresql
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: database-layer
+        image: postgres:15-alpine
+        resources:
+          limits:
+            cpu: "80%" # SQL Queries & Structs
+            memory: "80%" # Firebase / NoSQL Integration
+        env:
+        - name: DB_FLAVORS
+          value: SQL, Firebase (NoSQL)`,
     logs: [
-      "[datastore]: Opening connection pool to relational storage...",
-      "[datastore]: Query SELECT * FROM skills; status: EXPLAIN ANALYZE OK",
-      "[datastore]: Fetching Firestore collection metadata...",
-      "[datastore]: Read/Write throughput fully optimized."
+      "[db-relational-sql]: Checking Persistent Volume Claim status... BOUND",
+      "[db-relational-sql]: Database clustering engine listening on port 5432",
+      "[db-relational-sql]: Executing indexing script on transaction log...",
+      "[db-relational-sql]: Database schema synced with main application. OK"
     ]
   },
   {
-    id: "ai_inference",
+    id: "ai",
     number: "05",
-    name: "AI Inference Pipeline",
-    iconName: "Activity",
-    role: "Intelligent Pipeline",
-    x: 82,
-    y: 72,
+    name: "pod/ai-inference-engine",
+    namespace: "intelligence",
+    status: "Running",
+    restarts: 0,
+    cpu: 85,
+    memory: 80,
     category: "INTELLIGENCE // PIPELINE",
-    status: "STABLE",
     colorTheme: {
-      text: "text-violet-400",
-      border: "border-violet-500/20",
-      glow: "shadow-[0_0_15px_rgba(139,92,246,0.25)]",
-      badge: "bg-violet-500/10 border-violet-500/20 text-violet-300",
-      bgSelected: "bg-violet-500/5 border-violet-500/40",
-      accent: "#8b5cf6",
-      glowingSvg: "rgba(139, 92, 246, 0.4)"
+      text: "text-purple-400",
+      border: "border-purple-500/20",
+      glow: "shadow-[0_0_15px_rgba(168,85,247,0.25)]",
+      badge: "bg-purple-500/10 border-purple-500/20 text-purple-300",
+      bgSelected: "bg-purple-500/5 border-purple-500/40",
+      accent: "#a855f7"
     },
     skills: [
       { name: "Generative AI", level: 85 },
-      { name: "Hugging Face", level: 75 },
+      { name: "Hugging Face Hub", level: 75 },
       { name: "Pandas & NumPy", level: 80 }
     ],
-    use: "Running dataset profiling algorithms and serving transformer queries via Hugging Face/Generative AI APIs.",
+    use: "Orchestrating smart generator pipelines, utilizing Hugging Face neural tokenizers, and carrying out dataset metrics analysis.",
+    yaml: `apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-inference-engine
+  namespace: intelligence
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        role: prompt-inference
+    spec:
+      containers:
+      - name: model-pipeline
+        image: huggingface/transformers-pytorch-gpu:latest
+        resources:
+          limits:
+            cpu: "85%" # Generative AI & Prompts
+            memory: "80%" # Pandas & NumPy Vectors
+        env:
+        - name: AI_PROVIDERS
+          value: Generative AI, Hugging Face Hub
+        - name: DATA_TOOLS
+          value: Pandas, NumPy dataset parsing`,
     logs: [
-      "[ai-inference]: Instantiating tokenizer model weights...",
-      "[ai-inference]: Performing Pandas vector array math...",
-      "[ai-inference]: Computing embeddings layer projection...",
-      "[ai-inference]: Model execution succeeded."
+      "[ai-inference-engine]: Allocating GPU memory allocation pointers...",
+      "[ai-inference-engine]: Hugging Face inference pipeline model loaded",
+      "[ai-inference-engine]: Vector arrays calculated via Pandas & NumPy APIs",
+      "[ai-inference-engine]: Model server status: READY"
     ]
   }
 ];
@@ -852,6 +973,7 @@ export default function App() {
   const [clickedIdx, setClickedIdx] = useState(null);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(pipelineStages[0]);
+  const [k8sTab, setK8sTab] = useState('logs');
   const [selectedChapter, setSelectedChapter] = useState(0);
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
   // Custom cursor state variables
@@ -1226,7 +1348,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Skills Section (Interactive Cloud Topology Map) */}
+      {/* Skills Section (Kubernetes Workloads Dashboard) */}
       <section id="skills" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-12 text-left">
@@ -1234,247 +1356,218 @@ export default function App() {
               02 // TECHNICAL ARSENAL
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>Cloud Topology Map.</h2>
+              }`}>Kubernetes Workloads.</h2>
             <p className={`max-w-2xl text-sm ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              Interactive system architecture mapping cloud security gateways, HTTPS load balancers, serverless container computes, databases, and AI pipelines to technical skills. Click any system component to inspect.
+              Interactive cluster orchestration dashboard. Each Pod represents a core capability. Inspect logs or YAML specifications to check configurations and tool integrations.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-            {/* Left Column: Interactive Topology Canvas */}
-            <div className="lg:col-span-7">
-              <div className="relative w-full h-[450px] rounded-2xl bg-[#09090b]/80 border border-white/5 overflow-hidden p-6 select-none shadow-xl flex items-center justify-center">
-                {/* SVG Connecting Paths */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                  {/* Subtle Background Pattern */}
-                  <defs>
-                    <pattern id="topology-grid" width="30" height="30" patternUnits="userSpaceOnUse">
-                      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.015)" strokeWidth="1" />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#topology-grid)" />
-
-                  {/* Google Cloud VPC boundary box */}
-                  <rect x="5%" y="6%" width="90%" height="88%" rx="16" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1.5" strokeDasharray="6 4" />
-
-                  {/* Network Connections */}
-                  {/* Ingress to Security Shield */}
-                  <line x1="0%" y1="28%" x2="18%" y2="28%" stroke="rgba(255,255,255,0.08)" strokeWidth="2" />
-                  <motion.line
-                    x1="0%"
-                    y1="28%"
-                    x2="18%"
-                    y2="28%"
-                    stroke={selectedSkill.id === 'security' ? selectedSkill.colorTheme.accent : 'rgba(255,255,255,0.15)'}
-                    strokeWidth={selectedSkill.id === 'security' ? '2.5' : '1.5'}
-                    strokeDasharray="6 4"
-                    animate={{ strokeDashoffset: [-20, 0] }}
-                    transition={{ duration: selectedSkill.id === 'security' ? 1 : 2, repeat: Infinity, ease: "linear" }}
-                  />
-
-                  {/* Security (18%, 28%) to Routing Load Balancer (50%, 28%) */}
-                  <line x1="18%" y1="28%" x2="50%" y2="28%" stroke="rgba(255,255,255,0.08)" strokeWidth="2" />
-                  <motion.line
-                    x1="18%"
-                    y1="28%"
-                    x2="50%"
-                    y2="28%"
-                    stroke={selectedSkill.id === 'security' || selectedSkill.id === 'routing' ? selectedSkill.colorTheme.accent : 'rgba(255,255,255,0.15)'}
-                    strokeWidth={selectedSkill.id === 'security' || selectedSkill.id === 'routing' ? '2.5' : '1.5'}
-                    strokeDasharray="6 4"
-                    animate={{ strokeDashoffset: [-20, 0] }}
-                    transition={{ duration: selectedSkill.id === 'security' || selectedSkill.id === 'routing' ? 1 : 2, repeat: Infinity, ease: "linear" }}
-                  />
-
-                  {/* Routing (50%, 28%) to Compute Cloud Run (50%, 72%) */}
-                  <line x1="50%" y1="28%" x2="50%" y2="72%" stroke="rgba(255,255,255,0.08)" strokeWidth="2" />
-                  <motion.line
-                    x1="50%"
-                    y1="28%"
-                    x2="50%"
-                    y2="72%"
-                    stroke={selectedSkill.id === 'routing' || selectedSkill.id === 'compute' ? selectedSkill.colorTheme.accent : 'rgba(255,255,255,0.15)'}
-                    strokeWidth={selectedSkill.id === 'routing' || selectedSkill.id === 'compute' ? '2.5' : '1.5'}
-                    strokeDasharray="6 4"
-                    animate={{ strokeDashoffset: [-20, 0] }}
-                    transition={{ duration: selectedSkill.id === 'routing' || selectedSkill.id === 'compute' ? 1 : 2, repeat: Infinity, ease: "linear" }}
-                  />
-
-                  {/* Compute Cloud Run (50%, 72%) to Datastore Databases (18%, 72%) */}
-                  <line x1="50%" y1="72%" x2="18%" y2="72%" stroke="rgba(255,255,255,0.08)" strokeWidth="2" />
-                  <motion.line
-                    x1="50%"
-                    y1="72%"
-                    x2="18%"
-                    y2="72%"
-                    stroke={selectedSkill.id === 'compute' || selectedSkill.id === 'datastore' ? selectedSkill.colorTheme.accent : 'rgba(255,255,255,0.15)'}
-                    strokeWidth={selectedSkill.id === 'compute' || selectedSkill.id === 'datastore' ? '2.5' : '1.5'}
-                    strokeDasharray="6 4"
-                    animate={{ strokeDashoffset: [0, -20] }}
-                    transition={{ duration: selectedSkill.id === 'compute' || selectedSkill.id === 'datastore' ? 1 : 2, repeat: Infinity, ease: "linear" }}
-                  />
-
-                  {/* Compute Cloud Run (50%, 72%) to AI Inference (82%, 72%) */}
-                  <line x1="50%" y1="72%" x2="82%" y2="72%" stroke="rgba(255,255,255,0.08)" strokeWidth="2" />
-                  <motion.line
-                    x1="50%"
-                    y1="72%"
-                    x2="82%"
-                    y2="72%"
-                    stroke={selectedSkill.id === 'compute' || selectedSkill.id === 'ai_inference' ? selectedSkill.colorTheme.accent : 'rgba(255,255,255,0.15)'}
-                    strokeWidth={selectedSkill.id === 'compute' || selectedSkill.id === 'ai_inference' ? '2.5' : '1.5'}
-                    strokeDasharray="6 4"
-                    animate={{ strokeDashoffset: [-20, 0] }}
-                    transition={{ duration: selectedSkill.id === 'compute' || selectedSkill.id === 'ai_inference' ? 1 : 2, repeat: Infinity, ease: "linear" }}
-                  />
-                </svg>
-
-                {/* VPC Metadata Tag */}
-                <div className="absolute top-8 left-8 text-[9px] font-mono tracking-widest text-zinc-500 uppercase flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/80 animate-ping"></span>
-                  GCP VPC NETWORK // US-CENTRAL1
-                </div>
-
-                {/* Topology Components Placement */}
-                {pipelineStages.map((stage) => {
-                  const isSelected = selectedSkill.id === stage.id;
-                  
-                  // Lucide Icon Resolver
-                  const renderIcon = () => {
-                    const iconClass = "w-6 h-6";
-                    switch (stage.iconName) {
-                      case "Shield": return <Shield className={iconClass} />;
-                      case "Globe": return <Globe className={iconClass} />;
-                      case "Cpu": return <Cpu className={iconClass} />;
-                      case "Database": return <Database className={iconClass} />;
-                      case "Activity": return <Activity className={iconClass} />;
-                      default: return <Cpu className={iconClass} />;
-                    }
-                  };
-
-                  return (
-                    <button
-                      key={stage.id}
-                      onClick={() => setSelectedSkill(stage)}
-                      style={{
-                        left: `${stage.x}%`,
-                        top: `${stage.y}%`,
-                        transform: 'translate(-50%, -50%)'
-                      }}
-                      className="absolute flex flex-col items-center gap-2 group transition-all duration-300 pointer-events-auto"
-                    >
-                      {/* Node Icon Box */}
-                      <div className={`w-14 h-14 rounded-xl border flex items-center justify-center transition-all duration-300 ${
-                        isSelected
-                          ? `bg-zinc-950 border-current ${stage.colorTheme.text} ${stage.colorTheme.glow}`
-                          : 'bg-zinc-900/90 border-zinc-850 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
-                      }`}>
-                        {renderIcon()}
-                      </div>
-
-                      {/* Node Label Info */}
-                      <div className="flex flex-col items-center">
-                        <span className={`text-[8px] font-mono tracking-wider font-black uppercase text-center max-w-[110px] leading-tight transition-colors duration-300 ${
-                          isSelected ? stage.colorTheme.text : 'text-zinc-500 group-hover:text-zinc-400'
-                        }`}>
-                          {stage.role}
-                        </span>
-                        <span className={`text-[9px] font-bold text-center max-w-[120px] truncate transition-colors duration-300 ${
-                          isSelected ? 'text-zinc-200' : 'text-zinc-600'
-                        }`}>
-                          {stage.id === 'security' ? 'IAM Shield' : stage.id === 'routing' ? 'Load Balancer' : stage.id === 'compute' ? 'Cloud Run' : stage.id === 'datastore' ? 'Cloud SQL' : 'AI Inference'}
-                        </span>
-                      </div>
-                    </button>
-                  );
-                })}
+          {/* K8s Lens/Lens-style Dashboard Window */}
+          <div className="bg-[#09090b]/90 border border-white/5 rounded-2xl overflow-hidden shadow-2xl w-full flex flex-col">
+            
+            {/* Top Command / Telemetry Header Bar */}
+            <div className="bg-zinc-950 px-6 py-4 border-b border-white/5 flex flex-wrap items-center justify-between gap-4 text-[10px] font-mono text-zinc-500">
+              <div className="flex flex-wrap items-center gap-4">
+                <span className="flex items-center gap-1.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+                  CLUSTER: medhini-prod-01
+                </span>
+                <span className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  STATUS: HEALTHY
+                </span>
+                <span className="text-zinc-600 uppercase">
+                  NAMESPACE: ALL-NAMESPACES
+                </span>
+              </div>
+              
+              <div className="flex items-center gap-6">
+                <span>PODS: <b className="text-zinc-300">5/5 RUNNING</b></span>
+                <span>CPU: <b className="text-zinc-300">1.8 CORES ACTIVE</b></span>
+                <span>MEM: <b className="text-zinc-300">92% ALLOCATED</b></span>
               </div>
             </div>
 
-            {/* Right Column: Dynamic Capability & Console logs */}
-            <div className="lg:col-span-5 flex flex-col gap-6">
-              {/* Stage Description & Skills */}
-              <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-6 shadow-xl transition-all duration-300 ${
-                theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
-              }`}>
-                <div className="flex items-center gap-3">
-                  <div className={`p-2.5 rounded-lg bg-zinc-900 text-zinc-400 border border-white/5 ${selectedSkill.colorTheme.text}`}>
-                    <Terminal className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className={`text-[10px] font-bold font-mono tracking-wider uppercase ${selectedSkill.colorTheme.text}`}>
-                      {selectedSkill.category}
-                    </p>
-                    <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
-                      {selectedSkill.name}
-                    </h3>
-                  </div>
+            {/* Dashboard Workspace */}
+            <div className="grid lg:grid-cols-12 gap-0 items-stretch min-h-[460px]">
+              
+              {/* Left Column: Pods List (Workloads Table) */}
+              <div className="lg:col-span-7 p-6 border-b lg:border-b-0 lg:border-r border-white/5 text-left flex flex-col justify-start">
+                <div className="text-[11px] font-mono font-bold text-zinc-500 uppercase tracking-wider mb-4">
+                  Workloads &gt; Pods (Active)
                 </div>
+                
+                <div className="overflow-x-auto w-full">
+                  <table className="w-full border-collapse font-mono text-xs select-none">
+                    <thead>
+                      <tr className="border-b border-white/5 text-zinc-500 text-[10px] uppercase tracking-wider pb-2">
+                        <th className="text-left pb-3 font-semibold">Name</th>
+                        <th className="text-left pb-3 font-semibold hidden sm:table-cell">Namespace</th>
+                        <th className="text-center pb-3 font-semibold">Status</th>
+                        <th className="text-center pb-3 font-semibold hidden md:table-cell">Restarts</th>
+                        <th className="text-right pb-3 font-semibold pr-4">Limits (CPU/MEM)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5">
+                      {pipelineStages.map((stage) => {
+                        const isSelected = selectedSkill.id === stage.id;
+                        return (
+                          <tr
+                            key={stage.id}
+                            onClick={() => setSelectedSkill(stage)}
+                            className={`cursor-pointer transition-all duration-300 hover:bg-white/[0.02] ${
+                              isSelected ? 'bg-white/[0.03]' : ''
+                            }`}
+                          >
+                            {/* Pod Name */}
+                            <td className="py-4 text-left font-bold relative">
+                              {isSelected && (
+                                <span className={`absolute left-0 top-3 bottom-3 w-1 rounded-full ${stage.colorTheme.text}`} style={{ backgroundColor: stage.colorTheme.accent }}></span>
+                              )}
+                              <span className={`pl-3 flex items-center gap-2 transition-colors duration-300 ${
+                                isSelected ? stage.colorTheme.text : 'text-zinc-300 hover:text-zinc-100'
+                              }`}>
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                {stage.name}
+                              </span>
+                            </td>
 
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">COMPONENT FUNCTION</p>
-                  <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'}`}>
-                    {selectedSkill.use}
-                  </p>
+                            {/* Namespace */}
+                            <td className="py-4 text-left text-zinc-500 hidden sm:table-cell">
+                              {stage.namespace}
+                            </td>
+
+                            {/* Status */}
+                            <td className="py-4 text-center">
+                              <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">
+                                {stage.status}
+                              </span>
+                            </td>
+
+                            {/* Restarts */}
+                            <td className="py-4 text-center text-zinc-500 hidden md:table-cell">
+                              {stage.restarts}
+                            </td>
+
+                            {/* Resource Limits CPU/MEM */}
+                            <td className="py-4 text-right pr-4 space-y-1">
+                              <div className="flex flex-col items-end gap-1.5">
+                                <div className="flex gap-2 text-[9px] text-zinc-500">
+                                  <span>CPU: <b className={stage.colorTheme.text}>{stage.cpu}%</b></span>
+                                  <span>MEM: <b className={stage.colorTheme.text}>{stage.memory}%</b></span>
+                                </div>
+                                <div className="w-20 h-1 bg-zinc-800 rounded-full overflow-hidden border border-white/5 flex">
+                                  <div
+                                    className="h-full rounded-full"
+                                    style={{
+                                      width: `${(stage.cpu + stage.memory) / 2}%`,
+                                      backgroundColor: stage.colorTheme.accent
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
+              </div>
 
-                <div className="space-y-3 pt-2">
-                  <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">SKILLS INTEGRATION</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {selectedSkill.skills.map((skill, idx) => (
-                      <div key={idx} className="space-y-1">
-                        <div className="flex justify-between text-xs font-mono">
-                          <span className={`${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>{skill.name}</span>
-                          <span className={selectedSkill.colorTheme.text}>{skill.level}%</span>
-                        </div>
-                        <div className="h-1.5 w-full bg-zinc-850 rounded-full overflow-hidden border border-white/5">
-                          <motion.div
-                            key={`${selectedSkill.id}-${skill.name}`}
-                            initial={{ width: 0 }}
-                            animate={{ width: `${skill.level}%` }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                            className="h-full rounded-full"
-                            style={{ backgroundColor: selectedSkill.colorTheme.accent }}
-                          />
+              {/* Right Column: Inspector Tab (Logs & YAML Config) */}
+              <div className="lg:col-span-5 p-6 text-left flex flex-col justify-between">
+                <div className="flex flex-col h-full justify-between gap-4">
+                  
+                  {/* Tab Selector Headers */}
+                  <div className="flex border-b border-white/5 text-xs font-mono">
+                    <button
+                      onClick={() => setK8sTab('logs')}
+                      className={`pb-2 px-4 transition-all border-b-2 font-bold ${
+                        k8sTab === 'logs'
+                          ? `border-current ${selectedSkill.colorTheme.text}`
+                          : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                      }`}
+                    >
+                      Logs Output
+                    </button>
+                    <button
+                      onClick={() => setK8sTab('yaml')}
+                      className={`pb-2 px-4 transition-all border-b-2 font-bold ${
+                        k8sTab === 'yaml'
+                          ? `border-current ${selectedSkill.colorTheme.text}`
+                          : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                      }`}
+                    >
+                      YAML Specification
+                    </button>
+                  </div>
+
+                  {/* Tab Contents */}
+                  <div className="flex-grow flex flex-col justify-start">
+                    {k8sTab === 'logs' ? (
+                      <div className="space-y-4 h-full flex flex-col justify-between">
+                        <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[10px] text-zinc-400 space-y-1.5 min-h-[260px] max-h-[360px] overflow-y-auto relative flex-grow flex flex-col justify-start">
+                          {selectedSkill.logs.map((log, idx) => (
+                            <motion.div
+                              key={`${selectedSkill.id}-log-${idx}`}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: idx * 0.15, duration: 0.3 }}
+                              className={idx === selectedSkill.logs.length - 1 ? selectedSkill.colorTheme.text : 'text-zinc-400'}
+                            >
+                              {log}
+                            </motion.div>
+                          ))}
+                          <div className="absolute bottom-2 right-2 text-[9px] text-zinc-600 uppercase font-mono">
+                            Pod logs stream
+                          </div>
                         </div>
                       </div>
-                    ))}
+                    ) : (
+                      <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[10px] text-zinc-400 min-h-[260px] max-h-[360px] overflow-y-auto relative flex-grow flex flex-col justify-start whitespace-pre-wrap select-all">
+                        {selectedSkill.yaml.split('\n').map((line, idx) => {
+                          // Inline YAML syntax highlight resolver
+                          if (line.trim().startsWith('- name:') || line.trim().startsWith('- containerPort:') || line.trim().startsWith('- value:') || line.trim().startsWith('metadata:') || line.trim().startsWith('spec:') || line.trim().startsWith('containers:')) {
+                            return <div key={idx} className="text-cyan-400">{line}</div>;
+                          }
+                          if (line.includes(':')) {
+                            const colonIdx = line.indexOf(':');
+                            const key = line.substring(0, colonIdx);
+                            const val = line.substring(colonIdx);
+                            return (
+                              <div key={idx} className="leading-relaxed">
+                                <span className="text-blue-400">{key}</span>
+                                <span className="text-emerald-400">{val}</span>
+                              </div>
+                            );
+                          }
+                          return <div key={idx} className="leading-relaxed">{line}</div>;
+                        })}
+                        <div className="absolute bottom-2 right-2 text-[9px] text-zinc-600 uppercase font-mono">
+                          yaml spec-sheet
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
-              </div>
 
-              {/* Console Logs */}
-              <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-4 shadow-xl transition-all duration-300 flex-grow flex flex-col justify-between ${
-                theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
-              }`}>
-                <div className="space-y-2 flex-grow flex flex-col justify-between">
-                  <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500">
-                    <span>TELEMETRY CONSOLE: {selectedSkill.id.toUpperCase()}_NODE</span>
-                    <span className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                      HEALTHY
-                    </span>
-                  </div>
-
-                  <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[11px] text-zinc-400 space-y-1.5 min-h-[140px] overflow-hidden relative flex-grow flex flex-col justify-start">
-                    {selectedSkill.logs.map((log, idx) => (
-                      <motion.div
-                        key={`${selectedSkill.id}-log-${idx}`}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.15, duration: 0.3 }}
-                        className={idx === selectedSkill.logs.length - 1 ? selectedSkill.colorTheme.text : 'text-zinc-400'}
-                      >
-                        {log}
-                      </motion.div>
-                    ))}
-                    <div className="absolute bottom-2 right-2 text-[9px] text-zinc-600 uppercase font-mono">
-                      Telemetry Node-01
+                  {/* Skills Grid matching selected pod */}
+                  <div className="pt-2">
+                    <p className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider mb-2">Integrated Core Skills</p>
+                    <div className="grid grid-cols-2 gap-3">
+                      {selectedSkill.skills.map((skill, idx) => (
+                        <div key={idx} className="p-2 rounded bg-zinc-900 border border-white/5 flex items-center justify-between text-xs font-mono">
+                          <span className="text-zinc-400">{skill.name}</span>
+                          <span className={selectedSkill.colorTheme.text}>{skill.level}%</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
+
                 </div>
               </div>
+
             </div>
           </div>
         </div>
