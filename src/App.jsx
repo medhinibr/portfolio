@@ -270,239 +270,14 @@ const TelemetryHeaderWidget = ({ lenisRef }) => {
 
 const pipelineStages = [
   {
-    id: "gcp",
+    id: "cicd",
     number: "01",
-    name: "pod/gcp-cloud-engine",
-    namespace: "cloud-ops",
-    status: "Running",
-    restarts: 0,
-    cpu: 90,
-    memory: 85,
-    category: "CLOUD-OPS // GOOGLE-CLOUD",
-    colorTheme: {
-      text: "text-indigo-400",
-      border: "border-indigo-500/20",
-      glow: "shadow-[0_0_15px_rgba(99,102,241,0.25)]",
-      badge: "bg-indigo-500/10 border-indigo-500/20 text-indigo-300",
-      bgSelected: "bg-indigo-500/5 border-indigo-500/40",
-      accent: "#6366f1"
-    },
-    skills: [
-      { name: "Google Cloud (GCP)", level: 90 },
-      { name: "Cloud Run", level: 85 },
-      { name: "Firebase", level: 80 },
-      { name: "IAM Security", level: 85 }
-    ],
-    use: "Deploying serverless isolates, configuring Google IAM credentials, routing network boundaries, and provisioning Cloud Run clusters.",
-    yaml: `apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: gcp-cloud-engine
-  namespace: cloud-ops
-  labels:
-    app: portfolio-hosting
-    provider: google-cloud
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: gcp-cloud-engine
-  template:
-    metadata:
-      labels:
-        app: gcp-cloud-engine
-    spec:
-      containers:
-      - name: cloud-run-service
-        image: gcr.io/medhini-cloud/serverless:v1.0
-        resources:
-          limits:
-            cpu: "90%" # GCP / Cloud Run Mastery
-            memory: "85%" # Firebase & IAM Integration
-        env:
-        - name: TARGET_PLATFORM
-          value: Google Cloud Run
-        - name: ACCESS_CONTROL
-          value: GCP IAM Security
-        - name: SERVICES
-          value: GCP, Cloud Run, Firebase, IAM`,
-    logs: [
-      "[gcp-cloud-engine]: Initializing container runtimes...",
-      "[gcp-cloud-engine]: Authenticating IAM Service Account: portfolio-sa@medhini-cloud.iam.gserviceaccount.com",
-      "[gcp-cloud-engine]: Routing HTTP traffic to serverless endpoint Cloud Run",
-      "[gcp-cloud-engine]: Database sync with Firebase established. State: STABLE"
-    ]
-  },
-  {
-    id: "python",
-    number: "02",
-    name: "pod/python-backend-api",
-    namespace: "programming",
-    status: "Running",
-    restarts: 0,
-    cpu: 95,
-    memory: 90,
-    category: "PROGRAMMING // BACKEND",
-    colorTheme: {
-      text: "text-blue-400",
-      border: "border-blue-500/20",
-      glow: "shadow-[0_0_15px_rgba(59,130,246,0.25)]",
-      badge: "bg-blue-500/10 border-blue-500/20 text-blue-300",
-      bgSelected: "bg-blue-500/5 border-blue-500/40",
-      accent: "#3b82f6"
-    },
-    skills: [
-      { name: "Python", level: 95 },
-      { name: "Flask & REST APIs", level: 90 },
-      { name: "Java", level: 75 },
-      { name: "C Programming", level: 75 }
-    ],
-    use: "Architecting backend systems, setting routing parameters, orchestrating microservice APIs, and designing algorithmic procedures.",
-    yaml: `apiVersion: v1
-kind: Pod
-metadata:
-  name: python-backend-api
-  namespace: programming
-  labels:
-    tier: backend
-    framework: flask
-spec:
-  containers:
-  - name: flask-rest-api
-    image: python:3.11-alpine
-    resources:
-      limits:
-        cpu: "95%" # Python Proficiency
-        memory: "90%" # Flask & REST APIs
-    ports:
-    - containerPort: 5000
-    env:
-    - name: CORE_LANGUAGES
-      value: Python, Java, C Programming
-    - name: DATABASE_DRIVERS
-      value: SQL-Connector, Firebase-Admin`,
-    logs: [
-      "[python-backend-api]: Starting Python REST API framework...",
-      "[python-backend-api]: Dynamic routing initialized: /api/v1/skills",
-      "[python-backend-api]: Loading SQL driver connection pool...",
-      "[python-backend-api]: Healthcheck probe check: 200 OK (12ms latency)"
-    ]
-  },
-  {
-    id: "docker",
-    number: "03",
-    name: "pod/docker-isolate-runtime",
-    namespace: "infrastructure",
-    status: "Running",
-    restarts: 0,
-    cpu: 85,
-    memory: 85,
-    category: "INFRA // VIRTUALIZATION",
-    colorTheme: {
-      text: "text-cyan-400",
-      border: "border-cyan-500/20",
-      glow: "shadow-[0_0_15px_rgba(6,182,212,0.25)]",
-      badge: "bg-cyan-500/10 border-cyan-500/20 text-cyan-300",
-      bgSelected: "bg-cyan-500/5 border-cyan-500/40",
-      accent: "#06b6d4"
-    },
-    skills: [
-      { name: "Docker", level: 85 },
-      { name: "Linux & Shell", level: 85 },
-      { name: "Git", level: 85 },
-      { name: "GitHub", level: 85 }
-    ],
-    use: "Writing clean Dockerfiles, orchestrating multi-stage system layering, writing shell scripts, and executing version controls.",
-    yaml: `apiVersion: v1
-kind: Pod
-metadata:
-  name: docker-isolate-runtime
-  namespace: infrastructure
-  labels:
-    runtime: containerd
-    environment: linux-alpine
-spec:
-  containers:
-  - name: docker-engine
-    image: docker:dind
-    securityContext:
-      privileged: true
-    resources:
-      limits:
-        cpu: "85%" # Docker Containers
-        memory: "85%" # Linux & Shell Environment
-    env:
-    - name: CONTAINER_TECH
-      value: Docker, Linux, Shell scripting
-    - name: REPO_CONTROL
-      value: Git, GitHub version checks`,
-    logs: [
-      "[docker-isolate-runtime]: Dockerd daemon active in privileged container",
-      "[docker-isolate-runtime]: Running multi-stage Docker build...",
-      "[docker-isolate-runtime]: Exported alpine base filesystem layer",
-      "[docker-isolate-runtime]: Container layer caching completed successfully"
-    ]
-  },
-  {
-    id: "database",
-    number: "04",
-    name: "pod/db-relational-sql",
-    namespace: "data-layer",
-    status: "Running",
-    restarts: 0,
-    cpu: 80,
-    memory: 80,
-    category: "DATA-LAYER // PERSISTENCE",
-    colorTheme: {
-      text: "text-emerald-400",
-      border: "border-emerald-500/20",
-      glow: "shadow-[0_0_15px_rgba(16,185,129,0.25)]",
-      badge: "bg-emerald-500/10 border-emerald-500/20 text-emerald-300",
-      bgSelected: "bg-emerald-500/5 border-emerald-500/40",
-      accent: "#10b981"
-    },
-    skills: [
-      { name: "SQL", level: 80 },
-      { name: "Firebase (Firestore)", level: 80 }
-    ],
-    use: "Writing database schemas, optimization queries, building indexed tables, and establishing document databases.",
-    yaml: `apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: db-relational-sql
-  namespace: data-layer
-spec:
-  serviceName: postgresql
-  replicas: 1
-  template:
-    spec:
-      containers:
-      - name: database-layer
-        image: postgres:15-alpine
-        resources:
-          limits:
-            cpu: "80%" # SQL Queries & Structs
-            memory: "80%" # Firebase / NoSQL Integration
-        env:
-        - name: DB_FLAVORS
-          value: SQL, Firebase (NoSQL)`,
-    logs: [
-      "[db-relational-sql]: Checking Persistent Volume Claim status... BOUND",
-      "[db-relational-sql]: Database clustering engine listening on port 5432",
-      "[db-relational-sql]: Executing indexing script on transaction log...",
-      "[db-relational-sql]: Database schema synced with main application. OK"
-    ]
-  },
-  {
-    id: "ai",
-    number: "05",
-    name: "pod/ai-inference-engine",
-    namespace: "intelligence",
-    status: "Running",
-    restarts: 0,
+    name: "github-actions-workflow",
+    namespace: "ci-cd",
+    status: "Active",
     cpu: 85,
     memory: 80,
-    category: "INTELLIGENCE // PIPELINE",
+    category: "AUTOMATION // PIPELINE",
     colorTheme: {
       text: "text-purple-400",
       border: "border-purple-500/20",
@@ -512,40 +287,178 @@ spec:
       accent: "#a855f7"
     },
     skills: [
-      { name: "Generative AI", level: 85 },
-      { name: "Hugging Face Hub", level: 75 },
+      { name: "Git Version Control", level: 85 },
+      { name: "GitHub Actions", level: 80 },
+      { name: "Generative AI Integration", level: 85 },
+      { name: "Hugging Face Hub", level: 75 }
+    ],
+    use: "Automating server builds, orchestrating workflow steps, triggering webhooks, and packing container layers on repository pushes.",
+    yaml: `apiVersion: github.com/v1
+kind: Workflow
+metadata:
+  name: deployment-pipeline
+  labels:
+    runner: ubuntu-latest
+spec:
+  triggers:
+    - push:
+        branches: [ main ]
+  jobs:
+    build-and-test:
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v4
+        - name: Build Container
+          run: docker build -t app:latest .
+        - name: Deploy Cluster
+          run: terraform apply -auto-approve`,
+    logs: [
+      "$ terraform apply -target=github_actions_workflow.deploy",
+      "github_actions_workflow.deploy: Creating...",
+      "github_actions_workflow.deploy: Creation complete [id=gh-wf-184]",
+      "[OK] Webhook listener configured.",
+      "[OK] Runner workflow pipeline active."
+    ]
+  },
+  {
+    id: "gateway",
+    number: "02",
+    name: "gcp-ingress-gateway",
+    namespace: "traffic-management",
+    status: "Active",
+    cpu: 90,
+    memory: 85,
+    category: "GATEWAY // SECURITY",
+    colorTheme: {
+      text: "text-indigo-400",
+      border: "border-indigo-500/20",
+      glow: "shadow-[0_0_15px_rgba(99,102,241,0.25)]",
+      badge: "bg-indigo-500/10 border-indigo-500/20 text-indigo-300",
+      bgSelected: "bg-indigo-500/5 border-indigo-500/40",
+      accent: "#6366f1"
+    },
+    skills: [
+      { name: "IAM Security Shield", level: 85 },
+      { name: "Linux Administration", level: 85 },
+      { name: "Flask & REST APIs", level: 90 },
+      { name: "Java & C Programming", level: 75 }
+    ],
+    use: "Configuring ingress paths, securing API end points via IAM policies, proxying user requests, and establishing SSL configurations.",
+    yaml: `apiVersion: networking.gke.io/v1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  annotations:
+    cert-manager.io/issuer: letsencrypt-prod
+spec:
+  rules:
+  - host: portfolio.medhini.dev
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: compute-service
+            port:
+              number: 80`,
+    logs: [
+      "$ terraform apply -target=gcp_ingress_gateway.nginx",
+      "gcp_ingress_gateway.nginx: Creating...",
+      "gcp_ingress_gateway.nginx: Creation complete [id=gw-ng-390]",
+      "[OK] SSL Handshake configured on Port 443.",
+      "[OK] Nginx Ingress Controller active."
+    ]
+  },
+  {
+    id: "compute",
+    number: "03",
+    name: "gcp-cloud-run-compute",
+    namespace: "compute-services",
+    status: "Active",
+    cpu: 95,
+    memory: 90,
+    category: "COMPUTE // SERVERLESS",
+    colorTheme: {
+      text: "text-cyan-400",
+      border: "border-cyan-500/20",
+      glow: "shadow-[0_0_15px_rgba(6,182,212,0.25)]",
+      badge: "bg-cyan-500/10 border-cyan-500/20 text-cyan-300",
+      bgSelected: "bg-cyan-500/5 border-cyan-500/40",
+      accent: "#06b6d4"
+    },
+    skills: [
+      { name: "Docker Isolation", level: 85 },
+      { name: "Google Cloud Run", level: 85 },
+      { name: "Python Backend", level: 95 },
       { name: "Pandas & NumPy", level: 80 }
     ],
-    use: "Orchestrating smart generator pipelines, utilizing Hugging Face neural tokenizers, and carrying out dataset metrics analysis.",
-    yaml: `apiVersion: apps/v1
-kind: Deployment
+    use: "Executing business microservices in isolated serverless container pods, matching compute limits, and processing backend requests.",
+    yaml: `apiVersion: serving.knative.dev/v1
+kind: Service
 metadata:
-  name: ai-inference-engine
-  namespace: intelligence
+  name: compute-service
+  namespace: compute-services
 spec:
-  replicas: 2
   template:
-    metadata:
-      labels:
-        role: prompt-inference
     spec:
       containers:
-      - name: model-pipeline
-        image: huggingface/transformers-pytorch-gpu:latest
+      - image: gcr.io/medhini/compute-runner:latest
         resources:
           limits:
-            cpu: "85%" # Generative AI & Prompts
-            memory: "80%" # Pandas & NumPy Vectors
+            cpu: "2"
+            memory: "2Gi"
         env:
-        - name: AI_PROVIDERS
-          value: Generative AI, Hugging Face Hub
-        - name: DATA_TOOLS
-          value: Pandas, NumPy dataset parsing`,
+        - name: RUNTIME_ENV
+          value: CloudRun`,
     logs: [
-      "[ai-inference-engine]: Allocating GPU memory allocation pointers...",
-      "[ai-inference-engine]: Hugging Face inference pipeline model loaded",
-      "[ai-inference-engine]: Vector arrays calculated via Pandas & NumPy APIs",
-      "[ai-inference-engine]: Model server status: READY"
+      "$ terraform apply -target=gcp_cloud_run_service.api",
+      "gcp_cloud_run_service.api: Creating...",
+      "gcp_cloud_run_service.api: Creation complete [id=cr-run-912]",
+      "[OK] Container runtimes initialized (Docker alpine base).",
+      "[OK] Cloud Run cluster status: ONLINE."
+    ]
+  },
+  {
+    id: "database",
+    number: "04",
+    name: "gcp-cloud-sql-store",
+    namespace: "persistence-layer",
+    status: "Active",
+    cpu: 80,
+    memory: 80,
+    category: "PERSISTENCE // DATABASE",
+    colorTheme: {
+      text: "text-emerald-400",
+      border: "border-emerald-500/20",
+      glow: "shadow-[0_0_15px_rgba(16,185,129,0.25)]",
+      badge: "bg-emerald-500/10 border-emerald-500/20 text-emerald-300",
+      bgSelected: "bg-emerald-500/5 border-emerald-500/40",
+      accent: "#10b981"
+    },
+    skills: [
+      { name: "SQL Schema & Queries", level: 80 },
+      { name: "Firebase (NoSQL)", level: 80 }
+    ],
+    use: "Configuring relational databases, managing persistent volume claims, indexing schema tables, and managing real-time document collections.",
+    yaml: `apiVersion: sql.gcp.org/v1beta4
+kind: DatabaseInstance
+metadata:
+  name: relational-sql-instance
+  namespace: persistence-layer
+spec:
+  databaseVersion: POSTGRES_15
+  settings:
+    tier: db-f1-micro
+    ipConfiguration:
+      ipv4Enabled: false
+      privateNetwork: projects/medhini/global/networks/vpc`,
+    logs: [
+      "$ terraform apply -target=gcp_sql_database.relational",
+      "gcp_sql_database.relational: Creating...",
+      "gcp_sql_database.relational: Creation complete [id=db-sql-502]",
+      "[OK] Persistent storage volume bound.",
+      "[OK] Database listening on port 5432."
     ]
   }
 ];
@@ -974,6 +887,22 @@ export default function App() {
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(pipelineStages[0]);
   const [k8sTab, setK8sTab] = useState('logs');
+  const [printedLogs, setPrintedLogs] = useState([]);
+
+  useEffect(() => {
+    setPrintedLogs([]);
+    const timers = [];
+    let currentLines = [];
+    selectedSkill.logs.forEach((line, idx) => {
+      const timer = setTimeout(() => {
+        currentLines.push(line);
+        setPrintedLogs([...currentLines]);
+      }, idx * 220);
+      timers.push(timer);
+    });
+    return () => timers.forEach(clearTimeout);
+  }, [selectedSkill]);
+
   const [selectedChapter, setSelectedChapter] = useState(0);
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
   // Custom cursor state variables
@@ -1348,7 +1277,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Skills Section (Kubernetes Workloads Dashboard) */}
+      {/* Skills Section (Interactive Cloud Architecture / Topology Map) */}
       <section id="skills" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-12 text-left">
@@ -1356,220 +1285,279 @@ export default function App() {
               02 // TECHNICAL ARSENAL
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>Kubernetes Workloads.</h2>
+              }`}>Infrastructure Topology.</h2>
             <p className={`max-w-2xl text-sm ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              Interactive cluster orchestration dashboard. Each Pod represents a core capability. Inspect logs or YAML specifications to check configurations and tool integrations.
+              Interactive system architecture map with live data packet flows. Click on any system component to view infrastructure provisioning logs, specs, and integrated skills.
             </p>
           </div>
 
-          {/* K8s Lens/Lens-style Dashboard Window */}
-          <div className="bg-[#09090b]/90 border border-white/5 rounded-2xl overflow-hidden shadow-2xl w-full flex flex-col">
+          <div className="grid lg:grid-cols-12 gap-8 items-stretch">
             
-            {/* Top Command / Telemetry Header Bar */}
-            <div className="bg-zinc-950 px-6 py-4 border-b border-white/5 flex flex-wrap items-center justify-between gap-4 text-[10px] font-mono text-zinc-500">
-              <div className="flex flex-wrap items-center gap-4">
-                <span className="flex items-center gap-1.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
-                  CLUSTER: medhini-prod-01
-                </span>
-                <span className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                  STATUS: HEALTHY
-                </span>
-                <span className="text-zinc-600 uppercase">
-                  NAMESPACE: ALL-NAMESPACES
-                </span>
-              </div>
+            {/* Left Column: Interactive SVG Network Map */}
+            <div className="lg:col-span-7 relative w-full min-h-[460px] rounded-2xl bg-[#09090b]/90 border border-white/5 overflow-hidden shadow-2xl flex items-center justify-center">
               
-              <div className="flex items-center gap-6">
-                <span>PODS: <b className="text-zinc-300">5/5 RUNNING</b></span>
-                <span>CPU: <b className="text-zinc-300">1.8 CORES ACTIVE</b></span>
-                <span>MEM: <b className="text-zinc-300">92% ALLOCATED</b></span>
+              {/* Grid Background */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+              
+              <div className="absolute top-6 left-6 text-[10px] font-mono tracking-widest text-zinc-500 uppercase flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                ACTIVE MONITOR // TELEMETRY LINKED
               </div>
+
+              {/* SVG Connector Lines */}
+              <svg viewBox="0 0 800 400" className="absolute inset-0 w-full h-full pointer-events-none">
+                <defs>
+                  <filter id="svg-glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+
+                {/* Path Connections */}
+                {/* 1. CI/CD -> Gateway */}
+                <path d="M 120 200 Q 260 100 400 100" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" strokeDasharray="4 4" />
+                {/* 2. CI/CD -> Compute */}
+                <path d="M 120 200 Q 260 300 400 300" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" strokeDasharray="4 4" />
+                {/* 3. Gateway -> Compute */}
+                <path d="M 400 100 L 400 300" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" strokeDasharray="4 4" />
+                {/* 4. Compute -> Database */}
+                <path d="M 400 300 Q 540 300 680 200" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" strokeDasharray="4 4" />
+                {/* 5. Gateway -> Database */}
+                <path d="M 400 100 Q 540 100 680 200" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" strokeDasharray="4 4" />
+
+                {/* Animated Data Packets (constantly flow along the paths) */}
+                <circle r="3.5" fill="#a855f7" filter="url(#svg-glow)">
+                  <animateMotion dur="4s" repeatCount="indefinite" path="M 120 200 Q 260 100 400 100" />
+                </circle>
+                <circle r="3.5" fill="#06b6d4" filter="url(#svg-glow)">
+                  <animateMotion dur="3.5s" repeatCount="indefinite" path="M 120 200 Q 260 300 400 300" />
+                </circle>
+                <circle r="3.5" fill="#06b6d4" filter="url(#svg-glow)">
+                  <animateMotion dur="2.5s" repeatCount="indefinite" path="M 400 100 L 400 300" />
+                </circle>
+                <circle r="3.5" fill="#10b981" filter="url(#svg-glow)">
+                  <animateMotion dur="4.2s" repeatCount="indefinite" path="M 400 300 Q 540 300 680 200" />
+                </circle>
+                <circle r="3.5" fill="#10b981" filter="url(#svg-glow)">
+                  <animateMotion dur="3s" repeatCount="indefinite" path="M 400 100 Q 540 100 680 200" />
+                </circle>
+              </svg>
+
+              {/* Interactive Node Buttons Overlay */}
+              <div className="absolute inset-0 w-full h-full">
+                
+                {/* Node 1: CI/CD Pipeline */}
+                {(() => {
+                  const stage = pipelineStages.find(s => s.id === "cicd");
+                  const isSelected = selectedSkill.id === stage?.id;
+                  return stage ? (
+                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2 animate-pulse-slow" style={{ left: "15%", top: "50%" }}>
+                      <button
+                        onClick={() => setSelectedSkill(stage)}
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
+                          isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
+                        }`}
+                      >
+                        {isSelected && (
+                          <motion.div
+                            initial={{ scale: 0.8, opacity: 0.5 }}
+                            animate={{ scale: [0.8, 1.4, 1.8], opacity: [0.8, 0.3, 0] }}
+                            transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
+                            className="absolute inset-0 rounded-2xl border border-current"
+                          />
+                        )}
+                        <Activity className="w-6 h-6" />
+                      </button>
+                      <span className={`text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>CI/CD PIPELINE</span>
+                    </div>
+                  ) : null;
+                })()}
+
+                {/* Node 2: Gateway */}
+                {(() => {
+                  const stage = pipelineStages.find(s => s.id === "gateway");
+                  const isSelected = selectedSkill.id === stage?.id;
+                  return stage ? (
+                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2" style={{ left: "50%", top: "25%" }}>
+                      <button
+                        onClick={() => setSelectedSkill(stage)}
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
+                          isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
+                        }`}
+                      >
+                        {isSelected && (
+                          <motion.div
+                            initial={{ scale: 0.8, opacity: 0.5 }}
+                            animate={{ scale: [0.8, 1.4, 1.8], opacity: [0.8, 0.3, 0] }}
+                            transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
+                            className="absolute inset-0 rounded-2xl border border-current"
+                          />
+                        )}
+                        <Globe className="w-6 h-6" />
+                      </button>
+                      <span className={`text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>INGRESS GATEWAY</span>
+                    </div>
+                  ) : null;
+                })()}
+
+                {/* Node 3: Compute */}
+                {(() => {
+                  const stage = pipelineStages.find(s => s.id === "compute");
+                  const isSelected = selectedSkill.id === stage?.id;
+                  return stage ? (
+                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2" style={{ left: "50%", top: "75%" }}>
+                      <button
+                        onClick={() => setSelectedSkill(stage)}
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
+                          isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
+                        }`}
+                      >
+                        {isSelected && (
+                          <motion.div
+                            initial={{ scale: 0.8, opacity: 0.5 }}
+                            animate={{ scale: [0.8, 1.4, 1.8], opacity: [0.8, 0.3, 0] }}
+                            transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
+                            className="absolute inset-0 rounded-2xl border border-current"
+                          />
+                        )}
+                        <Cpu className="w-6 h-6" />
+                      </button>
+                      <span className={`text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>CLOUD COMPUTE</span>
+                    </div>
+                  ) : null;
+                })()}
+
+                {/* Node 4: Database Store */}
+                {(() => {
+                  const stage = pipelineStages.find(s => s.id === "database");
+                  const isSelected = selectedSkill.id === stage?.id;
+                  return stage ? (
+                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2" style={{ left: "85%", top: "50%" }}>
+                      <button
+                        onClick={() => setSelectedSkill(stage)}
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
+                          isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
+                        }`}
+                      >
+                        {isSelected && (
+                          <motion.div
+                            initial={{ scale: 0.8, opacity: 0.5 }}
+                            animate={{ scale: [0.8, 1.4, 1.8], opacity: [0.8, 0.3, 0] }}
+                            transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
+                            className="absolute inset-0 rounded-2xl border border-current"
+                          />
+                        )}
+                        <Database className="w-6 h-6" />
+                      </button>
+                      <span className={`text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>DATABASE STORE</span>
+                    </div>
+                  ) : null;
+                })()}
+
+              </div>
+
             </div>
 
-            {/* Dashboard Workspace */}
-            <div className="grid lg:grid-cols-12 gap-0 items-stretch min-h-[460px]">
+            {/* Right Column: Node Inspector & Provisioning logs */}
+            <div className="lg:col-span-5 p-6 rounded-2xl bg-[#09090b]/90 border border-white/5 text-left flex flex-col justify-between shadow-2xl">
               
-              {/* Left Column: Pods List (Workloads Table) */}
-              <div className="lg:col-span-7 p-6 border-b lg:border-b-0 lg:border-r border-white/5 text-left flex flex-col justify-start">
-                <div className="text-[11px] font-mono font-bold text-zinc-500 uppercase tracking-wider mb-4">
-                  Workloads &gt; Pods (Active)
-                </div>
+              <div className="flex flex-col h-full justify-between gap-4">
                 
-                <div className="overflow-x-auto w-full">
-                  <table className="w-full border-collapse font-mono text-xs select-none">
-                    <thead>
-                      <tr className="border-b border-white/5 text-zinc-500 text-[10px] uppercase tracking-wider pb-2">
-                        <th className="text-left pb-3 font-semibold">Name</th>
-                        <th className="text-left pb-3 font-semibold hidden sm:table-cell">Namespace</th>
-                        <th className="text-center pb-3 font-semibold">Status</th>
-                        <th className="text-center pb-3 font-semibold hidden md:table-cell">Restarts</th>
-                        <th className="text-right pb-3 font-semibold pr-4">Limits (CPU/MEM)</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/5">
-                      {pipelineStages.map((stage) => {
-                        const isSelected = selectedSkill.id === stage.id;
-                        return (
-                          <tr
-                            key={stage.id}
-                            onClick={() => setSelectedSkill(stage)}
-                            className={`cursor-pointer transition-all duration-300 hover:bg-white/[0.02] ${
-                              isSelected ? 'bg-white/[0.03]' : ''
-                            }`}
-                          >
-                            {/* Pod Name */}
-                            <td className="py-4 text-left font-bold relative">
-                              {isSelected && (
-                                <span className={`absolute left-0 top-3 bottom-3 w-1 rounded-full ${stage.colorTheme.text}`} style={{ backgroundColor: stage.colorTheme.accent }}></span>
-                              )}
-                              <span className={`pl-3 flex items-center gap-2 transition-colors duration-300 ${
-                                isSelected ? stage.colorTheme.text : 'text-zinc-300 hover:text-zinc-100'
-                              }`}>
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                {stage.name}
-                              </span>
-                            </td>
-
-                            {/* Namespace */}
-                            <td className="py-4 text-left text-zinc-500 hidden sm:table-cell">
-                              {stage.namespace}
-                            </td>
-
-                            {/* Status */}
-                            <td className="py-4 text-center">
-                              <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">
-                                {stage.status}
-                              </span>
-                            </td>
-
-                            {/* Restarts */}
-                            <td className="py-4 text-center text-zinc-500 hidden md:table-cell">
-                              {stage.restarts}
-                            </td>
-
-                            {/* Resource Limits CPU/MEM */}
-                            <td className="py-4 text-right pr-4 space-y-1">
-                              <div className="flex flex-col items-end gap-1.5">
-                                <div className="flex gap-2 text-[9px] text-zinc-500">
-                                  <span>CPU: <b className={stage.colorTheme.text}>{stage.cpu}%</b></span>
-                                  <span>MEM: <b className={stage.colorTheme.text}>{stage.memory}%</b></span>
-                                </div>
-                                <div className="w-20 h-1 bg-zinc-800 rounded-full overflow-hidden border border-white/5 flex">
-                                  <div
-                                    className="h-full rounded-full"
-                                    style={{
-                                      width: `${(stage.cpu + stage.memory) / 2}%`,
-                                      backgroundColor: stage.colorTheme.accent
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                {/* Tab Header Selector */}
+                <div className="flex border-b border-white/5 text-xs font-mono select-none">
+                  <button
+                    onClick={() => setK8sTab('logs')}
+                    className={`pb-2 px-4 border-b-2 font-bold transition-all ${
+                      k8sTab === 'logs' ? `border-b-2 border-current ${selectedSkill.colorTheme.text}` : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                    }`}
+                  >
+                    IaC Provisioning
+                  </button>
+                  <button
+                    onClick={() => setK8sTab('yaml')}
+                    className={`pb-2 px-4 border-b-2 font-bold transition-all ${
+                      k8sTab === 'yaml' ? `border-b-2 border-current ${selectedSkill.colorTheme.text}` : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                    }`}
+                  >
+                    YAML Specification
+                  </button>
                 </div>
-              </div>
 
-              {/* Right Column: Inspector Tab (Logs & YAML Config) */}
-              <div className="lg:col-span-5 p-6 text-left flex flex-col justify-between">
-                <div className="flex flex-col h-full justify-between gap-4">
-                  
-                  {/* Tab Selector Headers */}
-                  <div className="flex border-b border-white/5 text-xs font-mono">
-                    <button
-                      onClick={() => setK8sTab('logs')}
-                      className={`pb-2 px-4 transition-all border-b-2 font-bold ${
-                        k8sTab === 'logs'
-                          ? `border-current ${selectedSkill.colorTheme.text}`
-                          : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                      }`}
-                    >
-                      Logs Output
-                    </button>
-                    <button
-                      onClick={() => setK8sTab('yaml')}
-                      className={`pb-2 px-4 transition-all border-b-2 font-bold ${
-                        k8sTab === 'yaml'
-                          ? `border-current ${selectedSkill.colorTheme.text}`
-                          : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                      }`}
-                    >
-                      YAML Specification
-                    </button>
+                {/* Main Console Box */}
+                <div className="flex-grow flex flex-col justify-start">
+                  {k8sTab === 'logs' ? (
+                    <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[10px] text-zinc-400 min-h-[250px] max-h-[300px] overflow-y-auto relative flex-grow flex flex-col justify-start gap-1">
+                      {printedLogs.map((line, idx) => (
+                        <motion.div
+                          key={`${selectedSkill.id}-log-${idx}`}
+                          initial={{ opacity: 0, x: -5 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className={line.startsWith('$') ? 'text-zinc-500 font-bold' : line.startsWith('[OK]') ? 'text-emerald-400 font-bold' : 'text-zinc-300'}
+                        >
+                          {line}
+                        </motion.div>
+                      ))}
+                      {printedLogs.length < selectedSkill.logs.length && (
+                        <div className="text-[10px] text-zinc-600 animate-pulse">Provisioning resources...</div>
+                      )}
+                      <div className="absolute bottom-2 right-2 text-[8px] text-zinc-600 uppercase font-mono tracking-widest select-none">
+                        TERRAFORM RUN
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[10px] text-zinc-400 min-h-[250px] max-h-[300px] overflow-y-auto relative flex-grow flex flex-col justify-start whitespace-pre-wrap select-all">
+                      {selectedSkill.yaml.split('\n').map((line, idx) => {
+                        if (line.trim().startsWith('- name:') || line.trim().startsWith('- containerPort:') || line.trim().startsWith('- value:') || line.trim().startsWith('metadata:') || line.trim().startsWith('spec:') || line.trim().startsWith('containers:')) {
+                          return <div key={idx} className="text-cyan-400">{line}</div>;
+                        }
+                        if (line.includes(':')) {
+                          const colonIdx = line.indexOf(':');
+                          const key = line.substring(0, colonIdx);
+                          const val = line.substring(colonIdx);
+                          return (
+                            <div key={idx} className="leading-relaxed">
+                              <span className="text-blue-400">{key}</span>
+                              <span className="text-emerald-400">{val}</span>
+                            </div>
+                          );
+                        }
+                        return <div key={idx} className="leading-relaxed">{line}</div>;
+                      })}
+                      <div className="absolute bottom-2 right-2 text-[8px] text-zinc-600 uppercase font-mono tracking-widest select-none">
+                        yaml config
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Info Text & Skills Grid */}
+                <div className="space-y-4">
+                  <div>
+                    <div className="text-[10px] font-mono tracking-wider text-zinc-500 uppercase font-bold mb-1">Functional Description</div>
+                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>{selectedSkill.use}</p>
                   </div>
 
-                  {/* Tab Contents */}
-                  <div className="flex-grow flex flex-col justify-start">
-                    {k8sTab === 'logs' ? (
-                      <div className="space-y-4 h-full flex flex-col justify-between">
-                        <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[10px] text-zinc-400 space-y-1.5 min-h-[260px] max-h-[360px] overflow-y-auto relative flex-grow flex flex-col justify-start">
-                          {selectedSkill.logs.map((log, idx) => (
-                            <motion.div
-                              key={`${selectedSkill.id}-log-${idx}`}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: idx * 0.15, duration: 0.3 }}
-                              className={idx === selectedSkill.logs.length - 1 ? selectedSkill.colorTheme.text : 'text-zinc-400'}
-                            >
-                              {log}
-                            </motion.div>
-                          ))}
-                          <div className="absolute bottom-2 right-2 text-[9px] text-zinc-600 uppercase font-mono">
-                            Pod logs stream
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="bg-zinc-950 p-5 rounded-xl border border-white/5 font-mono text-[10px] text-zinc-400 min-h-[260px] max-h-[360px] overflow-y-auto relative flex-grow flex flex-col justify-start whitespace-pre-wrap select-all">
-                        {selectedSkill.yaml.split('\n').map((line, idx) => {
-                          // Inline YAML syntax highlight resolver
-                          if (line.trim().startsWith('- name:') || line.trim().startsWith('- containerPort:') || line.trim().startsWith('- value:') || line.trim().startsWith('metadata:') || line.trim().startsWith('spec:') || line.trim().startsWith('containers:')) {
-                            return <div key={idx} className="text-cyan-400">{line}</div>;
-                          }
-                          if (line.includes(':')) {
-                            const colonIdx = line.indexOf(':');
-                            const key = line.substring(0, colonIdx);
-                            const val = line.substring(colonIdx);
-                            return (
-                              <div key={idx} className="leading-relaxed">
-                                <span className="text-blue-400">{key}</span>
-                                <span className="text-emerald-400">{val}</span>
-                              </div>
-                            );
-                          }
-                          return <div key={idx} className="leading-relaxed">{line}</div>;
-                        })}
-                        <div className="absolute bottom-2 right-2 text-[9px] text-zinc-600 uppercase font-mono">
-                          yaml spec-sheet
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Skills Grid matching selected pod */}
-                  <div className="pt-2">
-                    <p className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider mb-2">Integrated Core Skills</p>
-                    <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <div className="text-[10px] font-mono tracking-wider text-zinc-500 uppercase font-bold mb-2">Integrated Core Skills</div>
+                    <div className="grid grid-cols-2 gap-2">
                       {selectedSkill.skills.map((skill, idx) => (
-                        <div key={idx} className="p-2 rounded bg-zinc-900 border border-white/5 flex items-center justify-between text-xs font-mono">
+                        <div key={idx} className="p-2.5 rounded bg-zinc-950 border border-white/5 flex items-center justify-between text-xs font-mono">
                           <span className="text-zinc-400">{skill.name}</span>
                           <span className={selectedSkill.colorTheme.text}>{skill.level}%</span>
                         </div>
                       ))}
                     </div>
                   </div>
-
                 </div>
+
               </div>
 
             </div>
+
           </div>
+
         </div>
       </section>
 
