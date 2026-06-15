@@ -784,7 +784,7 @@ export default function App() {
             {scrolledPastHero && (
               <motion.a
                 layoutId="download-resume-btn"
-                href="/resume.pdf"
+                href="/B%20R%20Medhini%20-%20Resume.pdf"
                 download="B R Medhini - Resume.pdf"
                 className={`w-[150px] sm:w-[180px] h-[40px] sm:h-[48px] flex items-center justify-center rounded-full text-[11px] sm:text-[13px] font-bold border shadow-md transition-all duration-300 ${theme === 'dark'
                   ? 'bg-black/80 border-white/10 text-white hover:bg-white/5'
@@ -891,7 +891,7 @@ export default function App() {
               {!scrolledPastHero && (
                 <motion.a
                   layoutId="download-resume-btn"
-                  href="/resume.pdf"
+                  href="/B%20R%20Medhini%20-%20Resume.pdf"
                   download="B R Medhini - Resume.pdf"
                   exit={{ opacity: 0 }}
                   className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] font-bold border transition-all duration-300 ${theme === 'dark'
