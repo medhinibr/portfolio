@@ -1141,10 +1141,29 @@ export default function App() {
         return;
       }
       setIsTransmitting(true);
-      setTimeout(() => {
+      fetch("https://formsubmit.co/ajax/brmedhini@gmail.com", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: contactForm.name,
+          Email: contactForm.email,
+          Message: contactForm.message,
+          _subject: `New Portfolio Message from ${contactForm.name}`
+        })
+      })
+      .then(res => res.json())
+      .then(() => {
         setIsTransmitting(false);
         setContactStep(3);
-      }, 1500);
+      })
+      .catch(err => {
+        console.error(err);
+        setFormError("Transmission failed. Please check connection and try again.");
+        setIsTransmitting(false);
+      });
     }
   };
 
@@ -2424,10 +2443,10 @@ export default function App() {
               ) : (
                 <motion.div
                   key={contactStep}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="space-y-6 w-full flex-grow flex flex-col justify-center"
                 >
                   <div>
