@@ -639,6 +639,7 @@ export default function App() {
   const theme = 'dark';
   const [hoveredIdx, setHoveredIdx] = useState(null);
   const [clickedIdx, setClickedIdx] = useState(null);
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(constellationSkills[0]);
   const [selectedChapter, setSelectedChapter] = useState(0);
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
@@ -695,14 +696,24 @@ export default function App() {
       setIsHoveringClickable(!!isClickable);
     };
 
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setScrolledPastHero(true);
+      } else {
+        setScrolledPastHero(false);
+      }
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       lenis.destroy();
       lenisRef.current = null;
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -767,7 +778,25 @@ export default function App() {
 
 
 
-      <header className="fixed top-8 left-0 w-full z-40 flex justify-end items-center px-6 sm:px-12 pointer-events-none">
+      <header className="fixed top-8 left-0 w-full z-40 flex justify-between items-center px-6 sm:px-12 pointer-events-none">
+        <div className="flex items-center gap-4 pointer-events-auto">
+          <AnimatePresence>
+            {scrolledPastHero && (
+              <motion.a
+                layoutId="download-resume-btn"
+                href="https://linktr.ee"
+                target="_blank"
+                rel="noreferrer"
+                className={`w-[150px] sm:w-[180px] h-[40px] sm:h-[48px] flex items-center justify-center rounded-full text-[11px] sm:text-[13px] font-bold border shadow-md transition-all duration-300 ${theme === 'dark'
+                  ? 'bg-black/80 border-white/10 text-white hover:bg-white/5'
+                  : 'bg-white/80 border-zinc-200 text-zinc-800 hover:bg-zinc-50'
+                  }`}
+              >
+                Download Resume
+              </motion.a>
+            )}
+          </AnimatePresence>
+        </div>
         <div className="flex items-center gap-4 pointer-events-auto">
           <TelemetryHeaderWidget lenisRef={lenisRef} />
         </div>
@@ -859,17 +888,23 @@ export default function App() {
             >
               Book a call
             </a>
-            <a
-              href="https://linktr.ee"
-              target="_blank"
-              rel="noreferrer"
-              className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] font-bold border transition-all duration-300 ${theme === 'dark'
-                ? 'bg-transparent border-zinc-800 text-white hover:bg-white/5'
-                : 'bg-transparent border-zinc-200 text-zinc-800 hover:bg-zinc-50'
-                }`}
-            >
-              Download Resume
-            </a>
+            <AnimatePresence>
+              {!scrolledPastHero && (
+                <motion.a
+                  layoutId="download-resume-btn"
+                  href="https://linktr.ee"
+                  target="_blank"
+                  rel="noreferrer"
+                  exit={{ opacity: 0 }}
+                  className={`w-[180px] h-[48px] flex items-center justify-center rounded-full text-[13px] font-bold border transition-all duration-300 ${theme === 'dark'
+                    ? 'bg-transparent border-zinc-800 text-white hover:bg-white/5'
+                    : 'bg-transparent border-zinc-200 text-zinc-800 hover:bg-zinc-50'
+                    }`}
+                >
+                  Download Resume
+                </motion.a>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </section>
