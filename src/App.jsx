@@ -483,6 +483,22 @@ const timelineChapters = [
   },
   {
     chapter: "CHAPTER II",
+    title: "Academia Focus",
+    role: "Information Technology Student",
+    institution: "SDM Institute of Technology (SDMIT)",
+    period: "SEP 2023 - MAY 2027",
+    description: "Developing core engineering concepts, data structures, algorithm design, database relations, and python scripting frameworks.",
+    skills: ["Python", "C Programming", "DBMS", "CS Fundamentals"],
+    colorTheme: {
+      text: "text-teal-400",
+      border: "border-teal-500",
+      bgSelected: "bg-teal-600/10 border-teal-500 shadow-md shadow-teal-600/5",
+      badgeSelected: "border-teal-400 bg-teal-500/20 text-teal-300 shadow-[0_0_15px_rgba(20,184,166,0.5)]",
+      lineGlow: "bg-teal-500"
+    }
+  },
+  {
+    chapter: "CHAPTER III",
     title: "Cloud Foundations",
     role: "Arcade Facilitator Participant",
     institution: "Google Cloud Arcade",
@@ -498,7 +514,7 @@ const timelineChapters = [
     }
   },
   {
-    chapter: "CHAPTER III",
+    chapter: "CHAPTER IV",
     title: "Tech Communities",
     role: "Innovators & WTM Member",
     institution: "Google Cloud / Women Techmakers",
@@ -514,7 +530,7 @@ const timelineChapters = [
     }
   },
   {
-    chapter: "CHAPTER IV",
+    chapter: "CHAPTER V",
     title: "The Spark",
     role: "Co-Founder & CSO",
     institution: "Berukodige Farm",
@@ -530,7 +546,7 @@ const timelineChapters = [
     }
   },
   {
-    chapter: "CHAPTER V",
+    chapter: "CHAPTER VI",
     title: "Pragati Path",
     role: "Data Science Intern",
     institution: "Infosys Springboard",
@@ -546,7 +562,7 @@ const timelineChapters = [
     }
   },
   {
-    chapter: "CHAPTER VI",
+    chapter: "CHAPTER VII",
     title: "Global Support",
     role: "Google Product Expert",
     institution: "Google Community Support",
@@ -562,7 +578,7 @@ const timelineChapters = [
     }
   },
   {
-    chapter: "CHAPTER VII",
+    chapter: "CHAPTER VIII",
     title: "Innovation Leader",
     role: "StartUp Coordinator",
     institution: "Institutions Innovation Council (IIC)",
@@ -578,7 +594,7 @@ const timelineChapters = [
     }
   },
   {
-    chapter: "CHAPTER VIII",
+    chapter: "CHAPTER IX",
     title: "The Horizon",
     role: "Flutter Developer Intern",
     institution: "Benevolate (Texas, USA)",
@@ -1976,7 +1992,7 @@ export default function App() {
                       ? item.colorTheme.badgeSelected
                       : 'border-zinc-700 bg-zinc-900 text-zinc-500'
                       }`}>
-                      {["I", "II", "III", "IV", "V", "VI", "VII", "VIII"][idx] || (idx + 1)}
+                      {["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"][idx] || (idx + 1)}
                     </div>
                     <div>
                       <span className={`text-[9px] font-mono font-bold tracking-wider uppercase ${isSelected ? item.colorTheme.text : 'text-zinc-500 group-hover:text-zinc-300'}`}>
