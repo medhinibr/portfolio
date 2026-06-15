@@ -94,7 +94,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: isHovered ? 0.35 : 0.01, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text"
+            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text px-1"
           >
             {item.prefix}
           </motion.span>
@@ -105,7 +105,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
             scale: isHovered ? 1.05 : 1,
           }}
           transition={{ duration: 0.2 }}
-          className={`inline-block cursor-default transition-all duration-300 smooth-text ${isHovered
+          className={`inline-flex flex-shrink-0 cursor-default transition-all duration-300 smooth-text px-1 ${isHovered
               ? 'bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent'
               : (theme === 'dark' ? 'text-white' : 'text-zinc-900')
             }`}
@@ -121,7 +121,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: isHovered ? 0.35 : 0.01, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-block overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text"
+            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text px-1"
           >
             {item.suffix}
           </motion.span>
@@ -157,12 +157,111 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
         opacity: 1,
         filter: "none"
       }}
-      className="inline-block cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-5.5xl sm:text-7.5xl md:text-[9.5rem] lg:text-[10.5rem] leading-[0.85] smooth-text"
+      className="inline-flex cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-5.5xl sm:text-7.5xl md:text-[9.5rem] lg:text-[10.5rem] leading-[0.85] smooth-text px-3 sm:px-4 flex-shrink-0"
     >
       {char === ' ' ? '\u00A0' : char}
     </motion.span>
   );
 };
+
+// Interactive top-right DevOps Telemetry Widget
+const TelemetryHeaderWidget = ({ lenisRef }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [uptime, setUptime] = useState(0);
+  const [cpu, setCpu] = useState(6.4);
+
+  // Uptime ticker
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setUptime(prev => prev + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // CPU fluctuations
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCpu(Number((4.5 + Math.random() * 8.2).toFixed(1)));
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatUptime = (sec) => {
+    const h = Math.floor(sec / 3600).toString().padStart(2, '0');
+    const m = Math.floor((sec % 3600) / 60).toString().padStart(2, '0');
+    const s = (sec % 60).toString().padStart(2, '0');
+    return `${h}:${m}:${s}`;
+  };
+
+  const handleStatusClick = () => {
+    if (lenisRef?.current) {
+      lenisRef.current.scrollTo('#telemetry', { duration: 1.2, offset: -40 });
+    }
+  };
+
+  return (
+    <div className="relative flex flex-col items-end">
+      <div 
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/5 bg-zinc-950/80 backdrop-blur-md cursor-pointer select-none text-[10px] font-mono font-bold text-zinc-400 hover:border-indigo-500/40 hover:text-indigo-400 transition-all duration-300 shadow-lg"
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>SYS STATUS: OPTIMAL</span>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-10 right-0 w-56 p-4 rounded-xl border border-white/5 bg-zinc-950/95 backdrop-blur-xl shadow-2xl flex flex-col gap-3 z-50 text-[10px] font-mono text-zinc-400"
+          >
+            <div className="flex justify-between items-center pb-2 border-b border-white/5">
+              <span className="text-zinc-500 uppercase tracking-wider font-bold">Node Telemetry</span>
+              <span className="text-emerald-400 font-bold">ONLINE</span>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <span>CPU Load:</span>
+              <span className="text-zinc-200 font-bold">{cpu}%</span>
+            </div>
+            <div className="w-full bg-zinc-900/50 h-1.5 rounded-full overflow-hidden">
+              <motion.div 
+                animate={{ width: `${cpu * 8}%` }} 
+                transition={{ duration: 0.5 }}
+                className="bg-indigo-500 h-full rounded-full"
+              />
+            </div>
+
+            <div className="flex justify-between items-center">
+              <span>Memory usage:</span>
+              <span className="text-zinc-200 font-bold">412MB / 1024MB</span>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <span>Node Uptime:</span>
+              <span className="text-zinc-200 font-bold">{formatUptime(uptime)}</span>
+            </div>
+
+            <button 
+              onClick={() => {
+                setIsOpen(false);
+                handleStatusClick();
+              }}
+              className="mt-2 w-full py-1.5 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-center transition-colors cursor-pointer"
+            >
+              Open Telemetry Logs
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+
 
 const constellationSkills = [
   { id: "gcp", name: "Google Cloud", category: "CLOUD COMPUTING", use: "Compute Engine, Cloud Functions, Kubernetes, Cloud Run", mastery: 85, x: 20, y: 35 },
@@ -534,7 +633,7 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
 };
 
 export default function App() {
-  const [theme, setTheme] = useState('dark');
+  const theme = 'dark';
   const [hoveredIdx, setHoveredIdx] = useState(null);
   const [clickedIdx, setClickedIdx] = useState(null);
   const [selectedSkill, setSelectedSkill] = useState(constellationSkills[0]);
@@ -604,10 +703,6 @@ export default function App() {
     };
   }, []);
 
-  // Monitor custom theme toggling
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
 
   // Contact form submission flow
   const handleContactInput = (e) => {
@@ -671,22 +766,13 @@ export default function App() {
 
       <header className="fixed top-8 left-0 w-full z-40 flex justify-end items-center px-6 sm:px-12 pointer-events-none">
         <div className="flex items-center gap-4 pointer-events-auto">
-          <button
-            onClick={toggleTheme}
-            className={`w-12 h-12 flex items-center justify-center rounded-full border transition-all duration-300 ${theme === 'dark'
-              ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white'
-              : 'bg-white/80 border-zinc-200 text-zinc-600 hover:text-zinc-900'
-              }`}
-            aria-label="Toggle Theme"
-          >
-            {theme === 'dark' ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
-          </button>
+          <TelemetryHeaderWidget lenisRef={lenisRef} />
         </div>
       </header>
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center relative pt-16 sm:pt-20">
-        <div className="-mt-14 sm:-mt-20 space-y-6 w-full max-w-7xl mx-auto px-10 relative">
+        <div className="-mt-14 sm:-mt-20 space-y-6 w-full max-w-full mx-auto px-6 sm:px-16 relative">
           {/* Status Pill */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -759,7 +845,7 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="flex justify-center flex-nowrap -mt-2 sm:-mt-4 gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible"
+              className="flex justify-center flex-nowrap -mt-6 sm:-mt-10 md:-mt-14 lg:-mt-16 gap-x-0.5 sm:gap-x-1 leading-[0.85] tracking-[-0.05em] w-full overflow-visible"
             >
               {"DEV".split("").map((char, index) => (
                 <AnimatedGradientLetter
@@ -816,7 +902,7 @@ export default function App() {
 
       {/* Identity Section */}
       <section id="identity" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="max-w-7xl mx-auto px-10 w-full">
+        <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               01 // DEVOPS ENGINEER
@@ -864,7 +950,7 @@ export default function App() {
 
       {/* Skills Section (The Constellation) */}
       <section id="skills" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="max-w-7xl mx-auto px-10 w-full">
+        <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               02 // TECHNICAL ARSENAL
@@ -968,7 +1054,7 @@ export default function App() {
 
       {/* Selected Works Section */}
       <section id="works" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="max-w-7xl mx-auto px-10 w-full">
+        <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               SELECTED WORKS
@@ -1052,7 +1138,7 @@ export default function App() {
 
       {/* The Architecture (Metrics) Section */}
       <section id="metrics" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="max-w-7xl mx-auto px-10 w-full">
+        <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-center">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               03 // THE ARCHITECTURE
@@ -1126,7 +1212,7 @@ export default function App() {
 
       {/* Consciousness Map Timeline Section */}
       <section id="timeline" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="max-w-7xl mx-auto px-10 w-full">
+        <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               04 // NEURAL CARTOGRAPHY
@@ -1228,7 +1314,7 @@ export default function App() {
 
       {/* GitHub Contributions Section */}
       <section id="telemetry" className="w-full py-24 text-center">
-        <div className="max-w-7xl mx-auto px-10 w-full">
+        <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-12">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               05 // TELEMETRY
@@ -1381,7 +1467,7 @@ export default function App() {
 
       {/* Interactive Contact Section */}
       <section id="contact" className="w-full py-24 min-h-screen flex flex-col justify-center">
-        <div className="max-w-7xl mx-auto px-10 w-full">
+        <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="w-full relative min-h-[350px] flex flex-col justify-between text-left">
 
             <AnimatePresence mode="wait">
@@ -1514,7 +1600,7 @@ export default function App() {
 
       {/* Footer & Social Icons */}
       <footer className="py-16 text-center">
-        <div className="max-w-7xl mx-auto px-10 w-full space-y-6">
+        <div className="max-w-full mx-auto px-6 sm:px-16 w-full space-y-6">
           <div className="flex justify-center items-center space-x-6">
             <a
               href="mailto:brmedhini@gmail.com"
