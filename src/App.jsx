@@ -12,6 +12,7 @@ import {
   ArrowUpRight,
   Send,
   CheckCircle,
+  ArrowLeft,
   ExternalLink,
   Calendar,
   Terminal,
@@ -2418,26 +2419,40 @@ export default function App() {
               {contactStep === 3 ? (
                 <motion.div
                   key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col justify-center items-center text-center space-y-4 py-16 w-full"
+                  initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, y: -30 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col justify-center items-center text-center space-y-6 py-16 w-full"
                 >
-                  <div className="p-4 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <CheckCircle className="w-12 h-12" />
+                  {/* Glowing Pulse Transmission Rings */}
+                  <div className="relative flex items-center justify-center mb-4">
+                    <span className="absolute w-24 h-24 rounded-full bg-emerald-500/10 animate-ping duration-1500" />
+                    <span className="absolute w-16 h-16 rounded-full bg-emerald-500/20 animate-pulse duration-1000" />
+                    <div className="relative p-5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_30px_rgba(16,185,129,0.3)]">
+                      <CheckCircle className="w-10 h-10" />
+                    </div>
                   </div>
-                  <h3 className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-950'}`}>
-                    Transmission Successful.
-                  </h3>
-                  <p className="text-sm text-zinc-500 max-w-sm">
-                    Your signals have been routed successfully. I will get back to you at <strong>{contactForm.email}</strong> shortly.
+
+                  <div className="space-y-2">
+                    <h3 className={`text-3xl font-black tracking-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-950'}`}>
+                      Transmission Successful.
+                    </h3>
+                    <p className={`text-xs font-mono tracking-widest ${theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'}`}>
+                      STATUS // ROUTE_RESOLVED // 200 OK
+                    </p>
+                  </div>
+
+                  <p className={`text-sm max-w-md leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                    Your signals have been routed successfully. I will get back to you at <span className="text-indigo-400 font-bold font-mono">{contactForm.email}</span> shortly.
                   </p>
+
                   <button
                     onClick={resetContactForm}
-                    className={`px-6 py-2 rounded-full text-xs font-mono border transition-all mt-4 ${theme === 'dark' ? 'border-white/10 hover:bg-zinc-900 text-white' : 'border-zinc-200 hover:bg-zinc-100 text-zinc-800'
-                      }`}
+                    className="group flex items-center gap-2 px-6 py-2.5 rounded-full border text-[10px] font-mono tracking-wider transition-all duration-300 bg-zinc-950/40 border-white/10 hover:border-emerald-500 text-zinc-400 hover:text-white hover:shadow-[0_0_15px_rgba(16,185,129,0.25)] mt-4"
                   >
-                    Transmit Another Message
+                    <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+                    <span>TRANSMIT ANOTHER SIGNAL</span>
                   </button>
                 </motion.div>
               ) : (
