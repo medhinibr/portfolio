@@ -927,23 +927,26 @@ export default function App() {
               </h3>
               <p className={`text-base sm:text-lg leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
                 }`}>
-                I build robust CI/CD automation pipelines, package application code with Docker containers, and deploy scalable hosting zones on Google Cloud and Firebase. Use the interactive SSH shell console to trigger dockerized compilation logs, deploy updates, or navigate through the pages.
+                I architect highly resilient cloud infrastructures, automate scalable deployment pipelines, and configure secure orchestration engines. Use the interactive SSH shell console to trigger dockerized compilation logs, deploy updates, or navigate through the pages.
               </p>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  { name: 'CI/CD Pipelines', color: 'bg-indigo-500' },
-                  { name: 'Docker Containers', color: 'bg-blue-500' },
-                  { name: 'Firebase Hosting', color: 'bg-amber-500' },
-                  { name: 'Google Cloud (GCP)', color: 'bg-sky-500' },
-                  { name: 'Shell Scripting (Bash)', color: 'bg-emerald-500' },
-                  { name: 'GitHub Actions', color: 'bg-purple-500' }
-                ].map((tag, i) => (
-                  <span key={i} className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${theme === 'dark' ? 'bg-zinc-900 text-zinc-300' : 'bg-zinc-100 text-zinc-800'
-                    }`}>
-                    <span className={`w-1.5 h-1.5 rounded-full ${tag.color}`}></span>
-                    {tag.name}
-                  </span>
-                ))}
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-indigo-500/30 ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
+                  <div className="text-indigo-400 font-mono text-xs uppercase mb-1 font-bold">IaC & Automation</div>
+                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Terraform scripting for repeatable, self-healing cloud infrastructures.</p>
+                </div>
+                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-blue-500/30 ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
+                  <div className="text-blue-400 font-mono text-xs uppercase mb-1 font-bold">Orchestration</div>
+                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Kubernetes & Docker container deployment and cluster management.</p>
+                </div>
+                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-emerald-500/30 ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
+                  <div className="text-emerald-400 font-mono text-xs uppercase mb-1 font-bold">Telemetry</div>
+                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Real-time metrics, logs, and alert system integration via Prometheus.</p>
+                </div>
+                <div className={`p-4 rounded-xl border transition-all duration-300 hover:border-purple-500/30 ${theme === 'dark' ? 'bg-[#18181b]/30 border-white/5' : 'bg-zinc-50/50 border-zinc-200'}`}>
+                  <div className="text-purple-400 font-mono text-xs uppercase mb-1 font-bold">DevSecOps</div>
+                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>Automated vulnerability scanning, secrets rotation, and audit logs.</p>
+                </div>
               </div>
             </div>
 
