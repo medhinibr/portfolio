@@ -25,3 +25,6 @@ dist-ssr
 
 # Keep VS Code workspace settings
 !.vscode/settings.json
+
+# Local explanation file
+how_it_works.txt
