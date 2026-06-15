@@ -297,27 +297,43 @@ const timelineChapters = [
   },
   {
     chapter: "CHAPTER II",
-    title: "The Arcade",
-    role: "Facilitator Participant",
+    title: "Cloud Foundations",
+    role: "Arcade Facilitator Participant",
     institution: "Google Cloud Arcade",
     period: "JUL 2024 - JAN 2025",
-    description: "Executed hands-on cloud labs focusing on container orchestration, virtual machines, and serverless workflows.",
+    description: "Completed technical cloud labs focusing on containerization, serverless architectures, and Kubernetes/Docker workflows.",
     skills: ["Google Cloud", "Kubernetes", "Docker", "Compute Engine"],
     colorTheme: {
-      text: "text-indigo-400",
-      border: "border-indigo-500",
-      bgSelected: "bg-indigo-600/10 border-indigo-500 shadow-md shadow-indigo-600/5",
-      badgeSelected: "border-indigo-400 bg-indigo-500/20 text-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.5)]",
-      lineGlow: "bg-indigo-500"
+      text: "text-blue-400",
+      border: "border-blue-500",
+      bgSelected: "bg-blue-600/10 border-blue-500 shadow-md shadow-blue-600/5",
+      badgeSelected: "border-blue-400 bg-blue-500/20 text-blue-300 shadow-[0_0_15px_rgba(59,130,246,0.5)]",
+      lineGlow: "bg-blue-500"
     }
   },
   {
     chapter: "CHAPTER III",
+    title: "Tech Communities",
+    role: "Innovators & WTM Member",
+    institution: "Google Cloud / Women Techmakers",
+    period: "AUG 2024 - PRESENT",
+    description: "Engaging in cloud architecture deep-dives and professional workshops to promote gender equity and diversity in STEM.",
+    skills: ["GCP", "Diversity in STEM", "Networking", "AI Operations"],
+    colorTheme: {
+      text: "text-purple-400",
+      border: "border-purple-500",
+      bgSelected: "bg-purple-600/10 border-purple-500 shadow-md shadow-purple-600/5",
+      badgeSelected: "border-purple-400 bg-purple-500/20 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.5)]",
+      lineGlow: "bg-purple-500"
+    }
+  },
+  {
+    chapter: "CHAPTER IV",
     title: "The Spark",
     role: "Co-Founder & CSO",
     institution: "Berukodige Farm",
     period: "JAN 2025 - PRESENT",
-    description: "Co-founded an agri-innovation startup integrating nurseries with custom software management models.",
+    description: "Co-founded an agri-innovation startup integrating plant nursery systems with custom software management models.",
     skills: ["Entrepreneurship", "Python", "Product Lifecycle", "Leadership"],
     colorTheme: {
       text: "text-cyan-400",
@@ -328,13 +344,13 @@ const timelineChapters = [
     }
   },
   {
-    chapter: "CHAPTER IV",
+    chapter: "CHAPTER V",
     title: "Pragati Path",
     role: "Data Science Intern",
     institution: "Infosys Springboard",
     period: "APR 2025 - JUL 2025",
-    description: "Trained on future-ready analytics models, processing telemetry data, and building Python ML models.",
-    skills: ["Python", "Machine Learning", "Data Analytics", "SQL"],
+    description: "Selected for a competitive national future-skills program. Built Python ML models and handled data analytics cohorts.",
+    skills: ["Python", "Machine Learning", "Data Science", "SQL"],
     colorTheme: {
       text: "text-amber-400",
       border: "border-amber-500",
@@ -344,12 +360,44 @@ const timelineChapters = [
     }
   },
   {
-    chapter: "CHAPTER V",
+    chapter: "CHAPTER VI",
+    title: "Global Support",
+    role: "Google Product Expert",
+    institution: "Google Community Support",
+    period: "JUL 2025 - PRESENT",
+    description: "Supporting users on Google Forums with research-backed SEO, ranking, indexing, and snippet optimization queries.",
+    skills: ["SEO Help", "Search Indexing", "Snippet Usability", "Community Support"],
+    colorTheme: {
+      text: "text-orange-400",
+      border: "border-orange-500",
+      bgSelected: "bg-orange-600/10 border-orange-500 shadow-md shadow-orange-600/5",
+      badgeSelected: "border-orange-400 bg-orange-500/20 text-orange-300 shadow-[0_0_15px_rgba(249,115,22,0.5)]",
+      lineGlow: "bg-orange-500"
+    }
+  },
+  {
+    chapter: "CHAPTER VII",
+    title: "Innovation Leader",
+    role: "StartUp Coordinator",
+    institution: "Institutions Innovation Council (IIC)",
+    period: "AUG 2025 - PRESENT",
+    description: "Facilitating entrepreneurial activities, university innovation ecosystems, and campus startup pipelines.",
+    skills: ["Campus Innovation", "Mentorship", "Collaboration", "Product Management"],
+    colorTheme: {
+      text: "text-sky-400",
+      border: "border-sky-500",
+      bgSelected: "bg-sky-600/10 border-sky-500 shadow-md shadow-sky-600/5",
+      badgeSelected: "border-sky-400 bg-sky-500/20 text-sky-300 shadow-[0_0_15px_rgba(14,165,233,0.5)]",
+      lineGlow: "bg-sky-500"
+    }
+  },
+  {
+    chapter: "CHAPTER VIII",
     title: "The Horizon",
     role: "Flutter Developer Intern",
     institution: "Benevolate (Texas, USA)",
     period: "APR 2026 - PRESENT",
-    description: "Building production cross-platform mobile architectures, designing custom widgets, and handling API states.",
+    description: "Building production cross-platform mobile architectures, designing custom widgets, and handling API state integrations.",
     skills: ["Flutter", "Dart", "REST APIs", "State Management"],
     colorTheme: {
       text: "text-rose-400",
@@ -388,6 +436,15 @@ const projectsList = [
     image: "/kanban_mockup.png",
     github: "https://github.com/medhinibr",
     tags: ["JavaScript", "Node.js", "LMS", "Gamification"]
+  },
+  {
+    title: "Viral-Drop-Platform-",
+    category: "DISTRIBUTED ASSET SHARING",
+    status: "ACTIVE DEV",
+    description: "A high-performance content delivery and automated assets sharing platform designed for frictionless community-wide file drops.",
+    image: "/icons.svg",
+    github: "https://github.com/medhinibr",
+    tags: ["JavaScript", "Node.js", "Content-Sharing", "WebSockets"]
   }
 ];
 
@@ -442,10 +499,12 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
     if (trimmed === 'about') {
       setHistory(prev => [
         ...prev,
-        'Identity: Medhini B R',
-        'Role: Cloud & DevOps Architect',
-        'Stack: CI/CD Pipelines, Docker Containers, Firebase, Google Cloud',
-        'Uptime Focus: High Availability & Automated Self-Healing workflows.'
+        'Identity: B R Medhini',
+        'Role: Cloud & DevOps Engineer | Flutter Developer | Co-Founder',
+        'Education: BE in Information Technology (Expected 2027) at SDMIT',
+        'Location: Koppa, Karnataka, India (Open to Bengaluru)',
+        'Internships: Benevolate (US-Remote), Infosys Springboard',
+        'Startup: Co-Founder & CSO, Berukodige Farm'
       ]);
       return;
     }
@@ -1077,7 +1136,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {projectsList.map((project, idx) => (
               <motion.div
                 key={idx}
@@ -1237,14 +1296,14 @@ export default function App() {
 
           <div className="grid md:grid-cols-12 gap-8 items-stretch">
             {/* Left List */}
-            <div className="md:col-span-5 flex flex-col space-y-4 text-left justify-center">
+            <div className="md:col-span-5 flex flex-col space-y-2 text-left justify-center">
               {timelineChapters.map((item, idx) => {
                 const isSelected = selectedChapter === idx;
                 return (
                   <button
                     key={idx}
                     onClick={() => setSelectedChapter(idx)}
-                    className={`flex items-center gap-4 p-4 rounded-xl border text-left transition-all duration-300 relative group ${isSelected
+                    className={`flex items-center gap-4 p-2.5 sm:p-3 rounded-xl border text-left transition-all duration-300 relative group ${isSelected
                       ? item.colorTheme.bgSelected
                       : 'bg-transparent border-transparent hover:bg-zinc-800/10 hover:border-white/5'
                       }`}
@@ -1253,7 +1312,7 @@ export default function App() {
                       ? item.colorTheme.badgeSelected
                       : 'border-zinc-700 bg-zinc-900 text-zinc-500'
                       }`}>
-                      {idx === 0 ? "I" : idx === 1 ? "II" : idx === 2 ? "III" : idx === 3 ? "IV" : "V"}
+                      {["I", "II", "III", "IV", "V", "VI", "VII", "VIII"][idx] || (idx + 1)}
                     </div>
                     <div>
                       <span className={`text-[9px] font-mono font-bold tracking-wider uppercase ${isSelected ? item.colorTheme.text : 'text-zinc-500 group-hover:text-zinc-300'}`}>
