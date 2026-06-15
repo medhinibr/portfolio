@@ -267,16 +267,18 @@ const TelemetryHeaderWidget = ({ lenisRef }) => {
 
 
 const constellationSkills = [
-  { id: "gcp", name: "Google Cloud", category: "CLOUD COMPUTING", use: "Compute Engine, Cloud Functions, Kubernetes, Cloud Run", mastery: 85, x: 20, y: 35 },
-  { id: "k8s", name: "Kubernetes", category: "ORCHESTRATION", use: "Automated scaling & container deployment management", mastery: 75, x: 50, y: 20 },
-  { id: "docker", name: "Docker", category: "CONTAINERIZATION", use: "Microservices design and image optimization", mastery: 80, x: 75, y: 30 },
-  { id: "python", name: "Python", category: "DEVELOPMENT", use: "Data Analytics, Machine Learning & Flask scripting", mastery: 90, x: 15, y: 65 },
-  { id: "flutter", name: "Flutter", category: "MOBILE DEV", use: "Cross-platform mobile application programming (Dart)", mastery: 85, x: 45, y: 80 },
-  { id: "react", name: "React.js", category: "FRONTEND DEV", use: "Dynamic component logic and virtual DOM renders", mastery: 80, x: 40, y: 50 },
-  { id: "js", name: "JavaScript", category: "FRONTEND DEV", use: "Event-driven programming and ES6 standard design", mastery: 85, x: 70, y: 60 },
-  { id: "sql", name: "MySQL", category: "DATASTORE", use: "Relational database modeling and performance queries", mastery: 75, x: 80, y: 80 },
-  { id: "ml", name: "AI & ML", category: "AI OPERATIONS", use: "Hugging Face model imports & machine learning training", mastery: 70, x: 85, y: 15 }
+  { id: "gcp", name: "Google Cloud", category: "CLOUD & DEVOPS", use: "Serverless container execution (Cloud Run), IAM policies, and cloud infrastructure management.", mastery: 90, x: 50, y: 50 },
+  { id: "docker", name: "Docker", category: "CLOUD & DEVOPS", use: "Microservices containerization, multi-stage builds, and dev environment scaling.", mastery: 85, x: 25, y: 30 },
+  { id: "cloudrun", name: "Cloud Run", category: "CLOUD & DEVOPS", use: "Deploying production-ready containers on serverless, scalable architecture.", mastery: 85, x: 75, y: 30 },
+  { id: "linux", name: "Linux & Shell", category: "CLOUD & DEVOPS", use: "Command-line administration, bash scripting, and task automation pipelines.", mastery: 85, x: 15, y: 15 },
+  { id: "python", name: "Python", category: "LANGUAGES", use: "Data analytics, server scripting, Flask API development, and ML integration.", mastery: 95, x: 15, y: 65 },
+  { id: "sql", name: "SQL", category: "LANGUAGES", use: "Relational database schema design, indexing, and optimized query pipelines.", mastery: 80, x: 80, y: 65 },
+  { id: "flask", name: "Flask", category: "WEB DEV", use: "Building RESTful microservices, request routing, and web service logic.", mastery: 90, x: 45, y: 80 },
+  { id: "firebase", name: "Firebase", category: "WEB DEV", use: "NoSQL Firestore collections, real-time sync, and client-side user authentication.", mastery: 80, x: 75, y: 80 },
+  { id: "genai", name: "Generative AI", category: "AI & TOOLS", use: "Prompt engineering, generative model integrations, and smart tool utilization.", mastery: 85, x: 55, y: 20 },
+  { id: "huggingface", name: "Hugging Face", category: "AI & TOOLS", use: "Importing state-of-the-art transformer models and tokenizer pipeline setups.", mastery: 75, x: 80, y: 15 }
 ];
+
 
 const timelineChapters = [
   {
@@ -967,23 +969,21 @@ export default function App() {
       </section>
 
       {/* Identity Section */}
-      <section id="identity" className="w-full py-24 min-h-screen flex flex-col justify-center">
+      <section id="identity" className="w-full pt-32 pb-20 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
-          <div className="space-y-4 mb-16 text-left">
+          <div className="space-y-3 mb-10 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
               01 // DEVOPS ENGINEER
             </div>
-            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>Automating pipeline execution.</h2>
+            <h2 className={`text-3xl sm:text-5xl font-black font-display leading-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+              }`}>
+              Interactive Shell.<br />
+              <span className="opacity-45">Automated pipelines.</span>
+            </h2>
           </div>
 
           <div className="grid md:grid-cols-12 gap-12 items-center">
             <div className="md:col-span-6 space-y-6 text-left">
-              <h3 className={`text-4xl sm:text-5xl font-black font-display leading-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                }`}>
-                Interactive Shell.<br />
-                <span className="opacity-45">Automated pipelines.</span>
-              </h3>
               <p className={`text-base sm:text-lg leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
                 }`}>
                 I build responsive web architectures, containerize applications for serverless cloud hosting, and integrate intelligent data pipelines. Use the interactive SSH shell console to explore my engineering domains, trigger virtual pipeline builds, or navigate the sections.
@@ -1062,7 +1062,7 @@ export default function App() {
       </section>
 
       {/* Skills Section (The Constellation) */}
-      <section id="skills" className="w-full py-24 min-h-screen flex flex-col justify-center">
+      <section id="skills" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
@@ -1075,21 +1075,50 @@ export default function App() {
           <div className="grid md:grid-cols-12 gap-12 items-stretch">
             {/* Left: Constellation Map */}
             <div className="md:col-span-7 h-96 relative rounded-2xl overflow-hidden bg-zinc-950/20 border border-white/5 flex items-center justify-center">
+              {/* Concentric Radar Grid Background */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                <circle cx="50%" cy="50%" r="18%" fill="none" stroke="rgba(99, 102, 241, 0.05)" strokeWidth="1" strokeDasharray="3, 6" />
+                <circle cx="50%" cy="50%" r="32%" fill="none" stroke="rgba(99, 102, 241, 0.035)" strokeWidth="1" strokeDasharray="4, 8" />
+                <circle cx="50%" cy="50%" r="45%" fill="none" stroke="rgba(99, 102, 241, 0.02)" strokeWidth="1" />
+                
+                {/* Rotating Radar Sweep Line */}
+                <motion.line
+                  x1="50%"
+                  y1="50%"
+                  x2="50%"
+                  y2="5%"
+                  stroke="rgba(34, 211, 238, 0.04)"
+                  strokeWidth="1.5"
+                  style={{ originX: "50%", originY: "50%" }}
+                  animate={{ rotate: 360 }}
+                  transition={{ ease: "linear", duration: 10, repeat: Infinity }}
+                />
+              </svg>
+
               {/* SVG Interactive Constellation Grid */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                {/* Draw connected lines */}
-                {constellationSkills.map((s, idx) => (
-                  <line
-                    key={idx}
-                    x1={`${s.x}%`}
-                    y1={`${s.y}%`}
-                    x2={`${selectedSkill.x}%`}
-                    y2={`${selectedSkill.y}%`}
-                    stroke="rgba(99, 102, 241, 0.2)"
-                    strokeWidth="1"
-                    strokeDasharray="4"
-                  />
-                ))}
+                {/* Draw connected lines with animated data packet flow */}
+                {constellationSkills.map((s, idx) => {
+                  const isCurrent = selectedSkill.id === s.id;
+                  return (
+                    <motion.line
+                      key={idx}
+                      x1={`${s.x}%`}
+                      y1={`${s.y}%`}
+                      x2={`${selectedSkill.x}%`}
+                      y2={`${selectedSkill.y}%`}
+                      stroke={isCurrent ? "rgba(34, 211, 238, 0.45)" : "rgba(99, 102, 241, 0.15)"}
+                      strokeWidth={isCurrent ? "1.5" : "0.75"}
+                      strokeDasharray={isCurrent ? "6, 6" : "4, 8"}
+                      animate={{ strokeDashoffset: [0, -24] }}
+                      transition={{ 
+                        ease: "linear", 
+                        duration: isCurrent ? 1.0 : 2.0, 
+                        repeat: Infinity 
+                      }}
+                    />
+                  );
+                })}
               </svg>
 
               {/* Render Constellation Node Buttons */}
@@ -1101,14 +1130,20 @@ export default function App() {
                     onClick={() => setSelectedSkill(skill)}
                     style={{ left: `${skill.x}%`, top: `${skill.y}%` }}
                     className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full transition-all duration-300 ${isSelected
-                      ? 'w-10 h-10 bg-indigo-500/20 border-2 border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.5)] z-20'
-                      : 'w-6 h-6 bg-zinc-900/60 border border-white/10 hover:border-white/40 z-10'
+                      ? 'w-11 h-11 bg-cyan-500/10 border border-cyan-400 shadow-[0_0_25px_rgba(34,211,238,0.4)] z-20'
+                      : 'w-7 h-7 bg-zinc-950/80 border border-white/10 hover:border-indigo-500/40 z-10'
                       }`}
                     aria-label={`Select skill ${skill.name}`}
                   >
-                    <span className={`w-2.5 h-2.5 rounded-full ${isSelected ? 'bg-indigo-400' : 'bg-zinc-600'
-                      }`} />
-                    <span className={`absolute top-8 text-[10px] font-mono whitespace-nowrap bg-zinc-950/80 px-2 py-0.5 rounded border border-white/5 transition-opacity ${isSelected ? 'opacity-100 text-white font-bold' : 'opacity-40 text-zinc-400 hover:opacity-100'
+                    {isSelected ? (
+                      <span className="relative flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+                      </span>
+                    ) : (
+                      <span className="w-2 h-2 rounded-full bg-zinc-600 transition-colors duration-300 hover:bg-indigo-400" />
+                    )}
+                    <span className={`absolute top-9 text-[9px] font-mono tracking-wider whitespace-nowrap bg-zinc-950/90 px-2 py-0.5 rounded border transition-all duration-300 ${isSelected ? 'opacity-100 border-cyan-500/30 text-cyan-300 font-bold scale-105' : 'opacity-50 border-white/5 text-zinc-400 hover:opacity-100'
                       }`}>
                       {skill.name}
                     </span>
@@ -1166,7 +1201,7 @@ export default function App() {
       </section>
 
       {/* Selected Works Section */}
-      <section id="works" className="w-full py-24 min-h-screen flex flex-col justify-center">
+      <section id="works" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
@@ -1426,7 +1461,7 @@ export default function App() {
       </section>
 
       {/* GitHub Contributions Section */}
-      <section id="telemetry" className="w-full py-24 text-center">
+      <section id="telemetry" className="w-full py-24 text-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-12">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
@@ -1579,7 +1614,7 @@ export default function App() {
       </section>
 
       {/* Interactive Contact Section */}
-      <section id="contact" className="w-full py-24 min-h-screen flex flex-col justify-center">
+      <section id="contact" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="w-full relative min-h-[350px] flex flex-col justify-between text-left">
 
