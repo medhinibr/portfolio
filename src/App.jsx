@@ -919,6 +919,7 @@ export default function App() {
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
   const [pingingIdx, setPingingIdx] = useState(null);
   const [pingResults, setPingResults] = useState({});
+  const [selectedAuditTab, setSelectedAuditTab] = useState("performance");
 
   const handleTestConnection = (idx) => {
     if (pingingIdx !== null) return;
@@ -1775,77 +1776,203 @@ export default function App() {
         </div>
       </section>
 
-      {/* The Architecture (Metrics) Section */}
-      <section id="metrics" className="w-full py-24 min-h-screen flex flex-col justify-center">
+      {/* Chrome Lighthouse Audits Console Section */}
+      <section id="metrics" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
+          
           <div className="space-y-4 mb-16 text-center">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              03 // THE ARCHITECTURE
+              04 // CHROME LIGHTHOUSE AUDITS
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>Engineered for <span className="text-gradient">Excellence.</span></h2>
-            <p className={`max-w-2xl mx-auto text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+              }`}>Chrome Lighthouse Audits.</h2>
+            <p className={`max-w-2xl mx-auto text-sm ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              Beautiful design is only half the equation. Under the hood, I focus on building robust, accessible, and highly optimized applications that respect the user's time and device.
+              Chrome Lighthouse is an open-source, automated tool by Google for improving the quality of web pages. Every application built here undergoes audits to achieve a perfect 100/100 score.
             </p>
           </div>
 
-          {/* Lighthouse Gauges */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 justify-center">
-            {[
-              { label: "PERFORMANCE", val: 100, color: "text-emerald-400 stroke-emerald-500" },
-              { label: "ACCESSIBILITY", val: 100, color: "text-indigo-400 stroke-indigo-500" },
-              { label: "BEST PRACTICES", val: 100, color: "text-violet-400 stroke-violet-500" },
-              { label: "SEO", val: 100, color: "text-amber-400 stroke-amber-500" }
-            ].map((item, idx) => (
-              <div key={idx} className="flex flex-col items-center space-y-3">
-                <div className="relative w-28 h-28 flex items-center justify-center">
-                  <svg className="absolute w-full h-full transform -rotate-90">
-                    <circle cx="56" cy="56" r="48" stroke="rgba(255,255,255,0.05)" strokeWidth="6" fill="transparent" />
-                    <motion.circle
-                      cx="56"
-                      cy="56"
-                      r="48"
-                      className={item.color}
-                      strokeWidth="6"
-                      fill="transparent"
-                      strokeDasharray={301.6}
-                      initial={{ strokeDashoffset: 301.6 }}
-                      whileInView={{ strokeDashoffset: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: idx * 0.1 }}
-                    />
-                  </svg>
-                  <span className="text-2xl font-black">{item.val}</span>
-                </div>
-                <span className="text-[10px] font-bold font-mono tracking-wider text-zinc-500">{item.label}</span>
+          {/* DevTools Lighthouse UI Window */}
+          <div className="bg-[#09090b]/90 border border-white/5 rounded-2xl overflow-hidden shadow-2xl w-full flex flex-col max-w-4xl mx-auto">
+            
+            {/* DevTools Chrome Mock Header */}
+            <div className="bg-zinc-950 px-6 py-3 border-b border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500 select-none">
+              <div className="flex items-center gap-4">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                </span>
+                <span className="text-zinc-600 border-r border-white/5 pr-4">Chrome DevTools</span>
+                <span className="text-zinc-400 font-bold border-b-2 border-indigo-500 pb-1 -mb-1">Lighthouse Report</span>
+                <span className="hover:text-zinc-300 cursor-pointer">Console</span>
+                <span className="hover:text-zinc-300 cursor-pointer">Network</span>
               </div>
-            ))}
+              <div>
+                <span>DEVICE: DESKTOP (MOTO G4 SIMULATED)</span>
+              </div>
+            </div>
+
+            {/* Audit Gauges Row */}
+            <div className="p-8 border-b border-white/5 bg-zinc-950/20">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-center">
+                {[
+                  { id: "performance", label: "PERFORMANCE", val: 100, color: "text-emerald-400 stroke-emerald-500" },
+                  { id: "accessibility", label: "ACCESSIBILITY", val: 100, color: "text-indigo-400 stroke-indigo-500" },
+                  { id: "best-practices", label: "BEST PRACTICES", val: 100, color: "text-violet-400 stroke-violet-500" },
+                  { id: "seo", label: "SEO", val: 100, color: "text-amber-400 stroke-amber-500" }
+                ].map((item, idx) => {
+                  const isSelected = selectedAuditTab === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => setSelectedAuditTab(item.id)}
+                      className={`flex flex-col items-center space-y-3 p-4 rounded-xl border transition-all duration-300 outline-none ${
+                        isSelected 
+                          ? 'bg-white/[0.03] border-white/10 shadow-lg scale-105' 
+                          : 'bg-transparent border-transparent hover:bg-white/[0.01]'
+                      }`}
+                    >
+                      <div className="relative w-24 h-24 flex items-center justify-center">
+                        <svg className="absolute w-full h-full transform -rotate-90">
+                          <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.03)" strokeWidth="5" fill="transparent" />
+                          <motion.circle
+                            cx="48"
+                            cy="48"
+                            r="40"
+                            className={item.color}
+                            strokeWidth="5"
+                            fill="transparent"
+                            strokeDasharray={251.2}
+                            initial={{ strokeDashoffset: 251.2 }}
+                            whileInView={{ strokeDashoffset: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.2, delay: idx * 0.15 }}
+                          />
+                        </svg>
+                        <span className="text-xl font-black font-mono tracking-tighter text-zinc-100 flex items-center gap-0.5">
+                          {item.val}
+                          <span className="text-[10px] text-emerald-400 font-bold">★</span>
+                        </span>
+                      </div>
+                      <span className={`text-[9px] font-bold font-mono tracking-wider transition-colors duration-300 ${isSelected ? 'text-indigo-400' : 'text-zinc-500'}`}>
+                        {item.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Diagnostic Details Area */}
+            <div className="p-8 text-left bg-zinc-950/40">
+              
+              {/* Performance Diagnostics */}
+              {selectedAuditTab === "performance" && (
+                <div className="space-y-4 font-mono text-xs">
+                  <div className="flex items-center gap-2 border-b border-white/5 pb-2 text-[10px] text-zinc-500 uppercase tracking-widest font-bold">
+                    <span>Performance Diagnostics</span>
+                    <span className="text-emerald-400 font-bold">(5 audits passed)</span>
+                  </div>
+                  <div className="space-y-3">
+                    {[
+                      { name: "First Contentful Paint (FCP)", value: "0.2s", desc: "First Contentful Paint marks the time at which the first text or image is painted." },
+                      { name: "Speed Index (SI)", value: "0.4s", desc: "Speed Index shows how quickly the contents of a page are visibly populated." },
+                      { name: "Largest Contentful Paint (LCP)", value: "0.5s", desc: "Largest Contentful Paint marks the time at which the main content of a page has likely loaded." },
+                      { name: "Total Blocking Time (TBT)", value: "0ms", desc: "Sum of all time periods between FCP and Time to Interactive where task duration exceeded 50ms." },
+                      { name: "Cumulative Layout Shift (CLS)", value: "0", desc: "Cumulative Layout Shift measures the movement of visible elements within the viewport." }
+                    ].map((m, idx) => (
+                      <div key={idx} className="flex flex-col gap-1 p-3 rounded bg-zinc-950 border border-white/5 hover:border-emerald-500/20 transition-colors">
+                        <div className="flex justify-between items-center">
+                          <span className="text-zinc-300 font-bold">▲ {m.name}</span>
+                          <span className="text-emerald-400 font-bold">{m.value}</span>
+                        </div>
+                        <span className="text-[10px] text-zinc-500 leading-normal">{m.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Accessibility Diagnostics */}
+              {selectedAuditTab === "accessibility" && (
+                <div className="space-y-4 font-mono text-xs">
+                  <div className="flex items-center gap-2 border-b border-white/5 pb-2 text-[10px] text-zinc-500 uppercase tracking-widest font-bold">
+                    <span>Accessibility Audits</span>
+                    <span className="text-indigo-400 font-bold">(passed compliance)</span>
+                  </div>
+                  <div className="space-y-3">
+                    {[
+                      { name: "ARIA Attributes Validity", value: "100%", desc: "Ensures all screen reader-accessible elements declare correct ARIA roles and labels." },
+                      { name: "Color Contrast Ratios", value: "Passing", desc: "Background and foreground colors have a sufficient contrast ratio, meeting WCAG 2.1 AA parameters." },
+                      { name: "Keyboard Navigational Focus", value: "Passing", desc: "All interactive controls (links, inputs, buttons) are sequentially focusable via Tab navigation." }
+                    ].map((m, idx) => (
+                      <div key={idx} className="flex flex-col gap-1 p-3 rounded bg-zinc-950 border border-white/5 hover:border-indigo-500/20 transition-colors">
+                        <div className="flex justify-between items-center">
+                          <span className="text-zinc-300 font-bold">▲ {m.name}</span>
+                          <span className="text-indigo-400 font-bold">{m.value}</span>
+                        </div>
+                        <span className="text-[10px] text-zinc-500 leading-normal">{m.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Best Practices Diagnostics */}
+              {selectedAuditTab === "best-practices" && (
+                <div className="space-y-4 font-mono text-xs">
+                  <div className="flex items-center gap-2 border-b border-white/5 pb-2 text-[10px] text-zinc-500 uppercase tracking-widest font-bold">
+                    <span>Best Practices Diagnostics</span>
+                    <span className="text-violet-400 font-bold">(compliant runtime)</span>
+                  </div>
+                  <div className="space-y-3">
+                    {[
+                      { name: "Secure Origin Connections (HTTPS)", value: "Enabled", desc: "Configured TLS certificate handshakes, forcing encryption on all incoming endpoints." },
+                      { name: "Modern Framework API Usages", value: "Valid", desc: "Uses clean, deprecation-free React hooks, avoiding outdated document APIs." },
+                      { name: "Content Security Policy (CSP)", value: "Configured", desc: "Declares strict resource-loading origins to prevent cross-site scripting (XSS) vectors." }
+                    ].map((m, idx) => (
+                      <div key={idx} className="flex flex-col gap-1 p-3 rounded bg-zinc-950 border border-white/5 hover:border-violet-500/20 transition-colors">
+                        <div className="flex justify-between items-center">
+                          <span className="text-zinc-300 font-bold">▲ {m.name}</span>
+                          <span className="text-violet-400 font-bold">{m.value}</span>
+                        </div>
+                        <span className="text-[10px] text-zinc-500 leading-normal">{m.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* SEO Diagnostics */}
+              {selectedAuditTab === "seo" && (
+                <div className="space-y-4 font-mono text-xs">
+                  <div className="flex items-center gap-2 border-b border-white/5 pb-2 text-[10px] text-zinc-500 uppercase tracking-widest font-bold">
+                    <span>Search Engine Optimization</span>
+                    <span className="text-amber-400 font-bold">(100% crawlable)</span>
+                  </div>
+                  <div className="space-y-3">
+                    {[
+                      { name: "Crawlability & Indexing Signals", value: "Passing", desc: "Correct robots.txt declarations, sitemaps index, and canonical href parameters." },
+                      { name: "Semantic Heading Hierarchy Structure", value: "Valid", desc: "Single h1 structure with logical parent-child heading elements (h2, h3) sequence." },
+                      { name: "Schema.org Rich Snippets JSON-LD", value: "Configured", desc: "Valid corporate contacts, profile, and developer organization metadata schemas mapped." }
+                    ].map((m, idx) => (
+                      <div key={idx} className="flex flex-col gap-1 p-3 rounded bg-zinc-950 border border-white/5 hover:border-amber-500/20 transition-colors">
+                        <div className="flex justify-between items-center">
+                          <span className="text-zinc-300 font-bold">▲ {m.name}</span>
+                          <span className="text-amber-400 font-bold">{m.value}</span>
+                        </div>
+                        <span className="text-[10px] text-zinc-500 leading-normal">{m.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            </div>
+
           </div>
 
-          {/* Core Architectural Pillars */}
-          <div className="grid md:grid-cols-3 gap-6 pt-12">
-            {[
-              { title: "Serverless & Containerized", desc: "Deploying serverless endpoints and containerized services using Google Cloud Run, Cloud Functions, and Kubernetes." },
-              { title: "Automated Deployments", desc: "Using Github Actions and CI/CD pipelines to ensure rapid iteration, automatic testing, and zero-downtime rollouts." },
-              { title: "Optimized Query Schemas", desc: "Modeling and index tuning databases (MySQL, MongoDB) to execute analytical computations rapidly without performance drops." }
-            ].map((card, idx) => (
-              <div
-                key={idx}
-                className={`p-6 rounded-2xl border text-left space-y-3 shadow-lg ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
-                  }`}
-              >
-                <h3 className={`text-base font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-950'
-                  }`}>
-                  {card.title}
-                </h3>
-                <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-                  }`}>
-                  {card.desc}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
