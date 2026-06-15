@@ -97,7 +97,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-5xl sm:text-6xl md:text-[6.5rem] lg:text-[7.5rem] tracking-[-0.05em] uppercase smooth-text pl-4 sm:pl-6 pr-1"
+            className={`inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text ${isHovered ? 'pl-4 sm:pl-6 pr-1' : 'p-0'}`}
           >
             {item.prefix}
           </motion.span>
@@ -124,7 +124,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-5xl sm:text-6xl md:text-[6.5rem] lg:text-[7.5rem] tracking-[-0.05em] uppercase smooth-text pl-1 pr-4 sm:pr-6"
+            className={`inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text ${isHovered ? 'pl-1 pr-4 sm:pr-6' : 'p-0'}`}
           >
             {item.suffix}
           </motion.span>
