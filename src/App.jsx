@@ -1959,124 +1959,179 @@ export default function App() {
         </div>
       </section>
 
-      {/* Network Hop Traceroute Timeline Section */}
+      {/* Git Branches History Tree Timeline Section */}
       <section id="timeline" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              04 // NETWORK PATH ANALYSIS
+              04 // SYSTEMS VERSION CONTROL
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>System Traceroute.</h2>
+              }`}>Git History Tree.</h2>
             <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              Tracing execution hops and network latency nodes across my educational milestones and professional deployments.
+              Visualizing my educational track and parallel engineering/startup branches as interactive Git workflow commits.
             </p>
+
+            {/* Tree Branch Legend */}
+            <div className="flex flex-wrap gap-4 text-[10px] font-mono pt-2">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span className="text-zinc-500">main (Education)</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-cyan-500"></span>
+                <span className="text-zinc-500">cloud-devops (Engineering)</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                <span className="text-zinc-500">startup-community (Leadership)</span>
+              </div>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-12 gap-10 items-stretch">
-            {/* Left Column - Traceroute Network Path */}
-            <div className="md:col-span-5 relative flex flex-col space-y-4 justify-center py-4 pl-8">
-              {/* Vertical network line backbone */}
-              <div className="absolute left-[15px] top-6 bottom-6 w-0.5 bg-zinc-800/80" />
-
+            {/* Left Column - Git tree selector */}
+            <div className="md:col-span-5 flex flex-col space-y-0 text-left justify-center">
               {timelineChapters.map((item, idx) => {
                 const isSelected = selectedChapter === idx;
+
+                // Define coordinates for columns
+                const colX = [22, 46, 70];
+
+                // Define branch colors
+                const branchColors = [
+                  "#10b981", // main (emerald)
+                  "#06b6d4", // cloud-devops (cyan)
+                  "#a855f7"  // startup-community (purple)
+                ];
+
+                // Row branch mapping
+                const rowBranch = [0, 0, 1, 2, 2, 1, 2, 2, 1];
+                const activeBranch = rowBranch[idx];
+                const nodeX = colX[activeBranch];
+
+                // Check active highlighting per branch
+                const isMainActive = selectedChapter === 0 || selectedChapter === 1;
+                const isCloudActive = selectedChapter === 2 || selectedChapter === 5 || selectedChapter === 8;
+                const isStartupActive = selectedChapter === 3 || selectedChapter === 4 || selectedChapter === 6 || selectedChapter === 7;
+
                 return (
                   <button
                     key={idx}
                     onClick={() => setSelectedChapter(idx)}
-                    className="relative flex items-center w-full text-left group focus:outline-none py-2"
+                    className={`flex items-stretch w-full text-left group focus:outline-none transition-colors duration-200 ${isSelected ? 'bg-white/[0.02] border-y border-white/5' : 'border-y border-transparent'}`}
                   >
-                    {/* Glowing circular node representing network hop */}
-                    <div className="absolute left-[-25px] flex items-center justify-center w-[16px] h-[16px] z-10">
-                      {isSelected ? (
-                        <div className="relative flex items-center justify-center w-4.5 h-4.5">
-                          <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${item.colorTheme.lineGlow}`} />
-                          <motion.div
-                            layoutId="traceroutePacket"
-                            className={`relative inline-flex rounded-full h-3.5 w-3.5 ${item.colorTheme.lineGlow} shadow-[0_0_12px_currentColor]`}
-                            transition={{ type: "spring", stiffness: 160, damping: 18 }}
-                          />
-                        </div>
-                      ) : (
-                        <div className="w-2.5 h-2.5 rounded-full border border-zinc-700 bg-zinc-950 group-hover:border-zinc-500 group-hover:scale-125 transition-all duration-200" />
-                      )}
+                    {/* Git Tree SVG cell */}
+                    <div className="w-[90px] relative flex-shrink-0">
+                      <svg className="w-full h-full min-h-[70px]" viewBox="0 0 90 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        {/* Column 1 (main) - always present */}
+                        <line x1="22" y1="0" x2="22" y2="70" stroke={isMainActive ? "#10b981" : "#27272a"} strokeWidth={isSelected && activeBranch === 0 ? "3" : "1.5"} />
+
+                        {/* Column 2 (cloud-devops) - active from Chapter III (idx >= 2) */}
+                        {idx >= 2 && (
+                          <line x1="46" y1="0" x2="46" y2="70" stroke={isCloudActive ? "#06b6d4" : "#27272a"} strokeWidth={isSelected && activeBranch === 1 ? "3" : "1.5"} />
+                        )}
+
+                        {/* Column 3 (startup-community) - active from Chapter IV (idx >= 3) */}
+                        {idx >= 3 && (
+                          <line x1="70" y1="0" x2="70" y2="70" stroke={isStartupActive ? "#a855f7" : "#27272a"} strokeWidth={isSelected && activeBranch === 2 ? "3" : "1.5"} />
+                        )}
+
+                        {/* Branch curves for splits */}
+                        {idx === 2 && (
+                          <path d="M 22 0 Q 32 15 46 35" stroke={isCloudActive ? "#06b6d4" : "#27272a"} strokeWidth="1.5" />
+                        )}
+                        {idx === 3 && (
+                          <path d="M 22 0 Q 46 15 70 35" stroke={isStartupActive ? "#a855f7" : "#27272a"} strokeWidth="1.5" />
+                        )}
+
+                        {/* Commit Node Circle */}
+                        {isSelected ? (
+                          <g>
+                            <circle cx={nodeX} cy="35" r="7.5" fill="#09090b" stroke={branchColors[activeBranch]} strokeWidth="3" />
+                            <circle cx={nodeX} cy="35" r="3" fill={branchColors[activeBranch]} />
+                          </g>
+                        ) : (
+                          <circle cx={nodeX} cy="35" r="4.5" fill="#09090b" stroke="#52525b" strokeWidth="2.5" className="group-hover:stroke-zinc-300 group-hover:scale-125 transition-all duration-200" />
+                        )}
+                      </svg>
                     </div>
 
-                    {/* Node details */}
-                    <div className={`pl-4 flex flex-col transition-all duration-300 ${isSelected ? 'translate-x-1' : 'group-hover:translate-x-0.5'}`}>
-                      <span className={`text-[9px] font-mono font-bold tracking-wider uppercase ${isSelected ? item.colorTheme.text : 'text-zinc-500 group-hover:text-zinc-300'}`}>
-                        HOP 0{idx + 1} // {item.period.split(' ').pop()}
+                    {/* Chapter details label */}
+                    <div className={`flex-1 pl-2 pr-4 flex flex-col justify-center py-2 transition-all duration-300 ${isSelected ? 'translate-x-1' : 'group-hover:translate-x-0.5'}`}>
+                      <span className={`text-[8px] font-mono font-bold tracking-wider uppercase ${isSelected ? item.colorTheme.text : 'text-zinc-500 group-hover:text-zinc-300'}`}>
+                        {idx === 0 || idx === 1 ? 'main' : idx === 2 || idx === 5 || idx === 8 ? 'cloud-devops' : 'startup-community'} // {item.period.split(' ').pop()}
                       </span>
-                      <h3 className={`text-sm font-bold transition-colors duration-200 ${isSelected ? (theme === 'dark' ? 'text-white' : 'text-zinc-900') : 'text-zinc-500 group-hover:text-zinc-300'}`}>
+                      <h3 className={`text-xs sm:text-sm font-bold transition-colors duration-200 ${isSelected ? (theme === 'dark' ? 'text-white' : 'text-zinc-900') : 'text-zinc-500 group-hover:text-zinc-300'}`}>
                         {item.title}
                       </h3>
+                      <span className={`text-[9px] font-mono ${isSelected ? 'text-zinc-400' : 'text-zinc-500'}`}>{item.role}</span>
                     </div>
                   </button>
                 );
               })}
             </div>
 
-            {/* Right Column - Traceroute Log Inspector */}
+            {/* Right Column - Git Show Commit Inspector */}
             <div className="md:col-span-7 flex flex-col justify-center">
               <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[440px] flex flex-col justify-between transition-all duration-300 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
                 }`}>
                 <div>
-                  {/* Terminal Header */}
+                  {/* Git show header */}
                   <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
                     <div className="flex items-center gap-2 font-mono text-[10px] text-zinc-500">
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                      <span>node-traceroute-inspector.sh</span>
+                      <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                      <span>git show {selectedChapter === 0 || selectedChapter === 1 ? 'main' : selectedChapter === 2 || selectedChapter === 5 || selectedChapter === 8 ? 'cloud-devops' : 'startup-community'}:0{selectedChapter + 1}</span>
                     </div>
-                    <span className="font-mono text-[9px] text-zinc-500">HOP_RTT_LATENCY: {(selectedChapter * 8) + 6}ms</span>
+                    <span className="font-mono text-[9px] text-zinc-500">COMMIT_SHA: f2a8{selectedChapter}de</span>
                   </div>
 
                   {/* Network Log Output Block */}
                   <div className="font-mono text-xs space-y-4 leading-relaxed text-zinc-400">
                     <div>
-                      <span className="text-indigo-400 font-bold">$ traceroute --hop-inspect 0{selectedChapter + 1}</span>
+                      <span className="text-indigo-400 font-bold">$ git show --stat</span>
                     </div>
 
                     <div className={`border rounded-lg p-4 space-y-2.5 ${theme === 'dark' ? 'bg-zinc-950/40 border-white/5' : 'bg-zinc-50 border-zinc-200'}`}>
                       <div>
-                        <span className="text-zinc-500 inline-block w-28">HOP IDENTIFIER :</span>{" "}
+                        <span className="text-zinc-500 inline-block w-24">COMMIT       :</span>{" "}
                         <span className={`font-bold ${timelineChapters[selectedChapter].colorTheme.text}`}>
-                          0{selectedChapter + 1} [RESOLVED]
+                          f2a8{selectedChapter}de817c6000000000000{selectedChapter + 1}
                         </span>
                       </div>
                       <div>
-                        <span className="text-zinc-500 inline-block w-28">GATEWAY        :</span>{" "}
+                        <span className="text-zinc-500 inline-block w-24">BRANCH       :</span>{" "}
+                        <span className="text-zinc-300 font-semibold">
+                          {selectedChapter === 0 || selectedChapter === 1 ? 'main' : selectedChapter === 2 || selectedChapter === 5 || selectedChapter === 8 ? 'cloud-devops' : 'startup-community'}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-zinc-500 inline-block w-24">AUTHOR       :</span>{" "}
                         <span className="text-zinc-300">
-                          {timelineChapters[selectedChapter].institution.toLowerCase().replace(/[^a-z0-9]/g, '-')}.local
+                          B R Medhini &lt;brmedhini@gmail.com&gt;
                         </span>
                       </div>
                       <div>
-                        <span className="text-zinc-500 inline-block w-28">RTT LATENCY    :</span>{" "}
-                        <span className="text-emerald-400 font-bold">
-                          {(selectedChapter * 7) + 5}ms (optimal)
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-500 inline-block w-28">PERIOD         :</span>{" "}
+                        <span className="text-zinc-500 inline-block w-24">DATE         :</span>{" "}
                         <span className="text-zinc-300">{timelineChapters[selectedChapter].period}</span>
                       </div>
                       <div>
-                        <span className="text-zinc-500 inline-block w-28">ROLE           :</span>{" "}
-                        <span className={`${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-800'} font-bold`}>{timelineChapters[selectedChapter].role}</span>
+                        <span className="text-zinc-500 inline-block w-24">SUBJECT      :</span>{" "}
+                        <span className={`${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-800'} font-bold`}>{timelineChapters[selectedChapter].title} - {timelineChapters[selectedChapter].role}</span>
                       </div>
                       <div>
-                        <span className="text-zinc-500 inline-block w-28">LOCATION       :</span>{" "}
+                        <span className="text-zinc-500 inline-block w-24">LOCATION     :</span>{" "}
                         <span className="text-zinc-300">{timelineChapters[selectedChapter].institution}</span>
                       </div>
                       <div>
-                        <span className="text-zinc-500 inline-block w-28">STATUS         :</span>{" "}
-                        <span className="text-emerald-400 font-bold">✓ Connected</span>
+                        <span className="text-zinc-500 inline-block w-24">INTEGRITY    :</span>{" "}
+                        <span className="text-emerald-400 font-bold">✓ GPG Signature Verified</span>
                       </div>
                     </div>
 
                     <div className="pt-2">
-                      <span className="text-indigo-400 font-bold">EXECUTION REPORT:</span>
+                      <span className="text-indigo-400 font-bold">CHANGELOG:</span>
                       <p className={`mt-1.5 leading-relaxed italic ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'}`}>
                         "{timelineChapters[selectedChapter].description}"
                       </p>
