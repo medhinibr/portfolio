@@ -22,7 +22,16 @@ The system architecture utilizes a high-frequency rendering client built on Reac
           ├─► [Service Catalog / Deployments Registry]
           │      └─► [ICMP Test Connection Pinger] (Asynchronous mock response generator)
           │
-          └─► [DevOps Lifecycle Timeline] (State machine rendering CLI consoles per stage)
+          ├─► [Real-Time Telemetry & Contributions]
+          │      └─► [Live GitHub Fetcher] (Queries jogruber API for daily commit grids)
+          │      └─► [Dynamic Bezier Plotter] (Renders monthly velocity SVG Line Charts)
+          │
+          ├─► [Interactive Contact Console]
+          │      └─► [Expanding Glow Underliner] (Relative container :focus-within transitions)
+          │      └─► [FormSubmit AJAX Pipeline] (Asynchronous POST payload to brmedhini@gmail.com)
+          │      └─► [Gmail Compose Bridge] (Direct browser intent mail pre-population link)
+          │
+          └─► [System Footer Status Bar] (Renders live latency metrics, port status, and brand badges)
 ```
 
 ---
@@ -39,11 +48,16 @@ The system architecture utilizes a high-frequency rendering client built on Reac
 * **Framer Motion**: Orchestrates complex animations, physics-based springs, scale transforms, delayed keyframes, and character-based title morphing.
 * **Lenis Smooth Scroll**: Intercepts native mouse wheel events to deliver a consistent, hardware-accelerated scroll flow across variable monitor refresh rates.
 
-### Interactive Components and Data Simulation
+### Telemetry and Data Visualization
+* **GitHub Telemetry Engine**: Integrates live contributions queries using the public GitHub API scraper. Fetches daily commit metrics for target years (2026, 2025, 2024) and outputs them to the grid.
+* **Cubic Bezier Plotter**: Runs a client-side JavaScript reducer to group daily contribution data into monthly increments. Automatically calculates control points to draw a custom SVG line path and area fill gradient showing engineering velocity.
 * **Scalable Vector Graphics (SVG)**: Custom graphics rendering VPC blocks, compute nodes, and path connection lines in the Cloud Topology visualization.
 * **SVG animateMotion**: Animates network packets along specific vector paths, simulating server traffic and data flow in real time.
-* **Asynchronous State Handlers**: Manages the pinger telemetry engine in the Service Catalog. Generates randomized round-trip time (RTT) latency values, HTTP status codes, and mock Google Cloud IP addresses.
-* **Timers and Iterators**: Drives the step-by-step logs printing in the Terraform deployment sequence and the DevOps lifecycle console.
+
+### Input Mechanics and Communication Routing
+* **Expanding Underline Glow**: Utilizes a relative container wrapping text input fields with a hidden absolute span. Focus triggers a `:focus-within` Tailwind state, causing the gradient line (`bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500`) to expand from the center using CSS `transform: scaleX(100)` with a neon drop shadow.
+* **FormSubmit AJAX Pipeline**: Handles submissions dynamically in the browser. Intercepts the submit action and makes a secure, asynchronous POST request using `fetch` to FormSubmit's serverless mailer API, routing inputs directly to `brmedhini@gmail.com`.
+* **Gmail Web Intent API**: Provides a direct communication fallback in the footer by mapping the mail button to `https://mail.google.com/mail/?view=cm&fs=1&to=brmedhini@gmail.com`, bypassing operating-system-level mailto client mismatch errors.
 
 ---
 
@@ -57,6 +71,9 @@ To prevent page layout reflows and font-aliasing jaggedness during animation tra
 ### Dynamic Backdrops
 * Glowing ambient nodes use GPU-driven CSS filter operations (`blur`) to render blurs without triggering constant paint calls.
 * An interactive SVG noise texture overlay runs on a static z-index plane to simulate a granular film effect across page sections.
+
+### Easing & Transition Handlers
+* Phase transitions in the contact steps use `AnimatePresence` with custom cubic Bezier curves (`ease: [0.16, 1, 0.3, 1]`) to animate opacity and Y-axis offsets, producing fluid, physics-based slide transitions between form stages.
 
 ---
 
