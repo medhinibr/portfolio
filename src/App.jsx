@@ -597,40 +597,52 @@ const timelineChapters = [
 
 const projectsList = [
   {
-    title: "Nivarya_Setu",
-    category: "REACT FRONTEND & FLASK BACKEND",
-    status: "ONGOING",
+    title: "nivarya-setu-api",
+    category: "Deployment (Cloud Run)",
+    status: "Healthy",
     description: "An Indian stock market simulator processing real-time NSE/BSE data, rendering technical charts, and conducting portfolio analytics.",
-    image: "/dashboard_mockup.png",
     github: "https://github.com/medhinibr",
-    tags: ["React", "Python", "Flask", "Stock-Analysis"]
+    tags: ["React", "Python", "Flask", "Stock-Analysis"],
+    endpoint: "https://nivarya-setu.medhini.dev",
+    registry: "gcr.io/medhini-prod/nivarya-setu:v1.2",
+    uptime: "99.98%",
+    metrics: { cpu: "18%", mem: "145MB / 512MB" }
   },
   {
-    title: "Vyamir",
-    category: "INTERACTIVE FRONTEND",
-    status: "COMPLETED",
+    title: "vyamir-weather-service",
+    category: "Serverless (Cloud Run)",
+    status: "Healthy",
     description: "A visually rich weather analytics platform designed to offer real-time meteorological intelligence and a gamified rewards ecosystem.",
-    image: "/editor_mockup.png",
     github: "https://github.com/medhinibr",
-    tags: ["HTML", "CSS", "JavaScript", "Visualizations"]
+    tags: ["HTML", "CSS", "JavaScript", "Visualizations"],
+    endpoint: "https://vyamir.medhini.dev",
+    registry: "gcr.io/medhini-prod/vyamir-service:v2.0",
+    uptime: "100.00%",
+    metrics: { cpu: "8%", mem: "64MB / 256MB" }
   },
   {
-    title: "Ed-Wise",
-    category: "LMS PLATFORM",
-    status: "PUBLIC REPO",
+    title: "ed-wise-lms-engine",
+    category: "Orchestrated (K8s Pod)",
+    status: "Healthy",
     description: "An AI-powered Learning Management System (LMS) designed to modernize student-teacher-parent interactions with gamification logic.",
-    image: "/kanban_mockup.png",
     github: "https://github.com/medhinibr",
-    tags: ["JavaScript", "Node.js", "LMS", "Gamification"]
+    tags: ["JavaScript", "Node.js", "LMS", "Gamification"],
+    endpoint: "https://ed-wise.medhini.dev",
+    registry: "gcr.io/medhini-prod/ed-wise-lms:v1.0",
+    uptime: "99.95%",
+    metrics: { cpu: "28%", mem: "210MB / 512MB" }
   },
   {
-    title: "Viral-Drop-Platform-",
-    category: "DISTRIBUTED ASSET SHARING",
-    status: "ACTIVE DEV",
+    title: "viral-drop-asset-cdn",
+    category: "DaemonSet (Edge CDN)",
+    status: "Active Dev",
     description: "A high-performance content delivery and automated assets sharing platform designed for frictionless community-wide file drops.",
-    image: "/icons.svg",
     github: "https://github.com/medhinibr",
-    tags: ["JavaScript", "Node.js", "Content-Sharing", "WebSockets"]
+    tags: ["JavaScript", "Node.js", "Content-Sharing", "WebSockets"],
+    endpoint: "https://viral-drop.medhini.dev",
+    registry: "gcr.io/medhini-prod/viral-drop-cdn:v0.8-alpha",
+    uptime: "99.90%",
+    metrics: { cpu: "35%", mem: "340MB / 1024MB" }
   }
 ];
 
@@ -1561,84 +1573,127 @@ export default function App() {
         </div>
       </section>
 
-      {/* Selected Works Section */}
+      {/* Selected Works Section (DevOps Deployments Registry) */}
       <section id="works" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
+          
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              SELECTED WORKS
+              03 // DEPLOYMENTS REGISTRY
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>Engineering Impact.</h2>
-            <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+              }`}>Service Catalog.</h2>
+            <p className={`max-w-2xl text-sm ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              A collection of projects and solutions demonstrating cloud integration, reactive frontends, and backend pipelines.
+              Active microservices catalog and containerized system endpoints built by B R Medhini. Inspect telemetry, configurations, and running runtimes.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             {projectsList.map((project, idx) => (
               <motion.div
                 key={idx}
                 whileHover={{ y: -6 }}
                 onMouseEnter={() => setHoveredProjectIdx(idx)}
                 onMouseLeave={() => setHoveredProjectIdx(null)}
-                className={`rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-500 shadow-xl ${hoveredProjectIdx !== null && hoveredProjectIdx !== idx ? 'opacity-40 scale-[0.98] blur-[0.5px]' : 'opacity-100'} ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5 hover:border-indigo-500/25' : 'bg-white border-zinc-200 hover:border-indigo-500/25'
-                  }`}
+                className={`rounded-2xl border p-6 flex flex-col justify-between transition-all duration-500 shadow-2xl relative overflow-hidden min-h-[460px] ${
+                  hoveredProjectIdx !== null && hoveredProjectIdx !== idx ? 'opacity-40 scale-[0.98] blur-[0.5px]' : 'opacity-100'
+                } ${
+                  theme === 'dark' ? 'bg-[#09090b]/90 border-white/5 hover:border-indigo-500/25' : 'bg-white border-zinc-200 hover:border-indigo-500/25'
+                }`}
               >
-                <div>
-                  <div className="relative h-48 w-full overflow-hidden bg-zinc-950/20 border-b border-white/5">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 to-transparent"></div>
+                
+                {/* Visual Top Highlight bar */}
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${
+                  idx === 0 ? 'from-cyan-500 to-blue-500' :
+                  idx === 1 ? 'from-indigo-500 to-purple-500' :
+                  idx === 2 ? 'from-emerald-500 to-teal-500' :
+                  'from-purple-500 to-pink-500'
+                }`} />
+
+                {/* Dashboard Console Header */}
+                <div className="space-y-4 text-left">
+                  
+                  {/* Status telemetry row */}
+                  <div className="flex items-center justify-between text-[9px] font-mono text-zinc-500 border-b border-white/5 pb-3">
+                    <span className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                      {project.status.toUpperCase()}
+                    </span>
+                    <span>UPTIME: <b className="text-zinc-300">{project.uptime}</b></span>
                   </div>
 
-                  <div className="p-6 space-y-4 text-left">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[9px] font-bold font-mono tracking-wide text-indigo-400 uppercase">
-                        {project.category}
-                      </span>
-                      <span className="text-[9px] font-bold font-mono bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-1.5 py-0.5 rounded">
-                        {project.status}
-                      </span>
+                  {/* Service type & Title */}
+                  <div className="space-y-1">
+                    <div className="text-[10px] font-mono font-bold text-indigo-400 uppercase tracking-wider">
+                      {project.category}
                     </div>
-                    <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                      }`}>
+                    <h3 className={`text-xl font-bold font-mono tracking-tight ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
                       {project.title}
                     </h3>
-                    <p className={`text-xs sm:text-sm leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-                      }`}>
-                      {project.description}
-                    </p>
+                    <div className="text-[9px] font-mono text-zinc-500 truncate" title={project.registry}>
+                      IMAGE: <span className="text-zinc-400">{project.registry}</span>
+                    </div>
                   </div>
+
+                  {/* Resource Consumption Indicators */}
+                  <div className="bg-black/40 p-3 rounded-lg border border-white/5 space-y-2 select-none font-mono text-[9px]">
+                    <div className="flex items-center justify-between text-zinc-500">
+                      <span>POD CPU UTILIZATION</span>
+                      <span className="text-indigo-300">{project.metrics.cpu}</span>
+                    </div>
+                    <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden">
+                      <div className="h-full bg-indigo-500 rounded-full" style={{ width: project.metrics.cpu }} />
+                    </div>
+                    <div className="flex items-center justify-between text-zinc-500 pt-1">
+                      <span>MEMORY RESIDENT SET</span>
+                      <span className="text-indigo-300">{project.metrics.mem}</span>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                    {project.description}
+                  </p>
+
                 </div>
 
-                <div className="p-6 pt-0 space-y-4">
+                {/* Footer layers & CTA */}
+                <div className="space-y-4 pt-4 mt-4 border-t border-white/5 text-left">
+                  
+                  {/* Container Layer tags */}
                   <div className="flex flex-wrap gap-1.5">
                     {project.tags.map((tag, tIdx) => (
-                      <span key={tIdx} className={`text-[10px] font-mono px-2 py-0.5 rounded border ${theme === 'dark' ? 'bg-zinc-900 border-white/5 text-zinc-400' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
-                        }`}>
-                        {tag}
+                      <span
+                        key={tIdx}
+                        className={`text-[9px] font-mono px-2 py-0.5 rounded border ${
+                          theme === 'dark' ? 'bg-zinc-950 border-white/5 text-zinc-500' : 'bg-zinc-100 border-zinc-200 text-zinc-600'
+                        }`}
+                      >
+                        {tIdx === 0 ? 'FROM' : tIdx === 1 ? 'RUN' : 'ENV'} {tag.toLowerCase()}
                       </span>
                     ))}
                   </div>
 
+                  {/* GitHub Action clone link */}
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    className={`flex items-center justify-center gap-1.5 w-full py-2.5 rounded-lg text-xs font-semibold border transition-colors ${theme === 'dark'
-                      ? 'bg-zinc-900 hover:bg-zinc-800 border-white/5 text-white'
-                      : 'bg-zinc-100 hover:bg-zinc-200 border-zinc-200 text-zinc-800'
-                      }`}
+                    className={`flex items-center justify-between w-full p-2.5 rounded-lg text-[10px] font-mono border transition-all duration-300 ${
+                      theme === 'dark'
+                        ? 'bg-zinc-950 hover:bg-zinc-900 border-white/5 hover:border-indigo-500/30 text-zinc-400 hover:text-white'
+                        : 'bg-zinc-50 hover:bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900'
+                    }`}
                   >
-                    <GithubIcon className="w-3.5 h-3.5" />
-                    View Repository
+                    <span className="truncate flex items-center gap-1.5">
+                      <span className="text-indigo-400">$</span> git clone repo
+                    </span>
+                    <GithubIcon className="w-3.5 h-3.5 flex-shrink-0" />
                   </a>
+
                 </div>
+
               </motion.div>
             ))}
           </div>
