@@ -1959,92 +1959,132 @@ export default function App() {
         </div>
       </section>
 
-      {/* Consciousness Map Timeline Section */}
-      <section id="timeline" className="w-full py-24 min-h-screen flex flex-col justify-center">
+      {/* Network Hop Traceroute Timeline Section */}
+      <section id="timeline" className="w-full py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-4 mb-16 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-              04 // NEURAL CARTOGRAPHY
+              04 // NETWORK PATH ANALYSIS
             </div>
             <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-              }`}>Consciousness Map.</h2>
+              }`}>System Traceroute.</h2>
             <p className={`max-w-2xl text-base ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
               }`}>
-              Trace the neural pathways of evolution — from curiosity to mastery.
+              Tracing execution hops and network latency nodes across my educational milestones and professional deployments.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-12 gap-8 items-stretch">
-            {/* Left List */}
-            <div className="md:col-span-5 flex flex-col space-y-2 text-left justify-center">
+          <div className="grid md:grid-cols-12 gap-10 items-stretch">
+            {/* Left Column - Traceroute Network Path */}
+            <div className="md:col-span-5 relative flex flex-col space-y-4 justify-center py-4 pl-8">
+              {/* Vertical network line backbone */}
+              <div className="absolute left-[15px] top-6 bottom-6 w-0.5 bg-zinc-800/80" />
+
               {timelineChapters.map((item, idx) => {
                 const isSelected = selectedChapter === idx;
                 return (
                   <button
                     key={idx}
                     onClick={() => setSelectedChapter(idx)}
-                    className={`flex items-center gap-4 p-2.5 sm:p-3 rounded-xl border text-left transition-all duration-300 relative group ${isSelected
-                      ? item.colorTheme.bgSelected
-                      : 'bg-transparent border-transparent hover:bg-zinc-800/10 hover:border-white/5'
-                      }`}
+                    className="relative flex items-center w-full text-left group focus:outline-none py-2"
                   >
-                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold font-mono transition-all duration-300 ${isSelected
-                      ? item.colorTheme.badgeSelected
-                      : 'border-zinc-700 bg-zinc-900 text-zinc-500'
-                      }`}>
-                      {["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"][idx] || (idx + 1)}
+                    {/* Glowing circular node representing network hop */}
+                    <div className="absolute left-[-25px] flex items-center justify-center w-[16px] h-[16px] z-10">
+                      {isSelected ? (
+                        <div className="relative flex items-center justify-center w-4.5 h-4.5">
+                          <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${item.colorTheme.lineGlow}`} />
+                          <motion.div
+                            layoutId="traceroutePacket"
+                            className={`relative inline-flex rounded-full h-3.5 w-3.5 ${item.colorTheme.lineGlow} shadow-[0_0_12px_currentColor]`}
+                            transition={{ type: "spring", stiffness: 160, damping: 18 }}
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-2.5 h-2.5 rounded-full border border-zinc-700 bg-zinc-950 group-hover:border-zinc-500 group-hover:scale-125 transition-all duration-200" />
+                      )}
                     </div>
-                    <div>
+
+                    {/* Node details */}
+                    <div className={`pl-4 flex flex-col transition-all duration-300 ${isSelected ? 'translate-x-1' : 'group-hover:translate-x-0.5'}`}>
                       <span className={`text-[9px] font-mono font-bold tracking-wider uppercase ${isSelected ? item.colorTheme.text : 'text-zinc-500 group-hover:text-zinc-300'}`}>
-                        {item.chapter}
+                        HOP 0{idx + 1} // {item.period.split(' ').pop()}
                       </span>
-                      <h3 className={`text-sm font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                        }`}>
+                      <h3 className={`text-sm font-bold transition-colors duration-200 ${isSelected ? (theme === 'dark' ? 'text-white' : 'text-zinc-900') : 'text-zinc-500 group-hover:text-zinc-300'}`}>
                         {item.title}
                       </h3>
                     </div>
-
-                    {isSelected && (
-                      <motion.div
-                        layoutId="arrowIndicator"
-                        className={`absolute right-4 ${item.colorTheme.text}`}
-                      >
-                        <ChevronRight className="w-4 h-4" />
-                      </motion.div>
-                    )}
                   </button>
                 );
               })}
             </div>
 
-            {/* Right Card */}
+            {/* Right Column - Traceroute Log Inspector */}
             <div className="md:col-span-7 flex flex-col justify-center">
-              <div className={`p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[300px] flex flex-col justify-between transition-all duration-300 ${theme === 'dark' ? `bg-[#0f0f12] border-white/5 hover:border-${timelineChapters[selectedChapter].colorTheme.border.split('-')[1]}-500/20` : `bg-white border-zinc-200 hover:border-${timelineChapters[selectedChapter].colorTheme.border.split('-')[1]}-500/20`
+              <div className={`p-6 sm:p-8 rounded-2xl border text-left space-y-5 shadow-xl relative min-h-[440px] flex flex-col justify-between transition-all duration-300 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
                 }`}>
                 <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className={`h-0.5 w-8 ${timelineChapters[selectedChapter].colorTheme.lineGlow}`}></div>
-                    <span className="text-xs font-mono font-bold text-zinc-500">
-                      {timelineChapters[selectedChapter].chapter}
-                    </span>
+                  {/* Terminal Header */}
+                  <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
+                    <div className="flex items-center gap-2 font-mono text-[10px] text-zinc-500">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span>node-traceroute-inspector.sh</span>
+                    </div>
+                    <span className="font-mono text-[9px] text-zinc-500">HOP_RTT_LATENCY: {(selectedChapter * 8) + 6}ms</span>
                   </div>
 
-                  <h3 className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                    }`}>
-                    {timelineChapters[selectedChapter].title}
-                  </h3>
-                  <h4 className={`text-sm font-semibold mt-1 ${timelineChapters[selectedChapter].colorTheme.text}`}>
-                    {timelineChapters[selectedChapter].role} @ {timelineChapters[selectedChapter].institution}
-                  </h4>
-                  <p className="text-xs text-zinc-500 mt-1 font-mono">{timelineChapters[selectedChapter].period}</p>
+                  {/* Network Log Output Block */}
+                  <div className="font-mono text-xs space-y-4 leading-relaxed text-zinc-400">
+                    <div>
+                      <span className="text-indigo-400 font-bold">$ traceroute --hop-inspect 0{selectedChapter + 1}</span>
+                    </div>
 
-                  <p className={`text-sm leading-relaxed italic mt-4 ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'
-                    }`}>
-                    "{timelineChapters[selectedChapter].description}"
-                  </p>
+                    <div className={`border rounded-lg p-4 space-y-2.5 ${theme === 'dark' ? 'bg-zinc-950/40 border-white/5' : 'bg-zinc-50 border-zinc-200'}`}>
+                      <div>
+                        <span className="text-zinc-500 inline-block w-28">HOP IDENTIFIER :</span>{" "}
+                        <span className={`font-bold ${timelineChapters[selectedChapter].colorTheme.text}`}>
+                          0{selectedChapter + 1} [RESOLVED]
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-zinc-500 inline-block w-28">GATEWAY        :</span>{" "}
+                        <span className="text-zinc-300">
+                          {timelineChapters[selectedChapter].institution.toLowerCase().replace(/[^a-z0-9]/g, '-')}.local
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-zinc-500 inline-block w-28">RTT LATENCY    :</span>{" "}
+                        <span className="text-emerald-400 font-bold">
+                          {(selectedChapter * 7) + 5}ms (optimal)
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-zinc-500 inline-block w-28">PERIOD         :</span>{" "}
+                        <span className="text-zinc-300">{timelineChapters[selectedChapter].period}</span>
+                      </div>
+                      <div>
+                        <span className="text-zinc-500 inline-block w-28">ROLE           :</span>{" "}
+                        <span className={`${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-800'} font-bold`}>{timelineChapters[selectedChapter].role}</span>
+                      </div>
+                      <div>
+                        <span className="text-zinc-500 inline-block w-28">LOCATION       :</span>{" "}
+                        <span className="text-zinc-300">{timelineChapters[selectedChapter].institution}</span>
+                      </div>
+                      <div>
+                        <span className="text-zinc-500 inline-block w-28">STATUS         :</span>{" "}
+                        <span className="text-emerald-400 font-bold">✓ Connected</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <span className="text-indigo-400 font-bold">EXECUTION REPORT:</span>
+                      <p className={`mt-1.5 leading-relaxed italic ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'}`}>
+                        "{timelineChapters[selectedChapter].description}"
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5 pt-4">
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/5">
                   {timelineChapters[selectedChapter].skills.map((skill, sIdx) => (
                     <span
                       key={sIdx}
