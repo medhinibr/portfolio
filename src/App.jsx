@@ -1278,7 +1278,7 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex flex-col justify-start sm:justify-center items-center text-center relative pt-28 sm:pt-20">
+      <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center relative pt-20">
         <div className="mt-0 sm:-mt-20 space-y-4 sm:space-y-6 w-full max-w-full mx-auto px-6 sm:px-16 relative">
           {/* Status Pill */}
           <motion.div
@@ -1384,7 +1384,7 @@ export default function App() {
       </section>
 
       {/* Identity Section */}
-      <section id="identity" className="w-full pt-20 pb-16 sm:pt-32 sm:pb-20 min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="identity" className="w-full pt-20 pb-16 sm:pt-32 sm:pb-20 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-3 mb-6 sm:mb-10 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
@@ -1477,7 +1477,7 @@ export default function App() {
       </section>
 
       {/* Skills Section (Interactive Cloud Architecture / Topology Map) */}
-      <section id="skills" className="w-full py-16 sm:py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="skills" className="w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-12 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
@@ -1761,7 +1761,7 @@ export default function App() {
       </section>
 
       {/* Selected Works Section (DevOps Deployments Registry) */}
-      <section id="works" className="w-full py-16 sm:py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="works" className="w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           
           <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-16 text-left">
@@ -2110,7 +2110,7 @@ export default function App() {
       </section>
 
       {/* Horizontal Deployment Tracker Timeline Section */}
-      <section id="timeline" className="w-full py-16 sm:py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="timeline" className="w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-12 text-left">
             <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
@@ -2411,7 +2411,7 @@ export default function App() {
       </section>
 
       {/* Interactive Contact Section */}
-      <section id="contact" className="w-full py-16 sm:py-24 min-h-screen flex flex-col justify-center scroll-mt-28">
+      <section id="contact" className="w-full py-16 sm:py-24 min-h-fit sm:min-h-screen flex flex-col justify-center scroll-mt-28">
         <div className="max-w-full mx-auto px-6 sm:px-16 w-full">
           <div className="w-full relative min-h-[350px] flex flex-col justify-between text-left">
 
