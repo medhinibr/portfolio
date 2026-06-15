@@ -88,9 +88,9 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
         e.stopPropagation();
         setClickedIdx(clickedIdx === index ? null : index);
       }}
-      className="flex items-center justify-center transition-all duration-300 h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] cursor-pointer"
+      className="flex items-center justify-center transition-all duration-300 h-16 sm:h-44 md:h-[12.5rem] lg:h-[14rem] cursor-pointer"
     >
-      <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${isOtherHovered ? 'blur-[3px] opacity-25 scale-95 select-none' : 'opacity-100 scale-100'
+      <div className={`flex items-center select-none font-sans font-black text-4xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${isOtherHovered ? 'blur-[3px] opacity-25 scale-95 select-none' : 'opacity-100 scale-100'
         } ${isHovered ? 'filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)]' : ''
         }`}>
 
@@ -102,7 +102,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className={`inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text ${isHovered ? 'pl-4 sm:pl-6 pr-1' : 'p-0'}`}
+            className={`inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-4xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text ${isHovered ? 'pl-4 sm:pl-6 pr-1' : 'p-0'}`}
           >
             {item.prefix}
           </motion.span>
@@ -129,7 +129,7 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
               opacity: isHovered ? 1 : 0
             }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className={`inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text ${isHovered ? 'pl-1 pr-4 sm:pr-6' : 'p-0'}`}
+            className={`inline-flex flex-shrink-0 overflow-hidden whitespace-nowrap bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent font-sans font-black text-4xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] uppercase smooth-text ${isHovered ? 'pl-1 pr-4 sm:pr-6' : 'p-0'}`}
           >
             {item.suffix}
           </motion.span>
@@ -165,7 +165,7 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
         opacity: 1,
         filter: "none"
       }}
-      className="inline-flex cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-5.5xl sm:text-7.5xl md:text-[9.5rem] lg:text-[10.5rem] leading-[0.85] smooth-text px-0.5 sm:px-1 flex-shrink-0"
+      className="inline-flex cursor-default font-sans font-black tracking-[-0.05em] select-none dev-gradient transition-all duration-150 text-3.5xl sm:text-7.5xl md:text-[9.5rem] lg:text-[10.5rem] leading-[0.85] smooth-text px-0.5 sm:px-1 flex-shrink-0"
     >
       {char === ' ' ? '\u00A0' : char}
     </motion.span>
@@ -1302,7 +1302,7 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.07em] w-full overflow-visible h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] items-center justify-center"
+              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-4xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.07em] w-full overflow-visible h-16 sm:h-44 md:h-[12.5rem] lg:h-[14rem] items-center justify-center"
             >
               <div className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 w-full h-full items-center origin-center">
                 {medhiniLetters.map((item, index) => (
@@ -1494,7 +1494,7 @@ export default function App() {
           <div className="grid lg:grid-cols-12 gap-8 items-stretch">
             
             {/* Left Column: Interactive SVG Network Map */}
-            <div className="lg:col-span-7 relative w-full min-h-[460px] rounded-2xl bg-[#09090b]/90 border border-white/5 overflow-hidden shadow-2xl flex items-center justify-center">
+            <div className="lg:col-span-7 relative w-full aspect-[2/1] min-h-[250px] sm:min-h-[400px] rounded-2xl bg-[#09090b]/90 border border-white/5 overflow-hidden shadow-2xl flex items-center justify-center">
               
               {/* Grid Background */}
               <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
@@ -1551,10 +1551,10 @@ export default function App() {
                   const stage = pipelineStages.find(s => s.id === "cicd");
                   const isSelected = selectedSkill.id === stage?.id;
                   return stage ? (
-                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2 animate-pulse-slow" style={{ left: "15%", top: "50%" }}>
+                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1 sm:gap-2 animate-pulse-slow" style={{ left: "15%", top: "50%" }}>
                       <button
                         onClick={() => setSelectedSkill(stage)}
-                        className={`w-14 h-14 rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
+                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
                           isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
                         }`}
                       >
@@ -1563,12 +1563,12 @@ export default function App() {
                             initial={{ scale: 0.8, opacity: 0.5 }}
                             animate={{ scale: [0.8, 1.4, 1.8], opacity: [0.8, 0.3, 0] }}
                             transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
-                            className="absolute inset-0 rounded-2xl border border-current"
+                            className="absolute inset-0 rounded-xl sm:rounded-2xl border border-current"
                           />
                         )}
-                        <Activity className="w-6 h-6" />
+                        <Activity className="w-4 h-4 sm:w-6 sm:h-6" />
                       </button>
-                      <span className={`text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>CI/CD PIPELINE</span>
+                      <span className={`text-[7px] sm:text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>CI/CD PIPELINE</span>
                     </div>
                   ) : null;
                 })()}
@@ -1578,10 +1578,10 @@ export default function App() {
                   const stage = pipelineStages.find(s => s.id === "gateway");
                   const isSelected = selectedSkill.id === stage?.id;
                   return stage ? (
-                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2" style={{ left: "50%", top: "25%" }}>
+                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1 sm:gap-2" style={{ left: "50%", top: "25%" }}>
                       <button
                         onClick={() => setSelectedSkill(stage)}
-                        className={`w-14 h-14 rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
+                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
                           isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
                         }`}
                       >
@@ -1590,12 +1590,12 @@ export default function App() {
                             initial={{ scale: 0.8, opacity: 0.5 }}
                             animate={{ scale: [0.8, 1.4, 1.8], opacity: [0.8, 0.3, 0] }}
                             transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
-                            className="absolute inset-0 rounded-2xl border border-current"
+                            className="absolute inset-0 rounded-xl sm:rounded-2xl border border-current"
                           />
                         )}
-                        <Globe className="w-6 h-6" />
+                        <Globe className="w-4 h-4 sm:w-6 sm:h-6" />
                       </button>
-                      <span className={`text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>INGRESS GATEWAY</span>
+                      <span className={`text-[7px] sm:text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>INGRESS GATEWAY</span>
                     </div>
                   ) : null;
                 })()}
@@ -1605,10 +1605,10 @@ export default function App() {
                   const stage = pipelineStages.find(s => s.id === "compute");
                   const isSelected = selectedSkill.id === stage?.id;
                   return stage ? (
-                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2" style={{ left: "50%", top: "75%" }}>
+                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1 sm:gap-2" style={{ left: "50%", top: "75%" }}>
                       <button
                         onClick={() => setSelectedSkill(stage)}
-                        className={`w-14 h-14 rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
+                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
                           isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
                         }`}
                       >
@@ -1617,12 +1617,12 @@ export default function App() {
                             initial={{ scale: 0.8, opacity: 0.5 }}
                             animate={{ scale: [0.8, 1.4, 1.8], opacity: [0.8, 0.3, 0] }}
                             transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
-                            className="absolute inset-0 rounded-2xl border border-current"
+                            className="absolute inset-0 rounded-xl sm:rounded-2xl border border-current"
                           />
                         )}
-                        <Cpu className="w-6 h-6" />
+                        <Cpu className="w-4 h-4 sm:w-6 sm:h-6" />
                       </button>
-                      <span className={`text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>CLOUD COMPUTE</span>
+                      <span className={`text-[7px] sm:text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>CLOUD COMPUTE</span>
                     </div>
                   ) : null;
                 })()}
@@ -1632,10 +1632,10 @@ export default function App() {
                   const stage = pipelineStages.find(s => s.id === "database");
                   const isSelected = selectedSkill.id === stage?.id;
                   return stage ? (
-                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2" style={{ left: "85%", top: "50%" }}>
+                    <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1 sm:gap-2" style={{ left: "85%", top: "50%" }}>
                       <button
                         onClick={() => setSelectedSkill(stage)}
-                        className={`w-14 h-14 rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
+                        className={`w-9 h-9 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center relative transition-all duration-300 border bg-zinc-950/90 ${
                           isSelected ? `${stage.colorTheme.border} ${stage.colorTheme.text} ${stage.colorTheme.glow}` : 'border-white/5 text-zinc-500 hover:border-white/20 hover:text-zinc-300'
                         }`}
                       >
@@ -1644,12 +1644,12 @@ export default function App() {
                             initial={{ scale: 0.8, opacity: 0.5 }}
                             animate={{ scale: [0.8, 1.4, 1.8], opacity: [0.8, 0.3, 0] }}
                             transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
-                            className="absolute inset-0 rounded-2xl border border-current"
+                            className="absolute inset-0 rounded-xl sm:rounded-2xl border border-current"
                           />
                         )}
-                        <Database className="w-6 h-6" />
+                        <Database className="w-4 h-4 sm:w-6 sm:h-6" />
                       </button>
-                      <span className={`text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>DATABASE STORE</span>
+                      <span className={`text-[7px] sm:text-[10px] font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${isSelected ? stage.colorTheme.text : 'text-zinc-500'}`}>DATABASE STORE</span>
                     </div>
                   ) : null;
                 })()}
@@ -1742,7 +1742,7 @@ export default function App() {
                     <div className="text-[10px] font-mono tracking-wider text-zinc-500 uppercase font-bold mb-2">Integrated Core Skills</div>
                     <div className="grid grid-cols-2 gap-2">
                       {selectedSkill.skills.map((skill, idx) => (
-                        <div key={idx} className="p-2.5 rounded bg-zinc-950 border border-white/5 flex items-center justify-between text-xs font-mono">
+                        <div key={idx} className="p-2.5 rounded bg-zinc-950 border border-white/5 flex items-center justify-between text-[10px] sm:text-xs font-mono">
                           <span className="text-zinc-400">{skill.name}</span>
                           <span className={selectedSkill.colorTheme.text}>{skill.level}%</span>
                         </div>
@@ -2480,7 +2480,7 @@ export default function App() {
                           value={contactForm.name}
                           onChange={handleContactInput}
                           placeholder="Your name..."
-                          className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
+                          className={`w-full py-4 text-2xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
                             ? 'border-white/10 text-white placeholder-zinc-800'
                             : 'border-zinc-200 text-zinc-900 placeholder-zinc-300'
                             }`}
@@ -2497,7 +2497,7 @@ export default function App() {
                           value={contactForm.email}
                           onChange={handleContactInput}
                           placeholder="Your email address..."
-                          className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
+                          className={`w-full py-4 text-2xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
                             ? 'border-white/10 text-white placeholder-zinc-800'
                             : 'border-zinc-200 text-zinc-900 placeholder-zinc-300'
                             }`}
@@ -2515,7 +2515,7 @@ export default function App() {
                           onChange={handleContactInput}
                           placeholder="Your message details..."
                           rows="2"
-                          className={`w-full py-4 text-3xl sm:text-5xl font-black bg-transparent border-b focus:outline-none resize-none transition-colors ${theme === 'dark'
+                          className={`w-full py-4 text-2xl sm:text-5xl font-black bg-transparent border-b focus:outline-none resize-none transition-colors ${theme === 'dark'
                             ? 'border-white/10 text-white placeholder-zinc-800'
                             : 'border-zinc-200 text-zinc-900 placeholder-zinc-300'
                             }`}
