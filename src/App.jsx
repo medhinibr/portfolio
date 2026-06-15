@@ -83,11 +83,9 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
       }}
       className="flex items-center justify-center transition-all duration-300 h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] cursor-pointer"
     >
-      <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${
-        isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
-      } ${
-        isHovered ? 'filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)]' : ''
-      }`}>
+      <div className={`flex items-center select-none font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.05em] leading-none transition-all duration-300 smooth-text ${isOtherHovered ? 'blur-sm opacity-20 scale-90' : 'opacity-100 scale-100'
+        } ${isHovered ? 'filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)]' : ''
+        }`}>
         {item.type === 'prefix' && (
           <motion.span
             initial={{ width: 0, opacity: 0 }}
@@ -107,11 +105,10 @@ const AnimatedLetter = ({ item, index, hoveredIdx, setHoveredIdx, clickedIdx, se
             scale: isHovered ? 1.05 : 1,
           }}
           transition={{ duration: 0.2 }}
-          className={`inline-block cursor-default transition-all duration-300 smooth-text ${
-            isHovered 
-              ? 'bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent' 
+          className={`inline-block cursor-default transition-all duration-300 smooth-text ${isHovered
+              ? 'bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent'
               : (theme === 'dark' ? 'text-white' : 'text-zinc-900')
-          }`}
+            }`}
         >
           {item.char}
         </motion.span>
@@ -145,8 +142,8 @@ const AnimatedGradientLetter = ({ char, delay, hoveredIdx, clickedIdx }) => {
       animate={{
         y: 0,
         opacity: isClicked ? 1.0 : (isHovered ? 0.4 : 0.8),
-        filter: isClicked 
-          ? "blur(0px)" 
+        filter: isClicked
+          ? "blur(0px)"
           : (isHovered ? "blur(2px)" : "blur(0px)")
       }}
       transition={{
@@ -354,7 +351,7 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
     if (trimmed === 'skills') {
       setHistory(prev => [...prev, 'Navigating to Technical Arsenal...']);
       if (lenisRef?.current) {
-        lenisRef.current.scrollTo('#skills', { duration: 1.2 });
+        lenisRef.current.scrollTo('#skills', { duration: 1.2, offset: -40 });
       } else {
         document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
       }
@@ -364,7 +361,7 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
     if (trimmed === 'projects') {
       setHistory(prev => [...prev, 'Navigating to Selected Works...']);
       if (lenisRef?.current) {
-        lenisRef.current.scrollTo('#works', { duration: 1.2 });
+        lenisRef.current.scrollTo('#works', { duration: 1.2, offset: -40 });
       } else {
         document.getElementById('works')?.scrollIntoView({ behavior: 'smooth' });
       }
@@ -374,7 +371,7 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
     if (trimmed === 'contact') {
       setHistory(prev => [...prev, 'Navigating to Contact Section...']);
       if (lenisRef?.current) {
-        lenisRef.current.scrollTo('#contact', { duration: 1.2 });
+        lenisRef.current.scrollTo('#contact', { duration: 1.2, offset: -40 });
       } else {
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
       }
@@ -449,16 +446,14 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
   return (
     <div className="w-full flex flex-col gap-3">
       {/* Shell Container */}
-      <div 
-        className={`w-full rounded-2xl border text-left font-mono shadow-xl relative overflow-hidden flex flex-col h-[380px] ${
-          theme === 'dark' ? 'bg-[#0b0b0d] border-white/5 text-zinc-300' : 'bg-zinc-950 border-zinc-800 text-zinc-300'
-        }`}
+      <div
+        className={`w-full rounded-2xl border text-left font-mono shadow-xl relative overflow-hidden flex flex-col h-[380px] ${theme === 'dark' ? 'bg-[#0b0b0d] border-white/5 text-zinc-300' : 'bg-zinc-950 border-zinc-800 text-zinc-300'
+          }`}
         onClick={() => document.getElementById('ssh-input')?.focus()}
       >
         {/* Terminal Header */}
-        <div className={`flex items-center justify-between px-5 py-3.5 border-b ${
-          theme === 'dark' ? 'border-white/5 bg-[#121216]' : 'border-zinc-800 bg-zinc-900'
-        }`}>
+        <div className={`flex items-center justify-between px-5 py-3.5 border-b ${theme === 'dark' ? 'border-white/5 bg-[#121216]' : 'border-zinc-800 bg-zinc-900'
+          }`}>
           <div className="flex gap-2 items-center">
             <span className="w-3.5 h-3.5 rounded-full bg-red-500/80"></span>
             <span className="w-3.5 h-3.5 rounded-full bg-yellow-500/80"></span>
@@ -490,7 +485,7 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
               </div>
             );
           })}
-          
+
           {/* Active Input Line */}
           {!isExecuting && (
             <div className="flex items-center gap-1.5 text-zinc-300">
@@ -525,11 +520,10 @@ const DevOpsTerminal = ({ theme, lenisRef }) => {
             key={cmd}
             onClick={() => executeCommand(cmd)}
             disabled={isExecuting}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold border transition-all ${
-              theme === 'dark'
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold border transition-all ${theme === 'dark'
                 ? 'bg-[#18181b]/80 border-white/5 text-zinc-400 hover:text-white hover:border-indigo-500/40 hover:bg-indigo-500/5'
                 : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-indigo-500/40 hover:bg-indigo-500/5'
-            }`}
+              }`}
           >
             {cmd}
           </button>
@@ -546,7 +540,6 @@ export default function App() {
   const [selectedSkill, setSelectedSkill] = useState(constellationSkills[0]);
   const [selectedChapter, setSelectedChapter] = useState(0);
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
-
   // Custom cursor state variables
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
   const [isHoveringClickable, setIsHoveringClickable] = useState(false);
@@ -656,10 +649,10 @@ export default function App() {
   };
 
   return (
-    <div 
+    <div
       onClick={() => setClickedIdx(null)}
       className={`relative min-h-screen font-sans transition-colors duration-300 overflow-x-hidden ${theme === 'dark' ? 'bg-black text-zinc-100' : 'bg-white text-zinc-900'
-      }`}
+        }`}
     >
       {/* Custom Interactive Cursor */}
       <motion.div
@@ -672,18 +665,7 @@ export default function App() {
         transition={{ type: 'spring', damping: 30, stiffness: 450, mass: 0.15 }}
       />
 
-      {/* Cinematic Noise Texture */}
-      <div className="fixed inset-0 bg-noise opacity-[0.04] pointer-events-none z-40" />
 
-      {/* Deep cinematic background blur blobs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[10%] left-[20%] w-[500px] h-[500px] rounded-full bg-[#22D3EE]/6 blur-[130px]" />
-        <div className="absolute bottom-[20%] right-[15%] w-[600px] h-[600px] rounded-full bg-[#818CF8]/6 blur-[150px]" />
-      </div>
-
-      {/* Background radial glows */}
-      <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-violet-500/5 rounded-full blur-[150px] pointer-events-none" />
 
 
 
@@ -719,8 +701,7 @@ export default function App() {
             </div>
           </motion.div>
 
-          {/* Hero Ambient Backlight Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[950px] h-[600px] sm:h-[950px] bg-gradient-to-tr from-[#22D3EE]/18 via-[#818CF8]/14 to-transparent rounded-full blur-[140px] sm:blur-[220px] pointer-events-none z-0" />
+
 
           {/* Heading */}
           <div className="space-y-2 select-none relative z-10">
@@ -728,31 +709,35 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.07em] w-full overflow-hidden h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] items-center justify-center"
+              className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.9] tracking-[-0.07em] w-full overflow-visible h-32 sm:h-44 md:h-[12.5rem] lg:h-[14rem] items-center justify-center"
             >
               <AnimatePresence mode="wait">
                 {clickedIdx !== null ? (
                   <motion.div
                     key={`active-word-${clickedIdx}`}
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     onClick={(e) => {
                       e.stopPropagation();
                       setClickedIdx(null);
                     }}
-                    className="flex items-center justify-center cursor-pointer font-sans font-black text-6xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.07em] leading-none uppercase bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)] select-none h-full smooth-text"
+                    className="flex items-center justify-center cursor-pointer font-sans font-black text-7xl sm:text-8xl md:text-[10rem] lg:text-[11rem] tracking-[-0.07em] leading-none uppercase bg-gradient-to-b from-white via-zinc-100 to-[#D8B4FE] bg-clip-text text-transparent filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] drop-shadow-[0_0_40px_rgba(216,180,254,0.55)] select-none h-full smooth-text"
                   >
                     {getFullWord(medhiniLetters[clickedIdx])}
                   </motion.div>
                 ) : (
                   <motion.div
                     key="name-letters"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0, scale: 1 }}
+                    animate={{ 
+                      opacity: 1,
+                      scale: hoveredIdx !== null ? 0.72 : 1
+                    }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     exit={{ opacity: 0 }}
-                    className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 w-full h-full items-center"
+                    className="flex justify-center flex-nowrap gap-x-0.5 sm:gap-x-1 w-full h-full items-center origin-center"
                   >
                     {medhiniLetters.map((item, index) => (
                       <AnimatedLetter
@@ -860,9 +845,8 @@ export default function App() {
                   { name: 'Shell Scripting (Bash)', color: 'bg-emerald-500' },
                   { name: 'GitHub Actions', color: 'bg-purple-500' }
                 ].map((tag, i) => (
-                  <span key={i} className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${
-                    theme === 'dark' ? 'bg-zinc-900 text-zinc-300' : 'bg-zinc-100 text-zinc-800'
-                  }`}>
+                  <span key={i} className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${theme === 'dark' ? 'bg-zinc-900 text-zinc-300' : 'bg-zinc-100 text-zinc-800'
+                    }`}>
                     <span className={`w-1.5 h-1.5 rounded-full ${tag.color}`}></span>
                     {tag.name}
                   </span>
@@ -1246,287 +1230,287 @@ export default function App() {
       <section id="telemetry" className="w-full py-24 text-center">
         <div className="max-w-7xl mx-auto px-10 w-full">
           <div className="space-y-4 mb-12">
-          <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
-            05 // TELEMETRY
+            <div className="inline-block text-xs font-bold font-mono tracking-widest text-indigo-400 uppercase">
+              05 // TELEMETRY
+            </div>
+            <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
+              }`}>Git Contributions.</h2>
+            <p className={`max-w-2xl mx-auto text-sm sm:text-base leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+              }`}>
+              A real-time command center visualizing my engineering velocity, technical focus, and open-source contributions.
+            </p>
           </div>
-          <h2 className={`text-3xl sm:text-5xl font-black font-display ${theme === 'dark' ? 'text-white' : 'text-zinc-900'
-            }`}>Git Contributions.</h2>
-          <p className={`max-w-2xl mx-auto text-sm sm:text-base leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+
+          {/* Calendar Grid Card */}
+          <div className={`p-6 sm:p-8 rounded-2xl border shadow-xl relative overflow-hidden text-left mb-8 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
             }`}>
-            A real-time command center visualizing my engineering velocity, technical focus, and open-source contributions.
-          </p>
-        </div>
-
-        {/* Calendar Grid Card */}
-        <div className={`p-6 sm:p-8 rounded-2xl border shadow-xl relative overflow-hidden text-left mb-8 ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
-          }`}>
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
-              <h3 className="font-bold text-sm">Contributions</h3>
-            </div>
-            <div className="flex items-center gap-2 text-xs font-mono">
-              <span className={`px-2 py-0.5 rounded ${theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-100'}`}>Last Year</span>
-              <span className="text-zinc-500">361 commits</span>
-              <a href="https://github.com/medhinibr" target="_blank" rel="noreferrer" className="text-indigo-400 hover:underline">@medhinibr</a>
-            </div>
-          </div>
-
-          {/* Grid mockup */}
-          <div className="overflow-x-auto">
-            <div className="grid grid-cols-[repeat(53,minmax(8px,1fr))] gap-[3px] min-w-[500px]">
-              {Array.from({ length: 371 }).map((_, i) => {
-                // Mock random commit colors (75% dark gray, 25% shades of blue/indigo)
-                let cellColor = theme === 'dark' ? 'bg-zinc-900' : 'bg-zinc-200';
-                const rand = Math.random();
-                if (rand > 0.85) {
-                  cellColor = 'bg-indigo-600';
-                } else if (rand > 0.7) {
-                  cellColor = 'bg-indigo-400';
-                } else if (rand > 0.6) {
-                  cellColor = 'bg-indigo-300';
-                }
-                return (
-                  <div
-                    key={i}
-                    className={`aspect-square w-full rounded-[1px] ${cellColor}`}
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <div className="flex justify-between items-center text-[10px] text-zinc-500 mt-4">
-            <span>361 contributions in the last year</span>
-            <div className="flex items-center gap-1">
-              <span>Less</span>
-              <span className={`w-2 h-2 rounded-[1px] ${theme === 'dark' ? 'bg-zinc-900' : 'bg-zinc-200'}`}></span>
-              <span className="w-2 h-2 rounded-[1px] bg-indigo-300"></span>
-              <span className="w-2 h-2 rounded-[1px] bg-indigo-400"></span>
-              <span className="w-2 h-2 rounded-[1px] bg-indigo-600"></span>
-              <span>More</span>
-            </div>
-          </div>
-        </div>
-
-        {/* AI Insights and Line Graph */}
-        <div className="grid md:grid-cols-12 gap-6 items-stretch">
-          {/* Insights Grid */}
-          <div className="md:col-span-5 grid grid-cols-2 gap-4">
-            {[
-              { title: "Focus Area", val: "Cloud & DevOps", icon: <Cpu className="w-4 h-4 text-indigo-400" /> },
-              { title: "Open Source", val: "Active Committer", icon: <Globe className="w-4 h-4 text-emerald-400" /> },
-              { title: "Consistency", val: "High Frequency", icon: <Activity className="w-4 h-4 text-violet-400" /> },
-              { title: "Momentum", val: "Upward Trend", icon: <TrendingUp className="w-4 h-4 text-amber-400" /> }
-            ].map((insight, i) => (
-              <div
-                key={i}
-                className={`p-4 rounded-xl border text-left flex flex-col justify-between shadow ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
-                  }`}
-              >
-                <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-mono font-bold text-zinc-500">{insight.title}</span>
-                  {insight.icon}
-                </div>
-                <span className={`text-sm font-bold mt-4 ${theme === 'dark' ? 'text-white' : 'text-zinc-950'
-                  }`}>
-                  {insight.val}
-                </span>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
+                <h3 className="font-bold text-sm">Contributions</h3>
               </div>
-            ))}
+              <div className="flex items-center gap-2 text-xs font-mono">
+                <span className={`px-2 py-0.5 rounded ${theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-100'}`}>Last Year</span>
+                <span className="text-zinc-500">361 commits</span>
+                <a href="https://github.com/medhinibr" target="_blank" rel="noreferrer" className="text-indigo-400 hover:underline">@medhinibr</a>
+              </div>
+            </div>
+
+            {/* Grid mockup */}
+            <div className="overflow-x-auto">
+              <div className="grid grid-cols-[repeat(53,minmax(8px,1fr))] gap-[3px] min-w-[500px]">
+                {Array.from({ length: 371 }).map((_, i) => {
+                  // Mock random commit colors (75% dark gray, 25% shades of blue/indigo)
+                  let cellColor = theme === 'dark' ? 'bg-zinc-900' : 'bg-zinc-200';
+                  const rand = Math.random();
+                  if (rand > 0.85) {
+                    cellColor = 'bg-indigo-600';
+                  } else if (rand > 0.7) {
+                    cellColor = 'bg-indigo-400';
+                  } else if (rand > 0.6) {
+                    cellColor = 'bg-indigo-300';
+                  }
+                  return (
+                    <div
+                      key={i}
+                      className={`aspect-square w-full rounded-[1px] ${cellColor}`}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex justify-between items-center text-[10px] text-zinc-500 mt-4">
+              <span>361 contributions in the last year</span>
+              <div className="flex items-center gap-1">
+                <span>Less</span>
+                <span className={`w-2 h-2 rounded-[1px] ${theme === 'dark' ? 'bg-zinc-900' : 'bg-zinc-200'}`}></span>
+                <span className="w-2 h-2 rounded-[1px] bg-indigo-300"></span>
+                <span className="w-2 h-2 rounded-[1px] bg-indigo-400"></span>
+                <span className="w-2 h-2 rounded-[1px] bg-indigo-600"></span>
+                <span>More</span>
+              </div>
+            </div>
           </div>
 
-          {/* Activity Line Graph */}
-          <div className={`md:col-span-7 p-6 rounded-2xl border text-left shadow-xl flex flex-col justify-between ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
-            }`}>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-sm">Activity Graph</h3>
-              <span className="text-[10px] font-mono text-zinc-500">Medhini's Contribution Velocity</span>
+          {/* AI Insights and Line Graph */}
+          <div className="grid md:grid-cols-12 gap-6 items-stretch">
+            {/* Insights Grid */}
+            <div className="md:col-span-5 grid grid-cols-2 gap-4">
+              {[
+                { title: "Focus Area", val: "Cloud & DevOps", icon: <Cpu className="w-4 h-4 text-indigo-400" /> },
+                { title: "Open Source", val: "Active Committer", icon: <Globe className="w-4 h-4 text-emerald-400" /> },
+                { title: "Consistency", val: "High Frequency", icon: <Activity className="w-4 h-4 text-violet-400" /> },
+                { title: "Momentum", val: "Upward Trend", icon: <TrendingUp className="w-4 h-4 text-amber-400" /> }
+              ].map((insight, i) => (
+                <div
+                  key={i}
+                  className={`p-4 rounded-xl border text-left flex flex-col justify-between shadow ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+                    }`}
+                >
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-mono font-bold text-zinc-500">{insight.title}</span>
+                    {insight.icon}
+                  </div>
+                  <span className={`text-sm font-bold mt-4 ${theme === 'dark' ? 'text-white' : 'text-zinc-950'
+                    }`}>
+                    {insight.val}
+                  </span>
+                </div>
+              ))}
             </div>
 
-            {/* Custom SVG Line Chart */}
-            <div className="h-32 w-full pt-4 relative">
-              <svg className="w-full h-full" viewBox="0 0 100 30" preserveAspectRatio="none">
-                {/* Grid Lines */}
-                <line x1="0" y1="5" x2="100" y2="5" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
-                <line x1="0" y1="15" x2="100" y2="15" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
-                <line x1="0" y1="25" x2="100" y2="25" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
+            {/* Activity Line Graph */}
+            <div className={`md:col-span-7 p-6 rounded-2xl border text-left shadow-xl flex flex-col justify-between ${theme === 'dark' ? 'bg-[#0f0f12] border-white/5' : 'bg-white border-zinc-200'
+              }`}>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-bold text-sm">Activity Graph</h3>
+                <span className="text-[10px] font-mono text-zinc-500">Medhini's Contribution Velocity</span>
+              </div>
 
-                {/* Gradient Fill under path */}
-                <defs>
-                  <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#6366f1" stopOpacity="0.25" />
-                    <stop offset="100%" stopColor="#6366f1" stopOpacity="0.0" />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M0,30 L0,22 Q15,8 30,18 T60,5 T90,20 L100,28 L100,30 Z"
-                  fill="url(#chartGlow)"
-                />
+              {/* Custom SVG Line Chart */}
+              <div className="h-32 w-full pt-4 relative">
+                <svg className="w-full h-full" viewBox="0 0 100 30" preserveAspectRatio="none">
+                  {/* Grid Lines */}
+                  <line x1="0" y1="5" x2="100" y2="5" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
+                  <line x1="0" y1="15" x2="100" y2="15" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
+                  <line x1="0" y1="25" x2="100" y2="25" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
 
-                {/* Line Path */}
-                <motion.path
-                  d="M0,22 Q15,8 30,18 T60,5 T90,20 L100,28"
-                  fill="none"
-                  stroke="url(#lineGradient)"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.5 }}
-                />
-                <defs>
-                  <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#a78bfa" />
-                    <stop offset="50%" stopColor="#6366f1" />
-                    <stop offset="100%" stopColor="#ec4899" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <div className="flex justify-between items-center text-[9px] font-mono text-zinc-500 pt-2 border-t border-white/5 mt-2">
-              <span>JUN 2025</span>
-              <span>OCT 2025</span>
-              <span>FEB 2026</span>
-              <span>JUN 2026</span>
+                  {/* Gradient Fill under path */}
+                  <defs>
+                    <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#6366f1" stopOpacity="0.25" />
+                      <stop offset="100%" stopColor="#6366f1" stopOpacity="0.0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M0,30 L0,22 Q15,8 30,18 T60,5 T90,20 L100,28 L100,30 Z"
+                    fill="url(#chartGlow)"
+                  />
+
+                  {/* Line Path */}
+                  <motion.path
+                    d="M0,22 Q15,8 30,18 T60,5 T90,20 L100,28"
+                    fill="none"
+                    stroke="url(#lineGradient)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5 }}
+                  />
+                  <defs>
+                    <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#a78bfa" />
+                      <stop offset="50%" stopColor="#6366f1" />
+                      <stop offset="100%" stopColor="#ec4899" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div className="flex justify-between items-center text-[9px] font-mono text-zinc-500 pt-2 border-t border-white/5 mt-2">
+                <span>JUN 2025</span>
+                <span>OCT 2025</span>
+                <span>FEB 2026</span>
+                <span>JUN 2026</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Interactive Contact Section */}
       <section id="contact" className="w-full py-24 min-h-screen flex flex-col justify-center">
         <div className="max-w-7xl mx-auto px-10 w-full">
           <div className="w-full relative min-h-[350px] flex flex-col justify-between text-left">
 
-          <AnimatePresence mode="wait">
-            {contactStep === 3 ? (
-              <motion.div
-                key="success"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                className="flex flex-col justify-center items-center text-center space-y-4 py-16 w-full"
-              >
-                <div className="p-4 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  <CheckCircle className="w-12 h-12" />
-                </div>
-                <h3 className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-950'}`}>
-                  Transmission Successful.
-                </h3>
-                <p className="text-sm text-zinc-500 max-w-sm">
-                  Your signals have been routed successfully. I will get back to you at <strong>{contactForm.email}</strong> shortly.
-                </p>
-                <button
-                  onClick={resetContactForm}
-                  className={`px-6 py-2 rounded-full text-xs font-mono border transition-all mt-4 ${theme === 'dark' ? 'border-white/10 hover:bg-zinc-900 text-white' : 'border-zinc-200 hover:bg-zinc-100 text-zinc-800'
-                    }`}
+            <AnimatePresence mode="wait">
+              {contactStep === 3 ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex flex-col justify-center items-center text-center space-y-4 py-16 w-full"
                 >
-                  Transmit Another Message
-                </button>
-              </motion.div>
-            ) : (
-              <motion.div
-                key={contactStep}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25 }}
-                className="space-y-6 w-full flex-grow flex flex-col justify-center"
-              >
-                <div>
-                  <h3 className={`text-2xl italic font-normal font-serif ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'
-                    }`}>
-                    {contactStep === 0 ? "Identify yourself." : contactStep === 1 ? "Where should I reply?" : "What are we building?"}
+                  <div className="p-4 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <CheckCircle className="w-12 h-12" />
+                  </div>
+                  <h3 className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-950'}`}>
+                    Transmission Successful.
                   </h3>
-                </div>
+                  <p className="text-sm text-zinc-500 max-w-sm">
+                    Your signals have been routed successfully. I will get back to you at <strong>{contactForm.email}</strong> shortly.
+                  </p>
+                  <button
+                    onClick={resetContactForm}
+                    className={`px-6 py-2 rounded-full text-xs font-mono border transition-all mt-4 ${theme === 'dark' ? 'border-white/10 hover:bg-zinc-900 text-white' : 'border-zinc-200 hover:bg-zinc-100 text-zinc-800'
+                      }`}
+                  >
+                    Transmit Another Message
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key={contactStep}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.25 }}
+                  className="space-y-6 w-full flex-grow flex flex-col justify-center"
+                >
+                  <div>
+                    <h3 className={`text-2xl italic font-normal font-serif ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'
+                      }`}>
+                      {contactStep === 0 ? "Identify yourself." : contactStep === 1 ? "Where should I reply?" : "What are we building?"}
+                    </h3>
+                  </div>
 
-                <form onSubmit={handleNextStep} className="w-full">
-                  {contactStep === 0 && (
-                    <input
-                      type="text"
-                      name="name"
-                      value={contactForm.name}
-                      onChange={handleContactInput}
-                      placeholder="Your name..."
-                      className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
-                        ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
-                        : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
-                        }`}
-                    />
-                  )}
+                  <form onSubmit={handleNextStep} className="w-full">
+                    {contactStep === 0 && (
+                      <input
+                        type="text"
+                        name="name"
+                        value={contactForm.name}
+                        onChange={handleContactInput}
+                        placeholder="Your name..."
+                        className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
+                          ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
+                          : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
+                          }`}
+                      />
+                    )}
 
-                  {contactStep === 1 && (
-                    <input
-                      type="email"
-                      name="email"
-                      value={contactForm.email}
-                      onChange={handleContactInput}
-                      placeholder="Your email address..."
-                      className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
-                        ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
-                        : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
-                        }`}
-                      autoFocus={contactStep > 0}
-                    />
-                  )}
+                    {contactStep === 1 && (
+                      <input
+                        type="email"
+                        name="email"
+                        value={contactForm.email}
+                        onChange={handleContactInput}
+                        placeholder="Your email address..."
+                        className={`w-full py-4 text-4xl sm:text-6xl font-black bg-transparent border-b focus:outline-none transition-colors ${theme === 'dark'
+                          ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
+                          : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
+                          }`}
+                        autoFocus={contactStep > 0}
+                      />
+                    )}
 
-                  {contactStep === 2 && (
-                    <textarea
-                      name="message"
-                      value={contactForm.message}
-                      onChange={handleContactInput}
-                      placeholder="Your message details..."
-                      rows="2"
-                      className={`w-full py-4 text-3xl sm:text-5xl font-black bg-transparent border-b focus:outline-none resize-none transition-colors ${theme === 'dark'
-                        ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
-                        : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
-                        }`}
-                      autoFocus={contactStep > 0}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                          e.preventDefault();
-                          handleNextStep();
-                        }
-                      }}
-                    />
-                  )}
+                    {contactStep === 2 && (
+                      <textarea
+                        name="message"
+                        value={contactForm.message}
+                        onChange={handleContactInput}
+                        placeholder="Your message details..."
+                        rows="2"
+                        className={`w-full py-4 text-3xl sm:text-5xl font-black bg-transparent border-b focus:outline-none resize-none transition-colors ${theme === 'dark'
+                          ? 'border-white/10 text-white placeholder-zinc-800 focus:border-indigo-500'
+                          : 'border-zinc-200 text-zinc-900 placeholder-zinc-300 focus:border-indigo-500'
+                          }`}
+                        autoFocus={contactStep > 0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            handleNextStep();
+                          }
+                        }}
+                      />
+                    )}
 
-                  {formError && (
-                    <p className="text-xs text-rose-500 font-mono mt-2">{formError}</p>
+                    {formError && (
+                      <p className="text-xs text-rose-500 font-mono mt-2">{formError}</p>
+                    )}
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Form Actions Footer & Social */}
+            {contactStep < 3 && (
+              <div className="flex justify-between items-center pt-8 border-t border-white/5 mt-12">
+                <span className="text-xs font-mono text-zinc-500">
+                  PHASE 0{contactStep + 1} // 03
+                </span>
+
+                <button
+                  onClick={handleNextStep}
+                  disabled={isTransmitting}
+                  className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-indigo-400 hover:text-indigo-300 transition-colors uppercase"
+                >
+                  {isTransmitting ? (
+                    <span>TRANSMITTING...</span>
+                  ) : (
+                    <>
+                      <span>Press Enter</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </>
                   )}
-                </form>
-              </motion.div>
+                </button>
+              </div>
             )}
-          </AnimatePresence>
-
-          {/* Form Actions Footer & Social */}
-          {contactStep < 3 && (
-            <div className="flex justify-between items-center pt-8 border-t border-white/5 mt-12">
-              <span className="text-xs font-mono text-zinc-500">
-                PHASE 0{contactStep + 1} // 03
-              </span>
-
-              <button
-                onClick={handleNextStep}
-                disabled={isTransmitting}
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-indigo-400 hover:text-indigo-300 transition-colors uppercase"
-              >
-                {isTransmitting ? (
-                  <span>TRANSMITTING...</span>
-                ) : (
-                  <>
-                    <span>Press Enter</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </>
-                )}
-              </button>
-            </div>
-          )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Footer & Social Icons */}
       <footer className="py-16 text-center">

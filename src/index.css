@@ -32,7 +32,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  
+  /* This trick smooths out the "staircase" jagged edges */
+  text-shadow: 0 0 1px rgba(255,255,255,0.1); 
+  
   transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 @utility bg-noise {
@@ -93,4 +99,9 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #3f3f46;
+}
+
+section {
+  /* This ensures sections don't stick to the very top when jumping */
+  scroll-margin-top: 80px; 
 }
