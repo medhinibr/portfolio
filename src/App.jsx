@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import { GitHubCalendar } from 'react-github-calendar';
 import 'react-github-calendar/tooltips.css';
-import Chatbot from './Chatbot';
+import CloudConsole from './CloudConsole';
 import {
   Sun,
   Moon,
@@ -2616,8 +2616,8 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Cloud-Orchestrator AI Chatbot */}
-      <Chatbot theme={theme} />
+      {/* Cloud Console Simulator */}
+      <CloudConsole theme={theme} />
     </div>
   );
 }
