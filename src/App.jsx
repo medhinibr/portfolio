@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
+import { GitHubCalendar } from 'react-github-calendar';
 import {
   Sun,
   Moon,
@@ -2178,48 +2179,29 @@ export default function App() {
             }`}>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
-                <h3 className="font-bold text-sm">Contributions</h3>
+                <span className="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></span>
+                <h3 className="font-bold text-sm">Contributions Graph</h3>
               </div>
               <div className="flex items-center gap-2 text-xs font-mono">
-                <span className={`px-2 py-0.5 rounded ${theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-100'}`}>Last Year</span>
-                <span className="text-zinc-500">361 commits</span>
+                <span className={`px-2 py-0.5 rounded ${theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-100'}`}>Real-Time</span>
                 <a href="https://github.com/medhinibr" target="_blank" rel="noreferrer" className="text-indigo-400 hover:underline">@medhinibr</a>
               </div>
             </div>
 
-            {/* Grid mockup */}
-            <div className="overflow-x-auto">
-              <div className="grid grid-cols-[repeat(53,minmax(8px,1fr))] gap-[3px] min-w-[500px]">
-                {Array.from({ length: 371 }).map((_, i) => {
-                  // Mock random commit colors (75% dark gray, 25% shades of blue/indigo)
-                  let cellColor = theme === 'dark' ? 'bg-zinc-900' : 'bg-zinc-200';
-                  const rand = Math.random();
-                  if (rand > 0.85) {
-                    cellColor = 'bg-indigo-600';
-                  } else if (rand > 0.7) {
-                    cellColor = 'bg-indigo-400';
-                  } else if (rand > 0.6) {
-                    cellColor = 'bg-indigo-300';
-                  }
-                  return (
-                    <div
-                      key={i}
-                      className={`aspect-square w-full rounded-[1px] ${cellColor}`}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-            <div className="flex justify-between items-center text-[10px] text-zinc-500 mt-4">
-              <span>361 contributions in the last year</span>
-              <div className="flex items-center gap-1">
-                <span>Less</span>
-                <span className={`w-2 h-2 rounded-[1px] ${theme === 'dark' ? 'bg-zinc-900' : 'bg-zinc-200'}`}></span>
-                <span className="w-2 h-2 rounded-[1px] bg-indigo-300"></span>
-                <span className="w-2 h-2 rounded-[1px] bg-indigo-400"></span>
-                <span className="w-2 h-2 rounded-[1px] bg-indigo-600"></span>
-                <span>More</span>
+            {/* Real GitHub Calendar */}
+            <div className="overflow-x-auto py-2">
+              <div className="min-w-[700px] flex justify-center text-zinc-300">
+                <GitHubCalendar
+                  username="medhinibr"
+                  colorScheme={theme === 'dark' ? 'dark' : 'light'}
+                  theme={{
+                    light: ['#ebedf0', '#c7d2fe', '#818cf8', '#4f46e5', '#312e81'],
+                    dark: ['#161b22', '#2b1c54', '#4a3399', '#7d55ff', '#a885ff']
+                  }}
+                  fontSize={10}
+                  blockSize={11}
+                  blockMargin={3}
+                />
               </div>
             </div>
           </div>
