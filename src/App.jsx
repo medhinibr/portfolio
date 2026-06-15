@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import { GitHubCalendar } from 'react-github-calendar';
+import 'react-github-calendar/tooltips.css';
 import {
   Sun,
   Moon,
@@ -997,6 +998,7 @@ export default function App() {
   }, [selectedSkill]);
 
   const [selectedChapter, setSelectedChapter] = useState(0);
+  const [githubYear, setGithubYear] = useState('last');
   const [hoveredProjectIdx, setHoveredProjectIdx] = useState(null);
   const [pingingIdx, setPingingIdx] = useState(null);
   const [pingResults, setPingResults] = useState({});
@@ -2182,25 +2184,48 @@ export default function App() {
                 <span className="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></span>
                 <h3 className="font-bold text-sm">Contributions Graph</h3>
               </div>
-              <div className="flex items-center gap-2 text-xs font-mono">
-                <span className={`px-2 py-0.5 rounded ${theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-100'}`}>Real-Time</span>
+              
+              {/* Year Select Tabs & Username */}
+              <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
+                <div className="flex bg-zinc-950/60 p-0.5 rounded-lg border border-white/5 text-[10px] font-mono">
+                  {['last', 2026, 2025, 2024].map((yr) => (
+                    <button
+                      key={yr}
+                      onClick={() => setGithubYear(yr)}
+                      className={`px-2.5 py-1 rounded-md transition-all ${
+                        githubYear === yr 
+                          ? 'bg-indigo-600 text-white font-bold shadow' 
+                          : 'text-zinc-500 hover:text-zinc-300'
+                      }`}
+                    >
+                      {yr === 'last' ? 'Last Year' : yr}
+                    </button>
+                  ))}
+                </div>
                 <a href="https://github.com/medhinibr" target="_blank" rel="noreferrer" className="text-indigo-400 hover:underline">@medhinibr</a>
               </div>
             </div>
 
             {/* Real GitHub Calendar */}
             <div className="overflow-x-auto py-2">
-              <div className="min-w-[700px] flex justify-center text-zinc-300">
+              <div className="min-w-[850px] flex justify-center text-zinc-300">
                 <GitHubCalendar
                   username="medhinibr"
+                  year={githubYear}
                   colorScheme={theme === 'dark' ? 'dark' : 'light'}
                   theme={{
                     light: ['#ebedf0', '#c7d2fe', '#818cf8', '#4f46e5', '#312e81'],
-                    dark: ['#161b22', '#2b1c54', '#4a3399', '#7d55ff', '#a885ff']
+                    dark: ['#161b22', '#221545', '#4f39a3', '#7d58f3', '#b199ff']
                   }}
-                  fontSize={10}
-                  blockSize={11}
-                  blockMargin={3}
+                  fontSize={11}
+                  blockSize={13.5}
+                  blockMargin={3.5}
+                  showWeekdayLabels
+                  tooltips={{
+                    activity: {
+                      text: (activity) => `${activity.count} contributions on ${activity.date}`,
+                    }
+                  }}
                 />
               </div>
             </div>
